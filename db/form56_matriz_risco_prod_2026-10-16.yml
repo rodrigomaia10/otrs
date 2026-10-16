@@ -1,0 +1,247 @@
+---
+- ChangeBy: 7
+  ChangeTime: 2026-10-15 16:38:38
+  CreateBy: 476
+  CreateTime: 2026-09-10 16:47:09
+  Description: ''
+  DynamicFields:
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 589
+    Mask: ''
+    Name: DynamicField_CAFMOTORISTAREALIZADO
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 591
+    Mask: ''
+    Name: DynamicField_CAFPROPRIETARIOREALIZADO
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 470
+    Mask: ''
+    Name: DynamicField_Cliente
+  - DefaultValue: ''
+    DescriptionShort: DATA DO POSSÍVEL CARREGAMENTO
+    Display: 1
+    ID: 394
+    Mask: ''
+    Name: DynamicField_Data
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 53
+    Mask: ''
+    Name: DynamicField_MotoristaNome
+  - DefaultValue: ''
+    DescriptionShort: CPF MOTORISTA
+    Display: 1
+    ID: 54
+    Mask: ''
+    Name: DynamicField_MotoristaCPF
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 58
+    Mask: ''
+    Name: DynamicField_MotoristaTelefone
+  - DefaultValue: ''
+    DescriptionShort: TIPO CONTRATAÇÃO MOTORISTA
+    Display: 1
+    ID: 594
+    Mask: ''
+    Name: DynamicField_TIPOCONTRATACAOMOTORISTA
+  - DefaultValue: ''
+    DescriptionShort: NOME PROP ANTT
+    Display: 1
+    ID: 330
+    Mask: ''
+    Name: DynamicField_Antt
+  - DefaultValue: ''
+    DescriptionShort: CPF OU CNPJ ANTT
+    Display: 1
+    ID: 524
+    Mask: ''
+    Name: DynamicField_NewKMMCnpjCpf
+  - DefaultValue: ''
+    DescriptionShort: DATA ANTT
+    Display: 1
+    ID: 116
+    Mask: ''
+    Name: DynamicField_DataEmissao
+  - DefaultValue: ''
+    DescriptionShort: TELEFONE PROPRIETARIO
+    Display: 1
+    ID: 322
+    Mask: ''
+    Name: DynamicField_Telefone
+  - DefaultValue: ''
+    DescriptionShort: 'RASTREADOR (TECNOLOGIA) '
+    Display: 1
+    ID: 595
+    Mask: ''
+    Name: DynamicField_RASTREADORTECNOLOGIA
+  - DefaultValue: ''
+    DescriptionShort: 'LOGIN '
+    Display: 1
+    ID: 596
+    Mask: ''
+    Name: DynamicField_Login
+  - DefaultValue: ''
+    DescriptionShort: 'SENHA '
+    Display: 1
+    ID: 597
+    Mask: ''
+    Name: DynamicField_Senha
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 600
+    Mask: ''
+    Name: DynamicField_RefProf1Nome
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 601
+    Mask: ''
+    Name: DynamicField_RefProf1Empresa
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 602
+    Mask: ''
+    Name: DynamicField_RefProf1Telefone
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 603
+    Mask: ''
+    Name: DynamicField_RefProf2Nome
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 604
+    Mask: ''
+    Name: DynamicField_RefProf2Empresa
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 605
+    Mask: ''
+    Name: DynamicField_RefProf2Telefone
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 606
+    Mask: ''
+    Name: DynamicField_RefProf3Nome
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 607
+    Mask: ''
+    Name: DynamicField_RefProf3Empresa
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 608
+    Mask: ''
+    Name: DynamicField_RefProf3Telefone
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 59
+    Mask: ''
+    Name: DynamicField_MotoristaRef1Nome
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 60
+    Mask: ''
+    Name: DynamicField_MotoristaRef1Parentesco
+  - DefaultValue: ''
+    DescriptionShort: Referência 1 - Telefone
+    Display: 1
+    ID: 62
+    Mask: ''
+    Name: DynamicField_MotoristaRef1Telefone
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 63
+    Mask: ''
+    Name: DynamicField_MotoristaRef2Nome
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 64
+    Mask: ''
+    Name: DynamicField_MotoristaRef2Parentesco
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 66
+    Mask: ''
+    Name: DynamicField_MotoristaRef2Telefone
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 206
+    Mask: ''
+    Name: DynamicField_OBS
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 2
+    ID: 55
+    Mask: ''
+    Name: DynamicField_MotoristaAnexoCNH
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 2
+    ID: 80
+    Mask: ''
+    Name: DynamicField_PesqCavaloAnexoCRLV
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 2
+    ID: 83
+    Mask: ''
+    Name: DynamicField_PesqCarretaAnexoCLRV
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 2
+    ID: 567
+    Mask: ''
+    Name: DynamicField_PesqCavaloAnexoANTT
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 569
+    Mask: ''
+    Name: DynamicField_PesqContratoAluguel
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 2
+    ID: 57
+    Mask: ''
+    Name: DynamicField_MotoristaAnexoCompResidencia
+  - DefaultValue: ''
+    DescriptionShort: ''
+    Display: 1
+    ID: 588
+    Mask: ''
+    Name: DynamicField_CarteiraDeTrabalhoESocial
+  - DefaultValue: ''
+    DescriptionShort: Rastreador
+    Display: 1
+    ID: 36
+    Mask: ''
+    Name: DynamicField_CteAnexoPosicaoRastreador
+  ID: 56
+  Interface: OnBothInterfaces
+  Name: Analise - Matriz de Risco
+  Services:
+  - GR::Analise - Matriz de Risco - Analise Perfil
+  ValidID: 1
