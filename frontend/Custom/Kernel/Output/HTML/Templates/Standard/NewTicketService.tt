@@ -332,7 +332,13 @@
 <script>
 (function () {
     function initMatrizRiscoWizard() {
-        var row = document.querySelector('#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome)');
+        var row;
+        try {
+            // :has() nao suportado lanca excecao em querySelector (ao contrario do CSS, que so ignora a regra)
+            row = document.querySelector('#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome)');
+        } catch (e) {
+            return; // navegador sem suporte a :has(): nao faz nada, nao quebra a pagina
+        }
         if (!row) return; // nao e o formulario da Matriz de Risco: nao faz nada
 
         var steps = [
