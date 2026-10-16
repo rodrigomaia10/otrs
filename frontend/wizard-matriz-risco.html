@@ -1,0 +1,138 @@
+<!--
+    Wizard de etapas para o formulario "Analise - Matriz de Risco" (servico GR -> Analise - Matriz de Risco - Analise Perfil).
+
+    So ativa quando detecta o campo-ancora RefProf1Nome na pagina, entao e seguro colar
+    neste template compartilhado: nao afeta nenhum outro formulario de servico.
+
+    ONDE COLAR: dentro de Kernel/Output/HTML/Templates/Standard/NewTicketService.tt
+    (Custom/Kernel/Output/HTML/Templates/Standard/NewTicketService.tt),
+    logo apos a linha "</form>" e ANTES da linha "[% RenderBlockEnd("NewTicketService") %]".
+
+    Antes de aplicar: fazer uma copia do arquivo original (ex.: NewTicketService.tt.bkp-wizard).
+    Depois de aplicar: so recarregar a pagina do formulario no portal (Znuny recompila o .tt
+    sozinho quando o arquivo muda de data, nao precisa reiniciar Apache).
+-->
+<script>
+(function () {
+    function initMatrizRiscoWizard() {
+        var row = document.querySelector('#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome)');
+        if (!row) return; // nao e o formulario da Matriz de Risco: nao faz nada
+
+        var steps = [
+            {
+                title: 'Dados da análise e motorista',
+                fields: ['CAFMOTORISTAREALIZADO', 'CAFPROPRIETARIOREALIZADO', 'Cliente', 'Data',
+                         'MotoristaNome', 'MotoristaCPF', 'MotoristaTelefone', 'TIPOCONTRATACAOMOTORISTA']
+            },
+            {
+                title: 'Proprietário (ANTT) e rastreador',
+                fields: ['Antt', 'NewKMMCnpjCpf', 'DataEmissao', 'Telefone',
+                         'RASTREADORTECNOLOGIA', 'Login', 'Senha']
+            },
+            {
+                title: 'Referências',
+                fields: ['RefProf1Nome', 'RefProf1Empresa', 'RefProf1Telefone',
+                         'RefProf2Nome', 'RefProf2Empresa', 'RefProf2Telefone',
+                         'RefProf3Nome', 'RefProf3Empresa', 'RefProf3Telefone',
+                         'MotoristaRef1Nome', 'MotoristaRef1Parentesco', 'MotoristaRef1Telefone',
+                         'MotoristaRef2Nome', 'MotoristaRef2Parentesco', 'MotoristaRef2Telefone']
+            },
+            {
+                title: 'Informações adicionais e anexos',
+                fields: ['OBS', 'MotoristaAnexoCNH', 'PesqCavaloAnexoCRLV', 'PesqCarretaAnexoCLRV',
+                         'PesqCavaloAnexoANTT', 'PesqContratoAluguel', 'MotoristaAnexoCompResidencia',
+                         'CarteiraDeTrabalhoESocial', 'CteAnexoPosicaoRastreador']
+            }
+        ];
+
+        function fieldNameOf(el) {
+            var m = el.className.match(/Col_DynamicField_(\S+)/);
+            return m ? m[1] : null;
+        }
+
+        var children = Array.prototype.slice.call(row.children);
+
+        function stepOf(el) {
+            var name = fieldNameOf(el);
+            for (var i = 0; i < steps.length; i++) {
+                if (steps[i].fields.indexOf(name) !== -1) return i;
+            }
+            return steps.length - 1; // campo nao mapeado: cai na ultima etapa (rede de seguranca)
+        }
+
+        var submitBtn = document.querySelector('#NewServiceTicket button[type="submit"]');
+        var submitRow = submitBtn ? submitBtn.closest('.row') : null;
+
+        var nav = document.createElement('div');
+        nav.className = 'MatrizRiscoWizardNav';
+        nav.innerHTML =
+            '<div class="MatrizRiscoWizardProgress">' +
+            steps.map(function (s, i) {
+                return '<div class="MatrizRiscoWizardStep" data-step="' + i + '">' +
+                       '<span class="MatrizRiscoWizardStepNum">' + (i + 1) + '</span>' +
+                       '<span class="MatrizRiscoWizardStepLabel">' + s.title + '</span>' +
+                       '</div>';
+            }).join('') +
+            '</div>' +
+            '<div class="MatrizRiscoWizardButtons">' +
+            '<button type="button" class="btn btn-secondary MatrizRiscoWizardPrev">Voltar</button>' +
+            '<button type="button" class="btn btn-success MatrizRiscoWizardNext">Próximo</button>' +
+            '</div>';
+        row.parentNode.insertBefore(nav, row);
+
+        var current = 0;
+
+        function render() {
+            children.forEach(function (el) {
+                el.style.display = (stepOf(el) === current) ? '' : 'none';
+            });
+            var stepEls = nav.querySelectorAll('.MatrizRiscoWizardStep');
+            stepEls.forEach(function (el, i) {
+                el.classList.toggle('is-active', i === current);
+                el.classList.toggle('is-done', i < current);
+            });
+            nav.querySelector('.MatrizRiscoWizardPrev').style.visibility = (current === 0) ? 'hidden' : 'visible';
+            var isLast = current === steps.length - 1;
+            nav.querySelector('.MatrizRiscoWizardNext').style.display = isLast ? 'none' : '';
+            if (submitRow) submitRow.style.display = isLast ? '' : 'none';
+        }
+
+        nav.querySelector('.MatrizRiscoWizardNext').addEventListener('click', function () {
+            if (current < steps.length - 1) { current++; render(); }
+        });
+        nav.querySelector('.MatrizRiscoWizardPrev').addEventListener('click', function () {
+            if (current > 0) { current--; render(); }
+        });
+        // Navegacao livre: clicar numa etapa vai direto pra ela (sem validar campos obrigatorios)
+        nav.querySelectorAll('.MatrizRiscoWizardStep').forEach(function (el) {
+            el.addEventListener('click', function () {
+                current = parseInt(el.getAttribute('data-step'), 10);
+                render();
+            });
+        });
+
+        render();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMatrizRiscoWizard);
+    } else {
+        initMatrizRiscoWizard();
+    }
+})();
+</script>
+<style>
+.MatrizRiscoWizardNav{margin-bottom:24px}
+.MatrizRiscoWizardProgress{display:flex;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.MatrizRiscoWizardStep{display:flex;align-items:center;gap:8px;opacity:.5;cursor:pointer;flex:1;min-width:140px}
+.MatrizRiscoWizardStep.is-active{opacity:1;font-weight:700}
+.MatrizRiscoWizardStep.is-done{opacity:.8}
+.MatrizRiscoWizardStepNum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#e0e0e0;color:#333;font-size:13px;flex-shrink:0}
+.MatrizRiscoWizardStep.is-active .MatrizRiscoWizardStepNum{background:#7aa33a;color:#fff}
+.MatrizRiscoWizardStep.is-done .MatrizRiscoWizardStepNum{background:#2f3b1a;color:#fff}
+.MatrizRiscoWizardStepLabel{font-size:13px}
+.MatrizRiscoWizardButtons{display:flex;justify-content:space-between}
+@media (max-width: 767px){
+    .MatrizRiscoWizardStepLabel{display:none}
+}
+</style>

@@ -53,7 +53,20 @@ Campos novos criados: `RefProf{1,2,3}{Nome,Empresa,Telefone}` (referências prof
 - Testar antes de salvar: injetar `<style id="testeMatrizCSS">` pela `javascript_tool` na pagina do portal (so na aba; recarregar desfaz).
 - Titulos de secao: `::before` com `position:absolute; top:-40px` na primeira coluna da secao + `margin-top:46px` nas colunas da primeira linha. Colunas verticais: `display:grid` na `.row` com `grid-column`/`grid-row` explicitos por campo.
 - O clique em **Salvar** do Manage CSS foi negado uma vez pelo classificador de permissoes; nao contornar — deixar o usuario clicar, ou pedir liberacao.
-- Pendencia conhecida: o CSS salvo nao apareceu no portal (nem o CSS antigo foi achado nas folhas). Investigar Configuracao do Sistema (`Loader::Customer::CommonCSS`, `Loader::Enabled::CSS`) e cache antes de insistir.
+- **Causa do CSS nao aparecer (descoberta 16/10/2026):** o CSS fica no banco (`CustomPortalCSS`) e e injetado pelo filtro `CustomerPortalCustomCSS`, que so atua nos templates da SysConfig `Frontend::Output::FilterElementPost###CustomerPortalCustomCSS` (ativo: CustomerKanban, CustomerPortalFAQZoom, CustomerPortalFAQs, CustomerPortalSurvey, MyTickets, NewTicketProcess, Services). A pagina do formulario usa o template `NewTicketService`, que **nao esta na lista**. Correcao: adicionar `NewTicketService` nessa SysConfig (altera prod: so com permissao; testar no HML 192.168.1.221 antes). O filtro injeta no primeiro `</style>` da pagina.
+- Repo git: `C:\project\otrs` (branch feat/versionamento-inicial); CSS em `frontend/portal-css/`, backups em `backups/`.
+
+## Exportar/importar formulário entre ambientes (Admin → Formulário Customizado ↔ Serviço)
+- **Exportar** (botão por linha) gera um `.yml` com nome/serviço/campos (por `Name`, não só ID) — sem segredos, pode ir pro git (`db/`).
+- **Importar** com "Sobrescrever formulários existentes?" marcado: casa por nome; se o formulário de destino ja existe mas **faltam campos dinâmicos** no ambiente de destino, a importação **ignora silenciosamente** os campos que não existem — e reimportar depois de criar os campos **não atualiza** o registro já existente (nem por nome nem por ID). O caminho que funciona é criar os campos faltantes (Admin → Campos Dinâmicos, mesmo nome/tipo/opções da origem) e então **atribuir manualmente por drag-and-drop** na tela do formulário (`ServiceFormEdit;ID=<n>`).
+- A importação pode criar o formulário com **um ID diferente** do original (não necessariamente reaproveita um ID vazio existente) — buscar pelo nome na listagem para achar o ID real.
+
+## Atribuir campo por script (drag-and-drop automatizado)
+- Esconder no `#AvailableFields` todos os `<li>` exceto o campo alvo (`display:none`), then `left_click_drag` do item visível pro `#AssignedFields`.
+- **Escalar coordenadas**: o frame de coordenadas do `computer`/screenshot pode ser menor que o "Viewport" do `read_page` (ex. 1491x812 vs 1852x1009, fator ~0.805) — sempre multiplicar `getBoundingClientRect()` pelo fator antes de usar em clique/drag.
+- O drop abre um modal "Editar Detalhes do Campo" cujo botão Salvar muda de posição conforme o tipo do campo (Texto com Máscara é mais alto que Checkbox/Multiselect/FileSystem) — recalcular via DOM a cada campo, não fixar coordenada.
+- **NUNCA reordenar `#AssignedFields` via `appendChild`/manipulação direta do DOM antes de salvar** — corrompe o save (só persiste um prefixo dos itens, perdendo o resto). A ordem de exibição não importa quando o CSS usa `grid-column`/`grid-row` explícitos — só arrastar e salvar, sem reordenar.
+- Para disparar submit por JS: `elementoDoForm.closest('form').requestSubmit()`, nunca `document.querySelector('form')` solto (pode pegar o form de busca do topo da página).
 
 ## Arquivos do projeto (C:\projects\otrs)
 - `css/matriz_risco_portal_vertical.css` — layout em colunas verticais (versao atual escolhida).

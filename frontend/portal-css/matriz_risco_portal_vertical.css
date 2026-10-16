@@ -11,6 +11,7 @@ form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicF
 form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaCPF{grid-column:1;grid-row:4}
 form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaTelefone{grid-column:2;grid-row:3;margin-top:46px}
 form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_TIPOCONTRATACAOMOTORISTA{grid-column:2;grid-row:4}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_NewKMMCnpjCpf{grid-column:3;grid-row:4}
 form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt{grid-column:1;grid-row:5;margin-top:46px}
 form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_DataEmissao{grid-column:2;grid-row:5;margin-top:46px}
 form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Telefone{grid-column:3;grid-row:5;margin-top:46px}
