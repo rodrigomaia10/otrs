@@ -1,0 +1,82 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AgentTicketServiceFormFields.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dsilva@serviceup.com.br
+# * jgsantos@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# * dparavani@serviceup.com.br
+# --
+
+<form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="AgentTicketServiceFormFields" class="Validate PreventMultipleSubmits">
+     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+     <input type="hidden" name="Subaction" value="Store"/>
+     <input type="hidden" name="TicketID"  value="[% Data.TicketID | html %]"/>
+     <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+
+    <div class="LayoutPopup ARIARoleMain">
+
+    <div class="Header">
+        <h1>
+            [% Translate("Campos para o formulário") | html %]: [% Data.Name %] &mdash; [% Data.TicketNumber %]
+    	</h1>
+        <p>
+            <a href="#" class="CancelClosePopup">[% Translate("Close dialog") | html %]</a>
+        </p>
+    </div>
+[% RenderBlockStart("ConfigEdition") %]
+    <div class="Content">
+       <div class="WidgetSimple">
+           <div class="Header">
+               <h2>
+                   [% Translate("Form content") | html %]
+               </h2>
+           </div>
+
+    		<div class="Content">
+    			<div id="Dialogs">
+    				<div id="FieldDetails">
+    					<div style="width: 100%; overflow: hidden;">
+    						<fieldset class="TableLike">
+                                <table>
+                [% RenderBlockStart("DynamicField") %]
+                                    [% IF Data.Label %]
+                                        <tr>
+                                            <td style="padding: 5px; border: none; width: 40%; word-wrap: break-word"><strong>[% Data.Label %]:</strong></td>
+                                    [% END %]
+                                    [% IF Data.Value %]
+                                            <td style="border: none; word-wrap: break-word; width: 100%;">
+                                                [% Data.Value %]
+                                            </td>
+                                        </tr>
+                                        <div class="Clear"></div>
+                                    [% END %]
+			    [% RenderBlockEnd("DynamicField") %]
+                                </table>
+                [% RenderBlockStart("DynamicFieldEdition") %]
+                            <div class="Row Row_DynamicField_[% Data.Name | html %]">
+                            [% Data.Label %]
+                                <div class="Field">
+                                [% Data.Field %]
+                                [% RenderBlockStart("rw:DynamicField:DescriptionShort") %]
+                                    <div class="FieldExplanation">[% Data.DescriptionShort %]</div>
+                                [% RenderBlockEnd("rw:DynamicField:DescriptionShort") %]
+                                </div>
+                                <div class="Clear"></div>
+                            </div>
+                [% RenderBlockEnd("DynamicFieldEdition") %]
+    						</fieldset>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <div class="Footer">
+        [% IF Data.ConfigEdition %]
+            <button class="btn-primary-ghost btn-main btn-width-md CallForAction Primary CallForAction Primary" id="submit" accesskey="g" title="[% Translate("Submit") | html %] (g)" type="submit" value="[% Translate("Submit") | html %]"><span><i class="fa fa-check"></i> [% Translate("Submit") | html %]</span></button>
+	    [% END %]
+    </div>
+    [% RenderBlockEnd("ConfigEdition") %]
+</form>

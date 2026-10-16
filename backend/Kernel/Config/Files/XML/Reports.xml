@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+    <Setting Name="Stats::DynamicObjectRegistration###ReportQueueCreate" Required="0" Valid="1">
+        <Description Translatable="1">Report that brings back the column that shows the queue in which the Ticket was created</Description>
+        <Navigation>InBox::Reports::Core::Stats</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Stats::Dynamic::ReportQueueCreate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::Reports::LoginToDeleteReport" Required="0" Valid="0">
+        <Description Translatable="1">Enter the agent login to delete the reports.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+ 
+<!-- FirstQueues -->
+    <Setting Name="Stats::DynamicObjectRegistration###FirstQueues" Required="0" Valid="1">
+        <Description Translatable="1">Report module registration.</Description>
+        <Navigation>InBox::FirstQueues::Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Stats::Dynamic::FirstQueues</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="FirstQueues::Core::ClosedStates" Required="1" Valid="1">
+        <Description Translatable="1">The ticket states that are considerated as closed, when the ticket exits of these states, the ticket are considered reopened by the module.</Description>
+        <Navigation>InBox::FirstQueues::Core</Navigation>
+        <Value>
+            <Array>
+			</Array>
+        </Value>
+    </Setting>
+<!-- FirstQueues -->
+
+    <Setting Name="InBox::Reports::TicketListAlphabeticalOrder" Required="0" Valid="1">
+        <Description Translatable="1">Define whether the order of fields in the report filter options will be in alphabetical order or not.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::Reports::ITSMChangeManagementAlphabeticalOrder" Required="0" Valid="1">
+        <Description Translatable="1">Define whether the order of fields in the report filter options will be in alphabetical order or not.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::Reports::SurveyListAlphabeticalOrder" Required="0" Valid="1">
+        <Description Translatable="1">Define whether the order of fields in the report filter options will be in alphabetical order or not.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::Reports::TicketAccumulationAlphabeticalOrder" Required="0" Valid="1">
+        <Description Translatable="1">Define whether the order of fields in the report filter options will be in alphabetical order or not.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::Reports::TicketAccountedTimeAlphabeticalOrder" Required="0" Valid="1">
+        <Description Translatable="1">Define whether the order of fields in the report filter options will be in alphabetical order or not.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::Reports::TicketSolutionResponseTimeAlphabeticalOrder" Required="0" Valid="1">
+        <Description Translatable="1">Define whether the order of fields in the report filter options will be in alphabetical order or not.</Description>
+        <Navigation>InBox::Reports::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

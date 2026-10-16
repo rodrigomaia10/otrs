@@ -1,0 +1,160 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKanban.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * poliveira@serviceup.com.br
+# --
+
+[% RenderBlockStart("Main") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <h1 class="InvisibleText">[% Translate("Kanban column management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Kanban column management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionAddKanban") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKanbanTicket;Subaction=Add" class="CallForAction Fullsize Center Create"><span><i class="fa fa-plus-square"></i>[% Translate("Add new Column for object") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKanbanBoards" class="CallForAction Fullsize Center Create"><span><i class="fa fa fa-columns"></i>[% Translate("Manage Boards") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAddKanban") %]
+                </ul>
+            </div>
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterKanbans">[% Translate("Filter for column") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterKanbans" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterKanbans" value="" title="[% Translate("Filter for column") | html %]">
+            </div>
+        </div>
+
+[% RenderBlockStart("Hint") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content">
+                <div class="FieldExplanation">
+                    <p>
+                        [% Translate("You can add a new column, and after that add it to a frame, the object sets the search limit and cannot be changed after the column is created.") | html %]
+                    </p>
+                </div>
+            </div>
+        </div>
+[% RenderBlockEnd("Hint") %]
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Kanban Column List") | html %]</h2>
+
+[% RenderBlockStart("ContextSettings") %]
+                <ul class="ContextFunctions">
+                    <li class="ContextSettings">
+                        <a href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
+                            <i class="fa fa-cog"></i>
+                            <span>[% Translate("Settings") | html %]</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="ContextSettingsDialogContainer" class="Hidden">
+                    <form action="[% Env("CGIHandle") %]" method="post" id="ContextSettingsDialog">
+                        <input type="hidden" name="Action" value="AgentPreferences"/>
+                        <input type="hidden" name="Subaction" value="Update"/>
+                        <input type="hidden" name="Group" value="[% Data.Group | html %]"/>
+                        <input type="hidden" name="RedirectURL" value="[% Data.RequestedURL | html %]"/>
+                        <fieldset class="TableLike">
+                            <label for="[% Data.PreferencesKey | html %]">[% Translate("Coluns fields per page") | html %]:</label>
+                            <div class="Field">
+                                [% Data.PageShownString %]
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+[% RenderBlockEnd("ContextSettings") %]
+
+            </div>
+            <div class="DynamicFieldsPagination">
+                <span class="Pagination">
+[% RenderBlockStart("OverviewNavBarPageNavBar") %]
+                    [% Data.ResultLong %]
+                    [% Data.SiteNavBarLong %]
+[% RenderBlockEnd("OverviewNavBarPageNavBar") %]
+                </span>
+            </div>
+
+            <div class="DynamicFieldsContent">
+                <table class="DataTable" id="KanbansTable" summary="List of all registered">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Groups") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Created") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                            <th>[% Translate("Copy") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFound") %]
+                        <tr>
+                            <td colspan="6">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFound") %]
+[% RenderBlockStart("DynamicFieldsRow") %]
+                        <tr class="MasterAction[% IF Data.ValidID != 1%] Invalid[% END %]" id="Kanban_[% Data.ID | html %]">
+                            <td>
+                                <a href="[% Env("Baselink") %]Action=AdminKanbanTicket;Subaction=Change;ID=[% Data.ID | uri %]" title="[% Data.Name | html %]" class="MasterActionLink">[% Data.Name %]</a>
+                            </td>                            
+                             <td>
+                                <div>[% Data.GroupNames | truncate(50) %]</div>
+                            </td>
+							<td>
+                                <div>[% Translate(Data.Validity) %]</div>
+                            </td>
+                            <td>
+                                <div>[% Data.CreateTime | Localize("TimeShort") | html %]</div>
+                            </td>
+                            <td class="Center">
+                                <a class="TrashCan KanbanDelete" href="#" data-query-string="Action=AdminKanban;Subaction=KanbanDelete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this Kanban") | html %]">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                              <td class="Center">
+                                <a class="KanbanCopy" href="#" data-query-string="Action=AdminKanban;Subaction=KanbanCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Copy this Kanban") | html %]">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("DynamicFieldsRow") %]
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Main") %]

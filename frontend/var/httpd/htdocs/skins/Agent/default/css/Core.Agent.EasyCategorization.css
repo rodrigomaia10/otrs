@@ -1,0 +1,88 @@
+/*  --
+ * var/httpd/htdocs/skins/Agent/default/css/Core.Agent.EasyCategorization.css
+ * Copyright (C) 2019 Service Up http://www.serviceup.com.br
+ * --
+ * written/edited by:
+ * * pdias@beonup.com.br
+ * * gesquetini@beonup.com.br
+ * * lcavalheiro@serviceup.com.br
+ -- */
+ 
+#FieldEC .ECTextField{
+	width: 85%;
+}
+
+.FieldECDateButton .fa-check::before {
+    color: var(--gray-dark);
+}
+
+.EasyCategorizationForm .FieldEC .AJAXLoader {
+    left: 78%;
+}
+
+#FieldEC .DatepickerIcon{
+	margin: 6px 0 0 4px !important;
+}
+
+.FieldECDateButton {
+    cursor: pointer;
+    height: 34px;
+    border: var(--border-width) var(--border-solid) var(--border-input-color);
+    border-radius: var(--border-radius-sm);
+}
+
+.SidebarColumn .WidgetSimple .InputField_Search, .SidebarColumn .WidgetSimple .InputField_Autocomplete {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.EasyCategorizationForm {
+	overflow: hidden !important;
+}
+
+#FieldEC .InputField_Container{
+	width: 97%;
+}
+
+#FieldEC .InputField_Container .InputField_InputContainer{
+	width: 100%;
+}
+
+.EasyCategorizationForm .AJAXLoader{
+	position:absolute;
+	right: -24px;
+	left: 90%;
+}
+
+.EasyCategorizationForm .FieldEC{
+	position: relative;
+}
+
+@media (max-width:500px) {
+	.EasyCategorizationForm .AJAXLoader {
+		right: -24px;
+		top: 3px;
+	}
+}
+
+.box_button{
+	display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.ButtonUpdate{
+	padding: 4px 10px 4px 10px;
+}
+
+.InputField_Search {
+	width: auto !important;
+}
+
+.label_easy{
+    margin-top: 10px  !important;
+}
+/* .InputField_ToolbarContainer{ */
+	/* display:none; */
+
+/* } */

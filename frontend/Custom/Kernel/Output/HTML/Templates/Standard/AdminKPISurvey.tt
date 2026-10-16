@@ -1,0 +1,183 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPISurvey.tt - frontend template
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('KPI - Survey'),
+                Link => 'AdminKPI',
+            },
+        ]
+    %]
+
+    [% IF Data.ID == ""  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add KPI - Survey"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit KPI - Survey")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPI" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="AdminKPISurvey">
+            <input type="hidden" name="Subaction" value="[% Data.Mode | html %]Action">
+            <input type="hidden" name="ID" value="[% Data.ID | html %]">
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("General") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                                    <div class="Field">
+                                        <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                        <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("This is the name to be shown on the screens where the KPI is active.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label for="ReturnFormat">[% Translate("Output") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ReturnFormatStrg %]
+                                        <p class="FieldExplanation">[% Translate("This is the return format when click on chart.") | html %]</p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ValidityStrg %]
+
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="GroupIDs">[% Translate("Groups") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.GroupsStrg %]
+                                        <div class="Clear"></div>
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="ObjectTypeName">[% Translate("Object type") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="ObjectTypeName" readonly class="W50pc" type="text" maxlength="200" value="[% Translate('Survey') | html %]" name="ObjectTypeName"/>
+                                        <div class="Clear"></div>
+                                    </div>
+                                </div>                               
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+            <div class="ContentColumn">
+            <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Options") | html %]</h2>
+            </div>
+                <div class="Content">
+                    <fieldset class="TableLike FixedLabelSmall">
+                        <div class="field-wrapper">
+                            <label for="SurveyIDs">[% Translate("Survey") | html %]:</label>
+                            <div class="Field">
+                                [% Data.SurveyStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="QuestionIDs">[% Translate("Question") | html %]:</label>
+                            <div class="Field">
+                                [% Data.QuestionStrg %]
+                                <div class="Clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="AnswerIDs">[% Translate("Answers") | html %]:</label>
+                            <div class="Field">
+                                [% Data.AnswerStrg %]
+                                <div class="Clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="MetricIDs">[% Translate("Metric") | html %]:</label>
+                            <div class="Field">
+                                [% Data.MetricStrg %]
+                                <div class="Clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="VoteTime">[% Translate("Vote time") | html %]:</label>
+                            <div class="Field flex-row">
+                                <input style="flex: initial;" type="checkbox" name="VoteTimeSearchType" value="TimeSlot" [% Data.VoteTimeSearchType %]/>                             
+                                [% Translate("Vote time between") | html %] [% Data.VoteTimeStart %] [% Translate(" and ") | html %] [% Data.VoteTimeStop %].
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="CreateTime">[% Translate("Create Time") | html %]:</label>
+                            <div class="Field flex-row">
+                                <input style="flex: initial;" type="checkbox" name="CreateTimeSearchType" value="TimeSlot" [% Data.CreateTimeSearchType %]/>
+                                [% Translate("Create Time between") | html %] [% Data.CreateTimeStart %] [% Translate(" and ") | html %] [% Data.CreateTimeStop %].
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="SendTime">[% Translate("Send Time") | html %]:</label>
+                            <div class="Field flex-row">
+                                <input style="flex: initial;" type="checkbox" name="SendTimeSearchType" value="TimeSlot"  [% Data.SendTimeSearchType %]/>
+                                [% Translate("Send Time between") | html %] [% Data.SendTimeStart %] [% Translate(" and ") | html %] [% Data.SendTimeStop %].
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    
+        <fieldset class="TableLike card SpacingTop">
+            <div class="field-wrapper form-button-actions">
+                <div class="Field buttons-field">
+                    <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=AdminKPI">[% Translate("Cancel") | html %]</a>
+                    <button id="SubmitKpiQuery" type="submit" class="Primary CallForAction btn-main btn-primary-ghost btn-width-md"  value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>                
+                </div>
+            </div>
+        </fieldset>
+       
+        </form>
+    </div>
+</div>
+
+

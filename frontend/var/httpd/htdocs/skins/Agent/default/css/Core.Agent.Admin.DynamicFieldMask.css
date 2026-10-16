@@ -1,0 +1,35 @@
+/*
+ var/httpd/htdocs/skins/Agent/default/Core.Agent.Admin.DynamicFieldMask.css
+ Copyright (C) 2019 Service Up, http://serviceup.com.br/
+
+ written/edited by:
+ * pdias@beonup.com.br
+ * gtiburtino@beonup.com.br
+ * mtatangelo@serviceup.com.br
+ -- */
+ 
+#Monetary label, #Mask label{
+	display: block;
+    float: left;
+    line-height: 1.9em;
+    text-align: right;
+    color: #929292;
+    min-height: 17px;
+    padding-top: 0.3em;
+    padding-bottom: 1px;
+    text-shadow: 0 1px 0 #FAFAFA;
+}
+
+#Monetary .Field, #Mask .Field{
+	line-height: 1.9em;
+    margin-right: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 0px;
+    min-height: 20px;
+}
+
+.Hidden {
+    display: none !important; 
+}

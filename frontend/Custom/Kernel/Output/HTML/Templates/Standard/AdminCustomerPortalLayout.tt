@@ -1,0 +1,570 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminCustomerPortalLayout.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# * ccresencio@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("Cards Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Cards Management of Customer Portal'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% BreadcrumbPath.push({ Name => Translate("Edit Layout"),}) %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=Admin" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminCustomerPortalHomePage;Subaction=CardsEdit;ID=Home_Page" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-right"></i>[% Translate("Edit home page") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+            <input type="hidden" name="Subaction" value="SaveLayout"/>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Edit Layout") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="EditWithPreview">
+                        <div class="EditArea FullSizeForm">
+
+                            <h1>
+                            <label for="MenuType" class="">[% Translate("Menu type") | html %]</label> </h1>
+                            <div class="Field">
+                                [% Data.MenuTypeStrg %]
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <h1>
+                                [% Translate("Search Card Options") | html %]
+                            </h1>
+                            <h2> 
+                                <label for="MenuType" class="">[% Translate("Search Card") | html %]</label>
+                            </h2>
+                            <div class="Field">
+                                [% Data.SearchCard %]
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Search Card color") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='color' id='SearchCardColor' name='SearchCardColor' value='[% Data.SearchCardColor | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Search Card title color") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='color' id='SearchCardTitleColor' name='SearchCardTitleColor' value='[% Data.SearchCardTitleColor | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Search Card Body color") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='color' id='SearchCardBodyColor' name='SearchCardBodyColor' value='[% Data.SearchCardBodyColor | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Background gradient") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='text' id='BackgroundGradient' name='BackgroundGradient' style="width: 100%;" value='[% Data.BackgroundGradient | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Image path") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='text' id='ImgSearchCard' name='ImgSearchCard' style="width: 100%;" value='[% Data.ImgSearchCard | html %]'>
+                                <!-- <button type="button" id="ClickLogo" class="ImgLogo">[% Translate("Preview in page") | html %]</button> -->
+                            </div>
+                            
+                            <!-- <img id="PreviewSearchCard" src="[% Data.SearchCard | html %]"> -->
+                            <!-- </img> -->
+                            <br>
+                            <hr>
+[% RenderBlockStart("CustomerSideBar") %]
+                            <div>
+                                <br>
+                                <h1>
+                                    [% Translate("Logo") | html %]
+                                </h1>
+                                <br>
+                                <label>
+                                    [% Translate("Define the image that will appear at the beginning of the sidebar.") | html %]
+                                </label>
+                                <p class="Explanation">
+                                    
+                                </p>
+                                <br>
+                                <label>
+                                    [% Translate("Image path") | html %]
+                                </label>
+                                <div class="Field PrimaryColor">
+                                    <input type='text' id='ImgLogo' name='ImgLogo' style="width: 100%;" value='[% Data.Logo | html %]'><button type="button" id="ClickLogo" class="ImgLogo">[% Translate("Preview in page") | html %]</button>
+                                </div>
+                                <img id="PreviewLogo" src="[% Data.Logo | html %]">
+                                </img>
+                                <br>
+                                <hr>
+                                <br>
+                                <h1>
+                                    [% Translate("Background image") | html %]
+                                </h1>                               
+                                <br>
+                                <label>
+                                    [% Translate("Image path") | html %]
+                                </label>
+                                <div class="Field PrimaryColor">
+                                    <input type='text' id='ImgBackground' name='ImgBackground' style="width: 100%;" value='[% Data.BackgroundImage | html %]'>
+                                    <button type="button" id="ClickBackgroundImage" class="ImgLogo">[% Translate("Preview in page") | html %]</button>
+                                </div>
+                                <img id="PreviewBackgroundImage" src="[% Data.BackgroundImage | html %]">
+                                </img>
+                                <div class="slidecontainer">
+                                    <p>[% Translate("Opacity") | html %]: <span id="Porcentage">[% Data.Opacity %]%</span></p>
+                                    <input type="range" min="1" max="100" value="[% Data.Opacity %]" class="slider" id="Range" name="Range">
+                                    <input type="hidden" name="Opacity" id='Opacity' value="[% Data.Opacity %]"/>
+
+                                </div>
+                                <br>
+                                <hr>
+                                <br>
+                                <h1>
+                                    [% Translate("Navigation bar color") | html %]
+                                </h1>
+                                <label>
+                                    [% Translate("Background colors of the Customer Portal side menu.") | html %] 
+                                </label>
+                                <p class="Explanation">
+                                    [% Translate("It is possible to define a gradient of two colors.") | html %]
+                                </p>
+                                <br>
+                                <label>
+                                    [% Translate("Top Color") | html %]
+                                </label>
+                                <div class="Field PrimaryColor">
+                                    <input type='color' id='SideBarColor1' name='SideBarColor1' value='#[% Data.SideBarColor1 | html %]'>
+                                </div>
+                                <br>
+                                <label>
+                                    [% Translate("Bottom Color") | html %]
+                                </label>
+                                <div class="Field HighlightColor">
+                                    <input type='color' id='SideBarColor2' name='SideBarColor2' value='#[% Data.SideBarColor2 | html %]'>
+                                </div>
+                                <br>
+                                <label>
+                                    [% Translate("Top navigation bar background color") | html %]
+                                </label>
+                                <div class="Field PrimaryColor">
+                                    <input type='color' id='NavBarBackgroundColor' name='NavBarBackgroundColor' value='[% Data.NavBarBackgroundColor | html %]'>
+                                </div>
+                                <br>
+                                <label>
+                                    [% Translate("Top navigation bar border color") | html %]
+                                </label>
+                                <div class="Field PrimaryColor">
+                                    <input type='color' id='BorderNavBarColor' name='BorderNavBarColor' value='[% Data.BorderNavBarColor | html %]'>
+                                </div>
+                                <br>
+                                <label>
+                                    [% Translate("Main panel color") | html %]
+                                </label>
+                                <div class="Field HighlightColor">
+                                    <input type='color' id='MainPanelColor' name='MainPanelColor' value='[% Data.MainPanelColor | html %]'>
+                                </div>
+                                <hr>
+                                <br>
+                                <h1>
+                                    [% Translate("Menu colors") | html %]
+                                </h1>
+                                <label>
+                                    [% Translate("Side menu font colors.") | html %]
+                                </label>
+                                <p class="Explanation">
+                                </p>
+                                <br>
+                                <label>
+                                    [% Translate("Main menu") | html %]
+                                </label>
+                                <div class="Field PrimaryColor">
+                                    <input type='color' id='ColorMenu' name='Menu' value='#[% Data.Menu | html %]'>
+                                </div>
+                                <br>
+                                <label>
+                                    [% Translate("Submenu color") | html %]
+                                </label>
+                                <div class="Field HighlightColor">
+                                    <input type='color' id='ColorSubMenu' name='SubMenu' value='#[% Data.SubMenu | html %]'>
+                                </div>
+                                <br>
+
+                                <label>
+                                    [% Translate("Username color") | html %]
+                                </label>
+                                <div class="Field HighlightColor">
+                                    <input type='color' id='ColorUserName' name='UserName' value='#[% Data.UserName | html %]'>
+                                </div>
+                        </div>
+
+                        </div>
+
+                        <div class="PreviewArea">
+
+                            <h3>[% Translate("Preview") | html %]</h3>
+
+                            <div style="pointer-events: none;" class="Browser">
+                            
+                                <i class="fa fa-chevron-left"></i>
+                                <i class="fa fa-chevron-right"></i>
+                                <i class="fa fa-home"></i>
+                                <i class="fa fa-repeat"></i>
+                                <span class="Favicon" style="background-color: transparent; background-image: url();"></span>
+                                <input type="text" readonly="" value="https://example.com/otrs/customer.pl?Action=HomePage">
+
+                                <i class="fa fa-window-minimize"></i>
+                                <i class="fa fa-window-restore"></i>
+                                <i class="fa fa-window-close"></i>
+
+                                <div class="Page" style="background-color: [% Data.MainPanelColor %];">
+
+                                    <div class="sidebar" id="Sidebar" style="background: linear-gradient(#[% Data.SideBarColor1 | html %] 0%, #[% Data.SideBarColor2 | html %] 80%)">
+                                        <div class="logo">
+                                            <a class="simple-text logo-normal"> </a>
+                                                <div id="logoNav">
+                                                    <a class="simple-text logo-normal">
+                                                        <img id="LogoPage" style="" src="[% Data.Logo %]">
+                                                    </a>
+                                                </div>
+                                            <div id="CompanyNameDiv" class="ColorUserName CompanyName" style="color: #[% Data.UserName | html %]">[% Config("CustomerHeadline") %]</div>
+                                        </div>
+                                        <!-- </div> -->
+                                        
+                                        <div class="user">
+                                            <div class="photo">
+                                                <img src="//www.gravatar.com/avatar/b1a4b2518dbbdd47dd4a713d5cd1df94?s=100&amp;d=mm">
+                                            </div>
+                                            <div class="info">
+                                                <a data-toggle="collapse" class="collapsed" aria-expanded="false">
+                                                    <span class="ColorUserName" title="doutor usuário 1 Lima" id="UserName" style="color: #[% Data.UserName | html %]">
+                                                        [% Translate("User Exemple") | html %]
+                                                        <b style="margin-left: 0px">&#9660;</b>
+                                                    </span>
+                                                </a>
+                                                <div class="clearfix"></div>
+                                                <div class="collapse" id="collapseExample" style=""></div>
+                                            </div>
+                                        </div>
+                                    
+                                        <ul class="nav">
+                                            <li class="active">
+                                                <a>
+                                                <i class="ColorMenu fa fa-bar-chart" style="color: #[% Data.Menu | html %]"></i>
+                                                <p class="ColorMenu" style="color: #[% Data.Menu | html %]">Home Page</p>
+                                                </a>
+                                            </li> 
+                                            <li>
+                                                <a>
+                                                <i class="ColorMenu fa fa-question-circle-o" style="color: #[% Data.Menu | html %]"></i>
+                                                <p class="ColorMenu" style="color: #[% Data.Menu | html %]">FAQs</p>
+                                                </a>
+                                            </li> 
+                                            <li>
+                                                <a data-toggle="collapse" id="ancor-pagesExamples" aria-expanded="true">
+                                                    <i class="ColorMenu fa fa-ticket" style="color: #[% Data.Menu | html %]"></i>
+                                                    <p class="ColorMenu" style="color: #[% Data.Menu | html %]">[% Translate("Tickets") | html %]<b class="caret-layout">&#9650;</b>
+                                                    </p>
+                                                </a>
+                                                <div class="collapse show" id="pagesExamples">
+                                                <ul class="nav">
+                                                    <li>
+                                                    <a>
+                                                        <span class="sidebar-mini-icon"><i class="ColorSubMenu fa fa-pencil-square-o" style="color: #[% Data.SubMenu | html %]"></i></span>
+                                                        <span class="ColorSubMenu sidebar-normal" style="color: #[% Data.SubMenu | html %]">[% Translate("New ticket") | html %]</span>
+                                                    </a>
+                                                    </li>
+                                                    <li>
+                                                    <a>
+                                                        <span class="sidebar-mini-icon"><i class="ColorSubMenu fa fa-list" style="color: #[% Data.SubMenu | html %]"></i></span>
+                                                        <span class="ColorSubMenu sidebar-normal" style="color: #[% Data.SubMenu | html %]">[% Translate("My Tickets") | html %]</span>
+                                                    </a>
+                                                    </li>
+                                                    <li>
+                                                    <a>
+                                                        <span class="sidebar-mini-icon"><i class="ColorSubMenu fa fa-ellipsis-h " style="color: #[% Data.SubMenu | html %]"></i></span>
+                                                        <span class="ColorSubMenu sidebar-normal" style="color: #[% Data.SubMenu | html %]">...</span>
+                                                    </a>
+                                                    </li>
+                                                </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="main-panel">
+                                        <nav id="NavBackgroundColorSide" style="background-color: [% Data.NavBarBackgroundColor | html %];border-bottom: 1px solid [% Data.BorderNavBarColor | html %];" class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+                                            <div class="container-fluid">
+                                                <div class="navbar-wrapper">
+                                                    <div class="navbar-minimize">
+                                                        <button id="minimizeSidebar" class="btn btn-icon btn-round">
+                                                            <i class="fa fa-chevron-left text-center visible-on-sidebar-regular"></i>
+                                                        </button>
+                                                    </div>
+                                                    <text id="NavTitle" class="navbar-brand">Home Page</text>     
+                                                </div>
+                                            </div>
+                                        </nav>  
+                                        <div style="opacity: [% Data.Opacity %]%; background-image: url([% Data.BackgroundImage %]);" class="fixed-top">              
+                                            <div id="CardSearchPreview" class="CardSearchPreviewItemSidebar">
+                                                <div id="CardSearchPreviewTitle" style="color: [% Data.SearchCardTitleColor | html %]">title1</div>
+                                                <div id="CardSearchPreviewBody" style="color: [% Data.SearchCardBodyColor | html%]">body</div>
+                                            </div>
+                                            <!-- <img id="BackgroundPageTopMenu" style="opacity: [% Data.Opacity %]%" src="[% Data.BackgroundImage %]">    -->
+                                        </div>                                   
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                            <button type="button" id="ClickBackgroundImage" onclick="window.location.href='index.pl?Action=AdminCustomerPortalHomePage;Subaction=CardsEdit;ID=Home_Page'" style="margin-top: 2%;">[% Translate("Edit Home Page") | html %]</button>
+                        </div>
+[% RenderBlockEnd("CustomerSideBar") %]
+[% RenderBlockStart("CustomerTopBar") %]
+                        <div>
+                            <h1>
+                                [% Translate("Logo") | html %]
+                            </h1>
+                            <label>
+                                [% Translate("Define the image that will appear at the beginning of the sidebar.") | html %]
+                            </label>
+                            <p class="Explanation">
+                                
+                            </p>
+                            <br>
+                            <label>
+                                [% Translate("Image path") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='text' id='ImgLogo' name='ImgLogo' style="width: 100%;" value='[% Data.Logo | html %]'><button type="button" id="ClickLogo" class="ImgLogo">[% Translate("Preview in page") | html %]</button>
+                            </div>
+                            <img id="PreviewLogo" src="[% Data.Logo | html %]">
+                            </img>
+                            <br>
+                            <hr>
+                            <br>
+                            <h1>
+                                [% Translate("Background image") | html %]
+                            </h1>                               
+                            <br>
+                            <label>
+                                [% Translate("Image path") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='text' id='ImgBackground' name='ImgBackground' style="width: 100%;" value='[% Data.BackgroundImage | html %]'><button type="button" id="ClickBackgroundImage" class="ImgLogo">[% Translate("Preview in page") | html %]</button>
+                            </div>
+                            <img id="PreviewBackgroundImage" src="[% Data.BackgroundImage | html %]">
+                            </img>
+                            <div class="slidecontainer">
+                                <p>[% Translate("Opacity") | html %]: <span id="Porcentage">[% Data.Opacity %]%</span></p>
+                                <input type="range" min="1" max="100" value="[% Data.Opacity %]" class="slider" id="Range" name="Range">
+                                <input type="hidden" name="Opacity" id='Opacity' value="[% Data.Opacity %]"/>
+
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <h1>
+                                [% Translate("Navigation bar color") | html %]
+                            </h1>
+                            <label>
+                                [% Translate("Background colors of the Customer Portal top menu.") | html %] 
+                            </label>                            
+                            <br>
+                            <label>
+                                [% Translate("NavBar item color") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='color' id='NavBarItemColor' name='NavBarItemColor' value='[% Data.NavBarItemColor | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Selected item suspended") | html %]
+                            </label>
+                            <div class="Field HighlightColor">
+                                <input type='color' id='SelectedItemSuspended' name='SelectedItemSuspended' value='[% Data.SelectedItemSuspended | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Selected NavBar item color") | html %]
+                            </label>
+                            <div class="Field HighlightColor">
+                                <input type='color' id='SelectedNavBarItemColor' name='SelectedNavBarItemColor' value='[% Data.SelectedNavBarItemColor | html %]'>
+                            </div>
+                            <hr>
+                            <br>
+                            <h1>
+                                [% Translate("Body colors") | html %]
+                            </h1>
+                            <!-- <label>
+                                [% Translate("Top menu font colors.") | html %]
+                            </label> -->
+                            <!-- <p class="Explanation">
+                            </p> -->
+                            <br>
+                            <label>
+                                [% Translate("NavBar background color") | html %]
+                            </label>
+                            <div class="Field PrimaryColor">
+                                <input type='color' id='NavBarBackgroundColor' name='NavBarBackgroundColor' value='[% Data.NavBarBackgroundColor  | html %]'>
+                            </div>
+                            <br>
+                            <label>
+                                [% Translate("Border navBar color") | html %]
+                            </label>
+                            <div class="Field HighlightColor">
+                                <input type='color' id='BorderNavBarColor' name='BorderNavBarColor' value='[% Data.BorderNavBarColor  | html %]'>
+                            </div>
+                            <br>
+
+                            <label>
+                                [% Translate("Main panel color") | html %]
+                            </label>
+                            <div class="Field HighlightColor">
+                                <input type='color' id='MainPanelColor' name='MainPanelColor' value='[% Data.MainPanelColor | html %]'>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="PreviewArea">
+
+                        <h3>[% Translate("Preview") | html %]</h3>
+
+                        <div style="pointer-events: none;" class="Browser">
+
+                            <i class="fa fa-chevron-left"></i>
+                            <i class="fa fa-chevron-right"></i>
+                            <i class="fa fa-home"></i>
+                            <i class="fa fa-repeat"></i>
+                            <span class="Favicon" style="background-color: transparent; background-image: url();"></span>
+                            <input type="text" readonly="" value="https://example.com/otrs/customer.pl?Action=HomePage">
+
+                            <i class="fa fa-window-minimize"></i>
+                            <i class="fa fa-window-restore"></i>
+                            <i class="fa fa-window-close"></i>
+
+                            <div class="PageTopMenu" style="background-color: [% Data.MainPanelColor  | html %]">                                
+                                <div class="main-panel">
+                                    <nav id="NavBackgroundColor" style="background-color: [% Data.NavBarBackgroundColor | html %]; border-bottom: 1px solid [% Data.BorderNavBarColor  | html %];" class="navbar navbar-expand-lg navbar-absolute">
+                                        <div class="container-fluid">
+                                            <div class="navbar-wrapper">            
+                                                <div class="FlexMenuTopInit">
+                                                    <a class="simple-text logo-normal">
+                                                        <div id="LogoNavTopBar">
+                                                            <img id="LogoPageTopMenu" src="[% Data.Logo %]" >
+                                                            <div id="LogoExample" style="display:none">Company Logo</div>
+                                                        </div>
+                                                    </a>
+                                                </div>  
+                                                <div class="Menu">                       
+                                                    <ul class="nav" style="display: flex; ">
+                                                        <li class="active ListTopBar">                                                            
+                                                            <p class="ColorMenuTop" style="color: [% Data.NavBarItemColor  | html %]">[% Translate("Home Page") | html %]</p>                                                           
+                                                        </li> 
+                                                        <li class="ListTopBar">
+                                                            <p class="ColorMenuTop" style="color: [% Data.NavBarItemColor  | html %]">[% Translate("FAQs") | html %]</p>
+                                                        </li> 
+                                                        <li class="ListTopBar">
+                                                            <p class="ColorMenuTopSelected" style="color: [% Data.SelectedNavBarItemColor  | html %]">[% Translate("Tickets") | html %]
+                                                                <b class="">&#9650;</b>
+                                                            </p>                                                           
+                                                        </li>
+                                                        <li class="ListTopBar">
+                                                            <p class="ColorMenuTop" style="color: [% Data.NavBarItemColor | html %]">
+                                                                <i class="IconPortal fa fa-bell-o"></i>
+                                                            </p>
+                                                        </li> 
+                                                        <li class="ListTopBar">
+                                                            <p class="ColorMenuTop" style="color: [% Data.NavBarItemColor | html %]">
+                                                                <i class="IconPortal fa fa-list-alt"></i>
+                                                            </p>
+                                                        </li> 
+                                                        <li class="">
+                                                            <div class="NavAvatar">
+                                                                <img src="//www.gravatar.com/avatar/b1a4b2518dbbdd47dd4a713d5cd1df94?s=100&amp;d=mm">
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </nav>  
+                                    <div style="opacity: [% Data.Opacity %]%; background-image: url([% Data.BackgroundImage %]);" class="CardSearchPreviewContainer">              
+                                        <div id="CardSearchPreview" class="CardSearchPreview">
+                                            <div id="CardSearchPreviewTitle" style="color: [% Data.SearchCardTitleColor | html %]">title</div>
+                                            <div id="CardSearchPreviewBody" style="color: [% Data.SearchCardBodyColor | html%]">body</div>
+                                        </div>
+                                        <!-- <img id="BackgroundPageTopMenu" style="opacity: [% Data.Opacity %]%" src="[% Data.BackgroundImage %]">    -->
+                                    </div>                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                        </div>
+
+[% RenderBlockEnd("CustomerTopBar") %]
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="WidgetSimple SpacingTop">
+                <div class="Header">
+                    <h2>[% Translate("Save Change") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("CGIHandle") %]?Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+
+                                <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="Salvar"><span>[% Translate("Save") | html %]</span></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+[% RenderBlockEnd("Overview") %]

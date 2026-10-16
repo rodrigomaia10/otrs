@@ -1,0 +1,294 @@
+# --
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPIScheduler.tt - frontend template
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("KPI scheduler management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('KPI scheduler management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% IF Data.ID == "NEW"  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add KPI Scheduler"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit KPI Scheduler")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+[% RenderBlockStart("ActionList") %]
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPI" class="CallForAction Fullsize Center Create btn-main btn-primary-ghost"><span><i class="fa fa-th"></i>[% Translate("Manage KPIs") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPISeries" class="CallForAction Fullsize Center Create btn-main btn-primary-ghost"><span><i class="fa fa-columns"></i>[% Translate("Manage KPI Series") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionOverview") %]
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPISchedulerEdit;ID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add scheduler") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPI" class="CallForAction Fullsize Center Create"><span><i class="fa fa-th"></i>[% Translate("Manage KPIs") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPISeries" class="CallForAction Fullsize Center Create"><span><i class="fa fa-columns"></i>[% Translate("Manage KPI Series") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %]
+                </ul>
+            </div>
+[% RenderBlockEnd("ActionList") %]
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content" style="background-color: #fbef98; padding: var(--padding-md);">
+                <div class="FieldExplanation">
+                    <p>
+                        [% Translate("Attention, the statistics can take a long time to run. Avoid creating multiple chrons that will run at the same time.") | html %]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+[% RenderBlockStart("Overview2") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable" id="Scheduleds">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Last execution") | html %]</th>
+                            <th>[% Translate("Next execution") | html %]</th>
+                            <th>[% Translate("Execute now") | html %]</th>
+                            <th>[% Translate("Copy") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                        </tr>
+                    </thead>
+[% RenderBlockStart("NoDataFoundMsg") %]
+                    <tr>
+                        <td colspan="5">
+                            [% Translate("No data found.") | html %]
+                        </td>
+                    </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("Row") %]
+                    <tbody>
+                        <tr class="[% IF Data.Valid != 1%] Invalid [% ELSE %] Valid [% END %]">
+                            <td>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPISchedulerEdit;Profile=[% Data.Name | uri %]">
+                                    [% Data.Name | html %]
+                                </a>
+                            </td>
+                            <td>[% Translate( Data.ShownValid ) | html %]</td>
+                            <td><i class="fa fa-tasks"></i>[% Data.LastExecution %]</td>
+                            <td><i class="fa fa-tasks"></i> [% Data.NextExecution %]</td>
+                            
+                            [% IF Data.ShownValid == 'valid' %]
+                                <td class="executeJob" data-job-key="[% Data.JobKey %]" style="cursor: pointer;"><i class="fa fa-send-o"></i> [% Translate('Execute') %]</td>
+                            [% ELSE %]
+                                <td style="cursor: not-allowed;" title="[% Translate('Invalid task') %]"><i class="fa fa-send-o"></i> [% Translate('Execute') %]</td>
+                            [% END %]
+                            <td class="Left">
+                                <a class="KPISchedulerCopy" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPISchedulerCopy;Profile=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Copy") | html %]">
+                                    <i class="fa fa-copy"></i> 
+                                </a>
+                            </td>
+                            <td class="Left">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;Profile=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete") | html %]">
+                                    <i class="fa fa-trash-o"></i> 
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+[% RenderBlockEnd("Row") %]
+                </table>
+            </div>
+        </div>
+[% RenderBlockEnd("Overview2") %]
+        
+[% RenderBlockStart("KPISchedulerEdit") %]          
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate">
+            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+            <input type="hidden" name="Subaction" value="KPISchedulerSave"/>
+            <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+            <input type="hidden" name="OldProfile" value="[% Data.Profile | html %]"/>
+            
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Job Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+
+                        <div class="field-wrapper">
+                            <label for="Profile" class="Mandatory"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                            <div class="Field">
+                                <input type="text" name="Profile" id="Profile" class="Validate_Required W50pc [% Data.ProfileInvalid | html %]" value="[% Data.Profile | html %]" />
+                                <div id="ProfileError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+    [% RenderBlockStart("ProfileInvalidMsg") %]
+                                <div id="ProfileServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+    [% RenderBlockEnd("ProfileInvalidMsg") %]
+    [% RenderBlockStart("ProfileInvalidMsgAddError") %]
+                                <div id="ProfileServerError" class="TooltipErrorMessage"><p>[% Translate("The name you entered already exists.") | html %]</p></div>
+    [% RenderBlockEnd("ProfileInvalidMsgAddError") %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="GroupIDs">[% Translate("Groups") | html %]: </label>
+                            <div class="Field">
+                                [% Data.GroupsStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="ValidID">[% Translate("Validity") | html %]: </label>
+                            <div class="Field">
+                                [% Data.ValidOptionStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="KPIs" id="KPIsFieldLabel">[% Translate("KPIs") | html %]: </label>
+                            <div class="Field" id="KPIsField">
+                                [% Data.KPIOptionString %]
+                            </div>   
+                        </div>  
+
+                        <div class="field-wrapper">
+                            <label for="Stats" id="Stats">[% Translate("Stats") | html %]: </label>
+                            <div class="Field" id="StatsField">
+                                [% Data.StatsOptionString %]
+                            </div>   
+                        </div>  
+
+                        <div class="field-wrapper">
+                            <label for="TypeExport" class="Mandatory"><span class="Marker">*</span>[% Translate("Type export") | html %]: </label>
+                            <div class="Field">
+                                [% Data.TypeExportStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Prefix">[% Translate("Prefix") | html %]: </label>
+                            <div class="Field">
+                                <input type="text" name="Prefix" id="Prefix" value="[% Data.Prefix | html %]" class="W50pc" maxlength="200"/>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="AdditionalEmails">[% Translate("Additional emails") | html %]: </label>
+                            <div class="Field">
+                                <input type="text" name="AdditionalEmails" id="AdditionalEmails" value="[% Data.AdditionalEmails | html %]" class="W50pc" maxlength="200"/>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="TemplateKPI">[% Translate("Template of email") | html %]: </label>
+                            <div class="Field">
+                                [% Data.TemplateKPIStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="TimeZone">[% Translate("Consider Time Zone") | html %]:</label>
+                            <div class="Field">
+                                [% Data.TimeZone %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="ScheduleMinutes">[% Translate("Minutes") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScheduleMinutesList %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="ScheduleHours">[% Translate("Hours") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScheduleHoursList %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="ScheduleDays">[% Translate("Days") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScheduleDaysList %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="ScheduleDaysOfWeek">[% Translate("Days of Week") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScheduleDaysOfWeek %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="ScheduleMonth">[% Translate("Months") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScheduleMonthList %]
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple SpacingTop">
+                <div class="Header">
+                    <h2>[% Translate("Save Changes") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+
+                                <button class="CallForAction Primary btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") |  html %]</span></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+           
+[% RenderBlockEnd("KPISSchedulerEdit") %]
+      
+    </div>
+    <div class="Clear"></div>
+</div>
+[% RenderBlockEnd("Overview") %]

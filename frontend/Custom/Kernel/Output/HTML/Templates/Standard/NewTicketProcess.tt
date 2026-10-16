@@ -1,0 +1,86 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/NewTicketProcess.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config(" Frontend::WebPath")
+    %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div id="content-functions-content" class="ContentResponsive removecontent NewTicketProcess" >
+[% RenderBlockStart("BackgroundPortal") %]
+    <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+    <div id="MainBox" class="TicketProcess ARIARoleMain">
+
+        <div class='BackgroundPortal'></div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-10 col-sm-10">
+                <div class="card-header-alt-newTicket">
+                    <h5 class="card-title" style="font-size: 20px;" title="[% Data.ServiceName | html %] ">
+                        <i class="fa fa-file-text-o fa-fw"></i>
+                        [% Translate("Process") | html %]: 
+                        <div id="MyProcessName" style="display: inline-block">
+                            
+                        <div>
+                    </h5> 
+
+                </div>
+            </div>
+        </div>
+
+        [% RenderBlockStart("Errors") %]
+        <div class="alert alert-danger" role="alert" id="Errors">
+            <input type="hidden" id="Errors" value="1">
+            [% Data.Message %]
+        </div>
+        [% RenderBlockEnd("Errors") %]
+        <div class="Content">
+            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="NewProcessTicket" class="Validate PreventMultipleSubmits">
+                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                <input type="hidden" name="Subaction" value="DisplayActivityDialog"/>
+                <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                <fieldset>
+                <div>
+                    [% RenderBlockStart("ProcessList") %]
+                    <!--<label class="Mandatory" for="ProcessEntityID"><span class="Marker">*</span>[% Translate("Process") | html %]:</label>
+                    [% Data.ProcessList %]-->
+                    <div class="styled-select blue semi-square">
+                        [% Data.ProcessList %]
+                    </div>
+                    <div id="ProcessEntityIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                    <div id="ProcessEntityIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                </div>
+                <div class="Spacing Clear"></div>
+                [% RenderBlockEnd("ProcessList") %]
+                </fieldset>
+            </form>
+            <div id="AJAXLoader" class="Spacing Center Hidden">
+                <span class="AJAXLoader" title="[% Translate("Loading") | html %]"></span>
+            </div>
+            <div id="ActivityDialogContent"></div>
+        </div>
+    </div>
+</div>
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]
+
+<style>
+    .Field {
+        flex-direction: row !important; 
+    }
+
+    h2, .h2 {
+        margin-bottom: 15px !important; 
+        margin-top: 15px !important; 
+    }
+
+    .UploadProcess{
+        width: 100% !important; 
+    }
+</style>

@@ -1,0 +1,263 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPIChartSQLQuery.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dparavani@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('KPI - Chart with SQL Query'),
+                Link => 'AdminKPI',
+            },
+        ]
+    %]
+
+    [% IF Data.ID == ""  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add KPI - Chart with SQL Query"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit KPI - Chart with SQL Query")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+
+    <div class="Clear"></div>
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPI" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="AdminKPIChartSQLQuery">
+            <input type="hidden" name="Subaction" value="[% Data.Mode | html %]Action">
+            <input type="hidden" name="ID" value="[% Data.ID | html %]">
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("General") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                                    <div class="Field">
+                                        <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                        <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("This is the name to be shown on the screens where the KPI is active.") | html %]</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="field-wrapper">
+                                    <label for="ReturnFormat">[% Translate("Output") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ReturnFormatStrg %]
+                                        <p class="FieldExplanation">[% Translate("This is the return format when click on chart.") | html %]</p>
+                                    </div>
+                                </div>    
+
+                                <div class="field-wrapper">
+                                    <label id="LabelToLink" for="Link">Link:</label>
+                                    <div class="Field">
+                                        <input type="text" name="Link" id="Link" value="[% Data.Link | html %]" class="W60pc"/>
+                                    </div>                               
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ValidityStrg %]
+
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="GroupIDs">[% Translate("Groups") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.GroupsStrg %]
+                                        <div class="Clear"></div>
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="ObjectTypeName">[% Translate("Object type") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="ObjectTypeName" readonly class="W50pc" type="text" maxlength="200" value="[% Translate('Chart with SQL Query') | html %]" name="ObjectTypeName"/>
+                                        <div class="Clear"></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Options") | html %]</h2>
+                </div>
+                <div class="Content ">
+                    <div id="BoxSQLQuery">
+                        <fieldset class="TableLike">
+
+                            <div class="field-wrapper">
+                                <label for="ReturnChart">[% Translate("Chart") | html %]:</label>
+                                <div class="Field" style="">
+                                    [% Data.ReturnChartStrg %]
+                                    <p class="FieldExplanation">[% Translate("Chart type to display.") | html %]</p>
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="ReturnChart">[% Translate("Text format") | html %]:</label>
+                                <div class="Field" style="">
+                                    [% Data.DisplayTextChartStrg %]
+                                    <p class="FieldExplanation">[% Translate("Display text format") | html %]</p>
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+
+                                <label class="Mandatory" for="FieldSQL"><span class="Marker">*</span> [% Translate("SQL") | html %]:</label>
+                                <div class="Field" id="FieldSQL">
+                                    
+                                    <pre>
+                                        <code class="language-html">
+                                            <textarea name="SQL" id="SQL" rows="10" class="Validate_Required [% Data.SQLInvalid | html %]">[% Data.SQL | html %]</textarea>
+                                        </code>
+                                    </pre>
+                                    <div id="SQLError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="SQLServerError" class="TooltipErrorMessage">
+                                        <p>
+    [% RenderBlockStart("FieldRequiredServerError") %]
+                                            [% Translate("This field is required.") | html %]
+    [% RenderBlockEnd("FieldRequiredServerError") %]
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="field-wrapper">
+
+                            <div id="chart"></div>
+                        </div>
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper form-button-actions">
+                                    <div class="Field buttons-field">
+                                        <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" type="button" id="RunSqlQuery" value="[% Translate("Test Query") | html %]"><span>[% Translate("Test Query") | html %]</span></button>
+                                        
+                                        <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" style="display: none;" type="button" id="ViewChart" value="[% Translate("Graph Preview") | html %]"><span>[% Translate("Graph Preview") | html %]</span></button>
+                                        
+                                    </div>
+                                </div>
+                            </fieldset>                  
+                           
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="WidgetSimple Collapsed">
+                    <div class="Header">
+                        <div class="WidgetAction Toggle">
+                            <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    </div>
+                    <h2>[% Translate("Examples of tables by chart type") | html %]</h2>
+                </div>
+
+                <div class="Content">
+                    <dl>
+                        <dt><code>&lt;[% Translate("Area Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have at least three columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Bar Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have at least two columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Column Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have at least two columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Donut Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have two columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Line Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have at least three columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Pie Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have two columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Stacked Bar Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have at least three columns.") | html %]
+                        </dd>
+
+                        <dt><code>&lt;[% Translate("Stacked Column Chart") | html %]&gt;</code></dt>
+                        <dd>
+                            [% Translate("Requirement: table must have at least three columns.") | html %]
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="Clear"></div>
+            <div class='AddedSQLResult'></div>
+
+            <fieldset class="TableLike card SpacingTop">
+                <div class="field-wrapper form-button-actions">
+                    <div class="Field buttons-field">
+                        <a class="btn-main btn-cancel-ghost btn-width-md" href="/znuny/index.pl?Action=AdminKPI">Cancelar</a>
+                        
+                        <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" id="Submit" type="submit" value="Salvar"><span>Salvar</span></button>
+                        
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+[% RenderBlockStart("SQLIsNotSelectServerError") %]
+    <div class="KPISQLErrorDiv">[% Translate("Only select queries are allowed.") | html %] </div>
+[% RenderBlockEnd("SQLIsNotSelectServerError") %]
+[% RenderBlockStart("SQLSyntaxServerError") %]
+    <div class="KPISQLErrorDiv">[% Translate("The syntax of your SQL query has a mistake. Please check it.") | html %] </div>
+[% RenderBlockEnd("SQLSyntaxServerError") %]
+[% RenderBlockStart("BindParamServerError") %]
+    <div class="KPISQLErrorDiv">[% Translate("There is at least one parameter missing for the binding. Please check it.") | html %] </div>
+[% RenderBlockEnd("BindParamServerError") %]
+[% RenderBlockStart("GraphDoesNotMatchSQLServerError") %]
+    <div class="KPISQLErrorDiv">[% Translate("Selected chart type incompatible with the generated table.") | html %] </div>
+[% RenderBlockEnd("GraphDoesNotMatchSQLServerError") %]
+

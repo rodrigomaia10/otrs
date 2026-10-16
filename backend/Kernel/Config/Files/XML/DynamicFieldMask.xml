@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Config">
+	<Setting Name="Frontend::Module###AdminDynamicFieldMask" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldMask::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Title" Translatable="1">DynamicFieldMask</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminDynamicFieldMask###002-Mask" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldMask::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicFieldMask.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicFieldMask.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="DynamicFields::Driver###Mask" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField backend registration.</Description>
+        <Navigation>InBox::DynamicFieldMask::Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">Mask</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::Mask</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldMask</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="Loader::Agent::CommonJS###001-DynamicFieldMask" Required="0" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldMask::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>inbox-thirdparty/jquery-maskMoney-3.0.2/jquery.maskmoney.js</Item>
+                <Item>inbox-thirdparty/jquery-mask-1.14.0/jquery.mask.min.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+	<Setting Name="Loader::Customer::CommonJS###001-DynamicFieldMask" Required="0" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
+        <Navigation>InBox::DynamicFieldMask::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>inbox-thirdparty/jquery-maskMoney-3.0.2/jquery.maskmoney.js</Item>
+                <Item>inbox-thirdparty/jquery-mask-1.14.0/jquery.mask.min.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="DynamicFields::Mask::PossibleMasks" Required="1" Valid="1">
+        <Description Translatable="1">Set the possible masks to be displayed.</Description>
+        <Navigation>InBox::DynamicFieldMask::Settings</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="999.999.999-99" Translatable="1">ITIN</Item>
+                <Item Key="99.999.999/9999-99" Translatable="1">CNPJ</Item>
+                <Item Key="(99)9999-9999" Translatable="1">Phone</Item>
+                <Item Key="99999-999" Translatable="1">Zip Code</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>

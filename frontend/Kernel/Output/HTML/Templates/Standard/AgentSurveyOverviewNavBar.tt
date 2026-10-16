@@ -1,0 +1,174 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+[% RenderBlockStart("OverviewNavBar") %]
+<div class="OverviewBox ARIARoleMain [% Data.View | html %]">
+    <h1>[% Data.TitleName | html %]:
+        <div class="overview-breadcrumb">[% Data.TitleValue | html %]</div>
+    </h1>
+
+    [% Data.DataInTheMiddle %]
+
+    <div class="OverviewControl" id="OverviewControl">
+        <div>
+            <div class="ControlRow">
+[% RenderBlockStart("OverviewNavBarFilter") %]
+                <ul class="Tabs">
+[% RenderBlockStart("OverviewNavBarFilterItem") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSelected") %]
+                    <li class="Active [% Data.CSS | html %]">
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("OverviewNavBarFilterItemSelected") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSelectedNot") %]
+                    <li class="[% Data.CSS | html %]">
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("OverviewNavBarFilterItemSelectedNot") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSplit") %]
+                    -
+[% RenderBlockEnd("OverviewNavBarFilterItemSplit") %]
+[% RenderBlockEnd("OverviewNavBarFilterItem") %]
+                </ul>
+[% RenderBlockEnd("OverviewNavBarFilter") %]
+
+                <ul class="Tabs">
+                    <li>
+                        <a id="SurveySearch" href="#">[% Translate("Survey overview options") | html %]</a>
+                    </li>
+                </ul>
+
+                <div id="SurveyOverviewSettingsDialogContainer" class="Hidden">
+                    <form action="[% Env("CGIHandle") %]" method="post" id="SurveyOverviewSettingsDialog">
+                        <input type="hidden" name="Action" value="AgentSurveyOverview"/>
+                        <input type="hidden" name="Subaction" value="Change"/>
+                        <fieldset class="TableLike">
+
+                            <div class="field-wrapper">
+                                <label for="Fulltext" id="LabelFulltext">[% Translate("Fulltext") | html %]:</label>
+                            </div>
+                            <div class="Field">
+                                <input type="text" id="Fulltext" name="Fulltext" value="[% Data.Fulltext | html %]" class="" />
+                                <p class="FieldExplanation">
+                                    [% Translate("Searches in the attributes Number, Title, Introduction, Description, NotificationSender, NotificationSubject and NotificationBody, overriding other attributes with the same name.") | html %]
+                                </p>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="States" id="LabelStates" >[% Translate("State") | html %]:</label>
+                            </div>
+                            <div class="Field">
+                                [% Data.StateStr %]
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="NoTimeSet">[% Translate("Survey Create Time") | html %]:</label>
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="NoTimeSet">[% Translate("No restriction") | html %]</label>
+                            </div>
+                            <div class="Field">
+                                <input title="[% Translate("No time settings") | html %]" type="radio"  id="NoTimeSet" name="TimeSearchType" value="" [% Data.SurveySearch.NoRestrictionChecked | html %] [% Data.item("TimeSearchType::None") %] />
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="DateRange">[% Translate("Only surveys created between") | html %]</label>
+                            </div>
+                            <div class="Field">
+                                <input title="[% Translate("Date range") | html %]" type="radio" id="DateRange" name="TimeSearchType" value="TimeSlot" [% Data.SurveySearch.TimeSlotChecked | html %] [% Data.item("TimeSearchType::TimeSlot") %] />
+                            </div>
+
+                            <div class="Field">
+                                <div class="outer-select-date">
+                                    <div>
+                                    [% Data.SurveyCreateTimeStart %]
+                                    </div>
+                                    <div>
+                                    [% Translate("and") | html %]
+                                    </div>
+                                    <div>
+                                    [% Data.SurveyCreateTimeStop %]
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+
+[% RenderBlockStart("ContextSettings") %]
+
+                <ul class="ContextFunctions">
+                    <li class="ContextSettings">
+                        <a class="icon-hover" href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
+                            <i class="fa fa-cog"></i>
+                            <span>[% Translate("Settings") | html %]</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="ContextSettingsDialogContainer" class="Hidden">
+                    <form action="[% Env("CGIHandle") %]" method="post" id="ContextSettingsDialog">
+                        <input type="hidden" name="Action" value="AgentPreferences"/>
+                        <input type="hidden" name="Subaction" value="Update"/>
+                        <input type="hidden" name="Group" value="[% Data.Group | html %]"/>
+                        <input type="hidden" name="RedirectURL" value="[% Data.RequestedURL | html %]"/>
+                        <fieldset class="field-wrapper">
+                            <label for="[% Data.PreferencesKey | html %]">[% Translate("Max. shown surveys per page") | html %]:</label>
+                            <div class="Field">
+                                [% Data.PageShownString %]
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+[% RenderBlockEnd("ContextSettings") %]
+
+            </div>
+            <div class="ActionRow">
+                <div class="OverviewActions">
+                    [% Data.ActionRow %]
+                    <div></div>
+                    <div>
+[% RenderBlockStart("OverviewNavBarPageNavBar") %]
+                        <span class="Pagination">
+                            <ul>
+                                <li>
+                                    <span>[% Data.ResultLong %]</span>
+                                </li>
+                                <li class="page-links">[% Data.SiteNavBarLong %]</li>
+                            </ul>
+                        </span>
+[% RenderBlockEnd("OverviewNavBarPageNavBar") %]
+
+                        <ul class="OverviewZoom">
+[% RenderBlockStart("OverviewNavBarViewMode") %]
+[% RenderBlockStart("OverviewNavBarViewModeSelected") %]
+                                <li class="Active">
+                                    <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                                        [% Translate(Data.NameShort) | html %]
+                                    </a>
+                                </li>
+[% RenderBlockEnd("OverviewNavBarViewModeSelected") %]
+[% RenderBlockStart("OverviewNavBarViewModeNotSelected") %]
+                                <li>
+                                    <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                                        [% Translate(Data.NameShort) | html %]
+                                    </a>
+                                </li>
+[% RenderBlockEnd("OverviewNavBarViewModeNotSelected") %]
+[% RenderBlockEnd("OverviewNavBarViewMode") %]
+                        </ul>
+                    </div>
+                </div>
+                [% Data.SortOrderBar %]
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("OverviewNavBar") %]

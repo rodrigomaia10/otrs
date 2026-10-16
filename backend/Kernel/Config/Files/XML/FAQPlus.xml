@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+
+    <Setting Name="FAQPlus::NotificationEmails" Required="0" Valid="1">
+        <Description Translatable="1">Defines the list of email addresses that will receive notifications upon FAQ creation or update.</Description>
+        <Navigation>InBox::FAQPlus::Core::Notifications</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="FAQPlus::NotificationEmailTemplates::Create" Required="0" Valid="1">
+        <Description Translatable="1">Defines the subject and body templates for notification emails sent when a FAQ is created.</Description>
+        <Navigation>InBox::FAQPlus::Core::Notifications</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Subject" ValueType="Textarea">Nova FAQ Criada: &lt;FAQ_Title&gt;</Item>
+                <Item Key="Body" ValueType="Textarea">
+    Olá,&lt;br&gt;&lt;br&gt;
+
+    Uma nova FAQ foi criada por &lt;FAQ_User_Name&gt; (&lt;FAQ_User_Email&gt;).&lt;br&gt;&lt;br&gt;
+
+    Título: "&lt;FAQ_Title&gt;"&lt;br&gt;&lt;br&gt;
+
+    Você pode acessá-la em: &lt;FAQ_Link&gt;&lt;br&gt;&lt;br&gt;
+
+    Atenciosamente,&lt;br&gt;
+    Equipe FAQ
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="FAQPlus::NotificationEmailTemplates::Update" Required="0" Valid="1">
+        <Description Translatable="1">Defines the subject and body templates for notification emails sent when a FAQ is updated.</Description>
+        <Navigation>InBox::FAQPlus::Core::Notifications</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Subject" ValueType="Textarea">FAQ Atualizada: &lt;FAQ_Title&gt;</Item>
+                <Item Key="Body" ValueType="Textarea">
+    Olá,&lt;br&gt;&lt;br&gt;
+
+    Uma FAQ foi atualizada por &lt;FAQ_User_Name&gt; (&lt;FAQ_User_Email&gt;).&lt;br&gt;&lt;br&gt;
+
+    Título: "&lt;FAQ_Title&gt;"&lt;br&gt;&lt;br&gt;
+
+    Você pode acessá-la em: &lt;FAQ_Link&gt;&lt;br&gt;&lt;br&gt;
+
+    Atenciosamente,&lt;br&gt;
+    Equipe FAQ
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="FAQPlus::Core::OnlyCreateApprovalTicketInNew" Required="0" Valid="1">
+        <Description Translatable="1">Only create approval ticket in new FAQs.</Description>
+        <Navigation>InBox::FAQPlus::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">No</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">Yes</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="FAQPlus::Core::ChangeFAQDialogSize" Required="0" Valid="1">
+        <Description Translatable="1">Change FAQ Dialog size.</Description>
+        <Navigation>InBox::FAQPlus::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="No">
+                <Item ValueType="Option" Value="No" Translatable="1">No</Item>
+                <Item ValueType="Option" Value="Yes" Translatable="1">Yes</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+
+</otrs_config>

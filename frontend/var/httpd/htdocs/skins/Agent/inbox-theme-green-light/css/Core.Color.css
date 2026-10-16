@@ -1,0 +1,839 @@
+/* 
+ * var/httpd/htdocs/skins/Agent/inbox-theme-dark-blue/css/Core.Color.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ * * gsantos@serviceup.com.br
+*/
+
+/**
+ * @package     Skin "Default"
+ */
+
+/**
+ * @section     Colors
+ */
+
+/*
+ * Used colors in Znuny:
+ * ---------------------
+ *
+ * Variable                             Description                         Default
+ *
+ * var(--color-black);                                                      Black
+ * var(--color-red);                                                        Red
+ * var(--color-orange);                                                     Orange
+ * var(--color-yellow);                                                     Yellow
+ * var(--color-green);                                                      Green
+ * var(--color-grey1);                                                      Grey #111
+ * var(--color-grey2);                                                      Grey #222
+ * var(--color-grey3);                                                      Grey #333
+ * var(--color-grey4);                                                      Grey #444
+ * var(--color-grey5);                                                      Grey #555
+ * var(--color-grey6);                                                      Grey #666
+ * var(--color-grey7);                                                      Grey #777
+ * var(--color-grey8);                                                      Grey #888
+ * var(--color-grey9);                                                      Grey #999
+ * var(--color-grey10);                                                     Grey #AAA
+ * var(--color-grey11);                                                     Grey #BBB
+ * var(--color-grey12);                                                     Grey #CCC
+ * var(--color-grey13);                                                     Grey #DDD
+ * var(--color-grey14);                                                     Grey #EEE
+ */
+
+ :root {
+
+    /* black */
+    --color-black:                    #000;
+
+    /* red */
+    --color-red:                      #b8384e;
+
+    /* orange */
+    --color-orange:                   #FF9050;
+
+    /* yellow */
+    --color-yellow:                   #FFDD50;
+
+    /* green */
+    --color-green:                    #049E35;
+
+    /* white */
+    --color-white:                    #FFF;
+
+    /* grey */
+    --color-grey1:                    #f1f1f1;
+    --color-grey2:                    #222;
+    --color-grey3:                    #f4f4f4;
+    --color-grey4:                    #444;
+    --color-grey5:                    #555;
+    --color-grey6:                    #666;
+    --color-grey7:                    #777;
+    --color-grey8:                    #888;
+    --color-grey9:                    #999;
+    --color-grey10:                   #AAA;
+    --color-grey11:                   #BBB;
+    --color-grey12:                   #CCC;
+    --color-grey13:                   #DDD;
+    --color-grey14:                   #EEE;
+
+
+    /* Main Colors */
+    --primary-color: #BFD730;
+    --primary-color-darker: #b6ce2e;
+    --primary-color-rgb: rgba(255, 139, 37, 0.2);
+    --primary-color-calendar: #e3fce0;
+    --primary-color-text: #f0ffd9;
+    --secondary-color: #251c17;
+
+    --white: #ffffff;
+    --gray-light-white: #fafbfa;
+    --gray-light-ultra: #f5f5f5;
+    --gray-light-semi: #efefef;
+    --gray-light: #ededed;
+    --gray-regular-light: #E8E8E8;
+    --gray-regular: #e0e0e0;
+    --gray-medium: #beb8b5;
+    --gray-medium-darker: #B5B5B580;
+    --gray-dark-semi: #9D9792;
+    --gray-dark: #746d69;
+    --gray-darker: #68615e;
+    --black: #251c17;
+
+
+    --color-scroll-bar: var(--gray-dark);
+    --mail-outgoing-color: #ffeec6;
+
+    --disabled: var(--gray-light-semi);
+    --disabled-text: var(--gray-medium);
+    --disabled-input: var(--gray-light-semi);
+
+    --bread-crumb: var(--gray-dark-semi);
+    --bread-crumb-active: var(--black);
+    --bread-crumb-font-size: var(--font-size-sm);
+
+
+    --color-ticket-header: var(--gray-light-white);
+    --email-info: var(--gray-light-white);
+    --ticket-subject: var(--table-text-color);
+
+    --success-color: #99c736;
+    --warning-color: #FC5A5A;
+    --warning-color-darker: #E44E4E;
+    --error-color: var(--warning-color);
+    --error-color-darker: var(--warning-color-darker);
+    --confirmation-color: var(--success-color);
+    --plus-color: var(--success-color);
+
+    /* Tables */
+    --table-text-color: #4f4444;
+    --table-th-bg: #EFEFEF;
+    --table-td-even-bg: #F9F9F9;
+    --tr-disabled-bg: #efefef;
+    --tr-disabled-text: #B6B6B6;
+    
+    /* Flag Element */
+    --color-flag-default: #cdcdcd;
+
+    /* Alert Component */
+    --alert-close-icon-color: var(--gray-dark);
+
+        /* Info */
+        --alert-info-bg-color: #50b6ff10;
+        --alert-info-icon-color: #50B5FF;
+        --alert-info-border-color: #50b6ff1a;
+
+        /* Error */
+        --alert-error-bg-solid-color: #FC5A5A;
+        --alert-error-bg-color: #FC5A5A10;
+        --alert-error-icon-color: #FC5A5A;
+        --alert-error-border-color:#FC5A5A1a;
+
+        /* Success */
+        --alert-success-bg-solid-color: #3DD598;
+        --alert-success-bg-color: #3DD59810;
+        --alert-success-icon-color: #3DD598;
+        --alert-success-border-color: #3DD5981a;
+
+        /* Warning */
+        --alert-warning-bg-color: #F2BD0E10;
+        --alert-warning-icon-color: #F2BD0E;
+        --alert-warning-border-color: #F2BD0E1a;
+
+        /* Notice */
+        --alert-notice-bg-color: #cccccc10;
+        --alert-notice-icon-color: #cccccc;
+        --alert-notice-border-color: #cccccc1a;
+
+    --color-icon-favorite: #F2BD0E;
+
+
+    /* Forms */
+    --border-color: #eae7e2;
+    --border-input-color: #c4c1bb;
+
+
+    /* BG's */
+    --overlay-bg: rgba(23, 23, 37, 0.145);
+
+}
+
+/* Estiliza as classes sem pseudo-elementos */
+.dropdown-filter,
+.dropdown-filter .btn-dropdown .fa-caret-down,
+.btn-text,
+.btn-dropdown .btn-wrapper,
+div.InputField_ToolbarContainer ul li a,
+label.title,
+.GroupingHeader,
+.Preferences .WidgetSimple.Setting .Header h2 label,
+.activity-dropdown p,
+.toolbar-row-wrapper .toolbar-row .component-wrapper {
+    color: #222 !important;
+}
+
+.toolbar-row-wrapper .toolbar-row .component-wrapper>label {
+    font-size: var(--font-size-sm);
+    margin-left: 7px;
+    color: #222;
+}
+.WidgetAction.Toggle {
+    background: var(--color-grey3);
+    color: #222;
+    border-top-left-radius: var(--border-radius-sm);
+    border-top-right-radius: var(--border-radius-sm);
+    padding: var(--padding-md) var(--padding-lg);
+}
+
+.TicketZoom .WidgetSimple>.Header h2 {
+    width: calc(100% - 65px);
+    color: #222;
+}
+
+.WidgetSimple>.Header h2, .WidgetSimple>.Header h3 {
+    color: #222;
+}
+
+div.InputField_ListContainer {
+    z-index: 10000;
+}
+
+.ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Header {
+    z-index: 8;
+}
+
+/* Menus e dropdown: */
+
+@media only screen and (max-width: 1024px) {
+    div#ToolBar {
+        padding-top: 47px;
+    }
+}
+
+
+    .dropdown-filter label {
+        background-color: #f4f7e2 !important;
+        color: #222 !important;
+        border-color: #c5db4e !important;
+    }
+
+    .dropdown-filter .btn-dropdown {
+        border: 1px solid #c5db4e !important;
+    }
+
+    .dropdown-menu,
+    .dropdown-search-menu {
+        background-color: #ffffff !important;
+        border-radius: 15px !important;
+        margin-top: 0px;
+        padding: 5px !important;
+    }
+
+    .ActionMenuList{
+        background-color: #ffffff !important;
+    }
+ 
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction a .textWrapper,
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction a .iconWrapper i{
+        color: #222;
+    }
+
+    .ActionMenu .ActionMenuList li .WidgetAction a .textWrapper, 
+    .ActionMenu .ActionMenuList li .WidgetAction a .iconWrapper i{
+        color: #222;
+    }
+
+    .Cluster ul ul li a:hover {
+        border-color: transparent;
+        background: var(--gray-light) !important;
+    }
+
+    .Cluster ul ul {
+        background: #ffffff !important;
+        padding: 0px;
+    }
+    .Cluster ul ul li a:hover{
+        background-color: #f4f4f4 !important;
+        color: #000000;
+    }
+
+    .toolbar-row-wrapper .toolbar-row .component-wrapper:last-child {
+        border-left: 0;
+        z-index: 10;
+    }
+
+    .ActionRow.Cluster ul ul li a{
+        color: var(--color-grey3);
+    }
+    /* Cor de dropdown e icones */
+
+    .ClusterLink, .ClusterLink:hover {
+        cursor: pointer;
+        border: var(--border-width) var(--border-solid) transparent !important;
+    }
+
+
+    .toolbar-row-wrapper .toolbar-row ul li a .iconWrapper span.Counter {
+        color: var(--black);
+        background-color: var(--primary-color-text);
+    }
+
+    .dropdown-item, 
+    .dropdown-item a, 
+    .dropdown-item.Selected a, 
+    label#ActiveWidgetsLabel{
+        color: var(--primary-color);
+    }
+
+    .Tab .dropdown-item a{
+        color: #222 !important;
+        font-weight: 500;
+    }
+
+    .dropdown-item.inactive-widget a{
+        width: 92%;
+        padding: var(--padding-sm) var(--padding-sm) !important;
+    }
+
+    .dropdown-item.inactive-widget:hover a, .dropdown-item.inactive-widget:hover i{
+        color: #222;
+    }
+
+    .Header.ui-sortable-handle {
+        background-color: var(--color-grey3);
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .Header.filter-items {
+        background: #dddddd;
+        color: #222;
+        border-radius: 10px 10px 0px 0px;
+    }
+    .Header.filter-items h2{
+        color: #222;
+    }
+
+    .SidebarFirst .SidebarColumn .CallForAction.Fullsize,
+    button.CallForAction.btn-main.btn-primary-ghost,
+    a.CallForAction.btn-main.btn-primary-ghost{
+        background-color: #f6ffe2;
+    }
+    
+    .SidebarFirst .SidebarColumn .CallForAction.Fullsize span,
+    button.CallForAction.btn-main.btn-primary-ghost span,
+    a.CallForAction.btn-main.btn-primary-ghost span{
+        color: #1f2c10;
+    }
+
+    .personal-preferences .ContentColumn .ItemListGrid {
+        padding-top: 20px !important;
+    }
+
+    .QueueOverview a.Active, .QueueOverview .Active>a, .ServiceOverview a.Active, .ServiceOverview .Active>a {
+        border: 1.5px var(--border-solid) var(--primary-color);
+        background: #f6ffe2;
+        font-weight: var(--bold);
+    }
+    .OverviewZoom li.Active a, .OverviewZoom li.Active a:hover {
+        background:#f6ffe2;
+        color: var(--black);
+        border: var(--border-width) var(--border-solid) var(--primary-color) !important;
+        pointer-events: none;
+    }
+
+    .QueueOverviewList:not(:last-of-type) li a.Active {
+        opacity: unset !important;
+    }
+
+    .ControlRow {
+        background-color: var(--color-grey3);
+    }
+
+    .ControlRow li.Active>a, .ControlRow li.Active:hover>a, .ControlRow li.Active:active>a {
+        color: #acc129;
+        pointer-events: none;
+    }
+
+    .ControlRow li.Active::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        background-color: #bad02f;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+    }
+
+    
+
+    .ControlRow .Tabs a:hover, .WidgetSimple.Tabs>.Header>a:hover {
+        background-color: #e9e9e9ab;
+        border-radius: var(--border-radius-xxs);
+    }
+
+    .ControlRow .Tabs a, .WidgetSimple.Tabs a {
+        display: flex;
+        padding: var(--padding-sm) var(--padding-md);
+        color: #c1d72fc3;
+        font-size: var(--main-font-size);
+        transition: var(--main-transition);
+    }
+
+    .MainBox .SidebarColumn .WidgetSimple .Header, .MainBox .SidebarColumn .WidgetSimple.not-collapse .Header, .MainBox .InnerSidebarColumn .WidgetSimple .Header {
+        padding: var(--padding-md);
+        background-color: var(--color-grey3);
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    }
+
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.GridGroups .Header h2 {
+        background: #fafbfa00;
+        z-index: 10;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+
+    .fa-caret-down:before {
+        content: "\f0d7";
+        padding-left: 10px !important;
+    }
+
+    label {
+        color: #222;
+    }
+    
+    .toolbar-row-wrapper .toolbar-row ul li a .iconWrapper i{
+        color: var(--primary-color) !important;
+    }
+
+    .MainBox.mainStructure.personal-preferences .SidebarColumn .WidgetSimple .Header{
+        z-index: 2;
+    }
+
+    label.dropdown-item{
+        color: #222 !important;
+    }
+    /* Bordas arredondadas */
+    
+    .component-personal-views a.dropdown-item, 
+    .component-overviews a.dropdown-item, 
+    .component-actions a.dropdown-item, 
+    .Btn-Menu-Vertical span, 
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span{
+        border-radius: 100% !important;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span:hover {
+        background-color: #f6f6f6 !important;
+    }
+
+   
+
+
+/* Estiliza títulos e ícones */
+
+    .mainContent>.SidebarColumn>.WidgetSimple>.Header h2, 
+    .SidebarColumn>.ContentColumn>.WidgetSimple>.Header h3, 
+    .SidebarColumn>.WidgetSimple>.Header, 
+    .TicketZoom .SidebarColumn .WidgetSimple>.Header h2,
+    .SidebarColumn>.WidgetSimple>.Header h2, 
+    i.activity-icon.fa.fa-ticket::before,
+    .toolbar-row-wrapper .toolbar-row .component-wrapper .Text {
+        color: #222 !important;
+        z-index: 10;
+    }
+
+
+    .ResponsiveSidebarContainer #NavigationContainer .Selected a span{
+        color: #222 !important;
+    }
+    .ResponsiveSidebarContainer #Navigation>li#nav-search>a{
+        color: #232806 !important;
+        font-weight: 500;
+        background-color:#bed7306a;
+    }
+    /* Estiliza o título h2 na coluna de conteúdo */
+    .mainContent>.ContentColumn>.WidgetSimple>.Header h2 {
+        color: #222 !important;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .Header>h2{
+        color: var(--black) !important;
+        padding-top: 10px;
+        padding-left: 15px;
+    }
+
+    .ContentColumn .DataTable tbody tr>td>a {
+        color: #87991c;
+    }
+
+    .ContentColumn .DataTable tbody tr:hover>td>a {
+        color: #718118;
+    }
+
+/* Estiliza fundo de várias seções */
+
+    .toolbar-row-wrapper .toolbar-row, 
+    .MainBox.mainStructure .SidebarColumn .WidgetSimple .Header, 
+    .Size1of2 ul.Tablelike li.Header, 
+    .Results ul li a span,
+    .modal-col-container.modal-col-wrapper ul>li.Header {
+        background-color: var(--color-grey3) !important;
+    }
+
+/* Header */
+
+    #Header {
+        border-bottom: 0px solid var(--primary-color) !important;
+        color: #222 !important;
+    }
+
+    .WidgetSimple>.Header {
+        background-color: var(--color-grey3);
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple .Header {
+        background-color: #f5fff000;
+    }
+
+/* Cor em headers */
+.Size1of2 ul.Tablelike li.Header {
+    color: #222 !important;
+}
+
+.btn-primary, .btn-primary:focus {
+    color: var(--btn-primary-text);
+    background: var(--primary-color-darker);
+    border: var(--border-width) var(--border-solid) var(--primary-color);
+}
+
+/* Cor do ícone de atividades */
+.fa, 
+.li.dropdown-item.inactive-widget::after, 
+ul.WidgetTooltip li:hover a, 
+ul.dropdown-search-menu li::after,
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span .fa-ellipsis-v, 
+.ResponsiveSidebarContainer #NavigationContainer span,
+.ResponsiveSidebarContainer #Navigation>.Active>ul>li>a {
+    color: #222;
+}
+
+.icon-hover{
+    border-radius: 100% !important;
+}
+
+/* Avatar */
+.UserAvatar>a {
+    border: 2px solid var(--primary-color-text) !important;
+    border-radius: 14px !important;
+    background-color: #746d68;
+}
+
+
+/* Bordas e cores para os atalhos do Painel */
+
+    .Dashboard .ContentColumn .WidgetSimple .Header {
+        background-color: var(--white);
+        border-color: var(--menu-bg);
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .badge {
+        padding: 0 8px;
+        background: rgb(240 255 216);
+        color: var(--black);
+        font-size: var(--font-size-sm);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .DashboardWidgetExpand ul li a.active{
+        background-color: #ced4ab97 !important;
+    }
+
+    .UserAvatar_submenu a, .UserAvatar_submenu span, .UserAvatar_submenu>label {
+        color: #746d68;
+    }
+
+    a#ToolBar-toggle {
+        border-radius: 2px !important;
+    }
+
+/* Estilos para tabelas, grid e filtros */
+.MainBox.mainStructure .DataTable tbody tr:nth-child(even):hover td:not(:first-child:last-child) {
+    background-color: var(--primary-color-text) !important;
+}
+.OverviewMedium li:nth-child(even) table.dataTable {
+    background-color: var(--primary-color-text) !important;
+}
+.FilterInputContainer, .LayoutGrid .FilterInputContainer {
+    padding-top: var(--padding-md);
+}
+
+#HeaderToolBar li.UserAvatar .UserAvatar_submenu a:hover {
+    border-radius: 15px;
+    background: var(--color-grey1);
+}
+
+/* Estiliza ao passar o mouse */
+.ActionMenu .ActionMenuList li .WidgetAction:hover a .textWrapper{
+    color: #222;
+}
+
+
+.TicketZoom .Actions li:hover>span, 
+.TicketZoom .Actions li#nav-Back:hover>a, 
+.TicketZoom .Actions li#nav-Print:hover>a,
+.TicketZoom .Actions li#nav-Priority:hover>a, 
+.TicketZoom .Actions li#nav-Time-Stamp:hover>a, 
+.TicketZoom .Actions li#nav-Pending:hover>a, 
+.TicketZoom .Actions li#nav-Close:hover>a, 
+.Actions li a:hover, 
+.ResponsiveSidebarContainer>#NavigationContainer>#Navigation>.Active>a, 
+.ResponsiveSidebarContainer #NavigationContainer li a:hover {
+    background-color: var(--primary-color-text);
+    color: #222 !important;
+}
+
+.dropdown-item:hover, .dropdown-filter .dropdown-menu li:hover a{
+    background: #e8e8e8;
+    cursor: pointer;
+}
+
+div.InputField_ToolbarContainer ul li a:hover {
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 0;
+}
+.DataTable tbody tr:hover td, 
+.TableSmall tbody tr:hover td, 
+.DataTable tbody tr:active td.Clickable, 
+.TableSmall tbody tr:active td.Clickable, 
+.DataTable tr:nth-child(even):hover td.Highlight{
+    background-color: var(--primary-color-text);
+    color: #222 !important;
+}
+
+
+.DataTable tbody tr:hover td span i{
+    color: #222 !important;
+}
+ul.Tablelike li:hover {
+    background: var(--primary-color-text);
+}
+
+#HeaderToolBar li.UserAvatar .UserAvatar_submenu span a:hover .fa-gear,
+.ResponsiveSidebarContainer #Navigation>.Active>ul>li:hover>a {
+    color: #222 !important;
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu:hover,
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList:hover {
+    color: var(--color-grey3) !important;
+}
+
+.dropdown-filter:hover label {
+    background-color: #e0e4cc !important;
+}
+
+.dropdown-filter .btn-dropdown:hover {
+    background-color: #e0e4cc !important;
+}
+
+
+
+.TicketZoom .Actions li:hover>span,
+.ResponsiveSidebarContainer #Navigation>li#nav-search:hover>a,
+.ResponsiveSidebarContainer #Navigation>li.Selected:hover>a,
+.ResponsiveSidebarContainer #NavigationContainer .Selected a:hover,
+ul.QueueOverviewList li a:hover,
+ul.ServiceOverviewList li a:hover {
+    background-color: var(--primary-color);
+}
+
+.a.activity-link.activity.dropdown-item:hover {
+    background-color: var(--primary-color);
+}
+
+.mainStructure .Actions li:hover>a,
+.SidebarColumn .Actions li:hover>a,
+.active-widgets-list li:hover,
+ul.Tablelike li:hover {
+    background-color: #dddddd;
+}
+
+.mainStructure .Actions li>a{
+    border-radius: 12px;
+}
+
+.ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span:hover {
+    background-color: #e4e4e4 !important;
+}
+
+.component-personal-views a.dropdown-item:hover, 
+.component-overviews a.dropdown-item:hover, 
+.component-actions a.dropdown-item:hover{
+    color: var(--primary-color-darker);
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li:hover {
+    color: #222 !important;
+    background: #dddddd !important;
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction:hover a .textWrapper{
+    color: #222;
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList {
+    background: #ffffff;
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction:hover a .iconWrapper i{
+    color: #222;
+}
+
+
+.WidgetSimple .Header .ActionMenu:hover .Btn-Menu-Vertical span {
+    background-color: #dddddd !important;
+}
+
+.ActionMenu .ActionMenuList li:hover, ul.WidgetTooltip li:hover {
+    color: #222;
+    background-color: #dddddd;
+}
+
+.ActionMenu .ActionMenuList li .WidgetAction:hover a .textWrapper {
+    color: #222;
+}
+.ActionMenu .ActionMenuList li .WidgetAction:hover a .iconWrapper i{
+    color: #222;
+}
+
+i.fa.fa-star:hover {
+    color: #222;
+}
+.fa-envelope-o:before {
+    content: "\f003";
+    color: #ffffff;
+}
+
+button.CallForAction.btn-main.btn-primary-ghost:hover, 
+a.CallForAction.btn-main.btn-primary-ghost:hover {
+    background-color: #e7f1cf;
+}
+
+button.CallForAction.btn-main.btn-primary-ghost:hover span, 
+a.CallForAction.btn-main.btn-primary-ghost:hover span{
+    color: #1f2c10;
+}
+
+.ItemListGrid>li>a:not(.Disabled).Active span.Title, .ItemListGrid>li>a:not(.Disabled):hover span.Title {
+    color: var(--color-grey4);
+}
+
+.ItemListGrid>li>a:not(.Disabled).Active span.Title, .ItemListGrid>li>a:not(.Disabled):hover span.Description {
+    color: var(--color-grey4);
+}
+li:hover span.ClusterLink{
+    background-color: var(--primary-color-text) !important;
+}
+/* Estiliza pseudo-elementos ::before */
+.fa-check::before,
+.ItemListGrid>li>a:not(.Disabled):hover .fa-star-o::before,
+.ItemListGrid>li>a:not(.Disabled):hover .fa-star::before,
+.SidebarColumn .btn-main:hover .btn-wrapper .fa-plus::before,
+.SidebarFirst .SidebarColumn .CallForAction:hover .fa::before {
+    color: #222;
+}
+
+.ListBoards .card:not(:first-child) .fa-pencil-square-o:before {
+    color: var(--white);
+}
+
+.ListBoards .card:first-child .fa-pencil-square-o:before {
+    color: #545454;
+}
+
+#HeaderToolBar li.UserAvatar .UserAvatar_submenu a:last-child .fa-sign-out::before,
+.Error i::before, i.Error::before, .Error i.Error::before {
+    color: var(--warning-color);
+}
+
+.Error i, i.Error::before, .Error i.Error::before {
+    color: var(--alert-error-icon-color);
+}
+
+.fa-caret-down::before,
+.dropdown-filter .btn-dropdown .fa-caret-down::before,
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span .fa-ellipsis-v::before,
+.SidebarColumn .WidgetSimple .Header .Btn-Menu-Vertical .fa::before,
+.SidebarColumn .WidgetSimple .Header .fa-caret-down::before,
+#HeaderToolBar li.UserAvatar .UserAvatar_submenu span a:hover .fa-gear::before {
+    color: #222 !important;
+}
+
+i.activity-icon.fa.fa-ticket::before {
+    color: #222 !important;
+}
+
+
+
+.WidgetAction:hover .ActionMenuList, .wrapper-widget-close:hover .ActionMenuList{
+    background-color: #dddddd;
+}
+
+#Navigation>.Active>ul>li>a:hover{
+    background-color: #dddddd !important;
+    color: #222;
+}
+
+#Navigation>li>a {
+    display: block;
+    height: auto;
+    padding: var(--padding-sm) 0;
+    font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
+    color: var(--menu-font);
+    position: relative;
+    text-align: center;
+}
+
+.ItemListGrid>li>a:not(.Disabled):hover, .ItemListGrid>li>a:not(.Disabled).Active, .ItemListGrid>li>a.Active {
+    background: var(--primary-color-text);
+    border-color: var(--primary-color);
+    color: #222;
+}
+
+.ItemListGrid.WithIcons>li a:not(.Disabled):hover span.Icons, .ItemListGrid.WithIcons>li a:not(.Disabled).Active span.Icons {
+    border-color: #c0d72f;
+    background: rgb(90 98 31 / 26%);
+    color: #1c1414;
+}
+
+.ItemListGrid>li:hover span.Description, 
+.ItemListGrid>li:hover span.Title,
+.ItemListGrid.WithIcons>li:hover span.Icons i{
+    color: var(--color-grey3);
+
+}

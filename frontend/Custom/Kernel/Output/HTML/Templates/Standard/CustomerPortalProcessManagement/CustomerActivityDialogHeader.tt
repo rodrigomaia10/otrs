@@ -1,0 +1,51 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalProcessManagement/CustomerActivityDialogHeader.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+
+[% RenderBlockStart("LoaderCSS") %]
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+[% RenderBlockEnd("LoaderCSS") %]
+<div id="MainBox" style="[% Data.MarginLeft %]"  class="TicketZoom ARIARoleMain [% Data.ContentResponsive %]">
+    <div class="ContentColumn">
+        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="[% Data.FormName %]" id="[% Data.FormID %]" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+            <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]"/>
+            <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+            <input type="hidden" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
+            <input type="hidden" name="ActivityDialogEntityID" id="ActivityDialogEntityID" value="[% Data.ActivityDialogEntityID | html %]"/>
+            <input type="hidden" name="Expand" id="Expand" value=""/>
+            <input type="hidden" name="AJAXDialog" id="AJAXDialog" value="[% Data.AJAXDialog | html %]"/>
+            <input type="hidden" name="IsMainWindow" id="IsMainWindow" value="[% IF !Data.TicketID %]1[% END %]"/>
+            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+            <div class="LayoutPopup ProcessContent">
+[% RenderBlockStart("Header") %]
+                <div class="PopupHeader">
+                    <h1>
+                        [% Data.Name | html %]
+[% RenderBlockStart("DescriptionShort") %]
+                        - [% Data.DescriptionShort | html %]
+[% RenderBlockEnd("DescriptionShort") %]
+                    </h1>
+[% RenderBlockStart("DescriptionLong") %]
+                    <p>[% Data.DescriptionLong | html %]</p>
+[% RenderBlockEnd("DescriptionLong") %]
+[% RenderBlockStart("CancelLink") %]
+                    <p>
+                        <a class="CancelClosePopup" href="#">[% Translate("Cancel & close") | html %]</a>
+                    </p>
+[% RenderBlockEnd("CancelLink") %]
+                </div>
+[% RenderBlockEnd("Header") %]
+                <div class="Content">
+                    <fieldset class="TableLike">
+[% RenderBlockStart("DescriptionShortAlt") %]
+                        <h2>[% Data.DescriptionShort | html %]</h2>
+[% RenderBlockEnd("DescriptionShortAlt") %]
+[% RenderBlockStart("DescriptionLongAlt") %]
+                        <p class="Description">[% Data.DescriptionLong | html %]</p>
+[% RenderBlockEnd("DescriptionLongAlt") %]

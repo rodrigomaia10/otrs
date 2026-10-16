@@ -1,0 +1,113 @@
+/**
+ * var/httpd/htdocs/skins/Customer/default/css/Core.Customer.CustomServiceForm.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ *  * jgsantos@serviceup.com.br
+ */
+
+ /**
+ * @package     InBox CustomServiceForm - Skin "Default"
+ * @section     Customer
+ */
+
+ .card-header-dfField .label-wrapper label{
+	flex-direction: row !important;
+ }
+
+ .card-header-dfField .label-wrapper input.DateSelection{
+	width: 16px !important;
+ }
+
+@media screen,projection,tv,handheld {
+
+input.DateSelection {
+	width: auto !important;
+}
+
+#FormInfo.Hidden {
+	display: none !important;
+}
+
+#FormInfo {
+	margin-left: 59%;
+	width: 300px;
+	padding: 0;
+	position: absolute;
+	display: table;
+}
+
+#FormInfo .WidgetSimple .Header {
+	padding: 5px 8px 3px;
+	color: #222;
+	background: #eeeeee;
+	border-bottom: 1px solid #D6D6D6;
+	text-shadow: 0 1px 0 #FFF;
+	position: relative;
+}
+
+#FormInfo .WidgetSimple {
+	padding-top: 0px;
+	border-top: none;
+	border: 1px solid #CCCCCC;
+}
+
+#FormInfo .WidgetSimple .Header h3 {
+	height: 16px;
+}
+
+#FormInfo .WidgetSimple .Content {
+	padding: 0;
+}
+
+#FormInfo .WidgetSimple .Hint {
+	padding: 8px;
+	color: #666666;
+}
+
+#Footer {
+	clear: both;
+	padding-top: 20px;
+}
+
+.WidgetSimple {
+	border: 1px solid #E9E9E9;
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #DDD;
+	padding: 0;
+	position: relative;
+	width: auto;
+	z-index: 10;
+	margin-bottom: 10px;
+}
+
+.WidgetSimple .Header {
+	padding: 5px 8px 3px;
+	color: #222;
+	background: #eeeeee;
+	border-bottom: 1px solid #D6D6D6;
+	text-shadow: 0 1px 0 #FFF;
+	position: relative;
+}
+
+.WidgetSimple .Header h3 {
+	font-weight: bold;
+	float: left;
+}
+
+.WidgetSimple .Header h3 span {
+	font-weight: normal;
+}
+
+.WidgetSimple .Content {
+	height: auto;
+	overflow: hidden;
+	padding: 13px 8px;
+	background: #FFF;
+	border: 0 none;
+}
+
+.WidgetSimple .Pagination {
+	font-size: 11px;
+}
+}

@@ -1,0 +1,182 @@
+/* 
+ * var/httpd/htdocs/skins/Agent/inbox-theme-dark-2/css/Core.Color.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ * * gbolsoni@serviceup.com.br
+*/
+
+/**
+ * @package     Skin "Default"
+ */
+
+/**
+ * @section     Colors
+ */
+
+/*
+ * Used colors in Znuny:
+ * ---------------------
+ *
+ * Variable                             Description                         Default
+ *
+ * var(--color-black);                                                      Black
+ * var(--color-red);                                                        Red
+ * var(--color-orange);                                                     Orange
+ * var(--color-yellow);                                                     Yellow
+ * var(--color-green);                                                      Green
+ * var(--color-grey1);                                                      Grey #111
+ * var(--color-grey2);                                                      Grey #222
+ * var(--color-grey3);                                                      Grey #333
+ * var(--color-grey4);                                                      Grey #444
+ * var(--color-grey5);                                                      Grey #555
+ * var(--color-grey6);                                                      Grey #666
+ * var(--color-grey7);                                                      Grey #777
+ * var(--color-grey8);                                                      Grey #888
+ * var(--color-grey9);                                                      Grey #999
+ * var(--color-grey10);                                                     Grey #AAA
+ * var(--color-grey11);                                                     Grey #BBB
+ * var(--color-grey12);                                                     Grey #CCC
+ * var(--color-grey13);                                                     Grey #DDD
+ * var(--color-grey14);                                                     Grey #EEE
+ */
+
+ 
+ :root {
+
+    /* black */
+    --color-black:                    #000;
+
+    /* red */
+    --color-red:                      #b8384e;
+
+    /* orange */
+    --color-orange:                   #FF9050;
+
+    /* yellow */
+    --color-yellow:                   #FFDD50;
+
+    /* green */
+    --color-green:                    #049E35;
+
+    /* white */
+    --color-white:                    #FFF;
+
+    /* grey */
+    --color-grey1:                    #111;
+    --color-grey2:                    #222;
+    --color-grey3:                    #333;
+    --color-grey4:                    #444;
+    --color-grey5:                    #555;
+    --color-grey6:                    #666;
+    --color-grey7:                    #777;
+    --color-grey8:                    #888;
+    --color-grey9:                    #999;
+    --color-grey10:                   #AAA;
+    --color-grey11:                   #BBB;
+    --color-grey12:                   #CCC;
+    --color-grey13:                   #DDD;
+    --color-grey14:                   #EEE;
+
+
+
+
+
+    /* Main Colors */
+    --primary-color: #b65400;
+    --primary-color-darker: #bf6600;
+    --primary-color-rgb: rgba(167,85,0,.2);
+    --primary-color-calendar: #4d2500;
+    --secondary-color: #251c17;
+
+    --white: #181a1b;
+    --gray-light-white: #151718;
+    --gray-light-ultra: #181a1b;
+    --gray-light-semi: #212425;
+    --gray-light: #222526;
+    --gray-regular-light: #1a1d1e;
+    --gray-regular: #2a2d2f;
+    --gray-medium: #beb8b5;
+    --gray-medium-darker: rgba(53, 57, 59, 0.5);
+    --gray-dark-semi: #4f5659;
+    --gray-dark: #d5d1cc;
+    --gray-darker: #d5d1cc;
+    --black: #d5d1cc;
+
+
+    --color-scroll-bar: var(--gray-dark);
+    --mail-outgoing-color: #402d00;
+
+    --disabled: var(--gray-light-semi);
+    --disabled-text: var(--gray-medium);
+    --disabled-input: var(--gray-light-semi);
+
+    --bread-crumb: var(--gray-dark-semi);
+    --bread-crumb-active: var(--black);
+    --bread-crumb-font-size: var(--font-size-sm);
+
+
+    --color-ticket-header: var(--gray-light-white);
+    --email-info: var(--gray-light-white);
+    --ticket-subject: var(--table-text-color);
+
+    --success-color: #3DD598;
+    --warning-color: #FC5A5A;
+    --warning-color-darker: #E44E4E;
+    --error-color: var(--warning-color);
+    --error-color-darker: var(--warning-color-darker);
+    --confirmation-color: var(--success-color);
+    --plus-color: var(--success-color);
+
+    /* Tables */
+    --table-text-color: #d5d1cd;
+    --table-th-bg: #212425;
+    --table-td-even-bg: #1b1e1f;
+    --tr-disabled-bg: #bab4ab;
+    --tr-disabled-text: #34393b;
+    
+    /* Flag Element */
+    --color-flag-default: #cdcdcd;
+
+    /* Alert Component */
+    --alert-close-icon-color: var(--gray-dark);
+
+        /* Info */
+        --alert-info-bg-color: #50b6ff10;
+        --alert-info-icon-color: #53b7ff;
+        --alert-info-border-color: #50b6ff1a;
+
+        /* Error */
+        --alert-error-bg-solid-color: #770202;
+        --alert-error-bg-color: rgba(149, 3, 3, 0.06);        ;
+        --alert-error-icon-color: #fc5959;
+        --alert-error-border-color: rgba(150, 3, 3, 0.1);
+
+        /* Success */
+        --alert-success-bg-solid-color: #1b7e61;
+        --alert-success-bg-color: rgba(34, 158, 121, 0.06);
+        --alert-success-icon-color: #58dba7;
+        --alert-success-border-color: rgba(31, 142, 97, 0.1);
+
+        /* Warning */
+        --alert-warning-bg-color: rgba(145, 113, 8, 0.06);
+        --alert-warning-icon-color: #f4c937;
+        --alert-warning-border-color: rgba(31, 142, 97, 0.1);
+
+        /* Notice */
+        --alert-notice-bg-color: #cccccc10;
+        --alert-notice-icon-color: #c1bcb4;
+        --alert-notice-border-color: rgba(62, 68, 70, 0.1);
+
+    --color-icon-favorite: #f4c937;
+
+
+    /* Forms */
+    --border-color: #373c3e;
+    --border-input-color: #756d60;
+
+
+    /* BG's */
+    --overlay-bg: rgba(18, 18, 30, 0.14);
+
+}

@@ -1,0 +1,105 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalStats.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.css" rel="stylesheet" />
+<!--link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/gridstack-1.1.1/gridstack.min.css" rel="stylesheet" /-->
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+  <div id="Content_Stats" class="ContentResponsive">
+[% RenderBlockStart("BackgroundPortal") %]
+    <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+        [% IF Data.EnableFilterQueue == 1 %]
+        <div class="row">
+            <div class="col-md-12 ">           
+                <div class="card card-custom-agent">
+                    <div class="card-text">
+                        <div class="">
+                            <div class="Header" style="border-radius: 3px;">
+                                <div class="TitleOfConsumption"><b style=" font-size: 16px;">[% Translate("Filter") | html %]</b></div>
+                            </div>
+                            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data"
+                                name="Dashboard_filter_form" id="Dashboard_filter_form" class="WidgetfiltersForm">
+                                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                                <input type="hidden" name="Subaction" value="Search"/>
+                                <div style="text-align: center;">
+                                    <p for="QueuesIDs" style="display: inline-block;width: 60px !important;">[% Translate("Queues") | html %]:</p>
+                                    <div class="Field">[% Data.Queues %]</div>
+                                    <div style="text-align: center; padding: 10px 0px 8px 0px;">
+                                        <button id="Dashboard_submit" class="DontPrint CallForAction" type="submit" value="[% Translate("Submit") | html %]">
+                                            <span>[% Translate("Search") | html %]</span>
+                                        </button>
+                                    </div>
+                                    <div class="Clear"></div>
+
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        [% END %]
+        <div class="row">
+            <div class="col-md-6 ">           
+                <div class="card card-custom-agent">
+                    <div class="card-text">
+        [% RenderBlockStart("ActualMonth") %]
+                    <div class="TitleOfConsumption"><b>[% Translate("Monthly View") | html %]</b></div>
+                    <div class="TitleOfConsumption"><p class="DescriptionOfConsumption">[% Translate ("Shows the number of hours in the months") | html %]</p></div>
+                    <div>
+                        <label id="label-02">
+                            <div class="TitleOfConsumption">[% Translate ("In the current month") | html %] <b>[%Data.TicketTotalMonth%]</b> [% Translate ("tickets and registered(s)") | html %] <b>[%Data.AccountedTime%]</b> [% Translate ("hour(s)") | html %].</div>
+                        </label>						
+                    </div>
+        [% RenderBlockEnd("ActualMonth") %]
+        	<div id="chart"></div>     
+                    </div>
+                </div>
+            </div>
+	  
+           
+        <div class="col-md-6 ">           
+            <div class="card card-custom-agent">
+                <div class="card-text">
+                    <div>
+                        <div class="TitleOfConsumption"><b class="TitleOfConsumption">[% Translate ('Vision of the last months') | html %]</b></div>
+                        <div class="TitleOfConsumption"><p class="DescriptionOfConsumption">[% Translate ('Shows the number of hours used in the last months.') | html %]</p></div>
+                        <div>
+                            <table class="DataTable">
+                                <thead>
+                                    <tr>
+                                        <th>[% Translate ("Month/Year") | html %]</th>
+                                        <th>[% Translate ("Hours Used") | html %]</th>
+                                        <th>[% Translate ("Open Tickets") | html %]</th>
+                                        <th>[% Translate ("Closed Tickets")| html %]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            [% RenderBlockStart("MonthsHours") %]
+                                    <tr>
+                                        <td class="AlignCenter">[% Data.MonthName | html %]/ [% Data.Year | html %]</td>
+                                        <td class="AlignCenter">[% Data.MonthHours | html %]</td>
+                                        <td class="AlignCenter">[% Data.MonthTicketsOpen | html %]</td>
+                                        <td class="AlignCenter">[% Data.MonthTicketsClosed | html %]</td>
+                                    </tr>
+                            [% RenderBlockEnd("MonthsHours") %]
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+			
+                    </div>
+                </div>
+            </div>
+            </div>		
+        <div class="Clear"></div>
+    </div>
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]

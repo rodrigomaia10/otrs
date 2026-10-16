@@ -1,0 +1,452 @@
+// --
+// var/httpd/htdocs/js/Core.Agent.Admin.KPISeries.js
+// Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+//
+// written/edited by:
+// * pdias@beonup.com.br
+// * dsilva@serviceup.com.br
+// * dparavani@serviceup.com.br
+// --
+
+"use strict";
+
+var Core = Core || {};
+Core.Agent = Core.Agent || {};
+Core.Agent.Admin = Core.Agent.Admin || {};
+
+/**
+ * @namespace Core.Agent.Admin.KPISeries
+ * @memberof Core.Agent.Admin
+ * @author OTRS AG
+ * @description
+ *      This namespace contains the special module functions for the KPI Series module.
+ */
+Core.Agent.Admin.KPISeries = (function (TargetNS) {
+    /**
+     * @name Init
+     * @memberof Core.Agent.Admin.KPISeries
+     * @function
+     * @description
+     *       Initialize module functionality
+     */
+
+    TargetNS.Init = function () {
+
+        TargetNS.KPISeriesDelete();
+        TargetNS.KPISeriesCopy();
+
+        // Initialize dynamic field filter
+        Core.UI.Table.InitTableFilter($('#FilterKPISeries'), $('#KPISeriesTable'));
+
+        $('#SerieType').on('change', function (Event) {
+
+            if ( $('#SerieType').val() === 'Simple' ) {
+
+                $('#KPIsField').removeClass('HiddenByKPI');
+                $("#KPIsFieldLabel").removeClass('HiddenByKPI');
+
+                $("#QtdColumn").val('');
+                $("#QtdColumn").trigger('redraw.InputField');
+                $('#ColumnsKPILabel').addClass('HiddenByKPI');
+                $("#ColumnsKPI").addClass('HiddenByKPI');
+
+                TargetNS.HiddenCollumn(1)
+                TargetNS.HiddenCollumn(2)
+                TargetNS.HiddenCollumn(3)
+            }
+            else {
+
+                TargetNS.HiddenCollumn(1)
+                TargetNS.HiddenCollumn(2)
+                TargetNS.HiddenCollumn(3)
+
+                $("#KPIsField").addClass('HiddenByKPI');
+                $("#KPIsFieldLabel").addClass('HiddenByKPI');
+
+                $('#ColumnsKPILabel').removeClass('HiddenByKPI');
+                $("#ColumnsKPI").removeClass('HiddenByKPI');
+                $('#QtdColumn').val('');
+
+                $("#ColumnsKPI").trigger('redraw.InputField');       
+                $("#QtdColumn").trigger('redraw.InputField');       
+            }
+        });
+
+        $('#QtdColumn').on('change', function (Event) {
+
+            if ( $('#SerieType').val() === 'Complex' ) {
+
+                var ChartType1 = $('#ChartTypeCol1').val();
+                var ChartType2 = $('#ChartTypeCol2').val();
+                var ChartType3 = $('#ChartTypeCol3').val();
+
+                var SerieType = $('#SerieType').val();
+
+                if($('#QtdColumn').val() === '1'){
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3);
+
+                }
+                else if ( $('#QtdColumn').val() === '2' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+                    TargetNS.ShowCollumn(2, ChartType2, SerieType);
+
+                    TargetNS.HiddenCollumn(3);                       
+
+                }
+                else if ( $('#QtdColumn').val() === '3' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+                    TargetNS.ShowCollumn(2, ChartType2, SerieType);         
+                    TargetNS.ShowCollumn(3, ChartType3, SerieType);         
+
+                }
+                else {
+                    
+                    TargetNS.HiddenCollumn(1);
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3);   
+
+                }
+            }
+            else {
+                var ChartType1 = $('#ChartTypeCol1').val();
+                var ChartType2 = $('#ChartTypeCol2').val();
+                var ChartType3 = $('#ChartTypeCol3').val();
+
+                if($('#QtdColumn').val() === '1'){
+
+                    TargetNS.ShowCollumn(1, ChartType1);
+
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);
+
+                }
+                else if ( $('#QtdColumn').val() === '2' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1);
+                    TargetNS.ShowCollumn(2, ChartType2);
+
+                    TargetNS.HiddenChartSQLCollumn(3);                       
+
+                }
+                else if ( $('#QtdColumn').val() === '3' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1);
+                    TargetNS.ShowCollumn(2, ChartType2);         
+                    TargetNS.ShowCollumn(3, ChartType3);         
+
+                }
+                else {
+                    
+                    TargetNS.HiddenChartSQLCollumn(1);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);   
+
+                }
+            }
+        });
+
+        $('#ChartTypeCol1').on('change', function (Event) {
+            $("#ChartScaleTimeCol1").val('');
+            $("#ChartScaleTimeCol1").trigger('redraw.InputField');
+            $("#ChartScaleUnitCol1").val('');
+            $("#ChartScaleUnitCol1").trigger('redraw.InputField');
+    
+            if($('#ChartTypeCol1').val() === 'Line' ){
+                $("#ChartScaleTimeColField1").removeClass('HiddenByKPI');
+                $("#ChartScaleTimeColLabel1").removeClass('HiddenByKPI');
+            }else{
+                $("#ChartScaleTimeColField1").addClass('HiddenByKPI');
+                $("#ChartScaleTimeColLabel1").addClass('HiddenByKPI');
+            }
+        });
+
+        $('#ChartTypeCol2').on('change', function (Event) {
+            $("#ChartScaleTimeCol2").val('');
+            $("#ChartScaleTimeCol2").trigger('redraw.InputField');
+            $("#ChartScaleUnitCol2").val('');
+            $("#ChartScaleUnitCol2").trigger('redraw.InputField');
+
+            if($('#ChartTypeCol2').val() === 'Line' ){
+                $("#ChartScaleTimeColField2").removeClass('HiddenByKPI');
+                $("#ChartScaleTimeColLabel2").removeClass('HiddenByKPI');
+            }else{
+                $("#ChartScaleTimeColField2").addClass('HiddenByKPI');
+                $("#ChartScaleTimeColLabel2").addClass('HiddenByKPI');
+            }
+        });
+
+        $('#ChartTypeCol3').on('change', function (Event) {
+            $("#ChartScaleTimeCol3").val('');
+            $("#ChartScaleTimeCol3").trigger('redraw.InputField');
+            $("#ChartScaleUnitCol3").val('');
+            $("#ChartScaleUnitCol3").trigger('redraw.InputField');
+
+            if($('#ChartTypeCol3').val() === 'Line' ){
+                $("#ChartScaleTimeColField3").removeClass('HiddenByKPI');
+                $("#ChartScaleTimeColLabel3").removeClass('HiddenByKPI');
+            }else{
+                $("#ChartScaleTimeColField3").addClass('HiddenByKPI');
+                $("#ChartScaleTimeColLabel3").addClass('HiddenByKPI');
+            }
+        });
+
+
+        $(document).ready(function() {
+
+            if ($('#SerieType').val() === 'Simple') {
+
+                $('#KPIsField').removeClass('HiddenByKPI');
+                $("#KPIsFieldLabel").removeClass('HiddenByKPI');
+
+                $('#ColumnsKPILabel').addClass('HiddenByKPI');
+                $("#ColumnsKPI").addClass('HiddenByKPI');
+
+                TargetNS.HiddenCollumn(1);
+                TargetNS.HiddenCollumn(2);
+                TargetNS.HiddenCollumn(3);
+                TargetNS.HiddenChartSQLCollumn(1);
+                TargetNS.HiddenChartSQLCollumn(2);
+                TargetNS.HiddenChartSQLCollumn(3);
+            } 
+            else if ( $('#SerieType').val() === 'Complex' ) {
+
+                $("#KPIsField").addClass('HiddenByKPI');
+                $("#KPIsFieldLabel").addClass('HiddenByKPI');
+
+                $('#ColumnsKPILabel').removeClass('HiddenByKPI');
+                $("#ColumnsKPI").removeClass('HiddenByKPI');
+
+                $("#ColumnsKPI").trigger('redraw.InputField');
+
+                var ChartType1 = $('#ChartTypeCol1').val();
+                var ChartType2 = $('#ChartTypeCol2').val();
+                var ChartType3 = $('#ChartTypeCol3').val();
+
+                var SerieType = $('#SerieType').val();
+
+                if ( $('#QtdColumn').val() === '1' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+    
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3);
+                    TargetNS.HiddenChartSQLCollumn(1);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);
+                }
+                else if ( $('#QtdColumn').val() === '2' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+                    TargetNS.ShowCollumn(2, ChartType2, SerieType);
+    
+                    TargetNS.HiddenCollumn(3);
+                    TargetNS.HiddenChartSQLCollumn(1);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);;
+                }
+                else if ( $('#QtdColumn').val() === '3' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+                    TargetNS.ShowCollumn(2, ChartType2, SerieType);
+                    TargetNS.ShowCollumn(3, ChartType3, SerieType);
+                    
+                    TargetNS.HiddenChartSQLCollumn(1);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);;                    
+                } 
+                else {
+                    
+                    TargetNS.HiddenCollumn(1);
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3); 
+
+                    TargetNS.HiddenChartSQLCollumn(1);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);
+                }              
+            }
+            else {
+
+                $("#KPIsField").addClass('HiddenByKPI');
+                $("#KPIsFieldLabel").addClass('HiddenByKPI');
+
+                $('#ColumnsKPILabel').removeClass('HiddenByKPI');
+                $("#ColumnsKPI").removeClass('HiddenByKPI');
+
+                $("#ColumnsKPI").trigger('redraw.InputField');
+
+                var SerieType = $('#SerieType').val();
+
+                if ( $('#QtdColumn').val() === '1' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+    
+                    TargetNS.HiddenCollumn(1);
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);
+                }
+                else if ( $('#QtdColumn').val() === '2' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+                    TargetNS.ShowCollumn(2, ChartType2, SerieType);
+    
+                    TargetNS.HiddenCollumn(1);
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3);
+                    TargetNS.HiddenChartSQLCollumn(3);
+                }
+                else if ( $('#QtdColumn').val() === '3' ) {
+
+                    TargetNS.ShowCollumn(1, ChartType1, SerieType);
+                    TargetNS.ShowCollumn(2, ChartType2, SerieType);
+                    TargetNS.ShowCollumn(3, ChartType3, SerieType);
+                    
+                    TargetNS.HiddenCollumn(1);
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3);                    
+                } 
+                else {
+                    
+                    TargetNS.HiddenCollumn(1);
+                    TargetNS.HiddenCollumn(2);
+                    TargetNS.HiddenCollumn(3); 
+
+                    TargetNS.HiddenChartSQLCollumn(1);
+                    TargetNS.HiddenChartSQLCollumn(2);
+                    TargetNS.HiddenChartSQLCollumn(3);
+                }
+            }
+        });
+
+    };
+
+    TargetNS.HiddenCollumn = function ( Collumn ) {
+        
+        $("#AssociatedKPIsCol" + Collumn).removeClass('Validate_Required');
+        $("#AssociatedKPIsCol" + Collumn).val('');
+        $("#AssociatedKPIsCol" + Collumn).trigger('redraw.InputField');
+
+        $("#ChartTypeCol" + Collumn).removeClass('Validate_Required');
+        $("#ChartTypeCol" + Collumn).val('');
+        $("#ChartTypeCol" + Collumn).trigger('redraw.InputField');  
+        $("input[name='TitleCol" + Collumn + "']").val('');
+
+        $("#TypeLabelCol" + Collumn).val('');
+        $("#TypeLabelCol" + Collumn).trigger('redraw.InputField');
+
+        $("#SearchInsertKPICol" + Collumn).addClass('HiddenByKPI');
+
+        $("#ChartScaleTimeCol" + Collumn).val('');
+        $("#ChartScaleTimeCol" + Collumn).trigger('redraw.InputField');
+        $("#ChartScaleUnitCol" + Collumn).val('');
+        $("#ChartScaleUnitCol" + Collumn).trigger('redraw.InputField');
+
+    }
+
+    TargetNS.HiddenChartSQLCollumn = function ( Collumn ) {
+        
+        $("#AssociatedKPIsChartSQLCol" + Collumn).removeClass('Validate_Required');
+        $("#AssociatedKPIsChartSQLCol" + Collumn).val('');
+        $("#AssociatedKPIsChartSQLCol" + Collumn).trigger('redraw.InputField');
+
+        $("input[name='TitleChartSQLCol" + Collumn + "']").val('');
+
+        $("#TypeLabelChartSQLCol" + Collumn).val('');
+        $("#TypeLabelChartSQLCol" + Collumn).trigger('redraw.InputField');
+
+        $("#SearchInsertKPIChartSQLCol" + Collumn).addClass('HiddenByKPI');
+
+    }
+
+    TargetNS.ShowCollumn = function ( Collumn,  ChartType, SerieType) {
+        
+        if (SerieType === 'Complex') {
+            $("#SearchInsertKPICol" + Collumn).removeClass('HiddenByKPI');
+            $("#AssociatedKPIsCol" + Collumn).addClass('Validate_Required');
+            $("#ChartTypeCol" + Collumn).addClass('Validate_Required');
+        }
+        else {
+            $("#SearchInsertKPIChartSQLCol" + Collumn).removeClass('HiddenByKPI');
+            $("#AssociatedKPIsChartSQLCol" + Collumn).addClass('Validate_Required');
+        }
+
+        if(ChartType === 'Line'){
+            $("#ChartScaleTimeColField" + Collumn).removeClass('HiddenByKPI');
+            $("#ChartScaleTimeColLabel" + Collumn).removeClass('HiddenByKPI');
+        }else{
+            $("#ChartScaleTimeColField" + Collumn).addClass('HiddenByKPI');
+            $("#ChartScaleTimeColLabel" + Collumn).addClass('HiddenByKPI');
+        }
+    }
+
+    TargetNS.DefaultSerie = function () {
+        if($("#DefaultSerie").is(':checked')){
+            $("#DefaultSerie").val('1');
+        }else{
+            $("#DefaultSerie").val('0');
+        }
+    };
+
+    TargetNS.KPISeriesDelete = function() {
+        $('.KPISeriesDelete').on('click', function (Event) {
+
+            if (window.confirm(Core.Language.Translate("Do you really want to delete this serie? ALL associated data will be LOST!"))) {
+
+                Core.UI.Dialog.ShowDialog({
+                    Title: Core.Language.Translate("Delete serie"),
+                    HTML: Core.Language.Translate("Deleting the field and its data. This may take a while..."),
+                    Modal: true,
+                    CloseOnClickOutside: false,
+                    CloseOnEscape: false,
+                    PositionTop: '20%',
+                    PositionLeft: 'Center',
+                    Buttons: []
+                });
+
+                Core.AJAX.FunctionCall(
+                    Core.Config.Get('Baselink'),
+                    $(this).data('query-string') + 'Confirmed=1;',
+                    function() {
+                        window.location.reload();
+                    }
+                );
+            }
+
+            // don't interfere with MasterAction
+            Event.stopPropagation();
+            Event.preventDefault();
+            return false;
+        });
+    };
+
+    TargetNS.KPISeriesCopy = function() {
+        $('.KPISeriesCopy').on('click', function (Event) {
+
+            Core.AJAX.FunctionCall(
+                Core.Config.Get('Baselink'),
+                $(this).data('query-string'),
+                function() {
+                    window.location.reload();
+                }
+            );
+            
+
+            // don't interfere with MasterAction
+            Event.stopPropagation();
+            Event.preventDefault();
+            return false;
+        });
+    };
+
+    Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
+
+return TargetNS;
+}(Core.Agent.Admin.KPISeries || {}));

@@ -1,0 +1,504 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standart/AdminDynamicFieldTable.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * dsilva@serviceup.com.br
+# * lcavalheiro@serviceup.com.br
+# * ykanegae@serviceup.com.br
+# * gbolsoni@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminDynamicField" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">
+            [% Translate("Dynamic Fields") | html %] - [% Translate(Data.ObjectTypeName) | html %]:
+            [% USE Title = String(Data.BreadcrumbText) %]
+            [% Title | html %]
+        </h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Dynamic Fields Management'),
+                    Link => 'AdminDynamicField',
+                },
+            ]
+        %]
+
+        [% USE BreadcrumbName = String(Translate(Data.ObjectTypeName)) %]
+
+        [% SWITCH Data.Mode %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => BreadcrumbName.append( ': ', Title ) }) %]
+            [% CASE 'Change' %]
+                [% BreadcrumbPath.push({ Name => BreadcrumbName.append( ': ', Title, ' - ', Data.Name ) }) %]
+        [% END %]
+
+        <form id="EntityUpdate" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="AdminDynamicFieldTable">
+            <input type="hidden" name="Subaction" value="[% Data.Mode | html %]Action">
+            <input type="hidden" name="ObjectType" value="[% Data.ObjectType | html %]">
+            <input type="hidden" name="FieldType" value="[% Data.FieldType | html %]">
+            <input type="hidden" name="ID" value="[% Data.ID | html %]">
+            <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+
+            [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("General") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="Name" class="W100pc [% Data.NameServerError | html %] [% Data.ShowWarning | html %]  Validate_Alphanumeric" type="text" maxlength="200" value="[% Data.Name | html %]" name="Name" [% Data.ReadonlyInternalField | html %]>
+                                        <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate(Data.NameServerErrorMessage) | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("Must be unique and only accept alphabetic and numeric characters.") | html %]</p>
+                                        <p class="Warning Hidden">[% Translate("Changing this value will require manual changes in the system.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">    
+                                    <label class="Mandatory" for="Label"><span class="Marker">*</span> [% Translate("Label") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="Label" class="W100pc [% Data.LabelServerError | html %] Validate_Required" type="text" maxlength="200" value="[% Data.Label | html %]" name="Label">
+                                        <div id="LabelError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="LabelServerError" class="TooltipErrorMessage"><p>[% Translate(Data.LabelServerErrorMessage) | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("This is the name to be shown on the screens where the field is active.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="FieldOrder"><span class="Marker">*</span> [% Translate("Field order") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.DynamicFieldOrderStrg %]
+                                        <div id="FieldOrderError" class="TooltipErrorMessage"><p>[% Translate("This field is required and must be numeric.") | html %]</p></div>
+                                        <div id="FieldOrderServerError" class="TooltipErrorMessage"><p>[% Translate(Data.FieldOrderServerErrorMessage) | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("This is the order in which this field will be shown on the screens where is active.") | html %]</p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ValidityStrg %]
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label for="FieldTypeName">[% Translate("Field type") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="FieldTypeName" readonly class="W100pc" type="text" maxlength="200" value="[% Translate(Data.FieldTypeName) | html %]" name="FieldTypeName">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label for="ObjectTypeName">[% Translate("Object type") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="ObjectTypeName" readonly class="W100pc" type="text" maxlength="200" value="[% Translate(Data.ObjectTypeName) | html %]" name="ObjectTypeName">
+                                    </div>
+                                </div>
+
+[% RenderBlockStart("InternalField") %]
+                                <div class="field-wrapper">
+                                    <label for="InternalField">[% Translate("Internal field") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="InternalField" readonly class="W100pc" type="text" maxlength="1" value="[% Data.InternalField | html %]" name="InternalField">
+                                        <p class="FieldExplanation">
+                                            [% Translate("This field is protected and can't be deleted.") | html %]
+                                        </p>
+                                    </div>
+                                </div>
+[% RenderBlockEnd("InternalField") %]
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate (Data.FieldTypeName) | html %] [% Translate("Field Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="Field">
+                        <p style="text-align: left;" class="FieldExplanation">[% Translate("Insert a name for the column, a data type and for List insert the possible options (add item list separate by semicolon).") | html %]</p>
+                    </div>
+                    <br>
+                    <fieldset class="TableLike">
+
+                        <div class="Field ValueInsert ColumnDisplay">
+
+                            <input type="hidden" name="ValueCounter" value="[% Data.ValueCounter | html %]" id="ValueCounter" class="ValueCounter" />
+[% RenderBlockStart("ValueRow") %]
+
+                            <div class="[% Data.ContainerClass | html %]" style="margin-bottom: 1px; display: inline-block;">
+
+                                <div class="Field single-row-inputs">
+            
+                                    <div class="field-wrapper">
+                                        <label style="width: 60%;">[% Translate("Column") | html %]:</label>
+                                        <input name="Column_[% Data.ValueCounter | html %]" id="Column_[% Data.ValueCounter | html %]" class="DefaultValueItem W20pc Validate_Required" type="text" value="[% Data.Column | html %]" maxlength="100"/>
+                                    </div>
+                                    
+                                    <div class="field-wrapper">
+                                        <label>[% Translate("Type") | html %]:</label>
+                                        [% Data.PossibleDataTypes %]
+                                    </div>
+            
+                                    <div class="field-wrapper">
+                                        <label class="[% Data.ContentClass %]" for="ContentColumn_[% Data.ValueCounter %]">[% Translate("Content") | html %]:</label>
+                                        <input name="ContentColumn_[% Data.ValueCounter %]" id="ContentColumn_[% Data.ValueCounter %]" class="DefaultValueItem [% Data.ContentClass %]" type="text" value="[% Data.ColumnContent %]" style="width: 42%;"/>
+                                    </div>
+            
+                                </div>    
+                                <br>
+                                <div class="Field single-row-inputs">
+            
+                                    <div class="field-wrapper">
+                                        <label style="width: 25%;" for="Default_[% Data.ValueCounter %]">[% Translate("Default") | html %]:</label>
+                                        <input name="Default_[% Data.ValueCounter%]" id="Default_[% Data.ValueCounter%]" class="DefaultValueItem" type="text" value="[% Data.Default%]" maxlength="100"/>
+                                    </div>
+            
+                                    <div class="field-wrapper">
+                                        <label>[% Translate("Editable by") | html %]:</label>
+                                        [% Data.EditableByList %]
+                                    </div>
+                                                
+                                </div>
+
+                                <a href="#" id="RemoveValue_[% Data.ValueCounter %]" class="RemoveButton ValueRemove_[% Data.ValueCounter %]"><i class="fa fa-minus-square-o"></i></a>
+            
+                                <div id="AJAXLoader" class="Spacing Center Hidden">
+                                    <span class="AJAXLoader" title="[% Translate("Loading") | html %]"></span>
+                                </div>
+            
+                                <div id="AjaxColumn_[% Data.ValueCounter %]" style="flex-flow: column;"></div>
+                        
+
+[% WRAPPER JSOnDocumentComplete %]
+<script type="text/javascript">//<![CDATA[
+$('.DataTypeColumn_' + [% Data.ValueCounter %]).bind('change', function () {
+    if ($(this).val() == 'select' && !($("#Column_" + [% Data.ValueCounter %]).val() == '')){
+        $("#ContentColumn_" + [% Data.ValueCounter %]).removeClass('Hidden');
+        $('label[for="ContentColumn_'+ [% Data.ValueCounter %] +'"]').removeClass('Hidden');
+    } else {
+        $("#ContentColumn_" + [% Data.ValueCounter %]).addClass('Hidden');
+        $('label[for="ContentColumn_'+ [% Data.ValueCounter %] +'"]').addClass('Hidden');
+    }
+
+    if ($(this).val() == 'computed' && !($("#Column_" + [% Data.ValueCounter %]).val() == '')){
+        $('label[for="Default_'+ [% Data.ValueCounter %] +'"]').text([% Translate("Formula") | html %]);
+    } else {
+        $('label[for="Default_'+ [% Data.ValueCounter %] +'"]').text([% Translate("Default") | html %]);
+    }
+
+    if ($(this).val() == 'mask' || $(this).val() == 'maskMoney'){
+        Core.Agent.Admin.DynamicFieldTable.NewMask($("#Column_" + [% Data.ValueCounter %]).val(), $(this).val());
+    } else {
+        var ColName = $("#Column_" + [% Data.ValueCounter %]).val();
+        ColName = ColName.replace(/\ /g, "");
+
+        $('.DataItem_' + ColName).remove();
+    }
+
+    if ( $("#Column_" + [% Data.ValueCounter %]).val() == '' ){
+        $(this).val("-");
+        $(this).addClass('Error');
+        $("#Column_" + [% Data.ValueCounter %]).addClass('Error');
+    }
+
+    if ($('#OperationColumn').val() !== ''){
+        Core.Agent.Admin.DynamicFieldTable.OperationColumn();
+    }
+});
+
+$('#Column_' + [% Data.ValueCounter %]).bind('keydown', function () {
+    var $MaskName = $('#Column_' + [% Data.ValueCounter %]).val();
+    $MaskName = $MaskName.replace(/\ /g, "");
+
+    $('.DataItem_' + $MaskName).remove();
+
+    var $Div = $('#TypeColumn_' + [% Data.ValueCounter %]+ '_Search').parent();
+    var remove = $Div.find(".InputField_Selection");
+    remove.remove();
+
+    $("#ContentColumn_" + [% Data.ValueCounter %]).addClass('Hidden');
+    $('label[for="ContentColumn_'+ [% Data.ValueCounter %] +'"]').addClass('Hidden');
+
+    $('.DataTypeColumn_' + [% Data.ValueCounter %]).val("-");
+   
+    if ($('#OperationColumn').val() !== ''){
+        Core.Agent.Admin.DynamicFieldTable.OperationColumn();
+    }
+
+});
+
+//bind click function to remove button
+$('.ValueRemove_' +[% Data.ValueCounter %]).bind('click', function () {
+    Core.Agent.Admin.DynamicFieldTable.RemoveValue($(this).attr('id'));
+    return false;
+});
+
+//]]></script>
+[% END %]
+<div class="SpacingTop"></div>
+[% RenderBlockEnd("ValueRow") %]
+
+[% RenderBlockStart("ValueTemplate") %]
+                        
+                                <div id="AJAXLoader" class="Spacing Center Hidden">
+                                    <span class="AJAXLoader" title="[% Translate("Loading") | html %]"></span>
+                                </div>
+
+                                <div id="AjaxColumn_[% Data.ValueCounter %]" style="flex-flow: column;"></div>
+
+[% RenderBlockEnd("ValueTemplate") %]
+                                <input type="hidden" name="DeletedValue" value="[% Data.DeletedString | html %]" id="DeletedValue" class="DeletedValue" />
+                            </div>
+                        
+                            <div class="field-wrapper">
+                                <label style="text-align: left;display: flex;justify-content: flex-start;width: auto !important;margin: 0px 0px 0px 0px !important;" class="NewColumnLabel" for="AddValue">[% Translate("Add") | html %] [% Translate("Column") | html %]:</label>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <a style="text-align: left; margin: 0px 0px 0px 0px !important;" href="#" id="AddValue" class="AddButton NewColumnButton"><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add Value") | html %]</span></a>
+                            </div>  
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("Mask Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike ACLStructure">
+                            <div class="ACLFields">
+                                <h4 style="margin-right: auto;">[% Translate("Text Mask Settings") | html %]</h4>
+                                <ul class="ACLFieldGroup" id="ACLMatch">
+                                    <li class="DataItem" data-content="">
+                                        <ul class="TextMask">
+[% RenderBlockStart("MaskText") %]
+                                            <li class="DataItem_[% Data.ColumnMask %]" data-content="Ticket">
+                                                <strong>[% Data.Name %]</strong>
+                                                <ul>
+                                                    <li>
+                                                        <div class="field-wrapper">
+                                                            <label for="DefaultValue">[% Translate("Mask") | html %]:</label>
+                                                            [% Data.PossibleMasks %]
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+[% RenderBlockEnd("MaskText") %]
+                                            <li class="DataItemTextAjax"></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    </fieldset>
+                    <fieldset class="TableLike">
+                            <div class="ACLFields">
+                                <h4>[% Translate("Monetary Mask Settings") | html %]</h4>
+                                <ul class="ACLFieldGroup" id="ACLMatch">
+                                    <li class="DataItem" data-content="">
+                                        <ul class="MoneyMask">
+[% RenderBlockStart("MaskMoney") %]
+                                            <li class="DataItem_[% Data.ColumnMask %]" data-content="MoneyMask">
+                                                <strong>[% Data.Name %]</strong>
+                                                <ul>
+                                                    <li>
+                                                        <div class="field-wrapper">
+                                                            <label for="DefaultValue">[% Translate("Currency") | html %]:</label>
+                                                            <input name="MoneyMaskPrefix_[% Data.Name %]" id="MoneyMaskPrefix_[% Data.Name %]" type="text" class="NewDataKey W10pc" data-level="3" data-parent="MoneyMask" value="[% Data.MoneyPrefix %]">
+                                                            <label for="DefaultValue">[% Translate("Negative") | html %]:</label>
+                                                            [% Data.PossibleNegative %]
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+[% RenderBlockEnd("MaskMoney") %]
+                                            <li class="DataItemMoneyAjax"></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("Sum Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike ACLStructure">
+                        <div class="ACLFields">
+                            <h4>[% Translate("Column sum settings") | html %]</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="OperationColumn">[% Translate("Operation Column") | html %]:</label>
+                            <div class="Field">
+                                [% Data.OperationColumn %]
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="OperationFormula" style="display: none;"><span class="Marker">*</span>[% Translate("Formula") | html %]:</label>
+                            <div class="Field Hidden">
+                                <input name="OperationFormula" id="OperationFormula" class="W100pc" type="text" value="[% Data.OperationFormula %]" maxlength="100"/>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="SelectedOperationColumn" style="display: none;"><span class="Marker">*</span>[% Translate("Columns") | html %]:</label>
+                            <div class="OperationColumn Hidden"></div>
+                            <div class="Field">
+                                <p class="FieldExplanation">[% Translate("Selecting to add the rows will use the columns selected above in Add Columns.") | html %]</p>
+                            </div>		
+                        </div>
+                    </fieldset>					
+					<fieldset class="TableLike ACLStructure">
+                        <div class="ACLFields">
+                            <h4>[% Translate("Operation Settings") | html %]</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="Operation_">[% Translate("Operation") | html %]:</label>
+                            <div class="Field">
+                                <input name="Operation" id="Operation" class="W100pc" type="text" value="[% Data.Operation %]" maxlength="100"/>
+                                <label for="ExtractOperation">[% Translate("Dynamic Field") | html %]:</label>
+                                [% Data.ExtractOperation %]
+                            </div>			
+                        </div>						
+                    </fieldset>
+                    <!--Row sum -->
+                    <fieldset class="TableLike">
+                        <div class="ACLFields">
+                            <h4>[% Translate("Row sum settings") | html %]</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="PossibleRowSum"><span class="Marker">*</span>[% Translate("Sum Rows") | html %]:</label>
+                            <div class="Field">
+                                [% Data.PossibleRowSum %]
+                            </div>
+                        </div>
+                        <div class="Field">
+                            <p class="FieldExplanation">[% Translate("Selecting to add the rows will use the columns selected above in Add Columns.") | html %]</p>
+                        </div>		
+                    </fieldset>					
+                </div>
+            </div>
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("Edition Permissions") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label>[% Translate("States to Disable") | html %]:</label>
+                            <div class="Field">
+                                [% Data.PossibleStates %]
+                                <div class="Field">
+                                    <p class="FieldExplanation">[% Translate("States which the table will be disabled to edition.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("Autocomplete") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="Field">
+                        <p style="margin-left: 11%;" class="FieldExplanation">[% Translate("Define the column, delay and module or web service for autocomplete.") | html %]</p>
+                    </div>
+
+                    <fieldset class="TableLike">
+                        <div class="Field ValueInsert ColumnDisplay">
+                            <div class="field-wrapper">
+                                <label style="width: 15%;">[% Translate("Column") | html %]:</label>
+                                <input name="AutoCompleteColumn" id="AutoCompleteColumn" class="DefaultValueItem W100pc" type="text" value="[% Data.AutoCompleteColumn | html %]" maxlength="100"/>
+
+                                <label style="width: 15%;"> Delay(ms):</label>
+                                <input name="AutoCompleteDelay" id="AutoCompleteDelay" class="DefaultValueItem W100pc" type="number" value="[% Data.AutoCompleteDelay | html %]" maxlength="100"/>
+
+                                <label style="width: 15%;">[% Translate("Module") | html %]:</label>
+                                <input name="AutoCompleteModule" id="AutoCompleteModule" class="DefaultValueItem W100pc" type="text" value="[% Data.AutoCompleteModule | html %]" maxlength="100"/>
+                                
+                                <p style="padding: 0;color: var(--gray-medium); background: transparent;align-self: center;">[% Translate("or") | html %]</p>
+                               
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label style="width: 50%;">[% Translate("WebService") | html %]:</label>
+                                <!-- <input name="AutoCompleteWebService" id="AutoCompleteWebService" class="DefaultValueItem W100pc" type="text" value="[% Data.AutoCompleteWebService | html %]" maxlength="200"/> -->
+                                [% Data.AutoCompleteWebService %]
+
+                                <label style="width: 50%;">[% Translate("Invoker") | html %]:</label>
+                                <input name="AutoCompleteInvoker" id="AutoCompleteInvoker" class="DefaultValueItem W100pc" type="text" value="[% Data.AutoCompleteInvoker | html %]" maxlength="200"/>
+                                
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("Dependency") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="Field">
+                        <p style="margin-left: 11%;" class="FieldExplanation">[% Translate("Define another table as a dependency and fill in the data in the columns with same name.") | html %]</p>
+                    </div>
+                    
+                    <fieldset class="TableLike">
+                        <div class="Field ValueInsert ColumnDisplay">
+                            <div class="field-wrapper">
+                                <label>[% Translate("Dependency Table") | html %]:</label>
+                                [% Data.DependencyTable %]
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <fieldset class="TableLike card">
+                <div class="field-wrapper form-button-actions">
+                    <div class="Field buttons-field">
+                        <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=AdminDynamicField">[% Translate("Cancel") | html %]</a>
+                        [% IF Data.Mode == 'Change' %]
+                        <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                        <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                        [% ELSE %]
+                        <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                        [% END %]
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+/*--
+ var/httpd/htdocs/skins/Agent/default/css/Core.Agent.Admin.KPI.css
+ Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+
+ written/edited by:
+ * pdias@beonup.com.br
+ * dsilva@beonup.com.br
+ * gtiburtino@beonup.com.br
+ * nfreitas@serviceup.com.br
+ -- */
+
+.HiddenByKPI{
+    display: none !important;
+}
+
+.DisplayNone{
+    display: none !important;
+}
+
+#ViewChart {
+    margin-bottom: 20px;
+}
+
+#chart {
+    background-color: #f5f5f5;
+}
+
+#BoxSQLQuery {
+    flex: 1;
+}
+
+#BoxSQLQuery > .TableLike > label {
+    padding-left: 25px;
+}
+
+.Container {
+    display: flex;
+    align-items: center;
+}
+
+#chart {
+    flex: 1;
+    transform: scale(0.9);
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.CodeMirror {
+    width: 684px;
+}
+
+#RunSqlQuery{
+    margin-left: 29px;
+}
+
+#FieldSQL {
+    height: 350px;
+}
+
+@media screen,projection,tv,handheld {
+
+/**
+ * @subsubsection     AdminDynamicFields
+ */
+
+.KPISQLErrorDiv{
+    background-color: #b8384e;
+    color: #eee;
+    padding: 10px;
+}
+.Header li {
+    margin-left: -3px;
+    padding-left: 2px;
+    float: left;
+    position: relative;
+}
+
+.RTL .Header li {
+    margin-left: 0;
+    margin-right: -3px;
+    float: right;
+}
+
+.Header li.Active,
+.Header li.Active:hover,
+.Header li.Active:active {
+    padding-left: 2px;
+}
+
+.Header a i {
+    color: #aaa;
+}
+
+.Header a:hover i {
+    color: #000;
+}
+
+.WidgetSimple > .DynamicFieldsContent {
+    overflow: auto;
+    padding: 0px 8px 10px;
+}
+
+.WidgetSimple > .DynamicFieldsPagination {
+    overflow: auto;
+    padding: 0px 8px 0px;
+}
+
+.SpacingTopMini {
+    margin-top: 5px;
+}
+
+.ValueRow input{
+    margin-right: 13px;
+}
+
+.RTL .ValueRow input{
+    margin-left: 13px;
+}
+}/* end @media */

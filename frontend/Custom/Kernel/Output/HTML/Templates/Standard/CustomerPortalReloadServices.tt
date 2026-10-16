@@ -1,0 +1,447 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalReloadServices.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# nfreitas@serviceup.com.br
+# --
+
+<div class="content removecontent" style=''> 
+  <h5 class="card-title service-name" style="" title="[% Data.ServiceName | html %] ">
+    <i class="fa fa-file-text-o fa-fw"></i> [% Translate("Service") | html %]: 
+    <div id="MyServiceName" style="display: inline-block">
+    [% RenderBlockStart("LinkOfContractService") %]               
+        <!--a class="LinkToBackService" href='[% Env("CGIHandle") %]?Action=Services;Subaction=ServiceDetails;ServiceID=[% Data.ServiceParentID | html %]'>[% Data.ServiceNameShort | html %]</a-->
+        [% Data.ServiceNameShort | html %]
+        [% IF Data.LastService == '0' %]
+        →
+        [% END %]
+    [% RenderBlockEnd("LinkOfContractService") %]
+    [% RenderBlockStart("LinkOfService") %]               
+        <!-- <a class="LinkToBackService" id='[% IF Data.LastService == '1' %]LastService[% END %]' href='[% Env("CGIHandle") %]?Action=Services;Subaction=ServiceDetails;ServiceID=[% Data.ServiceParentID | html %]'>[% Data.ServiceNameShort | html %]</a>  -->
+        [% Data.ServiceNameShort | html %]
+        [% IF Data.LastService == '0' %]
+        →
+        [% END %]
+    [% RenderBlockEnd("LinkOfService") %]
+    <div>
+  </h5>
+[% RenderBlockStart("ShowServiceDetailsReload") %]
+  <div class="row ServicesRowListReload animated [% Data.CardTransitionEffect %] slow">
+  <input type="hidden" id="ServiceURLData" />
+[% RenderBlockStart("TicketServiceDetailReload") %]
+[% IF Data.CardFormat == 2 %]
+      <div class="col-md-3 col-sm-3 colService animated [% Data.CardTransitionEffect %] slow" style ='max-width: 270px'>
+        <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %]; width: 232px; border-radius:15px !important; height: 164px; margin-left: 38px;">
+          <div class="card-body-square-[% Data.CardSize %] [% Data.DescriptionHeigthClass %]" onclick="Core.Customer.CustomerPortalReloadServices.ReloadService([% Data.ServiceID | html %])">
+            <span class="StarFavorite StarFavorite-square-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+              <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+            </span>
+            <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+              <div class="col-5 col-md-12">
+                  <div class="icon-square-[% Data.CardSize %]" >
+                    [% IF Data.ServiceImage %]
+                        <img class='NewCardType' src="[% Data.ServiceImage | html %]">
+                    [% ELSE %]
+                        <i class="fa [% Data.ServiceIcon | html %] NewCardTypeNoImage" style="color: #[% Data.ServiceIconColor | html %] !important;"></i>
+                    [% END %] 
+                  </div>
+                  [% IF Data.ServiceDescription %]
+                          <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class='NewCardDescription'>[% Data.NameShort | truncate(55) | html %]</p>
+                      [% ELSE %]
+                        <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class='NewCardDescription' >[% Data.NameShort | truncate(90) | html %]</p>
+                    [% END %]  
+                </div>
+                    <div>
+                      
+                <div class='DescritionServiceInCard card-category-rounded-desc-[% Data.CardSize %]' title="[% Data.ServiceDescription | html %]" >[% Data.SubStringDescription | html %]</div>
+                    </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+[% ELSE %]
+          [% IF Data.CardSize == 'Large' %]
+            <div class="col-lg-3 col-md-3 col-sm-3 colService animated [% Data.CardTransitionEffect %] slow">
+          [% ELSE %]
+            <div class="col-lg-2 col-md-2 col-sm-2 colService animated [% Data.CardTransitionEffect %] slow">
+          [% END %]  
+          <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %] ">
+          <div class="card-body-square-[% Data.CardSize %] [% Data.DescriptionHeigthClass %]" onclick="Core.Customer.CustomerPortalReloadServices.ReloadService([% Data.ServiceID | html %])">
+            <span class="StarFavorite StarFavorite-square-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+                <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+            </span>
+            <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+              <div class="col-5 col-md-12">
+                <div class="icon-square-[% Data.CardSize %] text-center icon-warning" style='line-height: 0.5;'>
+                  [% IF Data.ServiceImage %]
+                    <img class="text-warning" style="width: [% IF Data.CardSize == 'Small' %]24px[% ELSE %]50px[% END %]; margin-right: 5px;" src="[% Data.ServiceImage | html %]">
+                  [% ELSE %]
+                    <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+                  [% END %] 
+                </div>
+                  [% IF Data.ServiceDescription %]
+                    [% IF Data.CardSize == 'Small' %]
+                      <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(40) | html %]</p>
+                    [% ELSE %]
+                      <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(55) | html %]</p>
+                    [% END %]  
+                  [% ELSE %]
+                    [% IF Data.CardSize == 'Small' %]
+                      <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(80) | html %]</p>
+                    [% ELSE %]
+                      <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(90) | html %]</p>
+                    [% END %] 
+                  [% END %]  
+              </div>
+              <div class="col-7 col-md-12">
+                <div class="numbers [% Data.NotDisplayDescription %]">
+                    [% IF Data.CardSize == 'Small' %]
+                      <div title="[% Data.ServiceDescription | html %]"  class="card-category-square-desc-[% Data.CardSize %]">[% Data.SubStringDescription | html %]</div>
+                    [% ELSE %]
+                      <div title="[% Data.ServiceDescription | html %]"  class="card-category-square-desc-[% Data.CardSize %]">[% Data.SubStringDescription | html %]</div>
+                    [% END %]  
+                </div>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+[% END %]  
+[% RenderBlockEnd("TicketServiceDetailReload") %]
+[% RenderBlockStart("TicketServiceDetailReloadRetangle") %]
+  [% IF Data.CardSize == 'Large' %]
+  <div class="col-lg-4 col-md-4 col-sm-4 colService animated [% Data.CardTransitionEffect %] slow">
+  <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %] ">
+    <div class="card-body-rectangle-[% Data.CardSize %] [% Data.DescriptionHeigthClass %]" onclick="Core.Customer.CustomerPortalReloadServices.ReloadService([% Data.ServiceID | html %])">
+        <span class="StarFavorite StarFavorite-rectangle-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+            <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+        </span>
+      <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+        <div class="col-5 col-md-12">
+          <div class="icon-[% Data.CardSize %] text-center icon-warning" style='line-height: 0.5;'>
+            [% IF Data.ServiceImage %]
+            <img class="text-warning" style="width: 50px; margin-right: 5px;" src="[% Data.ServiceImage | html %]">
+            [% ELSE %]
+            <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+            [% END %] 
+          </div>
+          [% IF Data.ServiceDescription %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(55) | html %]</p>
+          [% ELSE %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(90) | html %]</p>
+
+          [% END %]  
+        </div>
+        <div class="col-7 col-md-12">
+          <div class="numbers-rectangle-[% Data.CardSize %] [% Data.NotDisplayDescription %]">
+            <div title="[% Data.ServiceDescription | html %]"  class="card-category">[% Data.SubStringDescription | html %]</div>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+  [% ELSE %]
+  <div class="col-lg-3 col-md-3 col-sm-3 colService animated [% Data.CardTransitionEffect %] slow">
+  <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %] ">
+    <div class="card-body-rectangle-[% Data.CardSize %] [% Data.DescriptionHeigthClass %] " onclick="Core.Customer.CustomerPortalReloadServices.ReloadService([% Data.ServiceID | html %])">
+        <span class="StarFavorite StarFavorite-rectangle-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+            <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+        </span>
+      <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+        <div class="col-5 col-md-12 ServiceCardPadding">
+          <div class="icon-[% Data.CardSize %] text-center icon-warning" style='line-height: 0.5;'>
+            [% IF Data.ServiceImage %]
+            <img class="text-warning" style="width: 50px; margin-right: 5px;" src="[% Data.ServiceImage | html %]">
+            [% ELSE %]
+            <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+            [% END %] 
+          </div>
+          [% IF Data.ServiceDescription %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(55) | html %]</p>
+          [% ELSE %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(90) | html %]</p>
+
+          [% END %]  
+        </div>
+        <div class="col-7 col-md-12">
+          <div class="numbers-rectangle-[% Data.CardSize %] [% Data.NotDisplayDescription %]">
+            <div title="[% Data.ServiceDescription | html %]"  class="card-category">[% Data.SubStringDescription | html %]</div>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+  [% END %]
+[% RenderBlockEnd("TicketServiceDetailReloadRetangle") %]
+
+
+[% RenderBlockStart("ShowAsCategoryList") %]
+
+<style>
+.NeedMessage, .MoreServices {
+    line-height: 20pt;
+    font-size: 20pt;
+    font-weight: normal;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+    color: #002A8C;
+}
+
+.Need {
+    font-size: 16pt;
+    line-height: 16pt;
+    border-radius: 3px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.Need span {
+    color: #0078CE;
+    font-size: 12pt;
+    line-height: 30px;
+    position: relative;
+    top: 4px;
+    padding: 2px 4px 2px 6px;
+    left: 8px;
+}
+
+
+</style>
+
+<div id="ServiceCatalog" style="width: 100%;">
+	<div id="ServiceCatalogItens" style="margin-top: 3%;">
+		<!--h2 class="NeedMessage">O que você precisa fazer?</h2-->
+[% RenderBlockStart("ServiceListRow") %]
+		<div class="Need">
+			•<a target="_self"
+				href="#" onclick="Core.Customer.CustomerPortalReloadServices.ReloadService([% Data.ServiceID | html %])">
+				[% Data.NameShort | html %]
+			</a>
+        <br>
+        <span>[% Data.ServiceDescription | html %]</span>
+		</div>
+[% RenderBlockEnd("ServiceListRow") %]
+		
+		<div id="NewLine"></div>
+    [% RenderBlockStart("MoreServices") %]
+		<h2 class="MoreServices">Mais Serviços:</h2>
+
+        <div style="display: flex">
+		[% RenderBlockStart("ServiceCard") %]
+        <div class="col-lg-3 col-md-3 col-sm-3 colService animated none slow">
+            <div class="card card-stats" style="background-color: #[% Data.ServiceColor | html %] ">
+                <div class="card-body-square-Small  [% Data.DescriptionHeigthClass | html %]"
+                    onclick="Core.Customer.CustomerPortalReloadServices.ReloadService([% Data.ServiceID | html %])">
+                    <span class="StarFavorite StarFavorite-square-Small [% IF Data.StarFavoriteColor == " ffc107"
+                        %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important'
+                        data-service-favorite="[% Data.ServiceID | html %]" title="[% Translate(" Set as favorite") | html %]">
+                        <i class="fa fa-star fa-star-[% Data.ServiceID | html %]"
+                            style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+                    </span>
+                    <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+                        <div class="col-5 col-md-12">
+                            <div class="icon-square-Small text-center icon-warning">
+                                [% IF Data.ServiceImage %]
+                                <img class="NewCardType"
+                                    src="[% Data.ServiceImage | html %]">
+                                [% ELSE %]
+                                <i class="fa [% Data.ServiceIcon | html %] text-warning"
+                                    style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+                                [% END %]
+                            </div>
+                            [% IF Data.ServiceDescription %]
+                            <p title="[% Data.NameShort | html %]" style='[% Data.TitleStyle %]'
+                                class="NewCardDescription">[% Data.NameShort | truncate(40) | html %]</p>
+                            [% ELSE %]
+                            <p title="[% Data.NameShort | html %]" style='[% Data.TitleStyle %]'
+                                class="NewCardDescription">[% Data.NameShort | truncate(60) | html %]</p>
+                            [% END %]
+                        </div>
+                        <div class="col-7 col-md-12">
+                            <div class="numbers [% Data.NotDisplayDescription %]">
+                                <div title="[% Data.ServiceDescription | html %]"
+                                    class="card-category-square-desc-Small">[% Data.SubStringDescription | html %]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        [% RenderBlockEnd("ServiceCard") %]
+        </div>
+    [% RenderBlockEnd("MoreServices") %]
+
+	</div> <!--ServiceCatalogItens-->
+</div>
+
+[% RenderBlockEnd("ShowAsCategoryList") %]
+
+
+
+    [% RenderBlockStart("BackURLReload") %]
+    <div id='BackButtons' style='text-align: center;' class ='col-lg-12'>
+        <button title="Voltar" id="Backbtn" style="color:#[% Data.Color | html %];background-color: #[% Data.BackgroundColor | html %]" type="button" onclick="Core.Customer.CustomerPortalReloadServices.ReloadServiceBackButton('[% Data.ServiceID | html %]')" data-parentService="[% Data.ServiceID | html %]" class=" CallForAction btnServiceBack">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            [% Translate("Back") | html %]
+        </button>
+        <button title="Início" style="color:#[% Data.Color | html %]; background-color: #[% Data.BackgroundColor | html %]" type="button" onclick="window.location.href = '[% Data.ServiceURLHome | html %]';" class=" CallForAction btnServiceBack">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            [% Translate("Home") | html %]
+        </button>
+    </div>
+    [% RenderBlockEnd("BackURLReload") %]
+[% RenderBlockEnd("ShowServiceDetailsReload") %]
+
+
+
+
+
+
+[% RenderBlockStart("ShowContractServiceDetailsReload") %]
+  <div class="row ServicesRowListReload animated [% Data.CardTransitionEffect %] slow">
+  <input type="hidden" id="ServiceURLData" />
+[% RenderBlockStart("TicketContractServiceDetailReload") %]
+    [% IF Data.CardSize == 'Large' %]
+      <div class="col-lg-3 col-md-3 col-sm-3 colService animated [% Data.CardTransitionEffect %] slow">
+    [% ELSE %]
+      <div class="col-lg-2 col-md-2 col-sm-2 colService animated [% Data.CardTransitionEffect %] slow">
+    [% END %]  
+    <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %] ">
+    <div class="card-body-square-[% Data.CardSize %] [% Data.DescriptionHeigthClass %]" onclick="Core.Customer.CustomerPortalReloadServices.ReloadContractService([% Data.ContractID | html %], [% Data.ServiceID | html %])">
+      <span class="StarFavorite StarFavorite-square-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+          <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+      </span>
+      <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+        <div class="col-5 col-md-12">
+          <div class="icon-square-[% Data.CardSize %] text-center icon-warning" style='line-height: 0.5;'>
+            [% IF Data.ServiceImage %]
+            <img class="text-warning" style="width: 50px; margin-right: 5px;" src="[% Data.ServiceImage | html %]">
+            [% ELSE %]
+            <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+            [% END %] 
+            <!-- <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i> -->
+          </div>
+          [% IF Data.ServiceDescription %]
+            [% IF Data.CardSize == 'Small' %]
+              <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(40) | html %]</p>
+            [% ELSE %]
+              <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(55) | html %]</p>
+
+            [% END %]  
+          [% ELSE %]
+            [% IF Data.CardSize == 'Small' %]
+              <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(80) | html %]</p>
+            [% ELSE %]
+              <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-name-square-[% Data.CardSize %]">[% Data.NameShort | truncate(90) | html %]</p>
+            [% END %] 
+          [% END %]  
+        </div>
+        <div class="col-7 col-md-12">
+          <div class="numbers [% Data.NotDisplayDescription %]">
+              [% IF Data.CardSize == 'Small' %]
+                <div title="[% Data.ServiceDescription | html %]"  class="card-category-square-desc-[% Data.CardSize %]">[% Data.SubStringDescription | truncate(50) | html %]</div>
+              [% ELSE %]
+                <div title="[% Data.ServiceDescription | html %]"  class="card-category-square-desc-[% Data.CardSize %]">[% Data.SubStringDescription | truncate(58) | html %]</div>
+              [% END %]  
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+[% RenderBlockEnd("TicketContractServiceDetailReload") %]
+[% RenderBlockStart("TicketContractServiceDetailReloadRetangle") %]
+  [% IF Data.CardSize == 'Large' %]
+  <div class="col-lg-4 col-md-4 col-sm-4 colService animated [% Data.CardTransitionEffect %] slow">
+  <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %] ">
+    <div class="card-body-rectangle-[% Data.CardSize %] [% Data.DescriptionHeigthClass %]" onclick="Core.Customer.CustomerPortalReloadServices.ReloadContractService([% Data.ContractID | html %], [% Data.ServiceID | html %])">
+        <span class="StarFavorite StarFavorite-rectangle-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+            <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+        </span>
+      <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+        <div class="col-5 col-md-12">
+          <div class="icon-[% Data.CardSize %] text-center icon-warning" style='line-height: 0.5;'>
+            [% IF Data.ServiceImage %] 
+            <img class="text-warning" style="width: 50px; margin-right: 5px;" src="[% Data.ServiceImage | html %]">
+            [% ELSE %] 
+            <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+            [% END %] 
+            <!-- <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i> -->
+          </div>
+          [% IF Data.ServiceDescription %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(55) | html %]</p>
+          [% ELSE %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(90) | html %]</p>
+
+          [% END %]  
+        </div>
+        <div class="col-7 col-md-12">
+          <div class="numbers-rectangle-[% Data.CardSize %] [% Data.NotDisplayDescription %]">
+            <div title="[% Data.ServiceDescription | html %]"  class="card-category">[% Data.SubStringDescription | truncate(60) | html %]</div>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+  [% ELSE %]
+  <div class="col-lg-3 col-md-3 col-sm-3 colService animated [% Data.CardTransitionEffect %] slow">
+  <div class="card card-stats"  style="background-color: #[% Data.ServiceColor | html %] ">
+    <div class="card-body-rectangle-[% Data.CardSize %] [% Data.DescriptionHeigthClass %] " onclick="Core.Customer.CustomerPortalReloadServices.ReloadContractService([% Data.ContractID | html %], [% Data.ServiceID | html %])">
+        <span class="StarFavorite StarFavorite-rectangle-[% Data.CardSize %] [% IF Data.StarFavoriteColor == "ffc107" %]FavoriteAdded[% END %]" style='position: absolute;z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="Definir como favorito">
+            <i class="fa fa-star fa-star-[% Data.ServiceID | html %]" style='[% IF Data.StarFavoriteColor == "ffc107" %]color:#[% Data.StarFavoriteColor | html %];[% ELSE %]display: none;[% END %]'></i>
+        </span>
+      <div class="row ServiceIconFix" data-serviceId='[% Data.ServiceID | html %]'>
+        <div class="col-5 col-md-12 ServiceCardPadding">
+          <div class="icon-[% Data.CardSize %] text-center icon-warning" style='line-height: 0.5;'>
+            [% IF Data.ServiceImage %] 
+            <img class="text-warning" style="width: 50px; margin-right: 5px;" src="[% Data.ServiceImage | html %]">
+            [% ELSE %] 
+            <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i>
+            [% END %] 
+            <!-- <i class="fa [% Data.ServiceIcon | html %] text-warning" style="color: #[% Data.ServiceIconColor | html %] !important"></i> -->
+          </div>
+          [% IF Data.ServiceDescription %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(55) | html %]</p>
+          [% ELSE %]
+            <p title="[% Data.NameShort %]" style='[% Data.TitleStyle %]' class="card-category-rectangle-[% Data.CardSize %]">[% Data.NameShort | truncate(90) | html %]</p>
+
+          [% END %]  
+        </div>
+        <div class="col-7 col-md-12">
+          <div class="numbers-rectangle-[% Data.CardSize %] [% Data.NotDisplayDescription %]">
+            <div title="[% Data.ServiceDescription | html %]"  class="card-category">[% Data.SubStringDescription | truncate(49) | html %]</div>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+  [% END %]
+
+[% RenderBlockEnd("TicketContractServiceDetailReloadRetangle") %]
+[% RenderBlockStart("BackURLContractReload") %]
+<div id='BackButtons' style='text-align: center;' class ='col-lg-12'>
+[% IF Data.FlagHome %]
+    <button title="Voltar" id="Backbtn" style="color:#[% Data.Color | html %];background-color: #[% Data.BackgroundColor | html %]" type="button" onclick="window.location.href = '[% Data.ServiceURLHome | html %]';" data-parentService="[% Data.ServiceID | html %]" class=" CallForAction btnServiceBack">
+[% ELSE %]
+<button title="Voltar" id="Backbtn" style="color:#[% Data.Color | html %];background-color: #[% Data.BackgroundColor | html %]" type="button" onclick="Core.Customer.CustomerPortalReloadServices.ReloadContractService([% Data.ContractID | html %], [% Data.ServiceID | html %])" data-parentService="[% Data.ServiceID | html %]" class=" CallForAction btnServiceBack">
+[% END %]
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        [% Translate("Back") | html %]
+    </button>
+    <button title="Início" style="color:#[% Data.Color | html %]; background-color: #[% Data.BackgroundColor | html %]" type="button" onclick="window.location.href = '[% Data.ServiceURLHome | html %]';" class=" CallForAction btnServiceBack">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        [% Translate("Home") | html %]
+    </button>
+</div>
+[% RenderBlockEnd("BackURLContractReload") %]
+[% RenderBlockEnd("ShowContractServiceDetailsReload") %]
+</div>
+</div>

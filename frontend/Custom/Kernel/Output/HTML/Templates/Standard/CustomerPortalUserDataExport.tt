@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <title>[% Config("ProductName") %] - [% Translate("User Personal Data") %]</title>
+    <style type="text/css">
+
+      body {
+            margin: 15px;
+            padding: 0;
+            line-height: 1.4em;
+            border-style: solid;
+            font: 300 1em Arial;
+        }
+
+        h1 {
+            font: bold 1.5em Arial;
+            color: white;
+            text-align: center;
+            background: #000000;
+        }
+
+        table {
+            width: 98%;
+            margin-left: 1%;
+            border-collapse: collapse;
+        }
+
+        tr:nth-child(even) {
+            background: #D0D0D0
+        }
+
+        tr:nth-child(odd) {
+            background: #FFF
+        }
+
+        th, td {
+            padding: 5px;
+        }
+
+        th {
+            font: bold 1em Arial;
+            text-align: left;
+        }
+
+        .TicketList thead tr {
+            background: #000000;
+            color: white;
+        }
+
+        .Logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+    </style>
+</head>
+<body>
+    <img src="[% Data.Logo %]" alt="Logo" class="Logo">
+
+    <h1>[% Translate("User Information") %]</h1>
+
+[% RenderBlockStart("CustomerUserTemplate") %]
+    [% Data.CustomerUserTemplate %]
+[% RenderBlockEnd("CustomerUserTemplate") %]
+
+    <h1>[% Translate("Customer Information") %]</h1>
+
+[% RenderBlockStart("CompanyDataTemplate") %]
+    [% Data.CompanyDataTemplate %]
+[% RenderBlockEnd("CompanyDataTemplate") %]
+
+    <h1>[% Translate("User Tickets") %]</h1>
+
+    <table class='TicketList'>
+        <thead>
+[% RenderBlockStart("TicketListHeadTemplate") %]
+    [% Data.TicketListHeadTemplate %]
+[% RenderBlockEnd("TicketListHeadTemplate") %]
+        </thead>
+        <tbody>
+[% RenderBlockStart("TicketRow") %]
+    [% Data.TicketListBodyTemplate %]
+[% RenderBlockEnd("TicketRow") %]
+        </tbody>
+    </table>
+
+[% RenderBlockStart("CompanyTickets") %]
+        <h1>[% Translate("Company Tickets") %]</h1>
+
+    <table class='TicketList'>
+        <thead>
+[% RenderBlockStart("CompanyTicketListHeadTemplate") %]
+    [% Data.TicketListHeadTemplate %]
+[% RenderBlockEnd("CompanyTicketListHeadTemplate") %]
+        </thead>
+        <tbody>
+[% RenderBlockStart("CompanyTicketRow") %]
+    [% Data.TicketListBodyTemplate %]
+[% RenderBlockEnd("CompanyTicketRow") %]
+        </tbody>
+    </table>
+[% RenderBlockEnd("CompanyTickets") %]
+</body>
+</html>

@@ -1,0 +1,359 @@
+/*--
+ var/httpd/htdocs/skins/Agent/default/css/Core.Agent.KPIWidget.css
+ Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+
+ written/edited by:
+ * pdias@beonup.com.br
+ * dsilva@beonup.com.br
+ * lsnevelin@serviceup.com.br
+ * nfreitas@serviceup.com.br
+ * dparavani@serviceup.com.br
+ -- */
+
+
+.Widget li{
+	/* display: inline-block;		 */
+	/* width: 190px; */
+	text-align: center;
+	padding-top: 3px;
+	box-shadow: 0px 0px 4px 0px #585858;
+	border-radius: 3px;
+	background: #fff;
+	transition: .3s all;
+	margin-top: 4px;
+	height: 135px;
+    overflow: hidden;
+	position: relative;
+    margin-right: 2px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    min-width: 190px;
+}
+
+.Widget {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ComplexLiTo1Column{
+	/* display: inline-block !important;
+    width: 99% !important; */
+    text-align: center !important;
+    padding-top: 3px !important;
+    box-shadow: 0px 0px 4px 0px #585858 !important;
+    border-radius: 3px !important;
+    background: #fff;
+    transition: .3s all !important;
+    margin-top: 4px !important;
+    height: 295px !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.ChartSQLQueryLiTo1Column{
+	/* display: inline-block !important;
+    width: 99% !important; */
+    text-align: center !important;
+    padding-top: 3px !important;
+    box-shadow: 0px 0px 4px 0px #585858 !important;
+    border-radius: 3px !important;
+    background: #fff;
+    transition: .3s all !important;
+    margin-top: 4px !important;
+    height: 295px !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.ExportAllKPI{
+	font-size: 14px;
+	color: #000000;
+}
+
+.SeriesBox{
+	list-style: none;
+}
+
+.ComplexLiTo2Column{
+	/* display: inline-block !important;
+    width: 49% !important; */
+    text-align: center !important;
+    padding-top: 3px !important;
+    box-shadow: 0px 0px 4px 0px #585858 !important;
+    border-radius: 3px !important;
+    background: #fff;
+    transition: .3s all !important;
+    margin-top: 4px !important;
+    height: 295px !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.ChartSQLQueryLiTo2Column{
+	/* display: inline-block !important; */
+    /* width: 49% !important; */
+    text-align: center !important;
+    padding-top: 3px !important;
+    box-shadow: 0px 0px 4px 0px #585858 !important;
+    border-radius: 3px !important;
+    background: #fff;
+    transition: .3s all !important;
+    margin-top: 4px !important;
+    height: 295px !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+
+.ComplexLiTo3Column{
+	/* display: inline-block !important;
+    width: 332px !important; */
+    text-align: center !important;
+    padding-top: 3px !important;
+    box-shadow: 0px 0px 4px 0px #585858 !important;
+    border-radius: 3px !important;
+    background: #fff ;
+    transition: .3s all !important;
+    margin-top: 4px !important;
+    height: 295px !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.ChartSQLQueryLiTo3Column{
+	/* display: inline-block !important;
+    width: 33% !important; 332px */
+    text-align: center !important;
+    padding-top: 3px !important;
+    box-shadow: 0px 0px 4px 0px #585858 !important;
+    border-radius: 3px !important;
+    background: #fff ;
+    transition: .3s all !important;
+    margin-top: 4px !important;
+    height: 295px !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.SQLQueryImage{
+	position: absolute !important;
+    top: 27px !important;
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    font-size: 95px !important;
+    color: #eaeaea;
+    transform: translate(-50%)
+}
+
+.SQLResult{
+	z-index: 1;
+    position: relative;
+}
+
+.Widget h1{
+	font-size: 20px;
+}
+
+.Loader{
+	height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.7;
+    background: #fff;
+    z-index: 10;
+	background-image: url(../img/loader.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#GroupingTicket{
+	width: 100%;
+}
+
+.GroupingHeader{
+	height: 40px;
+	background-color: #fff;	
+	box-shadow: 0px 0px 4px 0px #585858;
+	padding: 11px;
+	text-align: center;
+	border-radius: 3px;
+	margin-top: 8px;
+}
+
+#Title{
+	height: 20px;
+	padding: 5px;
+}
+
+.NumberGraphicResult{
+	font-size: 42px !important;
+    padding: 24px;
+	color: #888;
+}
+
+.NumberGraphicResult:hover{
+	color: #ff9922;
+	cursor: pointer;
+}
+
+.SimpleGraphicResult{
+	font-size: 42px !important;
+    padding: 20px;
+	color: #888;
+}
+
+.SimpleGraphicResult:hover{
+	color: #ff9922;
+	cursor: pointer;
+}
+
+.SimpleITSMGraphicResult{
+	font-size: 42px !important;
+    padding: 20px;
+	color: #888;
+}
+
+.SimpleITSMGraphicResult:hover{
+	color: #ff9922;
+	cursor: pointer;
+}
+
+.SQLQueryGraphicResult{
+	font-size: 42px !important;
+    padding: 26px;
+	color: #888;
+}
+	
+.SQLQueryGraphicResult:hover{
+	color: #ff9922;
+	cursor: pointer;
+}
+#Title span{
+	font-size: 14px;
+}
+
+#Text{
+	padding-top: 9%;
+	width: 100%;
+}
+
+#WidgetContainer{
+	margin-right: -1%;
+	margin-left: .5%;
+}
+
+#Dashboard0000-KPIWidget-box .Content{
+	overflow: hidden;
+}
+
+.Charts{
+	margin-bottom: 5%;
+	/* overflow: hidden; */
+    top: 15px;
+}
+
+.zc-svg{
+	padding-top: 3%;
+}
+
+.AddedColorBlack{
+	background-color: black !important;
+	color:black;
+	border-bottom: black !important;
+}
+
+.FieldHelpContainer {
+    position: relative;
+}
+
+.FieldHelpContainer:hover > span {
+    display: block;
+}
+
+.FieldHelpContainer .FieldHelpTrigger {
+    cursor: default;
+    z-index: 1;
+    color: #bbb;
+}
+
+.FieldHelpContainer > span {
+    background: #444444;
+    color: #fff;
+    font-size: 12px;
+    left: 15px;
+    line-height: 110%;
+    padding: 10px;
+    position: relative;
+    margin: auto;
+    z-index: 2;
+    text-align: left;
+    text-shadow: 1px 1px 1px #000;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    top: 5px;
+    width: 200px;
+    display: none;
+    -webkit-opacity: 0.8;
+    -moz-opacity: 0.8;
+    -ms-opacity: 0.8;
+    -o-opacity: 0.8;
+    opacity: 0.8;
+}
+
+.ExpandChart {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.ContentColumn .WidgetSimple.CanDrag>.Content{
+    box-shadow: none !important;
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header{
+    flex-wrap: wrap !important;
+}
+
+@media (max-width: 1370px) {
+  
+    .ChartSQLQueryLiTo3Column, .ChartSQLQueryLiTo2Column {
+        height: 100% !important;
+    }
+}

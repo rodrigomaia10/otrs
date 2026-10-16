@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+
+    <Setting Name="Frontend::Module###FieldReadOnlyAJAXHandler" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module AJAX handler for the agent interface.</Description>
+        <Navigation>InBox::ProcessFieldReadOnly::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group"></Item>
+                    <Item Key="GroupRo"></Item>
+                    <Item Key="Description">FieldReadOnlyAJAXHandler</Item>
+                    <Item Key="Title"></Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="ProcessFieldReadOnly::Core::FieldTypes" Required="0" Valid="1">
+        <Description Translatable="1">Field types that will be set to Read Only.</Description>
+        <Navigation>InBox::ProcessFieldReadOnly::Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Checkbox">Input</Item>
+                <Item Key="Contract">Select</Item>
+                <Item Key="CEP">Input</Item>
+                <Item Key="Dropdown">Select</Item>
+                <Item Key="FileSystem">FileSystem</Item>
+                <Item Key="Mask">Input</Item>
+                <Item Key="Multiselect">Select</Item>
+                <Item Key="TextArea">Input</Item>
+                <Item Key="Text">Input</Item>
+                <Item Key="TicketClosed">Select</Item>
+                <Item Key="SelectDB">SelectDB</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>

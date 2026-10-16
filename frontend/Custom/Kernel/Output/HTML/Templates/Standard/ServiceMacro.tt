@@ -1,0 +1,33 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/ServiceMacro.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+
+[% RenderBlockStart("AddNewDynamicFields") %]
+<fieldset class="">
+	<label>[% Translate("Add dynamic field") | html %]:</label>
+		<div class="Field" data-widget="Update">
+			[% Data.NewDynamicFieldsStrg %]
+		</div>
+	<input type="hidden" name="ServiceMacro" id="ServiceMacro" value="" class="W25pc">
+	<div class="Clear"></div>
+</fieldset>
+[% RenderBlockEnd("AddNewDynamicFields") %]
+<div class="Clear"></div>
+
+<fieldset id="SelectedNewDynamicFields" class="">
+
+[% RenderBlockStart("SelectedNewDynamicFields") %]
+
+	[% Data.Label %]
+	<div class="Field" data-id="[% Data.ID %]">
+		[% Data.Field %]
+		
+	</div>
+
+	<div class="Clear"></div>
+[% RenderBlockEnd("SelectedNewDynamicFields") %]
+</fieldset>

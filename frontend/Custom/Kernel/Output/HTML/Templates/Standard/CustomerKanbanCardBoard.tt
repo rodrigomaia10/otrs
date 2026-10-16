@@ -1,0 +1,19 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerKanbanCardBoard.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * ccresencio@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+
+<div class='CardData'>
+    <div class="linkCardData" onclick='Core.Customer.Kanban.TicketZoom([% Data.TicketNumber | html %])'> [% Data.TicketNumber | html %] </div> 
+    <p class='MessageCardKB' title='[% Data.Title | html %]'><b> [% Data.Title | truncate(80) | html %]</b></p>
+
+    [% RenderBlockStart("Field") %]
+    <div class="CardDynamicField [% Data.FieldNumber | html %]">[% Data.Field | html %]</div>
+    [% RenderBlockEnd("Field") %]
+
+</div>

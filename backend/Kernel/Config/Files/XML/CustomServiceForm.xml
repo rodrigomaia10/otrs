@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+  <Setting Name="Frontend::Module###AdminCustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Admin::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Group">
+                      <Array>
+                          <Item>admin</Item>
+                      </Array>
+                  </Item>
+                  <Item Key="GroupRo">
+                      <Array>
+                      </Array>
+                  </Item>
+                  <Item Key="Description">This module is part of the admin area of OTRS</Item>
+                  <Item Key="Title">Admin Custom Service Form</Item>
+                  <Item Key="NavBarName">Admin</Item>
+              </Hash>
+          </Item>
+      </Value>
+  </Setting>
+
+  <Setting Name="Loader::Module::AdminCustomServiceForm###002-CustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">Loader module registration for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+      <Value>
+          <Hash>
+              <Item Key="CSS">
+                  <Array>
+                    <Item>Core.Agent.Admin.ProcessManagement.css</Item>
+                    <Item>Core.AllocationList.css</Item>
+                  </Array>
+              </Item>
+              <Item Key="JavaScript">
+                  <Array>
+                      <Item>Core.Agent.Admin.CustomServiceForm.js</Item>
+                      <Item>Core.UI.AllocationList.js</Item>
+                  </Array>
+              </Item>
+          </Hash>
+      </Value>
+  </Setting>
+
+  <Setting Name="Frontend::NavigationModule###AdminCustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+      <Value>
+          <Hash>
+              <Item Key="Group">
+                  <Array>
+                      <Item>admin</Item>
+                  </Array>
+              </Item>
+              <Item Key="GroupRo">
+                  <Array>
+                  </Array>
+              </Item>
+              <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+              <Item Key="Name" Translatable="1">Service ↔ Custom Form</Item>
+              <Item Key="Block">Ticket</Item>
+              <Item Key="Description" Translatable="1">Creation of customized forms for services.</Item>
+              <Item Key="IconBig">fa fa-align-left</Item>
+              <Item Key="IconSmall">fa fa-wrench</Item>
+          </Hash>
+      </Value>
+  </Setting>
+
+  <Setting Name="Frontend::Output::FilterElementPost###CustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">Defines where the CustomServiceForm will be displayed.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Base::OutputFilter</Navigation>
+      <Value>
+          <Hash>
+              <Item Key="Module">Kernel::Output::HTML::FilterElementPost::CustomServiceForm</Item>
+              <Item Key="Debug">0</Item>
+              <Item Key="Templates">
+                  <Hash>
+                      <Item Key="AgentTicketEmail">1</Item>
+                      <Item Key="AgentTicketPhone">1</Item>
+                      <Item Key="CustomerTicketMessage">1</Item>
+                  </Hash>
+              </Item>
+          </Hash>
+      </Value>
+  </Setting>
+
+  <Setting Name="Loader::Agent::CommonJS###001-JSCustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Base::Loader</Navigation>
+      <Value>
+          <Array>
+              <Item>Core.Agent.CustomServiceForm.js</Item>
+              <Item>inbox-thirdparty/mask-js-1.14.15/jquery.mask.min.js</Item>
+          </Array>
+      </Value>
+  </Setting>
+
+  <Setting Name="Loader::Customer::CommonJS###001-JSCustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Base::Loader</Navigation>
+      <Value>
+          <Array>
+              <Item>Core.Agent.CustomServiceForm.js</Item>
+              <Item>inbox-thirdparty/mask-js-1.14.15/jquery.mask.min.js</Item>
+          </Array>
+      </Value>
+  </Setting>
+
+  <Setting Name="Loader::Agent::CommonCSS###001-CSSCustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Base::Loader</Navigation>
+      <Value>
+          <Array>
+              <Item>Core.Agent.CustomServiceForm.css</Item>
+          </Array>
+      </Value>
+  </Setting>
+
+  <Setting Name="Loader::Customer::CommonCSS###001-CSSCustomServiceForm" Required="0" Valid="1">
+      <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Base::Loader</Navigation>
+      <Value>
+          <Array>
+              <Item>Core.Customer.CustomServiceForm.css</Item>
+          </Array>
+      </Value>
+  </Setting>
+
+  <Setting Name="Frontend::Module###CustomServiceFormAJAXHandler" Required="0" Valid="1">
+      <Description Translatable="1">Frontend module registration for the CustomServiceFormAJAXHandler.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Agent::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Group"></Item>
+                  <Item Key="GroupRo"></Item>
+                  <Item Key="Description">CustomServiceFormAJAXHandler</Item>
+                  <Item Key="Title"></Item>
+                  <Item Key="NavBarName"></Item>
+              </Hash>
+          </Item>
+      </Value>
+  </Setting>
+
+  <Setting Name="CustomerFrontend::Module###CustomServiceFormAJAXHandler" Required="0" Valid="1">
+      <Description Translatable="1">CustomerFrontend module registration for the CustomServiceFormAJAXHandler.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Customer::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Group"></Item>
+                  <Item Key="GroupRo"></Item>
+                  <Item Key="Description">CustomServiceFormAJAXHandler</Item>
+                  <Item Key="Title"></Item>
+                  <Item Key="NavBarName"></Item>
+              </Hash>
+          </Item>
+      </Value>
+  </Setting>
+
+  <Setting Name="Ticket::EventModulePost###6000-SetDynamicFieldValue" Required="0" Valid="1">
+      <Description Translatable="1">This event module set dynamic fields values of the custom forms.</Description>
+      <Navigation>InBox::CustomServiceForm::Ticket::Event</Navigation>
+      <Value>
+          <Hash>
+              <Item Key="Module">Kernel::System::Ticket::Event::SetDynamicFieldValue</Item>
+              <Item Key="Event">TicketCreate</Item>
+          </Hash>
+      </Value>
+  </Setting>
+
+  <Setting Name="Ticket::EventModulePost###7000-CleanDynamicFieldValues" Required="0" Valid="1">
+      <Description Translatable="1">This event module clean dynamic fields values if service is change.</Description>
+      <Navigation>InBox::CustomServiceForm::Ticket::Event</Navigation>
+      <Value>
+          <Hash>
+              <Item Key="Module">Kernel::System::Ticket::Event::CleanDynamicFieldValues</Item>
+              <Item Key="Event">TicketServiceUpdate</Item>
+          </Hash>
+      </Value>
+  </Setting>
+
+  <Setting Name="Ticket::Frontend::MenuModule###490-ServiceFormFields" Required="0" Valid="1">
+      <Description Translatable="1">Show link to view and edit service form.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
+      <Value>
+          <Hash>
+              <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
+              <Item Key="Name" Translatable="1">Service Form Fields</Item>
+              <Item Key="Description" Translatable="1">Values ​​populated in service form fields</Item>
+              <Item Key="Action">AgentTicketServiceFormFields</Item>
+              <Item Key="Link">Action=AgentTicketServiceFormFields;TicketID=[% Data.TicketID | html %]</Item>
+              <Item Key="Target"></Item>
+              <Item Key="PopupType">TicketAction</Item>
+              <Item Key="ClusterName" Translatable="1"></Item>
+              <Item Key="ClusterPriority"></Item>
+          </Hash>
+      </Value>
+  </Setting>
+
+  <Setting Name="Frontend::Module###AgentTicketServiceFormFields" Required="0" Valid="1">
+      <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+      <Navigation>InBox::CustomServiceForm::Frontend::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Description">This module is part of the admin area of OTRS</Item>
+                  <Item Key="Title">CustomServiceForm Create</Item>
+                  <Item Key="NavBarName"></Item>
+              </Hash>
+          </Item>
+      </Value>
+  </Setting>
+
+  <Setting Name="AutoloadPerlPackages###1001-AgentTicketPhone" Required="0" Valid="1">
+    <Description Translatable="1">Autoload for module AgentTicketPhone.</Description>
+    <Navigation>InBox::CustomServiceForm::Core::Autoload</Navigation>
+    <Value>
+        <Array>
+            <Item ValueType="String">Kernel::Autoload::AgentTicketPhone</Item>
+        </Array>
+    </Value>
+</Setting>
+
+  <Setting Name="AutoloadPerlPackages###1001-AgentTicketEmail" Required="0" Valid="1">
+    <Description Translatable="1">Autoload for module AgentTicketEmail.</Description>
+    <Navigation>InBox::CustomServiceForm::Core::Autoload</Navigation>
+    <Value>
+        <Array>
+            <Item ValueType="String">Kernel::Autoload::AgentTicketEmail</Item>
+        </Array>
+    </Value>
+</Setting>
+
+  <Setting Name="AutoloadPerlPackages###1001-CustomerTicketMessage" Required="0" Valid="1">
+    <Description Translatable="1">Autoload for module CustomerTicketMessage.</Description>
+    <Navigation>InBox::CustomServiceForm::Core::Autoload</Navigation>
+    <Value>
+        <Array>
+            <Item ValueType="String">Kernel::Autoload::CustomerTicketMessage</Item>
+        </Array>
+    </Value>
+</Setting>
+
+
+  <Setting Name="CustomServiceForm::Core::ToEnableEdition" Required="0" Valid="1">
+        <Description Translatable="1">Enable editing of service form fields, after the ticket already created.</Description>
+        <Navigation>InBox::CustomServiceForm::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+               <Item ValueType="Option" Value="0" Translatable="1">No</Item>
+               <Item ValueType="Option" Value="1" Translatable="1">Yes</Item>
+            </Item>
+        </Value>
+  </Setting>
+
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0100-AgentTicketServiceFormFields" Required="0" Valid="0">
+        <Description Translatable="1">AgentTicketZoom widget that displays the amount of each associated.</Description>
+        <Navigation>InBox::CustomServiceForm::Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketZoom::AgentTicketServiceFormFields</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Async">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>

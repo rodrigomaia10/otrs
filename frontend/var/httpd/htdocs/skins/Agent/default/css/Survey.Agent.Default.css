@@ -1,0 +1,112 @@
+/*
+Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     Survey - Skin "Default"
+ * @section     Default Settings
+ */
+
+@media screen,projection,tv,handheld {
+    a.ArrowUpDisabled,
+    a.ArrowDownDisabled {
+        cursor: default;
+        display: none;
+    }
+
+    .NavArrows > div {
+        float: right;
+        padding-left: var(--padding-md);
+    }
+
+    /* SurveyOverview */
+    .outer-select-date {
+        flex-direction: row;
+    }
+
+    /* AgentSurveyZoom */
+
+    div.SurveyGraphContainer {
+        width: 95%;
+        height: 22px;
+    }
+
+    div.SurveyGraphBar {
+        height: 22px;
+        background-color: var(--primary-color);
+    }
+
+    fieldset.SurveyGraphs {
+        display: block !important;
+    }
+
+    fieldset.SurveyGraphs .Question {
+        margin-bottom: var(--margin-md);
+        line-height: 1.5em;
+        font-weight: var(--semi-bold);
+    }
+
+    fieldset.SurveyGraphs .Answer {
+        line-height: 22px;
+        width: 25%;
+        float: left;
+        clear: left;
+        padding-bottom: var(--padding-xs);
+    }
+
+    fieldset.SurveyGraphs .SurveyGraph {
+        width: 50%;
+        float: left;
+    }
+
+    fieldset.SurveyGraphs .SurveyGraphLegend {
+        line-height: 22px;
+        width: 25%;
+        float: left;
+    }
+
+    /* AgentSurveyAdd & AgentSurveyEdit */
+    /* Some CSS to have a semi-like feeling as in ACL-settings for CustomerUser conditions */
+
+    .DataItem {
+        display: block !important;
+    }
+
+    .DataItem > span {
+        float: left;
+    }
+
+    .DataItem > strong {
+        clear: left;
+        line-height: 30px;
+    }
+
+    .Negate {
+        display: block !important;
+        float: left;
+        font-size: 12px !important;
+        padding-top: 4px !important;
+        cursor: pointer;
+        clear: both;
+    }
+
+    .CustomerUserConditionsCheckbox {
+        display: block !important;
+        float: left;
+    }
+
+    .RemoveButtonCustomerCondition {
+        float: left;
+    }
+
+    .AddButtonCustomerCondition {
+        float: left;
+        margin-bottom: var(--margin-md);
+    }
+
+}

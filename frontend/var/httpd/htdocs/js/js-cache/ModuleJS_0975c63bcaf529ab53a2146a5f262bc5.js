@@ -1,0 +1,5 @@
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+"use strict";var Core=Core||{};Core.Agent=Core.Agent||{};Core.Agent.TicketHistory=(function(TargetNS){TargetNS.Init=function(){var $FilterHistory=$('#FilterHistory');$('a.LinkZoomView').on('click',function(){var that=this;Core.UI.Popup.ExecuteInParentWindow(function(WindowObject){WindowObject.Core.UI.Popup.FirePopupEvent('URL',{URL:$(that).attr('href')});});Core.UI.Popup.ClosePopup();});$('#ExpandCollapseAll').off('click').on('click',function(){if($(this).hasClass('Collapsed')){$('.WidgetSimple:not(.inline-filter-field)').removeClass('Collapsed').addClass('Expanded');$(this).removeClass('Collapsed');}
+else{$('.WidgetSimple:not(.inline-filter-field)').removeClass('Expanded').addClass('Collapsed');$(this).addClass('Collapsed');}
+return false;});Core.UI.Table.InitTableFilter($FilterHistory,$('.DataTable'),undefined,true);$FilterHistory.trigger('keydown.FilterInput').focus();};Core.Init.RegisterNamespace(TargetNS,'APP_MODULE');return TargetNS;}(Core.Agent.TicketHistory||{}));

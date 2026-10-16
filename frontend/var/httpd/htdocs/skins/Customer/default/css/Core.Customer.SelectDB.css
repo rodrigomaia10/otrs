@@ -1,0 +1,32 @@
+/* # --
+# var/httpd/htdocs/skins/Customer/default/css/Core.Customer.SelectDB.css - overview
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * gesquetini@beonup.com.br
+# * dsilva@serviceup.com.br
+# * dparavani@serviceup.com.br
+# -- */
+
+.ValueRow .InputField_Container{
+    margin-left: 11.3% !important;
+}
+  
+div.InputField_Selection div.Remove_SelectDB a {
+    color: #fff; 
+    padding: 2px 4px; 
+    display: block; 
+    border-bottom: none; 
+}
+  
+div.InputField_Selection div.Remove_SelectDB {
+    background: #bbb;
+    color: #fff;
+    cursor: pointer;
+}
+
+.ui-autocomplete{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 300px;
+}

@@ -1,0 +1,237 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/dataTables-bootstrap4/dataTables.bootstrap4.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<style type="text/css">
+
+.MessageBox, .ActionRow {
+    background: #ffffff !important;
+}
+
+.SearchTerms {
+    padding: 11px 7px !important;
+}
+
+.Overview thead th{
+    vertical-align: unset !important;
+}
+
+.Overview thead .SortDescending a {
+    background: #ffffff !important;
+}
+a {
+    color: #003061 !important;
+}
+
+.SortDescending>a::after, .table .SortAscending>a::after {
+    position: relative;
+    display: inline;
+    left: 0px !important;
+}
+
+.ResizeCard {
+    max-width: 35.666667% !important;
+}
+
+</style>
+
+<div id="successAlert" class="alert alert-success alert-popup fade">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times"></i>
+        </button>
+        <span>[% Translate("Mass action carried out successfully!") | html %]</span>
+    </div>
+
+<div class="ContentResponsive" id="content functions-content" >
+	<div class='BackgroundPortal'></div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+
+
+
+
+                    <div class="row justify-content-md-center" id="RowStats">
+				
+                        
+                                    [% RenderBlockStart("ShowChart") %]
+                                    <div class="col-md-5 ResizeCard">
+                                        <div class="card card-custom-agent">
+                                            <div class="card-text ">
+                                                <div class="Loader"></div>
+                                                <canvas id="pie[% Data.Name %]" class="Chart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    [% RenderBlockEnd("ShowChart") %]
+                                    <!--div class="col-md-5 ResizeCard">
+                                        <div class="card card-custom-agent">
+                                            <div class="card-text ">
+                                                <div class="Loader"></div>
+                                                <canvas id="pie" class="Chart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div-->
+                            
+                
+                    </div>
+
+
+
+
+
+                    <div id="MainBox" class="TicketView ARIARoleMain SearchResults [% Config("Ticket::Frontend::CustomerTicketOverviewSortable") %] ">
+                        <div class="ControlRow">
+                            <ul class="Tabs">
+                                <li>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=LoadProfile;[% Data.Link %]">
+                                        &larr; [% Translate("Change search options") | html %] [% Data.ProfileName | html %]
+                                    </a>
+                                </li>
+                            </ul>
+                    [% RenderBlockStart("Pagination") %]
+                            <div class="Tabs Pagination" style="gap: 5px;">
+                                <strong>[% Data.Result %]</strong> [% Translate("of") | html %] <strong>[% Data.TotalHits %]</strong> - [% Translate("Page") | html %]: [% Data.SiteNavBar %]
+                            </div>
+                    [% RenderBlockEnd("Pagination") %]
+                            <div class="Clear"></div>
+                            <!--div class="SearchTerms">
+                                <h2>[% Translate("Search Results for") | html %]:</h2>
+                    [% RenderBlockStart("SearchTerms") %]
+                                <span>
+                                    [% Translate(Data.Attribute) | html %]: [% Data.Value | html %]
+                                </span>
+                    [% RenderBlockEnd("SearchTerms") %]
+                            </div-->
+                        </div>
+                        <div id="BulkAction" class="AlwaysPresent"><a class='ButtonTicketBulk' href="#">[% Translate("Action Bulk") | html %]</a></div>
+                        <div class="Content">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        [% RenderBlockStart("BulkNavBar") %]
+                                        <th class="Checkbox">
+                                            <input type="checkbox" class="Checkbox" title="[% Translate("Select all") | html %]" id="SelectAllTickets" autocomplete="off" />
+                                        </th>
+                                        [% RenderBlockEnd("BulkNavBar") %]
+                                        <th class="Ticket [% Data.TicketSort %]">
+                                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=Ticket;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                                [% Config("Ticket::Hook") %]
+                                            </a>
+                                        </th>
+                                        <th class="Title">
+                                            <span>[% Translate("Created") | html %]</span>
+                                        </th>
+                                        <th class="Title">
+                                            <span>[% Translate("Closed") | html %]</span>
+                                        </th>
+                                        <th class="Status [% Data.StateSort %]">
+                                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=State;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                                [% Translate("State") | html %]
+                                            </a>
+                                        </th>
+                                        <th class="Title">
+                                            <span>[% Translate("Service") | html %]</span>
+                                        </th>
+                                        <th class="Title">
+                                            <span>[% Translate("SLA") | html %]</span>
+                                        </th>
+                                        <th class="Title">
+                                            <span>[% Translate("Elapsed SLA") | html %]</span>
+                                        </th>
+                                        <th class="Title">
+                                            <span>[% Translate("Subject") | html %]</span>
+                                        </th>
+                                        <!--th class="Age [% Data.AgeSort %]">
+                                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=Age;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                                [% Translate("Age") | html %]
+                                            </a>
+                                        </th-->
+                    [% RenderBlockStart("HeaderDynamicField") %]
+                                        <th class="DynamicField [% Data.CSS %]">
+                    [% RenderBlockStart("HeaderDynamicFieldSortable") %]
+                                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=DynamicField_[% Data.DynamicFieldName | uri %];Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                                [% Translate(Data.Label) | html %]
+                                            </a>
+                    [% RenderBlockEnd("HeaderDynamicFieldSortable") %]
+                    [% RenderBlockStart("HeaderDynamicFieldNotSortable") %]
+                                            <span>[% Translate(Data.Label) | html %]</span>
+                    [% RenderBlockEnd("HeaderDynamicFieldNotSortable") %]
+                                        </th>
+                    [% RenderBlockEnd("HeaderDynamicField") %]
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    [% RenderBlockStart("NoDataFoundMsg") %]
+                                    <tr id="EmptyMessage">
+                                        <td colspan="4">
+                                            [% Translate("No data found.") | html %]
+                                        </td>
+                                    </tr>
+                    [% RenderBlockEnd("NoDataFoundMsg") %]
+                    [% RenderBlockStart("Record") %]
+                                    <tr class="">
+                                        [% RenderBlockStart("Bulk") %]
+                                        <td class="Checkbox NonTextContent">
+                                            <input class="Checkbox" [% Data.Disabled %] type="checkbox" name="TicketID" title="[% Translate(Data.Title) | html %]" value="[% Data.TicketID | html %]" autocomplete="off" />
+                                        </td>
+                                        [% RenderBlockEnd("Bulk") %]
+                                        <td class="Ticket"><a href="[% Env("Baselink") %]Action=CustomerPortalTicketZoom;TicketNumber=[% Data.TicketNumber | uri %]" class="MasterActionLink">[% Data.TicketNumber | html %]</a></td>
+
+                                        <td class="Title">[% Data.Created | Localize("TimeShort") | html %]</td>
+                                        <td class="Title">[% Data.Closed | Localize("TimeShort") | html %]</td>
+
+                                        <td class="Status">
+                                            <div class="PillCustomer StateID-[% Data.StateID %]" style="padding: 4px var(--padding-md) !important;" title="[% Translate(Data.State) | html %]">
+                                                <span class="">
+                                                    <em>[% Translate(Data.State) | html %]</em>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="Status">[% Translate(Data.Service) | html %]</td>
+                                        <td class="Status">[% Translate(Data.SLA) | html %]</td>
+                                        <td class="Status">[% Data.SLAElapsed | html %]</td>
+
+                                        <td class="Title"><div><h2>[% Data.Subject | truncate(60) | html %]</h2>&nbsp;-&nbsp; [% Data.Body | truncate(200) | html %]</div></td>
+                                        <!--td class="Age" title="[% Data.Created | Localize("TimeShort") | html %]">[% Data.CustomerAge | truncate(20) | html %]</td-->
+                    [% RenderBlockStart("RecordDynamicField") %]
+                                        <td class="DynamicField" title="[% Data.Title | html %]">[% Data.Value %]</td>
+                    [% RenderBlockEnd("RecordDynamicField") %]
+                                    </tr>
+                    [% RenderBlockEnd("Record") %]
+                                </tbody>
+                            </table>
+                        </div>
+                    [% RenderBlockStart("BottomSubNavigation") %]
+                        <div id="BottomActionRow" class="ActionRow BigButtons">
+                            <ul class="Tabs">
+                                <li>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=LoadProfile;[% Data.Link | uri %]">
+                                        &larr; [% Translate("Change search options") | html %]
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="Tabs Pagination">
+                                <strong>[% Data.Result %]</strong> [% Translate("of") | html %] <strong>[% Data.TotalHits %]</strong> - [% Translate("Page") | html %]: [% Data.SiteNavBar %]
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
+                    [% RenderBlockEnd("BottomSubNavigation") %]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPIDashboardEditCardSettings.tt
+#
+# written/edited by:
+# * dparavani@serviceup.com.br
+# --
+
+<div class="InnerContent">
+    <form action="[% Env("CGIHandle") %]" method="post" class="AdminKPIDashboardEditCardSettingsForm" id="SettingsCardForm">
+        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+        <input type="hidden" name="Subaction" value="SaveCardSettings"/>
+        <input type="hidden" name="DashboardID" value="[% Data.DashboardID | html %]"/>
+        <input type="hidden" name="CardSettingsID" id="CardSettingsID"/>
+        <fieldset class="TableLike">
+            <label class="Mandatory" style="width: 70px;" for="ContentGrid"><span class="Marker">*</span> [% Translate("Contents") | html %]:</label>
+            <div class="Field" style="display: flex;">
+                <select name="SelectCardType" id="SelectCardType">
+                    <option value=""></option>
+                    <option value="HTML">HTML</option>
+                    <option value="KPI">KPI</option>
+                </select>
+            </div>
+            <br>
+
+            <div id="optionHTML" class="Hidden">
+                <div class="RichTextField">
+                    <textarea id="RichTextKPI" class="RichText" rows="10" cols="60" name="Template">[% Data.Template | html %]</textarea>
+                </div>
+            </div>
+
+            <label class="Mandatory" style="width: 70px; display: none;" for="KPIs" id="KPIsFieldLabel"><span class="Marker">*</span> [% Translate("KPIs") | html %]:</label>
+            <div class="Field" style="display: none;" id="KPIsField">
+                [% Data.KPIOptionString %]
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<div class="ContentFooter main-search-component-btns">
+    <button id="SettingsCardFormSubmit" class="Primary CallForAction btn-primary btn-main btn-width-md" value="[% Translate("Save") | html %]"><span><i class="fa fa-search"></i> [% Translate("Save") | html %]</span></button>
+</div>

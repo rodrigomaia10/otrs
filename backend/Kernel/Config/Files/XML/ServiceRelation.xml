@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+
+    <Setting Name="Frontend::Module###AdminQueueAndServices" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the AdminTicketSettings object in the admin area.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin-Queue ↔ Services</Item>
+                    <Item Key="Title">Queue ↔ Services</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminQueueAndServices###002-ServiceRelation" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.QueueAndService.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Navigation###AdminQueueAndServices###002-ServiceRelation" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+	
+	<Setting Name="Frontend::NavigationModule###AdminQueueAndServices" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+			<Hash>
+				<Item Key="Group">
+					<Array>
+						<Item>admin</Item>
+					</Array>
+				</Item>
+				<Item Key="GroupRo">
+					<Array>
+					</Array>
+				</Item>
+				<Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+				<Item Key="Name" Translatable="1">Queue  ↔ Services</Item>
+				<Item Key="Block">Ticket</Item>
+				<Item Key="Description" Translatable="1">Relation Queue and Service.</Item>
+				<Item Key="IconBig">fa-folder</Item>
+				<Item Key="IconSmall">fa-wrench</Item>
+			</Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="Frontend::Module###AdminTypeAndServices" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the AdminTicketSettings object in the admin area.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+					<Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin-Type  ↔ Services</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                    <Item Key="Title">Type  ↔ Services</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+	
+	<Setting Name="Loader::Module::AdminTypeAndServices###002-ServiceRelation" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.TypeAndService.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+	
+    <Setting Name="Frontend::Navigation###AdminTypeAndServices###002-ServiceRelation" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+
+	<Setting Name="Frontend::NavigationModule###AdminTypeAndServices" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>InBox::ServiceRelation::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+			<Hash>
+				<Item Key="Group">
+					<Array>
+						<Item>admin</Item>
+					</Array>
+				</Item>
+				<Item Key="GroupRo">
+					<Array>
+					</Array>
+				</Item>
+				<Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+				<Item Key="Name" Translatable="1">Type  ↔ Services</Item>
+				<Item Key="Block">Ticket</Item>
+				<Item Key="Description" Translatable="1">Relation Type and Service.</Item>
+				<Item Key="IconBig">fa-ticket</Item>
+				<Item Key="IconSmall">fa-wrench</Item>
+			</Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="Ticket::Acl::Module###Acl::ServiceRelation" Required="1" Valid="1">
+        <Description Translatable="1">ACL module that allows the relations between Type-Service and Queue-Service.</Description>
+        <Navigation>InBox::ServiceRelation::Core::Ticket::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Acl::ServiceRelation</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="PickServiceRelation" Required="1" Valid="1">
+        <Description Translatable="1">Defines which relationship will be used Queue Service or Type-Service.</Description>
+        <Navigation>InBox::ServiceRelation</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="QueueAndService">
+                <Item ValueType="Option" Value="QueueAndService" Translatable="1">Queue and Service</Item>
+                <Item ValueType="Option" Value="TypeAndService" Translatable="1">Type and Service</Item>
+            </Item>
+        </Value>
+	 </Setting>
+	 
+    <Setting Name="PickUserType" Required="1" Valid="1">
+        <Description Translatable="1">Defines which type (s) of user (s) will be applied to PickServiceRelation.</Description> 
+        <Navigation>InBox::ServiceRelation</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Agent">
+                <Item ValueType="Option" Value="Agent" Translatable="1">Agent</Item>
+                <Item ValueType="Option" Value="Customer" Translatable="1">Customer</Item>
+                <Item ValueType="Option" Value="Agent-Customer" Translatable="1">Agent and Customer</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

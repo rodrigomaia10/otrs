@@ -1,0 +1,34 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/TicketZoomServiceFormFields.tt
+# Copyright (C) 2019 Service Up http://www.serviceup.com.br
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+<div class="WidgetSimple">
+    <div class="Header">
+        <div class="WidgetAction Toggle">
+            <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+        </div>
+        <h2 title="[% Translate("Service Form Fields") | html %]">[% Translate("Service Form Fields") | html %]</h2>
+    </div>
+
+	<div class="Content">
+        <fieldset class="TableLike FixedLabelSmall Narrow">
+        [% RenderBlockStart("DynamicField") %]
+        <span>
+            <label>[% Translate(Data.Label) | html %]:</label>
+            <p class="Value">
+                [% Data.Value %]
+            </p>
+        </span>  
+        [% RenderBlockEnd("DynamicField") %]
+        [% RenderBlockStart("DynamicFieldLink") %]
+        <label>[% Translate(Data.Label) | html %]:</label>
+        <p class="Value">
+            <span title="[% Data.Title %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></span>                
+        </p>
+        [% RenderBlockEnd("DynamicFieldLink") %]
+        </fieldset>
+    </div>
+</div>

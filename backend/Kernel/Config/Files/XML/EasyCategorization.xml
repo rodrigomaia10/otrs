@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<otrs_config version="2.0" init="Application">
+	 <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0100-AgentEasyCategorization" Required="0" Valid="1">
+		<Description Translatable="1">AgentTicketZoom widget that displays the amount of each associated.</Description>
+		<Navigation>InBox::EasyCategorization::Frontend::Agent::View::TicketZoom</Navigation>
+		<Value>
+			<Hash>
+				<Item Key="Module">Kernel::Output::HTML::TicketZoom::AgentEasyCategorization</Item>
+				<Item Key="Location">Sidebar</Item>
+				<Item Key="Async">0</Item>
+			</Hash>
+		</Value>
+	</Setting>
+
+    <Setting Name="Frontend::Module###AgentEasyCategorization" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::EasyCategorization::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+
+                    <Item Key="Description" Translatable="1">Easy to classify your tickets.</Item>
+                    <Item Key="NavBarName"></Item>
+                    <Item Key="Title" Translatable="1">Easy Categorization</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentEasyCategorization###002-EasyCategorization" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::EasyCategorization::Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EasyCategorization::Config###Service" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the service.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###Responsible" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the responsible.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###Type" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the type.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###Priority" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the priority.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###State" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the state.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###Owner" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the owner.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###Queue" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the queue.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="InBox::EasyCategorization::Config###Lock" Required="1" Valid="1">
+        <Description Translatable="1">Easy categorization for the lock / unlock.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+	<Setting Name="InBox::EasyCategorization::Config###DynamicFields" Required="0" Valid="0">
+        <Description Translatable="1">Easy Categorization for Date, Text, Suspended Dynamic Fields or Contract.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+			<Array>
+				<Item ValueType="String"></Item>
+			</Array>
+        </Value>
+    </Setting>
+
+
+    <Setting Name="InBox::EasyCategorization::Config###StateBlock" Required="0" Valid="0">
+        <Description Translatable="1">Enter the status of the ticket in which the EasyCategorization fields are to be blocked</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+			<Array>
+				<Item ValueType="String"></Item>
+			</Array>
+        </Value>
+    </Setting>
+    
+
+	<Setting Name="Frontend::Module###EasyCategorizationAJAXHandler" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::EasyCategorization::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+
+                    <Item Key="Description">To perform easy categorization with AJAX-request</Item>
+                    <Item Key="Title">EasyCategorization AJAX</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###EasyCategorizationAJAXHandler###002-EasyCategorization" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::EasyCategorization::Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EasyCategorization::Config###ManualSave" Required="0" Valid="1">
+        <Description Translatable="1">Add button to manually save changes.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EasyCategorization::Config###ArticleCreate" Required="0" Valid="1">
+        <Description Translatable="1">Create article with easy categorization information when there is update.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EasyCategorization::Config###ArticleTitle" Required="0" Valid="0">
+        <Description Translatable="1">Define the title of the article that will be created if InBox::EasyCategorization::Config###ArticleCreate is enabled.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+				<Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Ticket::Frontend::AgentEasyCategorization###StateType" Required="1" Valid="1">
+        <Description Translatable="1">Determines the possible ticket states in EasyCategorization.</Description>
+        <Navigation>InBox::EasyCategorization::Config</Navigation>
+        <Value>
+            <Array>
+                <Item Translatable="1">new</Item>
+                <Item Translatable="1">open</Item>
+                <Item Translatable="1">pending auto</Item>
+                <Item Translatable="1">pending reminder</Item>
+                <Item Translatable="1">closed</Item>
+                <Item Translatable="1">removed</Item>
+                <Item Translatable="1">merged</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+</otrs_config>

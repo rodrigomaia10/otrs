@@ -1,0 +1,13 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPISeriesBody.tt - frontend template
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+[% RenderBlockStart("KPIOption") %]
+    <div class="Clear"></div>
+    <label for="KPIs">[% Translate("KPIs") | html %]: </label>
+    <div class="Field">
+        [% Data.KPIOptionString %]
+    </div>  
+[% RenderBlockEnd("KPIOption") %]

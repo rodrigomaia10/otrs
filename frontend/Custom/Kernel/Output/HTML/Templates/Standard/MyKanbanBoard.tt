@@ -1,0 +1,58 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/MyKanbanBoard.tt 
+# Copyright (C) 2019 Service UP, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * poliveira@serviceup.com.br
+# --
+
+[% RenderBlockStart("OverviewBoard") %]
+<div class="MainBox ARIARoleMain">
+    <h1 class="InvisibleText">[% Translate("Overview") | html %]</h1>
+
+    <ul class="BreadCrumb">
+        <li>
+            <a href="[% Env("Baselink") %]Action=AgentKanban" title="[% Translate("My Boards") | html %]"><i class="fa fa-columns"></i></a>
+        </li>   
+        <li>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>          
+            [% Data.BoardName | html %]
+        </li> 
+        <li  id="Fullscreen" style="margin-left: auto;">          
+            <a href="#" id="DashboardKanban-FullscreenIcon" title="[% Translate("FullScreen") | html %]" class='FullscreenIcon'>
+
+                <i class="fa fa-arrows-alt"></i>
+            </a>
+        </li>  
+        [% RenderBlockStart("OverviewEditBoard") %]
+        <li id="Fullscreen">          
+            <a href="[% Env("Baselink") %]Action=AdminKanbanBoards;Subaction=BoardsEdit;ID=[% Data.BoardID | html %];OpenBy=Kanban" id="EditBoard" title="[% Translate("Edit board") | html %]" class='FullscreenIcon'>
+                <i class="fa fa-pencil-square-o "></i>
+            </a>
+        </li>  
+        [% RenderBlockEnd("OverviewEditBoard") %]
+    </ul>    
+
+    <div class="WidgetSimple">
+        <div class="">
+            <input type="hidden" name="BoardID" id="BoardID" value="[% Data.BoardID | html %]">
+            <div class="container-fluid">
+                <div class="row">
+                    <section>
+                    <div id="kanban"></div>                   
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+[% RenderBlockEnd("OverviewBoard") %]
+</div>
+
+
+
+
+
+

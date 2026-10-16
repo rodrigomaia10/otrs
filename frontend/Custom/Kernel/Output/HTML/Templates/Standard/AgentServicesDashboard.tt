@@ -1,0 +1,63 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AgentServicesDashboard.pm
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain">
+	<h1>[% Translate("Services Dashboard") %]</h1>
+	<div class="WidgetSimple Expanded">
+        <div class="Header">
+            <div class="WidgetAction Toggle">
+                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+            </div>
+            <h2>[% Translate("Filters") | html %]</h2>
+        </div>
+        <div class="Content">
+			<form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate">
+				<input type="hidden" name="Action" value="[% Env("Action") %]"/>
+				<input type="hidden" name="Subaction" id="Subaction" value=""/>
+
+				<div class="Content">
+					<fieldset class="TableLike">
+
+						[% IF Config("ServicesDashboard::Core::EnableCustomerSearch") == 1 %]
+						<div class="field-wrapper">
+							<label for="CustomerID">[% Translate("Customer") | html %]:</label>
+							<div class="Field">
+								[% Data.CustomerList %]
+							</div>
+						</div>
+						[% END %]
+						<div class="field-wrapper">
+							<label for="QueueID">[% Translate("Queues") | html %]:</label>
+							<div class="Field">
+								[% Data.QueueList %]
+							</div>
+						</div>
+						<div class="field-wrapper">
+							<label for="Period">[% Translate("Ticket Create Time (between)") | html %]</label>
+							<div class="Field" style="flex-direction: row !important;"> 
+								[% Data.TimeStart %] [% Translate("and") | html %] [% Data.TimeStop %].
+							</div>
+						</div>
+						
+						<div class="Field SpacingTop">
+							<div class="Value">
+								<button class="Primary CallForAction btn-main btn-cancel-ghost btn-width-md" type="submit" id="Submit" value="[% Translate("Search") | html %]"><span><i class="fa fa-search"></i>	[% Translate("Search") | html %]</span></button>
+                            </div>
+						</div>
+					</fieldset>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="WidgetSimple SpacingTop">
+		<div class="Content">
+			<canvas id="myChart" class="AjaxLoading" ></canvas>
+		</div>
+	</div>
+</div>

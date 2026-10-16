@@ -1,0 +1,211 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalStats.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * jsantos@serviceup.com.br
+# -- 
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.css" rel="stylesheet" />
+<!--link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/gridstack-1.1.1/gridstack.min.css" rel="stylesheet" /-->
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+	[% RenderBlockStart("SearchFull") %]
+	
+	<div class="card" style='margin-bottom: 2%; [% Data.Transparent %]' id="BoxSearchFull">
+		<div class="card-body" style='z-index: 1;cursor: auto;'>
+			<div class='Card-Service-Image' style='[% Data.Style %]'></div>
+			<div class="places-buttons" style='margin-bottom: 5%;'>
+				<div class="row" style='color: #fff;'>
+					<div class="col-md-6 ml-auto mr-auto text-center">
+						<h4 class="card-title" style='color: [% Data.TitleColor %]'>
+							[% Translate(Data.Title) %]
+						</h4>
+						<h6 class=" mb-2" style='font-size: 0.8em;color:[% Data.SubtitleColor %]'>[% Translate(Data.Subtitle) %]</h6>
+					</div>
+				</div>
+				[% IF Data.Search %]
+				<div class="row ServicesRowList" id="ServicesRowList">
+					<div class="col-lg-12">
+						<div class="form-group left-inner-addon">
+							<i class="fa fa-search" id="icon-Search"></i>
+							<input type="text" class="form-control input-search-service" id="input-search-service-all-home" placeholder="[% Translate("Search") | html %]..." title="[% Translate("Search") | html %]...">
+							<ul id="service-list"></ul>
+						</div>
+					</div>
+				</div>
+				[% END %]
+			</div>
+		</div>
+	</div>
+	[% RenderBlockEnd("SearchFull") %]
+	
+	<div id="Content_Stats" class="ContentResponsive [% IF Data.IsFullSearch == 1%]ContentResponsiveSearchFull[% END %]" >
+		[% RenderBlockStart("BackgroundPortal") %]
+		<div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+		[% RenderBlockEnd("BackgroundPortal") %]
+
+		[% RenderBlockStart("Search") %]
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" style='margin-bottom: 2%; [% Data.Transparent %]'>
+					<div class="card-body" style='z-index: 1;cursor: auto;'>
+						<div class='Card-Service-Image' style='[% Data.Style %]'></div>
+						<div class="places-buttons" style='margin-bottom: 5%;'>
+							<div class="row" style='color: #fff;'>
+								<div class="col-md-6 ml-auto mr-auto text-center">
+									<h4 class="card-title" style='color: [% Data.TitleColor %]'>
+										[% Translate(Data.Title) %]
+									</h4>
+									<h6 class=" mb-2" style='font-size: 0.8em;color:[% Data.SubtitleColor %]'>[% Translate(Data.Subtitle) %]</h6>
+								</div>
+							</div>
+							[% IF Data.Search %]
+							<div class="row ServicesRowList" id="ServicesRowList">
+								<div class="col-lg-12">
+									<div class="form-group left-inner-addon">
+										<i class="fa fa-search" id="icon-Search"></i>
+										<input type="text" class="form-control input-search-service" id="input-search-service-all-home" placeholder="[% Translate("Search") | html %]..." title="[% Translate("Search") | html %]...">
+										<ul id="service-list"></ul>
+									</div>
+								</div>
+							</div>
+							[% END %]
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		[% RenderBlockEnd("Search") %]
+
+		[% RenderBlockStart("ShowCentralCardUp") %]
+			[% Data.BodyCard %]
+		[% RenderBlockEnd("ShowCentralCardUp") %]
+
+		[% RenderBlockStart("ShowCustomerCards") %]
+		<div class="row justify-content-md-center" id="RowCustomerCards">
+			[% RenderBlockStart("CustomerPortalCard") %]
+				<div class="col-md-5 ResizeCard">           
+					<div class="card card-custom-agent">
+						<div class="card-text">
+							[% Data.BodyCard %]
+						</div>            
+					</div> 
+				</div>
+			[% RenderBlockEnd("CustomerPortalCard") %]
+		</div>
+		[% RenderBlockEnd("ShowCustomerCards") %]
+
+		[% RenderBlockStart("ShowCentralCardDown") %]
+			[% Data.BodyCard %]
+		[% RenderBlockEnd("ShowCentralCardDown") %]
+
+		[% RenderBlockStart("ShowStats") %]
+			<div class="row justify-content-md-center" id="RowStats">
+				
+				[% RenderBlockStart("ShowChartJS") %]
+					[% RenderBlockStart("ShowChartOpenAndClosed") %]
+							<div class="col-md-5 ResizeCard">
+								<div class="card card-custom-agent">
+									<div class="card-text ">
+										<div class="Loader"></div>
+										<canvas id="line" class="Chart"></canvas>
+									</div>
+								</div>
+							</div>
+					[% RenderBlockEnd("ShowChartOpenAndClosed") %]
+					[% RenderBlockStart("ShowChartState") %]       
+							<div class="col-md-5 ResizeCard">
+								<div class="card card-custom-agent">
+									<div class="card-text ">
+										<div class="Loader"></div>
+										<canvas id="pie" class="Chart"></canvas>
+									</div>
+								</div>
+							</div>
+					[% RenderBlockEnd("ShowChartState") %]
+					[% RenderBlockStart("ShowChartService") %]
+					<div class="col-md-5 ResizeCard">
+						<div class="card card-custom-agent">
+							<div class="card-text ">
+								<div class="Loader"></div>
+								<canvas id="bar" class="Chart"></canvas>
+							</div>
+						</div>
+					</div>
+					[% RenderBlockEnd("ShowChartService") %]
+					[% RenderBlockStart("ShowChartType") %]
+					<div class="col-md-5 ResizeCard">
+						<div class="card card-custom-agent">
+							<div class="card-text ">
+								<div class="Loader"></div>
+								<canvas id="TicketType" class="Chart"></canvas>
+							</div>
+						</div>
+					</div>
+					[% RenderBlockEnd("ShowChartType") %]
+		 
+			</div>
+		[% RenderBlockEnd("ShowChartJS") %]
+
+		[% RenderBlockStart("ShowChartJSWithNews") %]
+		<div class="col-md-9">
+					[% RenderBlockStart("ShowChartOpenAndClosedNews") %]
+					<div class="card-charts-with-news" style=''>
+						<div class="card-body ">
+							<div class="Loader"></div>
+							<canvas id="line" class="Chart"></canvas>
+						</div>
+					</div>
+					[% RenderBlockEnd("ShowChartOpenAndClosedNews") %]
+					[% RenderBlockStart("ShowChartStateNews") %]      
+					<div class="card-charts-with-news" style=''>
+						<div class="card-body ">
+							<div class="Loader"></div>
+							<canvas id="pie" class="Chart"></canvas>
+						</div>
+					</div>
+					[% RenderBlockEnd("ShowChartStateNews") %]    
+					[% RenderBlockStart("ShowChartServiceNews") %]
+					<div class="card-charts-with-news" style=''>
+						<div class="card-body ">
+							<div class="Loader"></div>
+							<canvas id="bar" class="Chart"></canvas>
+						</div>
+					</div>
+					[% RenderBlockEnd("ShowChartServiceNews") %]
+					[% RenderBlockStart("ShowChartTypeNews") %]
+					<div class="card-charts-with-news" style=''>
+						<div class="card-body ">
+							<div class="Loader"></div>
+							<canvas id="TicketType" class="Chart"></canvas>
+						</div>
+					</div>
+					[% RenderBlockEnd("ShowChartTypeNews") %]
+		</div>
+		[% RenderBlockStart("News") %]
+		<div class="col-md-3">
+				<div class="card CardNews">
+				<div class="card-header ">
+					<h5 class="card-title">[% Translate("News") | html %]:</h5>
+				</div>
+				<div class="card-body">
+						[% RenderBlockStart("NewsBody") %]
+								<div class="TitleNews">[% Data.Title %]</div>
+								<div class="BodyNews">[% Data.Body %]</div>
+								<div class="SeparatorNews">----------------------------------</div>
+						[% RenderBlockEnd("NewsBody") %]
+				</div>
+				</div>
+		</div>
+		[% RenderBlockEnd("News") %]
+			[% RenderBlockEnd("ShowChartJSWithNews") %]
+		[% RenderBlockEnd("ShowStats") %]
+	</div>
+
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.min.js"></script>
+

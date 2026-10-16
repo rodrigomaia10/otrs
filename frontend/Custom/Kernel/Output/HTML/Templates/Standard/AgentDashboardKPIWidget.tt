@@ -1,0 +1,106 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AgentDashboardKPIWidget.tt - frontend template
+#
+# written/edited by:
+# * pdias@beonup.com.br
+# * dsilva@beonup.com.br
+# * gtiburtino@beonup.com.br
+# * nfreitas@serviceup.com.br
+# * dparavani@serviceup.com.br
+# --
+
+<div id="WidgetContainer">
+	[% RenderBlockStart("Series") %]
+	<div id="GroupingTicket" style="border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    padding: var(--padding-md);">
+		[% RenderBlockStart("SeriesRow") %]
+		<div style="width:99%">
+			<div class="GroupingHeader" class="header"><h1>[% Data.Title %]</h1></div>
+			<li class="SeriesBox">
+				<div style="margin: 0px 5px;">
+					<ul class="Widget" style="text-align: center;">
+					[% RenderBlockStart("WidgetTicketRowSeries") %]
+						<li>
+							<div class="Loader"></div>
+							<div id="Title">
+								<span>[% Data.Title %]:</span>
+							</div>
+							<div id="[% Data.ID %]" class="Charts">
+							</div>
+						</li>
+					[% RenderBlockEnd("WidgetTicketRowSeries") %]
+					[% RenderBlockStart("WidgetTicketRowSeriesComplex") %]
+						<li class="[% Data.Class %] " id="Complex_[% Data.ID %]">
+							<div class="Loader"></div>
+							<div id="Title">
+								<a class='ExportAllKPI' href="index.pl?Action=AgentKPISearch;Subaction=SearchAllKPIComplex;TakeLastSearch=1;DivID=[% Data.ID %]">[% Data.Title %]</a>
+								[% IF Data.TypeKPI  == 'Line' %]
+								<span class="FieldHelpContainer">
+									<i class="fa fa-info-circle FieldHelpTrigger"></i>
+									<span id="Title_[% Data.ID %]"></span>
+								</span>
+								[% END %]
+							</div>
+							<div class="ExpandChart" id="Expand_Complex_[% Data.ID %]" style='display: none'>
+								<a href="#" title='Expand'><i class="fa fa-arrows-alt"></i></a>
+							</div>
+
+							<div id="[% Data.ID %]" class="Charts">
+							</div>
+						</li>
+					[% RenderBlockEnd("WidgetTicketRowSeriesComplex") %]
+
+					[% RenderBlockStart("WidgetTicketRowSeriesChartSQLQuery") %]
+						<li class="[% Data.Class %]" id="Chart_[% Data.ID %]">
+							<div class="Loader"></div>
+							<div id="Title">
+								<a class='ExportAllKPI' href="index.pl?Action=AgentKPISearch;Subaction=SearchAllKPIComplex;TakeLastSearch=1;DivID=[% Data.ID %]">[% Data.Title %]</a>
+								[% IF Data.TypeKPI  == 'Line' %]
+								<span class="FieldHelpContainer">
+									<i class="fa fa-info-circle FieldHelpTrigger"></i>
+									<span id="Title_[% Data.ID %]"></span>
+								</span>
+								[% END %]
+							</div>
+							<div class="ExpandChart" id="Expand_Chart_[% Data.ID %]" style='display: none'>
+								<a href="#" title='Expand'><i class="fa fa-arrows-alt"></i></a>
+							</div>
+
+							<div id="[% Data.ID %]" class="Charts">
+							</div>
+						</li>
+					[% RenderBlockEnd("WidgetTicketRowSeriesChartSQLQuery") %]
+					
+					</ul>
+				</div>
+			</li>
+		</div>
+		[% RenderBlockEnd("SeriesRow") %]
+	</div>
+	[% RenderBlockEnd("Series") %]
+
+	[% RenderBlockStart("Simple") %]
+	<ul class="Widget">
+	[% RenderBlockStart("WidgetTicketRowSimple") %]
+		<li>
+			<div id="Title">
+				<span>[% Data.Title %]:</span>
+			</div>
+			<div id="[% Data.ID %]" class="Charts">
+			</div>
+		</li>
+	[% RenderBlockEnd("WidgetTicketRowSimple") %]
+	</ul>
+	[% RenderBlockEnd("Simple") %]
+</div>
+
+[% WRAPPER JSOnDocumentComplete %]
+<script type="text/javascript">//<![CDATA[
+var DataJSON = [% Data.JSON %];
+
+if ( DataJSON != null ){
+	Core.Agent.KPIWidget.Init(DataJSON);
+}
+
+//]]></script>
+[% END %]

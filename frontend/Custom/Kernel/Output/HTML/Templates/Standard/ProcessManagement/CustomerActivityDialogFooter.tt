@@ -1,0 +1,41 @@
+# Custom/Kernel/Output/HTML/Templates/Standard/ProcessManagement/ActivityDialogFooter.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dsilva@serviceup.com.br
+# --
+
+## nofilter(TidyAll::Plugin::OTRS::TT::Format)
+## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+                    </fieldset>
+                </div>
+[% RenderBlockStart("Footer") %]
+                <div class="PopupFooter">
+                    <button class="Primary" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]">[% Translate(Data.ButtonText) | html %]</button>
+[% RenderBlockStart("SubmitAdviceText") %]
+                    <span class="AdviceText">[% Translate(Data.AdviceText) | html %]</span>
+[% RenderBlockEnd("SubmitAdviceText") %]
+                </div>
+[% RenderBlockEnd("Footer") %]
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- BLOCK SUP START -->
+[% WRAPPER JSOnDocumentComplete %]
+<script type="text/javascript">//<![CDATA[
+    
+    Params = Core.Agent.ShowHideField.GetParams(Action);
+    Core.Agent.ShowHideField.GetDynamicFieldValues(Action, Params, '');
+
+//]]></script>
+[% END %]
+<!-- BLOCK SUP END -->
+
+[% RenderBlockStart("FooterJS") %]
+<script type="text/javascript">
+[% PROCESS JSDataInsert %]
+[% PROCESS JSOnDocumentCompleteInsert %]
+</script>
+[% RenderBlockEnd("FooterJS") %]

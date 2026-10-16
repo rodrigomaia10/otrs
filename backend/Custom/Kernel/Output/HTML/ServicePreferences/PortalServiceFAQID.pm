@@ -1,0 +1,145 @@
+# Kernel/Output/HTML/ServicePreferences/PortalServiceFAQID.pm
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * nfreitas@beonup.com.br
+# --
+
+package Kernel::Output::HTML::ServicePreferences::PortalServiceFAQID;
+
+use strict;
+use warnings;
+
+use Kernel::Language qw(Translatable);
+
+our @ObjectDependencies = (
+    'Kernel::System::Web::Request',
+    'Kernel::System::Service',
+);
+
+sub new {
+    my ( $Type, %Param ) = @_;
+
+    # allocate new hash for object
+    my $Self = {};
+    bless( $Self, $Type );
+
+    # get env
+    for ( sort keys %Param ) {
+        $Self->{$_} = $Param{$_};
+    }
+
+    return $Self;
+}
+
+sub Param {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my @Params = ();
+
+    my $GetParam
+        = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $Self->{ConfigItem}->{PrefKey} );
+
+    if ( !defined($GetParam) ) {
+        $GetParam = defined( $Param{ServiceData}->{ $Self->{ConfigItem}->{PrefKey} } )
+            ? $Param{ServiceData}->{ $Self->{ConfigItem}->{PrefKey} }
+            : $Self->{ConfigItem}->{DataSelected};
+    }
+
+    my $FAQObject = $Kernel::OM->Get('Kernel::System::FAQ');
+
+    # set default interface settings
+    my $Interface = $FAQObject->StateTypeGet(
+        Name   => 'external',
+        UserID => 1,
+    );
+
+    # search all FAQ articles within the given category
+    my @ViewableItemIDs = $FAQObject->FAQSearch(
+        UserID    => 1,
+        Interface => $Interface,
+        Valid     => 1,
+        Limit     => 10000
+    );
+
+    my %FAQItens;
+    for my $ItemID (@ViewableItemIDs){
+
+        my %FAQ = $FAQObject->FAQGet(
+            ItemID     => $ItemID,
+            ItemFields => 1,
+            UserID     => 1,
+        );
+
+        if($FAQ{State} ne 'internal (agent)'){
+            $FAQItens{$FAQ{ID}} = "($FAQ{ID}) - $FAQ{CategoryName} - $FAQ{Title}";
+        }        
+    }
+
+    my %Queues = $Kernel::OM->Get('Kernel::System::Queue')->QueueList();
+
+    my $OptionHTMLNew   = $LayoutObject->BuildSelection(
+        Data         => \%FAQItens,
+        SelectedID   => $GetParam||'',
+        Name         => $Self->{ConfigItem}->{PrefKey},
+        Class        => 'Modernize',
+        PossibleNone => 1,
+    );
+    
+    push(
+        @Params,
+        {
+            %Param,
+            Name   => $Self->{ConfigItem}->{PrefKey},
+            Option => $OptionHTMLNew,
+        },
+    );
+
+    return @Params;
+
+}
+
+sub Run {
+    my ( $Self, %Param ) = @_;
+
+    for my $Key ( sort keys %{ $Param{GetParam} } ) {
+        my @Array = @{ $Param{GetParam}->{$Key} };
+        for (@Array) {
+            
+            if($Param{ContractID} ){       
+                my $Services = $Kernel::OM->Get('Kernel::System::ContractAndServices')->ContractServicePreferencesSet(
+                    ContractID => $Param{ContractID},
+                    ServiceID  => $Param{ServiceData}->{ServiceID} ,
+                    Key        => $Key,
+                    Value      => $_,
+                );
+
+            }else{
+                # pref update db
+                $Kernel::OM->Get('Kernel::System::Service')->ServicePreferencesSet(
+                    ServiceID => $Param{ServiceData}->{ServiceID},
+                    Key       => $Key,
+                    Value     => $_,
+                );
+            }
+        }
+    }
+    $Self->{Message} = Translatable('Preferences updated successfully!');
+    return 1;
+}
+
+sub Error {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->{Error} || '';
+}
+
+sub Message {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->{Message} || '';
+}
+
+1;

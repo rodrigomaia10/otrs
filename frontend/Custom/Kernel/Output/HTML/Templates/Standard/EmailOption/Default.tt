@@ -1,0 +1,120 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/EmailOption/ReplyTemplate.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * dsilva@serviceup.com.br
+# * dparavani@serviceup.com.br
+# --
+
+<div id="Container" style="display: flex; flex-direction: column; align-items: center; max-width: none;">
+
+[% RenderBlockStart("Overview") %]
+        <div class="box" style="width: 640px; margin-top: 50px; border: solid; border-width: 1px; border-color: #d1d1d1;">
+
+            <div id="Header" style="height: 82px !important;padding: 20px 0px 30px; display: flex; justify-content: flex-end; background-color:[% Data.HeaderColor %] !important;">
+                <div id="Logo" style="position: relative; right: 0px; top: 0px;background-size: contain;background-repeat: no-repeat;"></div>
+            </div>
+        
+            <div class="row">
+                <label for="fname" style="color:#5e5e5e; font-size: 15px; font-weight: bolder; width: 100%; text-align: left; margin-top: 20px; padding: 12px;">[% Translate(Data.Title) | html %]</label>
+            </div>
+
+            <div class="box-Warning" style="display: flex; justify-content: flex-start; margin: 35px 0px; line-height: 25px; color: #5e5e5e; font-size: 15px; padding: 12px;">     
+                [% Data.Description %]
+            </div>
+
+            <form id="form" class="Customform" enctype="multipart/form-data" action="[% Data.Link %]" method="post">
+                </br>
+[% RenderBlockStart("DynamicField") %]
+            <div class="row">
+                <div class="col-100 dynamicFields" style="display: flex;">
+                    [% Data.Label %]
+                    [% Data.Field %]
+                </div>
+            </div>
+[% RenderBlockEnd("DynamicField") %]
+                <div class="row [% Data.TextArea %]">
+                    <div class="col-100">
+                        <textarea required id="Article" name="Article" placeholder="[% Translate(Data.Placeholder) | html %]" style="height:100px" class="[% Data.TextAreaError %]"></textarea>
+                    </div>
+                </div>
+[% RenderBlockStart("ViewAttachment") %]
+                <div class="Field" style="margin: 20px 0px;">
+                    <input type="file" class="DynamicFieldText" id="EmailOptionAttachment" name="EmailOptionAttachment" multiple="multiple" title="Anexo" style="margin-left: 5%;">
+                </div>
+[% RenderBlockEnd("ViewAttachment") %]
+                <div style="display: flex; justify-content: center;">
+                    <div class="row [% Data.TextArea %]" style="margin: 20px 0px;">
+                        </br>
+                        <input id="Send" type="submit" value="[% Translate('Send') | html %]" style="background-color:[% Data.BtnColor %]; margin: 0px 0px">
+                    </div>
+                </div>
+            </form>
+       	</div>	
+[% RenderBlockEnd("Overview") %]
+
+[% RenderBlockStart("Warning") %]
+        <div class="box" style="width: 640px; margin-top: 50px; border: solid; border-width: 1px; border-color: #d1d1d1;">
+
+            <div id="Header" style="height: 82px !important;padding: 20px 0px 30px; display: flex; justify-content: flex-end; background-color:[% Data.HeaderColor %] !important;">
+                <div id="Logo" style="position: relative; right: 0px; top: 0px;background-size: contain;background-repeat: no-repeat;"></div>
+            </div>
+
+            <div class="row">
+                <label for="fname" style="color:#5e5e5e; font-size: 15px; font-weight: bolder; width: 100%; text-align: left; margin-top: 20px; padding: 12px;">[% Translate(Data.Title) | html %]</label>
+            </div>
+
+            <div class="box-Warning" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 35px 0px; color: #5e5e5e; font-size: 15px; padding: 12px;">     
+                [% Data.Description %]
+                               
+                <p class="infoTicket" style="color: #5e5e5e;">[% Data.TicketNumberText %]</p>
+                <p class="infoTicket" style="color: #5e5e5e;">[% Data.TicketTitleText %]</p>
+                <p class="infoTicket" style="color: #5e5e5e;">[% Data.TicketCustomerText %]</p>
+                <p class="infoTicket" style="color: #5e5e5e;">[% Data.TicketAgentText %]</p>
+
+                <p class="infoTicket" style="color: #5e5e5e;">[% Data.Details %]</p>
+            </div>
+        </div>
+[% RenderBlockEnd("Warning") %]
+
+[% RenderBlockStart("Success") %]
+        <div class="box" style="width: 640px; margin-top: 50px; border: solid; border-width: 1px; border-color: #d1d1d1;">
+
+            <div id="Header" style="height: 82px !important;padding: 20px 0px 30px; display: flex; justify-content: flex-end; background-color:[% Data.HeaderColor %] !important;">
+                <div id="Logo" style="position: relative; right: 0px; top: 0px;background-size: contain;background-repeat: no-repeat;"></div>
+            </div>
+
+            <div class="row">
+                <label for="fname" style="color:#5e5e5e; font-size: 15px; font-weight: bolder; width: 100%; text-align: left; margin-top: 20px; padding: 12px;">[% Translate(Data.Title) | html %]</label>
+            </div>
+
+            <div class="box-Sucess" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 35px 0px; color: #5e5e5e; font-size: 15px; padding: 12px;">
+                [% Data.TextDescription %]
+            </div>
+        </div>
+[% RenderBlockEnd("Success") %]
+
+[% RenderBlockStart("Error") %]
+        <div class="box" style="width: 640px; margin-top: 50px; border: solid; border-width: 1px; border-color: #d1d1d1;">
+
+            <div id="Header" style="height: 82px !important;padding: 20px 0px 30px; display: flex; justify-content: flex-end; background-color:[% Data.HeaderColor %] !important;">
+                <div id="Logo" style="position: relative; right: 0px; top: 0px;background-size: contain;background-repeat: no-repeat;"></div>
+            </div>
+
+            <div class="row">
+                <label for="fname" style="color:#5e5e5e; font-size: 15px; font-weight: bolder; width: 100%; text-align: left; margin-top: 20px; padding: 12px;">[% Translate(Data.Title) | html %]</label>
+            </div>
+
+            <div class="box-Sucess" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 35px 0px; color: #5e5e5e; font-size: 15px; padding: 12px;">
+                [% Data.Description %]
+            </div>
+        </div>
+[% RenderBlockEnd("Error") %]
+    <div class="Clear"></div>
+</div>
+<script>
+
+
+</script>

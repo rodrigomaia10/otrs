@@ -1,0 +1,52 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalFooter.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * jsantos@serviceup.com.br
+# --
+
+
+<!-- End Navbar -->
+	</div>
+</div>
+
+[% IF Config("CustomerPortal::Core::ToEnableFooter") == 1 %]
+
+<footer class="footerCustomerPortalCopyright">
+      <a href="https://serviceup.com.br" target="_blank" id="footerCreatedBy">
+        <span id="footerCopyrightPortal">© Copyright </span>  <img alt="logo" src="https://storage.googleapis.com/serviceup/marca-08.png" width="80"/>
+      </a>
+</footer>
+
+<script>
+  window.onload = (event) => {
+    document.getElementById("footerCopyrightPortal").innerHTML += new Date().getFullYear();
+  };
+
+</script>
+
+[% END %]
+
+[% IF Config("CustomerPortal::Core::Typebot::Enabled") %]
+
+[% Config("CustomerPortal::Core::Typebot::Script") %]
+
+[% END %]
+
+[% IF Config("CustomerPortal::Core::ToEnableAcessibilityInCustomerPortal") %]
+
+<script src="[% Config("Frontend::WebPath") %]js/CustomerPortalAcessibity.js" defer></script>
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+ 
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+[% END %]

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+    <Setting Name="AutoloadPerlPackages###1001-SetDynamicFieldFromSurvey" Required="0" Valid="1">
+        <Description Translatable="1">Autoload for module SLAByIC to the functions.</Description>
+        <Navigation>InBox::DynamicFieldFromSurvey::Core::Autoload</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">Kernel::Autoload::SetDynamicFieldFromSurvey</Item>
+            </Array>
+        </Value>
+    </Setting>
+	<Setting Name="DynamicFieldFromSurvey::Mapping###Vote" Required="1" Valid="1">
+        <Description Translatable="1">Define a mapping between variables of the survey response data (keys) and dynamic fields of a ticket (values). The purpose is to store survey response data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They musn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values.</Description>
+        <Navigation>InBox::DynamicFieldFromSurvey::Settings</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldFromSurvey::Mapping###Request" Required="1" Valid="1">
+        <Description Translatable="1">Define a mapping between variables of the survey data (keys) and dynamic fields of a ticket (values). The purpose is to store survey data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They musn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values.</Description>
+        <Navigation>InBox::DynamicFieldFromSurvey::Settings</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Framework">
+
+    <!-- Skin 1 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-dark" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-dark skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-dark</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-dark</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-dark" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "dark". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 2 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-dark-blue" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-dark-blue skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-dark-blue</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-dark-blue</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-dark-blue" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "dark-blue". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 3 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-dark-blue-slim" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-dark-blue-slim skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-dark-blue-slim</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-dark-blue-slim</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-dark-blue-slim" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "dark-blue-slim". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 4 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-green-dark" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-green-dark skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-green-dark</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-green-dark</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-green-dark" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "green-dark". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 5 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-green-light" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-green-light skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-green-light</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-green-light</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-green-light" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "green-light". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 6 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-dark-purple" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-dark-purple skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-dark-purple</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-dark-purple</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-dark-purple" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "dark". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 7 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-green-slim" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-green-slim skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-green-slim</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-green-slim</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-green-slim" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "inbox-theme-green-slim". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 8 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-dark-purple-slim" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-purple-slim skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-dark-purple-slim</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-dark-purple-slim</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-dark-purple-slim" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "inbox-theme-dark-purple-slim". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Skin 9 -->
+    <Setting Name="Loader::Agent::Skin###inbox-theme-dark-2" Required="0" Valid="1">
+        <Description Translatable="1">inbox-theme-dark-2 skin for the agent interface.</Description>
+        <Navigation>InBox::Skins::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">inbox-theme-dark-2</Item>
+                <Item Key="VisibleName" Translatable="1">inbox-theme-dark-2</Item>
+                <Item Key="Description" Translatable="1"></Item>
+                <Item Key="HomePage"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentLogoCustom###inbox-theme-dark-2" Required="0" Valid="0">
+        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "inbox-theme-dark-2". See "AgentLogo" for further description.</Description>
+        <Navigation>InBox::Skins::Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="URL"></Item>
+                <Item Key="StyleTop">7px</Item>
+                <Item Key="StyleRight">24px</Item>
+                <Item Key="StyleHeight">55px</Item>
+                <Item Key="StyleWidth">300px</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>

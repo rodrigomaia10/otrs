@@ -1,0 +1,215 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPITicket.tt - frontend template
+#
+# written/edited by:
+# * pdias@beonup.com.br
+# * dsilva@beonup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('KPI - Ticket'),
+                Link => 'AdminKPI',
+            },
+        ]
+    %]
+
+    [% IF Data.ID == ""  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add KPI - Ticket"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit KPI - Ticket")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+
+    <div class="Clear"></div>
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPI" class="CallForAction btn-main btn-primary-ghost Back"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="AdminKPITicket">
+            <input type="hidden" name="Subaction" value="[% Data.Mode | html %]Action">
+            <input type="hidden" name="ID" value="[% Data.ID | html %]">
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("General") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="Name" class="W50pc [% Data.NameServerError | html %] [% Data.ShowWarning | html %]  Validate_Alphanumeric" type="text" maxlength="200" value="[% Data.Name | html %]" name="Name" [% Data.ReadonlyInternalField | html %]>
+                                        <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate(Data.NameServerErrorMessage) | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("This is the name to be shown on the screens where the KPI is active.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label for="ReturnFormat">[% Translate("Output") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ReturnFormatStrg %]
+                                        <p class="FieldExplanation">[% Translate("This is the return format when click on chart.") | html %]</p>
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label id="LabelToLink" for="Link">Link:</label>
+                                    <div class="Field">
+                                        <input type="text" name="Link" id="Link" value="[% Data.Link | html %]" class="W60pc"/>
+                                    </div>                               
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ValidityStrg %]
+
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="GroupIDs">[% Translate("Groups") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.GroupsStrg %]
+                                        <div class="Clear"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="field-wrapper">
+                                    <label for="ObjectTypeName">[% Translate("Object type") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="ObjectTypeName" readonly class="W50pc" type="text" maxlength="200" value="[% Translate('Ticket') | html %]" name="ObjectTypeName"/>
+                                        <div class="Clear"></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="WidgetSimple">
+                <div class="Header">
+					<div class="WidgetAction Toggle">
+						<a href="#" title="Chavear este dispositivo" aria-controls="Core_UI_AutogeneratedID_1" aria-expanded="true"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+					</div>
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("KPI Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    [% InsertTemplate("AdminKPISearch.tt") %]
+                </div>
+            </div>
+			 <div class="WidgetSimple">
+                <div class="Header">
+					<div class="WidgetAction Toggle">
+						<a href="#" title="Chavear este dispositivo" aria-controls="Core_UI_AutogeneratedID_1" aria-expanded="true"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+					</div>
+                    <h2>[% Translate("View Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label>[% Translate("Type") | html %]:</label>
+                            <div class="Field">
+                                [% Data.TypeKPI %]
+                            </div>
+                        </div>
+                    </fieldset>
+					<fieldset class="TableLike" id="ViewSettingsKPI" style="margin-bottom: 15px;">                    	 
+						<legend><span>[% Translate("Min/Max values") | html %]</span></legend>
+						<div class="LayoutGrid ColumnsWithSpacing no-padding" style="width: 25%;">
+							<div class="Size1of2">
+								<fieldset class="TableLike">
+                                    <div class="field-wrapper">
+                                        <label>[% Translate("Min") | html %]:</label>
+                                        <div class="Field">
+                                            <input type="text" name="MinValue" value="[% Data.MinValue | html %]" style="width: 90%" />
+                                        </div>
+                                    </div>
+								</fieldset>
+							</div>
+							 <div class="Size1of2">
+								<fieldset class="TableLike">
+                                    <div class="field-wrapper">
+                                        <label>[% Translate("Max") | html %]:</label>
+                                        <div class="Field">
+                                            <input type="text" name="MaxValue" value="[% Data.MaxValue | html %]" style="width: 90%" />
+                                        </div>
+                                    </div>
+								</fieldset>
+							</div>                            
+						</div>
+                    
+                        <legend><span>[% Translate("Style") | html %]</span></legend>
+                        <div class="Field single-row-inputs">
+                            <div class="field-wrapper">
+                                <label>[% Translate("Color") | html %]:</label>
+                                <div class="Field">
+                                    <input type="color" name="Color" value="[% Data.Color | html %]" />
+                                    <p class="FieldExplanation">[% Translate("Sets KPI color in complex sets") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+						<legend style="margin-top: 15px"><span>[% Translate("Rules in use") | html %]</span></legend>
+						<label>[% Translate("Severity order") | html %]:</label>
+						<div class="Field">
+							[% Data.SeverityOrder %]
+						</div>
+						<br>
+						<input Name="TotalRules" type="hidden" value="[% Data.TotalRules %]">
+				[% RenderBlockStart("Rule") %]
+						
+                        <div class="Field single-row-inputs">
+                            <div class="Field Rule[% Data.Index %]">
+                                <div class="field-wrapper">
+                                    <label class="RuleLabel">[% Translate("Severity") | html %] [% Data.Index %]:</label>
+                                    <input type="text" name="RuleLabel[% Data.Index %]" value="[% Data.RuleLabel | html %]" class="W50px"/>
+                                    
+                                    <label class="RuleColor">[% Translate("Severity color") | html %] [% Data.Index %]</label>
+                                    <input type="color"name="RuleColor[% Data.Index %]" value="[% Data.RuleColor | html %]" aria-invalid="false">
+                            </div>
+                        </div>
+                        </div>
+				[% RenderBlockEnd("Rule") %]
+					</fieldset>
+                </div>
+            </div>
+            <fieldset class="TableLike card SpacingTop">
+                <div class="field-wrapper form-button-actions">
+                    <div class="Field buttons-field">
+                        <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=AdminKPI">[% Translate("Cancel") | html %]</a>
+                        
+                        <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" id="Submit" type="submit" value="Salvar"><span>Salvar</span></button>
+                        
+                    </div>
+                </div>
+            </fieldset>
+           
+        </form>
+    </div>
+</div>

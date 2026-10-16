@@ -1,0 +1,40 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AgentKPIWidget.tt - frontend template
+#
+# written/edited by:
+# * pdias@beonup.com.br
+# * dsilva@beonup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain">
+	<h1>[% Translate("Overview") %]</h1>
+	<div class="ContentColumn">
+		<div class="WidgetSimple" id="Dashboard0000-KPIWidget-box">
+			<div class="Header">
+				<div class="ActionMenu">
+					<div class="WidgetAction Settings">
+						<a href="#" id="Dashboard0000-KPIWidget-toggle" title="[% Translate("Fullscreen") | html %]">
+							<i class="fa fa-arrows-alt"></i>
+						</a>
+					</div>
+					[% RenderBlockStart("Adjust") %]
+					<div class="WidgetAction Adjust">
+						<a href="#" id="Dashboard0000-KPIWidget-Adjust" title="[% Translate("Adjust") | html %]">
+							<i class="fa fa-adjust" aria-hidden="true"></i>
+						</a>
+					</div>
+					[% RenderBlockEnd("Adjust") %]					
+					<div class="Clear"></div>
+				</div>
+				<h2 title="[% Translate(Data.Description) | html %]">[% Translate(Data.Title) | html %]</h2>
+			</div>
+			<div class="Content">
+				<div id="Dashboard0000-KPIWidget">
+					[% Data.Content %]
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

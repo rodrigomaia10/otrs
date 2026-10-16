@@ -1,0 +1,3 @@
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+"use strict";var Core=Core||{};Core.Agent=Core.Agent||{};Core.Agent.Admin=Core.Agent.Admin||{};Core.Agent.Admin.CustomerUserService=(function(TargetNS){TargetNS.Init=function(){Core.Form.InitSelectAllCheckboxes($('table td input[type="checkbox"][name=ItemsSelected]'),$('#SelectAllItemsSelected'));$('input[type="checkbox"][name=ItemsSelected]').click(function(){Core.Form.SelectAllCheckboxes($(this),$('#SelectAllItemsSelected'));});Core.UI.Table.InitTableFilter($("#FilterServices"),$("#Service"));};Core.Init.RegisterNamespace(TargetNS,'APP_MODULE');return TargetNS;}(Core.Agent.Admin.CustomerUserService||{}));

@@ -1,0 +1,311 @@
+<link rel="stylesheet" type="text/css" href="[% Config(" Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+#[% InsertTemplate("CustomerPortalFooter.tt") %]
+[% RenderBlockStart("Error") %]
+<div class="MainBox">
+    
+    <div id="content-functions-content" class="ContentResponsive removecontent" >
+        <div style="width: 99%;" class="W33pc CenterBox SpacingTopLarge SpacingBottomLarge">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2 style="font-size: 1.5em">[% Translate("Insufficient Rights") | html %]</h2>
+                </div>
+                <div style="padding: 0px 8px !important" class="Content">
+                    <h4 style="font-size: 1.5em">
+                        [% Translate("Message") | html %]: <span class="Error">[% Translate(Data.Message) | html %]</span>
+                    </h4>
+                    <p class="SpacingTop">
+                        [% Translate(Data.Comment) | html %]
+                    <p class="SpacingTop">
+                        <a href="#" class="ReturnToPreviousPage">[% Translate("Back to the previous page") | html %]</a>
+                    </p>
+[% RenderBlockStart("PossibleNextActionContainer") %]
+                    <p class="SpacingTop">
+[% RenderBlockStart("PossibleNextActionRow") %]
+                        <a href="[% Data.Link | Interpolate %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | html %]</a>
+                        <br/>
+[% RenderBlockEnd("PossibleNextActionRow") %]
+                    </p>
+[% RenderBlockEnd("PossibleNextActionContainer") %]
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Error") %]
+
+<style>
+
+.Header {
+    padding: var(--padding-lg);
+    border-bottom: 0;
+    background-color: var(--main-bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body {
+    background-color: #fff;
+}
+
+form, body, p, .InputField_ListContainer {
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+.Footer {
+    padding: 0 var(--main-page-padding) var(--main-page-padding);
+    border-top: none;
+    min-height: 28px;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--padding-lg);
+    background: var(--white);
+}
+
+.cke_chrome {
+    display: block !important;
+    border: 1px solid #d1d1d1;
+    padding: 0;
+}
+
+.RichTextField #cke_RichText, .RichTextField #cke_Body, .RichTextField #cke_EmailBody, .RichTextField .cke {
+    width: 100% !important;
+    max-width: 99.7%;
+    border-radius: 10px !important;
+    border: var(--border-width) var(-border-solid) var(--border-color)!important;
+    overflow: hidden;
+}
+
+.field-wrapper {
+    padding-right: 10px;
+}
+
+</style>
+
+[% RenderBlockStart("BulkAction") %]
+
+    <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" class="Validate PreventMultipleSubmits">
+        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+        <input type="hidden" name="Subaction" value="Do"/>
+        <div class="LayoutPopup ARIARoleMain">
+            <div class="Header">
+                <h1>[% Translate("Ticket Bulk Action") | html %]</h1>
+[% RenderBlockStart("CancelClosePopup") %]
+                    <div>
+                        <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
+                    </div>
+[% RenderBlockEnd("CancelClosePopup") %]
+            </div>
+
+            <div class="Content" style="background-color: var(--white);">
+                <div class="Content">
+[% RenderBlockStart("UsedTicketID") %]
+                        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
+[% RenderBlockEnd("UsedTicketID") %]
+
+                    <div class="WidgetSimple SpacingTop">
+                        <div class="Header" style="padding: var(--padding-md);">
+                            <h2>[% Translate("Add Note") | html %]</h2>
+                        </div>
+                        <div class="Content">
+                            <fieldset class="TableLike FixedLabel">
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Subject">
+                                        [% Translate("Subject") | html %]:
+                                    </label>
+                                    <div class="Field">
+                                        <input type="text" class="Validate_Required [% Data.SubjectInvalid %] W75pc" id="Subject" name="Subject" value="[% Data.Subject | html %]" />
+                                        <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Body">
+                                        [% Translate("Text") | html %]:
+                                    </label>
+                                    <div class="RichTextField Field">
+                                        <textarea id="Body" class="RichText Validate_Required [% Data.BodyInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.Body | html %]</textarea>
+                                        <div id="BodyError" class="TooltipErrorMessage">
+                                            <p>[% Translate("This field is required.") | html %]</p>
+                                        </div>
+                                        <div id="BodyServerError" class="TooltipErrorMessage">
+                                            <p>[% Translate("This field is required.") | html %]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                [% RenderBlockStart("State") %]
+                                <div class="field-wrapper">
+                                    <label for="StateID">[% Translate("Next state") | html %]</label>
+                                    <div class="Field">
+                                        [% Data.NextStatesStrg %]
+                                    </div>
+                                </div>
+                                [% RenderBlockStart("StatePending") %]
+                                <div class="field-wrapper">
+                                    <label>[% Translate("Pending date") | html %]</label>
+                                    <div class="Field">
+                                        <div class="select-field-wrapper">[% Data.DateString %]</div>
+                                        <div id="DayServerError" class="TooltipErrorMessage">
+                                            <p>[% Translate("Date invalid!") | html %]</p>
+                                        </div>
+                                        <div id="HourServerError" class="TooltipErrorMessage">
+                                            <p>[% Translate("Date invalid!") | html %]</p>
+                                        </div>
+                                        <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
+                                    </div>
+                                </div>
+                                [% RenderBlockEnd("StatePending") %]
+                                [% RenderBlockEnd("State") %]
+                            </fieldset>
+                        </div>
+                    </div>
+
+#                    <fieldset class="TableLike FixedLabel">
+
+#[% RenderBlockStart("Type") %]
+#                        <div class="field-wrapper">
+#                            <label for="TypeID">[% Translate("Type") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.TypeStrg %]
+#                            </div>
+#                        </div>
+#[% RenderBlockEnd("Type") %]
+#
+#                        <div class="field-wrapper">
+#                            <label for="QueueID">[% Translate("Queue") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.MoveQueuesStrg %]
+#                            </div>
+#                        </div>
+#[% RenderBlockStart("Service") %]
+#                        <div class="field-wrapper">
+#                            [% IF Data.ServiceMandatory %]
+#                                <label class="Mandatory" for="ServiceID">
+#                                    <span class="Marker">*</span>[% Translate("Service") | html %]:
+#                                </label>
+#                            [% ELSE %]
+#                                <label for="ServiceID">[% Translate("Service") | html %]</label>
+#                            [% END %]
+#                            <div class="Field">
+#                                [% Data.ServiceStrg %]
+#                                [% IF Data.ServiceMandatory %]
+#                                    <div id="ServiceIDError" class="TooltipErrorMessage">
+#                                        <p>[% Translate("This field is required.") | html %]</p>
+#                                    </div>
+#                                [% END %]
+#                                <div id="ServiceIDServerError" class="TooltipErrorMessage">
+#                                    <p>[% Translate("Service invalid.") | html %]</p>
+#                                </div>
+#                            </div>
+#                        </div>
+#[% RenderBlockEnd("Service") %]
+#[% RenderBlockStart("ServiceMandatory") %]
+#                        <div class="field-wrapper">
+#                            <label class="Mandatory" for="ServiceID">
+#                                <span class="Marker">*</span>[% Translate("Service") | html %]:
+#                            </label>
+#                            <div class="Field">
+#                                [% Data.ServiceStrg %]
+#                                <div id="ServiceIDError" class="TooltipErrorMessage">
+#                                    <p>[% Translate("This field is required.") | html %]</p>
+#                                </div>
+#                                <div id="ServiceIDServerError" class="TooltipErrorMessage">
+#                                    <p>[% Translate("Service invalid.") | html %]</p>
+#                                </div>
+#                            </div>
+#                        </div>
+#[% RenderBlockEnd("ServiceMandatory") %]
+#[% RenderBlockStart("Owner") %]
+#                        <div class="field-wrapper">
+#                            <label for="OwnerID">[% Translate("Owner") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.OwnerStrg %]
+#                            </div>
+#                        </div>
+#[% RenderBlockEnd("Owner") %]
+#[% RenderBlockStart("Responsible") %]
+#                        <div class="field-wrapper">
+#                            <label for="ResponsibleID">[% Translate("Responsible") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.ResponsibleStrg %]
+#                            </div>
+#                        </div>
+#[% RenderBlockEnd("Responsible") %]
+#[% RenderBlockStart("Priority") %]
+#                        <div class="field-wrapper">
+#                            <label for="PriorityID">[% Translate("Priority") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.PriorityStrg %]
+#                            </div>
+#                        </div>
+#[% RenderBlockEnd("Priority") %]
+#                        <div class="field-wrapper">
+#                            <label>[% Translate("Merge") | html %]</label>
+#                            <div class="field-column">
+#                                <div class="Field field-column">
+#                                    <div class="radio-field-wrapper">
+#                                        <input type="radio" name="MergeToSelection" id="OptionMergeTo" class="RadioRound" value="OptionMergeTo" [% Data.MergeToChecked %]/>
+#                                        <label for="MergeTo">[% Translate("Merge to") | html %] [% Config("Ticket::Hook") | html %]</label>
+#                                    </div>
+#                                    <input type="text" class="[% Data.MergeToInvalid | html %] W50pc" id="MergeTo" name="MergeTo" value="[% Data.MergeTo | html %]"/>
+#                                    <div id="MergeToServerError" class="TooltipErrorMessage">
+#                                        <p>[% Translate("Invalid ticket identifier!") | html %]</p>
+#                                    </div>
+#                                </div>
+#                                <div class="Field">
+#                                    <div class="radio-field-wrapper">
+#                                        <input type="radio" name="MergeToSelection" id="OptionMergeToOldest" class="RadioRound" value="OptionMergeToOldest" [% Data.MergeToOldestChecked %]/>
+#                                        <label for="OptionMergeToOldest">[% Translate("Merge to oldest") | html %]</label>
+#                                    </div>
+#                                </div>
+#                            </div>
+#                        </div>
+#                        <div class="field-wrapper">
+#                            <label for="LinkTogether">[% Translate("Link together") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.LinkTogetherYesNoOption %]
+#                            </div>
+#                        </div>
+#                        <div class="field-wrapper">
+#                            <label for="LinkTogetherParent">[% Translate("Link to parent") | html %]</label>
+#                            <div class="Field">
+#                                <input type="text" class="[% Data.LinkTogetherParentInvalid | html %] W50pc" id="LinkTogetherParent" name="LinkTogetherParent" value="[% Data.LinkTogetherParent | html %]"/>
+#                                <div id="LinkTogetherParentServerError" class="TooltipErrorMessage">
+#                                    <p>[% Translate("Invalid ticket identifier!") | html %]</p>
+#                                </div>
+#                            </div>
+#                        </div>
+#                        <div class="field-wrapper">
+#                            <label for="Unlock">[% Translate("Unlock tickets") | html %]</label>
+#                            <div class="Field">
+#                                [% Data.UnlockYesNoOption %]
+#                            </div>
+#                        </div>
+#
+#                        [% FOREACH CONTENT IN Data.BulkModuleContent %]
+#                            <div class="field-wrapper">
+#                                [% CONTENT %]
+#                            </div>
+#                        [% END %]
+#[% RenderBlockStart("DynamicField") %]
+#                            <div class="Row Row_DynamicField_[% Data.Name | html %] field-wrapper">
+#                                [% Data.Label %]
+#                                <div class="Field">
+#                                    [% Data.Field %]
+#                                </div>
+#                            </div>
+#[% RenderBlockEnd("DynamicField") %]
+#                    </fieldset>
+#                </div>
+#            </div>
+
+
+            <div class="Footer" style="margin-bottom: 30px;">
+                <button class="btn-main btn-width-xl btn-primary" id="submitRichText" accesskey="g" title="[% Translate("Submit") | html %] (g)" type="submit" value="[% Translate("Execute Bulk Action") | html %]">
+                    <span>[% Translate("Execute Bulk Action") | html %]</span>
+                </button>
+            </div>
+        </div>
+    </form>
+[% RenderBlockEnd("BulkAction") %]

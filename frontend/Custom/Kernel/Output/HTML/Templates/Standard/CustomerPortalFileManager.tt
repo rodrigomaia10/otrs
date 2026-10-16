@@ -1,0 +1,74 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalFileManger.pm
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dsilva@serviceup.com.br
+# * goliveira@serviceup.com.br 
+# * nfreitas@serviceup.com.br 
+# --
+
+<script src="[% Config("Frontend::WebPath") %]js/Core.Customer.FileManagerToPortal.js"></script>
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+<!-- Tree -->
+<div id="DirectoryManager">
+	
+</div>
+
+[% RenderBlockStart("Overview") %]
+<div class="ContentResponsive" id="content functions-content" >
+
+	<p class="FMHeaderTitleCP">[% Data.Folder %]</p>
+<div id="FileManagerCard" class="card ARIARoleMain [% Config("Ticket::Frontend::CustomerTicketOverviewSortable") %]">
+    <div class="col-md-12">
+		<table class="FileManager table table-striped">
+			<thead>
+				<tr>
+					<th>[% Translate("Name") | html %]</th>
+					<th>[% Translate("Last Modified") | html %]</th>
+					<th>[% Translate("Size") | html %]</th>
+					<th class="Action">[% Translate("Actions") | html %]</th>
+				</tr>					
+			</thead>
+			<tbody>				
+[% RenderBlockStart("NoDataFoundMsg") %]
+				<tr>
+					<td colspan="4">
+						[% Translate("No data found.") | html %]
+					</td>
+				</tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("DataRow") %]
+				<tr>										
+					<td>
+[% RenderBlockStart("ViewFile") %]
+							<i class="[% Data.Class %]" aria-hidden="true"></i>
+							<span>[% Data.Name | html %]</span>
+[% RenderBlockEnd("ViewFile") %]
+					</td>
+					<td>
+						[% Data.LastModified | html %]
+					</td>
+					<td>
+						[% Data.Size | html %]
+					</td>
+					<td class="Action">
+[% RenderBlockStart("ViewPDF") %]
+
+						<a href='#' id="File_[% Data.Count %]" class="ViewPDFFile" onclick="Core.Customer.FileManagerToPortal.Init('[% Data.Name | html %]')" >
+							<i class="fa fa-eye eye-display-show" aria-hidden="true"></i>
+						</a>
+[% RenderBlockEnd("ViewPDF") %]
+						<a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadCustomerFileManager;File=[% Data.Name %]">
+							<i class="fa fa-download" aria-hidden="true"></i>
+						</a>						
+					</td>
+				</tr>
+[% RenderBlockEnd("DataRow") %]
+			</tbody>
+		</table>
+	</div>	
+</div>
+</div>
+[% RenderBlockEnd("Overview") %]

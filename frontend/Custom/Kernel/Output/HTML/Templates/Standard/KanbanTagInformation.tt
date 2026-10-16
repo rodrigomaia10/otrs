@@ -1,0 +1,23 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/KanbanTagInformation.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="InnerContent" style="max-height: 600px;min-width: 250px;max-width: 500px;">
+    <form action="[% Env("CGIHandle") %]" method="post" id="AgentKanbanTicketSetTag">
+        <input type="hidden" name="Action" value="KanbanAJAXHandler"/>
+        <input type="hidden" name="Subaction" value="TicketUpdateTags"/>
+        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+        <input type="hidden" name="BoardID" value="[% Data.BoardID | html %]"/>
+        <fieldset class="TableLike">
+
+           [% RenderBlockStart("TagField") %]
+                <div onclick="Core.Agent.Admin.MyKanbanBoard.AddTicketTag('[% Data.ID | html %]', '[% Data.TicketID | html %]', '[% Data.BoardID | html %]')" data-id-tag="[% Data.ID | html %]" class="TagOfKanban" style="background-color: [% Data.Tag_Color | html %]">[% Data.Name | html %]</div>
+                </br>
+            [% RenderBlockEnd("TagField") %]
+        </fieldset>
+    </form>
+</div>

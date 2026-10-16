@@ -1,0 +1,364 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalNewTicket.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * jsantos@serviceup.com.br
+# * jguedes@serviceup.com.br
+# * gbolsoni@serviceup.com.br
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.css" rel="stylesheet" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div class="ContentResponsive" id="content functions-content" style="">
+
+  <div id="Overlay" tabindex="0" style="transition: .6s !important;z-index: 1;height: 1723px; top: 0px;" class="Hidden"></div>
+
+    <div class="row ServicesRowList HiddenElement" id="ServicesRowList">
+        <div class="col-lg-12">
+            <div class="form-group left-inner-addon">
+              <i class="fa fa-search" id="icon-Search"></i>
+              <input type="text" class="form-control" id="input-search-service" title=" [% Translate("Search") | html %]...">
+                   <ul id="service-list">
+                   </ul>
+
+              <div></div>
+            </div>
+        </div>
+    </div>
+
+	[% RenderBlockStart("BackgroundPortal") %]
+		<div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+	[% RenderBlockEnd("BackgroundPortal") %]
+
+
+[% RenderBlockStart("NewTicketService") %]
+
+        <div class="row">
+            <div class="col-lg-12 col-md-10 col-sm-10">
+                <div class="card-header-alt-newTicket">
+                    [% RenderBlockStart("ContractName") %]
+                        <h5 class="card-title" style="font-size: 20px;" title="[% Data.ContractName | html %] ">
+                            <i class="fa fa-file-text-o fa-fw"></i> [% Translate("Contract") | html %]: 
+                            <div id="MyContractName" style="display: inline-block">            
+                                <a class="LinkToBackService" href='[% Env("CGIHandle") %]?Action=Services'>[% Data.ContractName | html %]</a> 
+                            <div>
+                        </h5>
+                    [% RenderBlockEnd("ContractName") %]
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <form action="[% Env('CGIHandle') %]" method="post" name="compose" id="NewServiceTicket"
+            enctype="multipart/form-data" class="Validate PreventMultipleSubmits" novalidate="novalidate">
+            <input type="hidden" name="Action" value="[% Env('Action') %]" />
+            <input type="hidden" name="Subaction" value="StoreNew" />
+            <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
+            <input type="hidden" name="ServiceID" id="ServiceID" value="[% Data.ServiceID | html %]" />
+            <input type="hidden" name="ContractID" id="ContractID" value="[% Data.ContractID | html %]" />
+            <input type="hidden" name="Dest" id="Dest" value="[% Data.DestID | html %]" />
+            [% RenderBlockStart("Errors") %]
+                <div class="alert alert-danger" role="alert" id="Errors">
+                    <input type="hidden" id="Errors" value="1">
+                    [% Data.Message %]
+                </div>
+            [% RenderBlockEnd("Errors") %]
+
+            <div class="row">
+                [% RenderBlockStart("DescriptionCustomServiceForm") %]
+                <div class="col-md-12">
+                    <div class="ServiceFormDescription" style="[% Data.TitleStyle %]">[% Data.DescriptionShort | html %]</div>
+                </div>
+                [% RenderBlockEnd("DescriptionCustomServiceForm") %]
+                [% RenderBlockStart("DescriptionService") %]
+                <div class="col-md-12">
+                    <div class="ServiceFormDescription" style="[% Data.TitleStyle %]">[% Data.Description | html %]</div>
+                </div>
+                [% RenderBlockEnd("DescriptionService") %]
+            </div>
+
+            [% IF Data.FormLocation == 0 %]
+            [% RenderBlockStart("CustomServiceFormVertical") %]
+            <div class="row">
+                [% RenderBlockStart("DynamicFieldCustomServiceFormCard") %]
+                <div class="[% Data.ColMDField | html %] Col_DynamicField_[% Data.Name %]">
+                    <div class="[% Data.CardClass | html %]">
+                        <div class="card-header-dfField">
+                            [% Data.Label %]
+                        </div>
+                        <div class="[% Data.CardBodyClass | html %]">
+                            <div class="form-control-file">
+                                [% Data.Field %]
+                            </div>
+                        </div>
+                        <div class="ToShorDescription">[% Data.ShortDescription | html %]</div>                    
+                    </div>
+                </div>
+                [% RenderBlockEnd("DynamicFieldCustomServiceFormCard") %]
+            </div>
+            [% RenderBlockEnd("CustomServiceFormVertical") %]
+
+            [% RenderBlockStart("CustomServiceFormHorizontal") %]
+            
+                [% RenderBlockStart("DynamicFieldCustomServiceFormHorizontal") %]
+                <div class="row">
+                    <div class="[% Data.ColMDField | html %] Col_DynamicField_[% Data.Name %]">
+                        <div class="[% Data.CardClass | html %]">
+                            <div class="card-header-dfField" style="padding: 10px 0px 0px 0px;">
+                                [% Data.Label %]
+                            </div>
+                            <div class="[% Data.CardBodyClass | html %]">
+                                <div class="form-control-file">
+                                    [% Data.Field %]
+                                </div>
+                            </div>
+                            <div class="ToShorDescription" style="top: -10px;position: relative;">[% Data.ShortDescription | html %]</div>                    
+                        </div>
+                    </div>
+                </div>
+
+                [% RenderBlockEnd("DynamicFieldCustomServiceFormHorizontal") %]
+            [% RenderBlockEnd("CustomServiceFormHorizontal") %]
+            [% END %]
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h5 class="card-title service-name" style="" title="[% Data.ServiceName | html %] ">
+                                <i class="fa fa-file-text-o fa-fw"></i> [% Translate("Service") | html %]: 
+                                <div id="MyServiceName" style="display: inline-block">
+                                [% RenderBlockStart("LinkOfContractService") %]               
+                                    <!--a class="LinkToBackService" href='[% Env("CGIHandle") %]?Action=Services;Subaction=ServiceDetails;ServiceID=[% Data.ServiceParentID | html %]'>[% Data.ServiceNameShort | html %]</a-->
+                                    [% Data.ServiceNameShort | html %]
+                                    [% IF Data.LastService == '0' %]
+                                    →
+                                    [% END %]
+                                [% RenderBlockEnd("LinkOfContractService") %]
+                                [% RenderBlockStart("LinkOfService") %]               
+                                     <a class="LinkToBackService" id='[% IF Data.LastService == 1 %]LastService[% END %]' href='[% Env("CGIHandle") %]?Action=Services;Subaction=[% Data.ServiceSubaction | html %];ServiceID=[% Data.ServiceParentID | html %][% IF Data.FirstService == 1 %];FirstService=1[% END %]'>[% Data.ServiceNameShort | html %]</a> 
+                                    [% IF Data.LastService == '0' %]→[% END %]
+                                [% RenderBlockEnd("LinkOfService") %]
+                                <div>
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-8">                                 
+                                        </div>
+                                        <div class="col-md-4">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+[% RenderBlockStart("CustomerID") %]
+                                    <div class="form-group" id="CustomerIDElement">
+                                        <label class="Mandatory LabelsNewTicketSub" for="CustomerID">
+                                            <span class="Marker">* </span> [% Translate("CustomerID") | html %]:
+                                        </label>
+                                        [% Data.CustomerIDStrg %]
+                                    </div>
+[% RenderBlockEnd("CustomerID") %]
+                                    
+[% RenderBlockStart("Subject") %]   
+                                    [% IF Data.DefaultSubject != 1 %]    
+                                        <div class="form-group">                                        
+                                        <label class="Mandatory LabelsNewTicketSub" for="Subject">
+                                            <span class="Marker">* </span>[% Translate("Subject") | html %]:
+                                        </label>
+                                        <input required="required" data-error="Este campo é requerido" type="text"
+                                            style="width:100%" class="form-control" id="Subject" name="Subject"
+                                            value="[% Data.Subject | html %]"                  
+                                            class="Validate_Required [% Data.SubjectInvalid | html %]">
+                                    [% ELSE %]
+                                        <div class="form-group">  
+                                        <input required="required" data-error="Este campo é requerido" type="hidden"
+                                            style="width:100%" class="form-control Hidden" id="Subject" name="Subject"
+                                            value="[% Data.Subject %]"                  
+                                            class="Validate_Required [% Data.SubjectInvalid | html %]">
+                                    [% END %]
+[% RenderBlockEnd("Subject") %]
+[% RenderBlockStart("SubjectWithService") %]
+                                        <input required="required" data-error="Este campo é requerido" type="text"
+                                            style="width:100%" class="form-control" id="Subject" name="Subject"
+                                            value="[% Data.ServiceName | html %]"                  
+                                            class="Validate_Required [% Data.SubjectInvalid | html %]" readonly='readonly'>
+[% RenderBlockEnd("SubjectWithService") %]
+                                    </div>
+                                    <div class="form-group">
+[% RenderBlockStart("Body") %]          
+                                    [% IF Data.DefaultBody != 1 %] 
+                                    <!-- Cai aqui -->
+                                        <label class="Mandatory LabelsNewTicket" for="RichText">
+                                            <span class="Marker">* </span>[% Translate( Data.TextLabel ) | html %]:
+                                        </label>
+                                        <textarea id="RichText"
+                                            class="Validate_Required  RichText [% Data.BodyInvalid | html %]" name="Body"
+                                            rows="2" cols="1">[% Data.Body | html %]
+                                        </textarea>
+                                    [% ELSE %]
+                                        <div class="form-group" style="display:none">  
+                                        <textarea id="RichText" 
+                                            class="Validate_Required RichText Hidden [% Data.BodyInvalid | html %]" name="Body"
+                                            rows="2" cols="1">[% Data.Body | html %] 
+                                        </textarea>
+
+                                    [% END %]
+[% RenderBlockEnd("Body") %]
+[% RenderBlockStart("TextConfig") %]
+                                    <div id="TextConfig" data-enabled="[% Data.Data %]">
+                                    </div>
+[% RenderBlockEnd("TextConfig") %]
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+[% RenderBlockStart("DynamicFieldFixed") %]
+                                    <div class="form-group [% Data.Bold %]">
+                                        [% Data.Field %]
+                                        [% Data.Label %]
+                                    </div>
+[% RenderBlockEnd("DynamicFieldFixed") %]
+[% RenderBlockStart("Priority") %]
+                                <div class="form-group ">
+                                    <label class="LabelsNewTicketSub" for="Priority">
+                                        [% Translate("Priority") | html %]:
+                                    </label>
+                                    [% Data.PriorityStrg %]
+                                </div>
+[% RenderBlockEnd("Priority") %]
+[% RenderBlockStart("TypeID") %]
+                                    <div class="form-group">
+                                        <label class="Mandatory LabelsNewTicketSub" for="TypeID">
+                                            <span class="Marker">* </span> [% Translate("Type") | html %]:
+                                        </label>
+                                        [% Data.TypeStrg %]
+                                    </div>
+[% RenderBlockEnd("TypeID") %]
+[% RenderBlockStart("MandatorySLAID") %]
+                                    <div class="form-group">
+                                        <label class="Mandatory LabelsNewTicketSub" for="SLAID">
+                                            <span class="Marker">* </span> [% Translate("Service Level Agreement") | html %]:
+                                        </label>
+                                        [% Data.SLAStrg %]
+                                    </div>
+[% RenderBlockEnd("MandatorySLAID") %]
+[% RenderBlockStart("SLAID") %]
+                                    <div class="form-group">
+                                        <label class="LabelsNewTicketSub" for="SLAID">
+                                            [% Translate("Service Level Agreement") | html %]:
+                                        </label>
+                                        [% Data.SLAStrg %]
+                                    </div>
+[% RenderBlockEnd("SLAID") %]
+                                    <div class="form-group">
+                                    [% IF Data.AttachmentConfig == 0 %]
+                                        <label class="LabelsNewTicket" for="Attachments">[% Translate("Attachments") | html %]:</label>
+                                            <div class="Field">
+                                                <div class="DnDUploadBox">
+[% INCLUDE "FormElements/AttachmentList.tt" %]
+                                                </div>
+                                            </div>
+                                    [% END %]
+                                    </div>
+                                </div>
+                            </div>
+                            [% IF Data.FormLocation == 1 %]
+                            <div class="row">
+                                [% RenderBlockStart("DynamicFieldCustomServiceForm") %]
+                                <div class="[% Data.ColMDField | html %] Col_DynamicField_[% Data.Name %]">
+                                    <div class="[% Data.CardClass | html %]">
+                                        <div class="card-header-dfField">
+                                            [% Data.Label %]
+                                        </div>
+                                        <div class="[% Data.CardBodyClass | html %]">
+                                            <div class="form-control-file">
+                                                [% Data.Field %]
+                                            </div>
+                                        </div>
+                                        <div class="ToShorDescription">[% Data.ShortDescription | html %]</div>                    
+                                    </div>
+                                </div>
+                                [% RenderBlockEnd("DynamicFieldCustomServiceForm") %]
+                            </div>
+                            [% END %]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+[% RenderBlockStart("DynamicField") %]
+                <div class="[% Data.ColMDField | html %] Col_DynamicField_[% Data.Name %]">
+                    <div class="[% Data.CardClass | html %]">
+                        <div class="card-header-dfField">
+                            [% Data.Label %]
+                        </div>
+                        <div class="[% Data.CardBodyClass | html %]">
+                            <div class="form-control-file">
+                                [% Data.Field %]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+[% RenderBlockEnd("DynamicField") %]
+            </div>
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                    <div class="card-body text-center btnNewTicketService"
+                        title="Para enviar, preencha todos os campos requeridos">
+                        <button title="Para enviar, preencha todos os campos requeridos" type="submit"
+                            class="btn btn-success  btn-lg Primary CallForAction btnNewTicketService">[% Translate("Submit")
+                            | html %] <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <!-- Form End -->
+[% RenderBlockEnd("NewTicketService") %]
+
+[% RenderBlockStart("Error") %]
+
+        <div style="width: 99%;" class="W33pc CenterBox SpacingTopLarge SpacingBottomLarge">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2 style="font-size: 1.5em">[% Translate("Insufficient Rights") | html %]</h2>
+                </div>
+                <div style="padding: 0px 8px !important" class="Content">
+                    <h4 style="font-size: 1.5em">
+                        [% Translate("Message") | html %]: <span class="Error">[% Translate(Data.Message) | html %]</span>
+                    </h4>
+
+                    <p class="SpacingTop">
+                        [% Translate(Data.Comment) | html %]
+
+                    <p class="SpacingTop">
+                        <a href="#" class="ReturnToPreviousPage">[% Translate("Back to the previous page") | html %]</a>
+                    </p>
+
+[% RenderBlockStart("PossibleNextActionContainer") %]
+                    <p class="SpacingTop">
+[% RenderBlockStart("PossibleNextActionRow") %]
+                        <a href="[% Data.Link | Interpolate %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | html %]</a>
+                        <br/>
+[% RenderBlockEnd("PossibleNextActionRow") %]
+                    </p>
+[% RenderBlockEnd("PossibleNextActionContainer") %]
+                </div>
+            </div>
+        </div>
+[% RenderBlockEnd("Error") %]
+    </div>
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]

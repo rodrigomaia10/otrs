@@ -1,0 +1,98 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/FAQOfService.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+<div class="ContentResponsive"  >
+
+<div class="card">
+<div class="card-body">
+
+[% RenderBlockStart("FAQData") %]
+        <h5>[% Data.Title | html %]</h5>     
+        <div class="Clear"></div>
+        <ul class="MessagesOfFaq">
+[% RenderBlockStart("AttachmentHeader") %]
+            <li class="CustomerFAQ">
+                <div class="MessageHeader">
+                    <b>[% Translate("Attachments") | html %]:</b>
+                </div>
+                <div class="Attachments">
+                    <div>
+[% RenderBlockStart("AttachmentRow") %]
+                        <i class="fa fa-paperclip"></i>
+                        <span class="DownloadAttachment" title="[% Translate("Download Attachment") | html %]">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadAttachment;ItemID=[% Data.ItemID | uri %];FileID=[% Data.FileID | uri %]">
+                                [% Data.Filename | html %]
+                            </a>
+                            , [% Data.Filesize | html %]
+                        </span>
+                        <br/>
+[% RenderBlockEnd("AttachmentRow") %]
+                    </div>
+                </div>
+            </li>
+[% RenderBlockEnd("AttachmentHeader") %]
+<div class="Clear"></div>
+[% RenderBlockStart("FAQContent") %]
+            <li class="CustomerFAQ">
+                <div class="MessageHeader">
+                    <b>[% Translate(Data.Caption) | html %]:</b>
+                    <div class="Clear"></div>
+                </div>
+                <input type="hidden" value="true" name="FieldState">
+[% RenderBlockStart("FAQContentHTML") %]
+# execute IFrame JS asynchronously. Otherwise it could happen before our API was loaded
+# the following JS code must be within the template, otherwise it could happen, that also this code itself is not loaded yet
+<script>
+function CheckIFrameHeight(IFrameID) {
+
+    if (typeof FAQ === 'object' && typeof FAQ.Customer === 'object' && typeof FAQ.Customer.CustomerPortalFAQZoom === 'object') {
+
+        FAQ.Customer.CustomerPortalFAQZoom.IframeAutoHeight($('#' + IFrameID));
+    }
+    else {
+        window.setTimeout(function () {
+            CheckIFrameHeight(IFrameID);
+        }, 500);
+    }
+}
+</script>
+                <div class="">
+# Use the HTML5 sandbox attribute to prevent plugins and scripts from being executed in the browser.
+# Append session info to URL because IE will not send cookies.
+# Set 'allow-popups' to allow IE10+ to open links. ref: http://www.w3.org/html/wg/wiki/ChangeProposals/sandbox_allow_popups
+                    <iframe style="width: 100%;" sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" class="FAQField" id="IframeFAQ[% Data.Field | html %]" onload="window.setTimeout( function (){ CheckIFrameHeight('IframeFAQ[% Data.Field | html %]'); }, 500);" src="[% Env("Baselink") %]Action=CustomerFAQZoom;Subaction=HTMLView;ItemID=[% Data.ItemID | html %];Field=[% Data.Field | html %];[% Env("SessionName") | html %]=[% Env("SessionID") | html %]"></iframe>
+                </div>
+[% RenderBlockEnd("FAQContentHTML") %]
+[% RenderBlockStart("FAQContentPlain") %]
+                <div class="ArticleFAQContent">
+                    <div class="message">
+                        [% Data.Content %]
+                    </div>
+                </div>
+[% RenderBlockEnd("FAQContentPlain") %]
+            </li>
+[% RenderBlockEnd("FAQContent") %]
+        </ul>
+        
+    </div>
+          
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group mr-2" role="group">
+            <button style="background-color: #[% Data.ButtonColor1 | html %]" type="button" onclick="location.href='[% Env("Baselink") %]Action=HomePage';" class="btn btn-faq" title="[% Data.ButtonText1 | html %]">[% Data.ButtonText1 | html %]</button>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="Segundo grupo">
+            <button style="background-color: #[% Data.ButtonColor2 | html %]" type="button"  onclick="location.href='[% Env("Baselink") %]Action=NewTicketService;ServiceID=[% Data.ServiceID | html%];[% Data.ContractID | html%]';" class="btn btn-faq" title="[% Data.ButtonText2 | html %]">[% Data.ButtonText2 | html %]</button>
+        </div>
+        
+    </div>
+</div>
+[% RenderBlockEnd("FAQData") %]
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]

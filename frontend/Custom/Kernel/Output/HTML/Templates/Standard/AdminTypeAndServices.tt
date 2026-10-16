@@ -1,0 +1,184 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/AdminTypeAndServices.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+	
+	[% BreadcrumbPath = [
+            {
+                Name => Translate('Manage Type-Service Relations'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+	
+	
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterTypes">[% Translate("Filter for Types") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterTypes" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterTypes" value="" title="[% Translate("Filter for Types") | html %]"/>
+            </div>
+        </div>
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterServices">[% Translate("Filter for Services") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterServices" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterServices" value="" title="[% Translate("Filter for Services") | html %]" />
+            </div>
+        </div>
+    </div>
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Overview") | html %]</h2>
+            </div>
+            <div class="Content LayoutGrid ColumnsWithSpacing modal-col-wrapper modal-col-container">
+                <div class="Size1of2">
+                    <ul class="Tablelike" id="Types">
+                        <li class="Header">[% Translate("Types") | html %]</li>
+                        <li class="FilterMessage Hidden">[% Translate("No matches found.") | html %]</li>
+[% RenderBlockStart("NoDataFoundMsgRole") %]
+                        <li>[% Translate("No data found.") | html %]</li>
+[% RenderBlockEnd("NoDataFoundMsgRole") %]
+[% RenderBlockStart("TypeList") %]
+                        <li><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Type;ID=[% Data.ID | uri %]" class="AsBlock">[% Data.Name | html %]</a></li>
+[% RenderBlockEnd("TypeList") %]
+                    </ul>
+                </div>
+                <div class="Size1of2">
+                    <ul class="Tablelike" id="Services">
+                        <li class="Header">[% Translate("Services") | html %]</li>
+                        <li class="FilterMessage Hidden">[% Translate("No matches found.") | html %]</li>
+[% RenderBlockStart("NoDataFoundMsgGroup") %]
+                        <li>[% Translate("No data found.") | html %]</li>
+[% RenderBlockEnd("NoDataFoundMsgGroup") %]
+[% RenderBlockStart("ServiceList") %]
+                        <li><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Service;ID=[% Data.ID | uri %]" class="AsBlock">[% Data.Name | html %]</a></li>
+[% RenderBlockEnd("ServiceList") %]
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+[% RenderBlockEnd("Overview") %]
+
+[%RenderBlockStart("Change")%]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+	
+	[% USE EditTitle = String(Data.BreadcrumbTitle) %]
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Manage Type-Service Relations'),
+                Link => Env("Action"),
+            },
+            {
+                Name => EditTitle.append( " '", Data.Name, "'" )
+            }
+        ]
+    %]
+	
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>
+[% RenderBlockStart("ChangeHeaderType") %]
+                    [% Translate("Change Service Relations for Type") | html %]
+[% RenderBlockEnd("ChangeHeaderType") %]
+[% RenderBlockStart("ChangeHeaderService") %]
+                    [% Translate("Change Type Relations for Service") | html %]
+[% RenderBlockEnd("ChangeHeaderService") %]
+                    <a href="[% Env("Baselink") %][% Data.LinkHeader %]">[% Data.Name | html %]</a>
+                </h2>
+            </div>
+            <div class="Content ">
+                <form action="[% Env("CGIHandle") %]" method="post" name="matrix">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="Change[% Data.Type | html %]"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    <div class="DataTable scroll-bar-styled bar-no-left-border">
+
+                        <table class="DataTable VariableWidth" id="Typeservice">
+                            <thead>
+                                <tr>
+                                    <th>[% Translate(Data.VisibleNeType) | html %]</th>
+    [% RenderBlockStart("ChangeHeader") %]
+                                    <th class="Center [% Data.Mark | html %]">
+                                        <input type="checkbox" name="[% Data.Type | html %]" id="SelectAll[% Data.Type | html %]" title="[% Translate("Toggle active state for all") | html %]" value="" />
+                                        [% Translate("Active") | html %]
+                                    </th>
+    [% RenderBlockEnd("ChangeHeader") %]
+                                </tr>
+                            </thead>
+                            <tbody>
+    [% RenderBlockStart("NoDataFoundMsgList") %]
+                                <tr>
+                                    <td colspan="[% Data.ColSpan | html %]">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
+    [% RenderBlockEnd("NoDataFoundMsgList") %]
+    [% RenderBlockStart("ChangeRow") %]
+                                <tr>
+                                    <td>
+                                        <a href="[% Env("Baselink") %][% Data.Link %]">[% Data.Name | html %]</a>
+                                    </td>
+                                    <td class="[% Data.Mark | html %]">
+                                        <input type="checkbox" name="[% Data.Type | html %]" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Selected %]/>
+                                    </td>
+                                </tr>
+    [% RenderBlockEnd("ChangeRow") %]
+                                <tr class="Hidden">
+                                    <td colspan="2">[% Translate("No matches found.") | html %]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+
+                            <button class="btn-primary btn-main btn-width-md" id="Submit" type="submit" value="Salvar">
+                                <span>[% Translate("Submit") | html %]</span>
+                            </button>
+
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+[%RenderBlockEnd("Change")%]

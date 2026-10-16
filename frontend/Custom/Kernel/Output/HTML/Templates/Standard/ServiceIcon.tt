@@ -1,0 +1,60 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/ServiceIcon.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+<style type="text/css">
+	.blocker {
+		z-index: 5 !important;
+	};
+</style>
+
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/Core.SelectorStyleIcon.css" />
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Agent/default/css/inbox-thirdparty/jquery-modal-0.9.1/jquery.modal.min.css" />
+
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/jQuery-3.2.1/jquery.min.js"></script>
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/jquery-modal-0.9.1/jquery.modal.min.js"></script>
+<script src="[% Config("Frontend::WebPath") %]js/Core.FontawesomePicker.js"></script>
+
+<div id="iconPicker" class="modal" >
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">[% Translate("Choose an icon") | html %]</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<ul class="icon-picker-list">
+						<li>
+							<a data-class="{{item}} {{activeState}}" data-index="{{index}}">
+								<span class="{{item}}"></span>
+								<span class="name-class">{{item}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="modal-footer">
+                <a href="#" id="change-icon" rel="modal:close" class="buttonHref">[% Translate("To define") | html %]</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div>
+	<input type="text" id="ServiceIcon" name="ServiceIcon" class="icon-class-input" value="[% Data.DataIcon %]" />
+    <a id="pickerlink" href="#iconPicker" rel="modal:open">[% Translate("Choose an icon") | html %]</a>
+	<span class="demo-icon"></span>
+</div>
+
+<script>	
+    $(document).ready(function () {
+		$('.blocker').css('z-index', '5');
+	});
+</script>

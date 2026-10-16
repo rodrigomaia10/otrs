@@ -1,0 +1,54 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalError.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+<link rel="stylesheet" type="text/css" href="[% Config(" Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+  <div id="Overlay" tabindex="0" style="transition: .6s !important;z-index: 1;height: 1723px; top: 0px;" class="Hidden"></div>
+
+    <div class="row ServicesRowList HiddenElement" id="ServicesRowList">
+        <div class="col-lg-12">
+            <div class="form-group left-inner-addon">
+              <i class="fa fa-search" id="icon-Search"></i>
+              <input type="text" class="form-control" id="input-search-service" title=" [% Translate("Search") | html %]...">
+                <ul id="service-list"></ul>
+              <div></div>
+            </div>
+        </div>
+    </div>
+<div class="MainBox">
+    [% InsertTemplate("CustomerPortalFooter.tt") %]
+    <div id="content-functions-content" class="ContentResponsive removecontent" >
+[% RenderBlockStart("Error") %]
+        <div style="width: 99%;" class="W33pc CenterBox SpacingTopLarge SpacingBottomLarge">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2 style="font-size: 1.5em">[% Translate("Insufficient Rights") | html %]</h2>
+                </div>
+                <div style="padding: 0px 8px !important" class="Content">
+                    <h4 style="font-size: 1.5em">
+                        [% Translate("Message") | html %]: <span class="Error">[% Translate(Data.Message) | html %]</span>
+                    </h4>
+                    <p class="SpacingTop">
+                        [% Translate(Data.Comment) | html %]
+                    <p class="SpacingTop">
+                        <a href="#" class="ReturnToPreviousPage">[% Translate("Back to the previous page") | html %]</a>
+                    </p>
+[% RenderBlockStart("PossibleNextActionContainer") %]
+                    <p class="SpacingTop">
+[% RenderBlockStart("PossibleNextActionRow") %]
+                        <a href="[% Data.Link | Interpolate %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | html %]</a>
+                        <br/>
+[% RenderBlockEnd("PossibleNextActionRow") %]
+                    </p>
+[% RenderBlockEnd("PossibleNextActionContainer") %]
+                </div>
+            </div>
+        </div>
+[% RenderBlockEnd("Error") %]
+    </div>
+</div>

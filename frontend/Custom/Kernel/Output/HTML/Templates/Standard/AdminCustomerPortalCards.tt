@@ -1,0 +1,142 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminCustomerPortalCards.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+
+<!--
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+[% RenderBlockStart("ActionList") %]
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <!--
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                    
+[% RenderBlockEnd("ActionOverview") %]
+
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=CardsEdit;ID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add card") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %] 
+                </ul>
+            </div>
+[% RenderBlockEnd("ActionList") %]
+        </div>
+    </div>
+!-->
+    <div class="ContentColumn">
+    <h1 class="InvisibleText">[% Translate("Cards Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Cards Management of Customer Portal'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% IF Data.ID == "NEW"  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add card"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit card")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+        <div class="WidgetSimple">
+[% RenderBlockStart("OverviewList") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+
+                <table class="DataTable" id="CardsTable" summary="List of all registered Cards">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Card") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr>
+                            <td colspan="5">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("OverviewListRow") %]
+                        <tr [% IF Data.ValidID != 1%]class="Invalid"[% END %]>
+                            <td title="[% Data.Name | html %]"><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=CardsEdit;ID=[% Data.ID | uri %]">[% Data.Name | truncate(80) | html %]</a></td>
+                            <td>[% Translate(Data.Valid) | html %]</td>
+                        </tr>
+[% RenderBlockEnd("OverviewListRow") %]
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("OverviewList") %]
+
+[% RenderBlockStart("CardEdit") %]
+            <div class="Header">
+[% RenderBlockStart("HeaderAdd") %]
+                <h2>[% Translate("Add card") | html %]</h2>
+[% RenderBlockEnd("HeaderAdd") %]
+[% RenderBlockStart("HeaderEdit") %]
+                <h2>[% Translate("Edit card") | html %] : [% Data.Name | html %]</h2>
+[% RenderBlockEnd("HeaderEdit") %]
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="CardsSave"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    <div class="field-wrapper form-button-actions">
+                    <fieldset class="TableLike">
+                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                            <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
+                        <div class="Clear"></div>
+                   
+                        <label class="Mandatory" for="RichText"><span class="Marker">*</span>[% Translate("Body") | html %]:</label>
+                        <div class="RichTextField">
+                            <textarea id="RichText" class="RichText Validate_Required" rows="10" cols="60" name="Body">[% Data.Body | html %]</textarea>
+                        </div>
+                        <div class="Clear"></div>
+                       
+                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                        <div class="Field">
+                            [% Data.ValidOptionStrg %]
+                        </div>
+                        <div class="Clear"></div>
+                        
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                            <button class="btn-primary-ghost btn-main btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                        </div>
+          
+                    </fieldset>
+                </div>
+                </form>
+            </div>
+[% RenderBlockEnd("CardEdit") %]
+        </div>
+    </div>
+    <div class="Clear"></div>
+</div>
+[% RenderBlockEnd("Overview") %]

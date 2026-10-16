@@ -48,3 +48,43 @@ Thumbs.db
 *.mov
 *.wmv
 
+
+# ---- OTRS/Znuny (Cootravale) ----
+# Segredos e configuracao local do servidor
+Kernel/Config.pm
+**/Config.pm
+var/copilot-ws.secret
+*.secret
+*.ppk
+*.pem
+.env
+
+# Gerado pelo Znuny (SysConfig/ACL/Processos deployados do banco)
+Kernel/Config/Files/ZZZAAuto.pm
+
+# Dados/runtime: nunca versionar (anexos de clientes = LGPD)
+var/dynamicfield/
+var/article/
+var/log/
+var/tmp/
+var/sessions/
+var/spool/
+var/run/
+
+# Historicos de shell e editor
+.bash_history
+.mysql_history
+.viminfo
+
+# Backups manuais feitos no servidor (o git e o backup agora)
+*.custom_backup
+*.save
+*.bkp*
+
+# Testes e fixtures do core (contem chaves de exemplo)
+scripts/test/
+
+# Arquivos compactados e dumps
+*.tar.gz
+*.sql.gz
+*.sql

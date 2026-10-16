@@ -1,0 +1,18 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/KanbanTicketSLA.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * dsilva@serviceup.com.br
+# --
+
+<div class="InnerContent" style="max-height: 600px;min-width: 350px;">
+[% RenderBlockStart("DataValues") %]
+    <label>[% Data.DataLabel %]: 
+        <b class="[% Data.SLAClass %]">[% Data.DataSolutionTime  | Localize("TimeShort") | html %]</b>
+        <b class="[% Data.SLAClass %]">[% Data.DataSolutionTimeDestination  | Localize("TimeShort") | html %]</b>
+    </label>
+    <br/><br/>
+[% RenderBlockEnd("DataValues") %]
+    <div class="Clear"></div>
+</div>

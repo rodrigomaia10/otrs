@@ -1,0 +1,170 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPIConfigItems.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * poliveira@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('KPI - Config Items'),
+                Link => 'AdminKPI',
+            },
+        ]
+    %]
+
+    [% IF Data.ID == ""  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add KPI - Config Items"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit KPI - Config Items")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKPI" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="AdminKPIConfigItems">
+            <input type="hidden" name="Subaction" value="[% Data.Mode | html %]Action">
+            <input type="hidden" name="ID" value="[% Data.ID | html %]">
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("General") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                                    <div class="Field">
+                                        <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                        <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <p class="FieldExplanation">[% Translate("This is the name to be shown on the screens where the KPI is active.") | html %]</p>
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="ReturnFormat">[% Translate("Output") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ReturnFormatStrg %]
+                                        <p class="FieldExplanation">[% Translate("This is the return format when click on chart.") | html %]</p>
+                                    </div>
+                                </div>   
+                            </fieldset>
+                        </div>
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ValidityStrg %]
+
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="GroupIDs">[% Translate("Groups") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.GroupsStrg %]
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="ObjectTypeName">[% Translate("Object type") | html %]:</label>
+                                    <div class="Field">
+                                        <input id="ObjectTypeName" readonly class="W50pc" type="text" maxlength="200" value="[% Translate('Config Items') | html %]" name="ObjectTypeName"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+            <div class="ContentColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Options") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike FixedLabelSmall"  id="SearchInsertKPI" >
+                    
+                    <div class="field-wrapper">
+                        <label for="Class">[% Translate("Class") | html %]</label>
+                        <div class="Field" id='DivClassID'>
+                            [% Data.ClassOptionStrg %]
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label>[% Translate("Add another attribute") | html %]:</label>
+                        <div class="Field">
+                            [% Data.AttributesStrg %]
+                        </div>
+                    </div>
+                    [% RenderBlockStart("AttributeRowDeplState") %]
+                    <div class="field-wrapper">
+                        <label for="DeplStateIDs" id="LabelDeplStateIDs">[% Translate("Deployment State") | html %]:</label>
+                        <div class="Field">
+                            [% Data.CurDeplStateOptionStrg %]
+                            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                        </div>
+                    </div>
+                    [% RenderBlockEnd("AttributeRowDeplState") %]
+                    [% RenderBlockStart("AttributeRowInciState") %]
+                    <div class="field-wrapper">
+                        <label for="InciStateIDs" id="LabelInciStateIDs">[% Translate("Incident State") | html %]:</label>
+                        <div class="Field">
+                            [% Data.CurInciStateOptionStrg %]
+                            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                        </div>
+                    </div>
+                    [% RenderBlockEnd("AttributeRowInciState") %]
+                    [% RenderBlockStart("AttributeRow") %]
+                    <div class="field-wrapper">
+                        <label for="[% Translate(Data.Key) | html %]" id="Label[% Data.Key %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Name) | html %]:</label>
+                        <div class="Field">
+                            [% Data.InputString %]
+                            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                        </div>
+                    </div>
+                    [% RenderBlockEnd("AttributeRow") %]
+                    </fieldset>
+                  
+                </div>
+            </div>
+        </div>
+        <fieldset class="TableLike card SpacingTop">
+            <div class="field-wrapper form-button-actions">
+                <div class="Field buttons-field">
+                    <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=AdminKPI">[% Translate("Cancel") | html %]</a>
+                    <button id="SubmitKpiQuery" type="submit" class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                </div>
+            </div>
+        </fieldset>
+        </form>
+    </div>
+</div>
+
+

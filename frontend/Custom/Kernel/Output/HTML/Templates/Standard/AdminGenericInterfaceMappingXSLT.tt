@@ -1,0 +1,433 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dsilva@serviceup.com.br
+# * dparavani@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceMappingXSLT ActionsSideBar AdminManagement">
+    <div class="Clear"></div>
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Data.ActionFrontendModule | uri %];Subaction=Change;[% Data.ActionType | uri %]=[% Data.Action | uri %];WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction Fullsize Center">
+                            <span><i class="fa fa-caret-left"></i> [% Translate("Go back to") | html %] [% Data.LowerCaseActionType | html %]</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="WidgetSimple Tabs StickyElement">
+            <div class="Header">
+                <a href="#General" class="Active">[% Translate("General Shortcuts") | html %]</a>
+                <a href="#MacOS">[% Translate("MacOS Shortcuts") | html %]</a>
+            </div>
+            <div class="Content">
+                <div data-id="General" class="Active">
+                    <ul class="ShortCuts">
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>K</span>
+                            </em>
+                            <em>[% Translate("Comment code") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>Shift</span><span>K</span>
+                            </em>
+                            <em>[% Translate("Uncomment code") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>Alt</span><span>K</span>
+                            </em>
+                            <em>[% Translate("Auto format code") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>Q</span>
+                            </em>
+                            <em>[% Translate("Expand/Collapse code block") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>F</span>
+                            </em>
+                            <em>[% Translate("Find") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>G</span>
+                            </em>
+                            <em>[% Translate("Find next") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>Shift</span><span>G</span>
+                            </em>
+                            <em>[% Translate("Find previous") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>Shift</span><span>F</span>
+                            </em>
+                            <em>[% Translate("Find and replace") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span><span>Shift</span><span>R</span>
+                            </em>
+                            <em>[% Translate("Find and replace all") | html %]</em>
+                        </li>
+                    </ul>
+                </div>
+                <div data-id="MacOS">
+                    <ul class="ShortCuts">
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>K</span>
+                            </em>
+                            <em>[% Translate("Comment code") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>Shift</span><span>K</span>
+                            </em>
+                            <em>[% Translate("Uncomment code") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>Alt</span><span>K</span>
+                            </em>
+                            <em>[% Translate("Auto format code") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>F</span>
+                            </em>
+                            <em>[% Translate("Find") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>G</span>
+                            </em>
+                            <em>[% Translate("Find next") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>Shift</span><span>G</span>
+                            </em>
+                            <em>[% Translate("Find previous") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>Shift</span><span>F</span>
+                            </em>
+                            <em>[% Translate("Find and replace") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span><span>Shift</span><span>R</span>
+                            </em>
+                            <em>[% Translate("Find and replace all") | html %]</em>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate( "GenericInterface Web Service Management" ) | html %]</h1>
+
+        [% USE WebserviceLink = String( "AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=" ) %]
+        [% USE ActionName = String( Data.ActionType ) %]
+        [% USE ActionLink = String( Data.ActionFrontendModule ) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate( 'Web Service Management' ),
+                    Link => 'AdminGenericInterfaceWebservice',
+                },
+                {
+                    Name => Data.WebserviceName,
+                    Link => WebserviceLink.append( Data.WebserviceID ),
+                },
+                {
+                    Name => ActionName.append( ': ', Data.Action ),
+                    Link => ActionLink.append( ';Subaction=Change;', Data.ActionType, '=', Data.Action, ';WebserviceID=', Data.WebserviceID ),
+                },
+                {
+                    Name => Data.MappingDirection,
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits" id="XSLTConfig">
+            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+            <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]Action"/>
+            <input type="hidden" name="WebserviceID" value="[% Data.WebserviceID | html %]" id="WebserviceID"/>
+            <input type="hidden" name="CommunicationType" value="[% Data.CommunicationType | html %]" />
+            <input type="hidden" name="Operation" value="[% Data.Operation | html %]" />
+            <input type="hidden" name="Invoker" value="[% Data.Invoker | html %]" />
+            <input type="hidden" name="Direction" value="[% Data.Direction | html %]"/>
+            [% IF Data.Subaction == 'Change' %]
+                <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+            [% END %]
+[% RenderBlockStart("ConfigBlock") %]
+
+[% RenderBlockStart("ConfigBlockTemplate") %]
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <div class="WidgetAction Toggle">
+                        <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    </div>
+                    <h2>[% Translate("XSLT Mapping") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Template"><span class="Marker">*</span>[% Translate("XSLT stylesheet") | html %]:</label>
+                            <div class="Field">
+                                <textarea id="Template" name="Template" rows="20" cols="80" class="RichText Validate_Required [% Data.TemplateError | html %]">[% Data.Template | html %]</textarea>
+                                <div id="TemplateServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("The entered data is not a valid XSLT style sheet.") | html %]</p>
+                                </div>
+                                <p class="FieldExplanation">
+                                    [% Translate("Here you can add or modify your XSLT mapping code.") | html %]
+                                </p>
+                                <p class="FieldExplanation">
+                                    [% Translate("The editing field allows you to use different functions like automatic formatting, window resize as well as tag- and bracket-completion.") | html %]
+                                </p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="DataInclude">[% Translate("Data includes") | html %]:</label>
+                            <div class="Field">
+                                [% Data.DataIncludeSelect %]
+                                <p class="FieldExplanation">[% Translate("Select one or more sets of data that were created at earlier request/response stages to be included in mappable data.") | html %]</p>
+                                <p class="FieldExplanation">[% Translate("These sets will appear in the data structure at '/DataInclude/<DataSetName>' (see debugger output of actual requests for details).") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="OwnerCustomerData">[% Translate("Owner, customer and company data") | html %]:</label>
+                            <div class="Field">
+                                <input id="OwnerCustomerData" class="OwnerCustomerData " type="checkbox" value="1" [% IF Data.OwnerCustomerData %]checked="checked"[% END %] name="OwnerCustomerData"/>
+                                <p class="FieldExplanation">[% Translate("Include Owner, Customer and Customer User Data in the ticket.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="DecodeJSON">[% Translate("Decode JSON") | html %]:</label>
+                            <div class="Field">
+                                <input id="DecodeJSON" class="DecodeJSON W75pc" type="text" value="[% Data.DecodeJSON | html %]" name="DecodeJSON"/>
+                                <p class="FieldExplanation">[% Translate("Enter tags separated by space so that their value is passed in DecodeJSON before mapping. (Provider: Enter the tag value received. Requester: Use in dynamic field with a value in JSON).") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="ForceArray">[% Translate("Force array for tags") | html %]:</label>
+                            <div class="Field">
+                                <input id="ForceArray" class="ForceArray W75pc" type="text" value="[% Data.ForceArray | html %]" name="ForceArray"/>
+                                <p class="FieldExplanation">[% Translate("Enter tags separated by space for which array representation should be forced.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="ForceNumber">[% Translate("Force number for tags") | html %]:</label>
+                            <div class="Field">
+                                <input id="ForceNumber" class="ForceNumber W75pc" type="text" value="[% Data.ForceNumber | html %]" name="ForceNumber"/>
+                                <p class="FieldExplanation">[% Translate("Enter tags separated by space for which number representation should be forced.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="ForceEmptyString">[% Translate("Force empty string for tags") | html %]:</label>
+                            <div class="Field">
+                                <input id="ForceEmptyString" class="ForceEmptyString W75pc" type="text" value="[% Data.ForceEmptyString | html %]" name="ForceEmptyString"/>
+                                <p class="FieldExplanation">[% Translate("Enter tags separated by space for which empty string representation should be forced.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="ForceBoolean">[% Translate("Force boolean for tags") | html %]:</label>
+                            <div class="Field">
+                                <input id="ForceBoolean" class="ForceBoolean W75pc" type="text" value="[% Data.ForceBoolean | html %]" name="ForceBoolean"/>
+                                <p class="FieldExplanation">[% Translate("Enter tags separated by space for which boolean representation should be forced.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="KeepAttributes">[% Translate("Keep XML attributes") | html %]:</label>
+                            <div class="Field">
+                                <input id="KeepAttributes" class="KeepAttributes " type="checkbox" value="1" [% IF Data.KeepAttributes %]checked="checked"[% END %] name="KeepAttributes"/>
+                                <p class="FieldExplanation">[% Translate("Only needed for content type XML.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+[% RenderBlockEnd("ConfigBlockTemplate") %]
+
+[% RenderBlockStart("ConfigBlockRegExFilter") %]
+            <div class="WidgetSimple [% Data.Collapsed | html %]" id="WidgetRegExFilters[% Data.Type | html %]">
+                <div class="Header">
+                    <div class="WidgetAction Toggle">
+                        <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    </div>
+[% IF Data.Type == 'Pre' %]
+                    <h2>[% Translate("Data key regex filters (before mapping)") | html %]</h2>
+[% ELSE %]
+                    <h2>[% Translate("Data key regex filters (after mapping)") | html %]</h2>
+[% END %]
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike FixedLabel">
+                            <label for="Filter">[% Translate("Regular expressions") | html %]:</label>
+                            <div class="Field [% Data.Type | html %]ValueInsert">
+                                <input type="hidden" name="[% Data.Type | html %]ValueCounter" value="[% Data.ValueCounter | html %]" id="[% Data.Type | html %]ValueCounter" class="ValueCounter" />
+    [% RenderBlockStart("ValueRow") %]
+                                <div class="ValueRow">
+                                    <label class="Mandatory" for="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Search") | html %]:</label>
+                                    <input name="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" class="Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="100" value="[% Data.Key | html %]"/>
+                                    <div id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+
+                                    <label for="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]">[% Translate("Replace") | html %]:</label>
+                                    <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
+
+                                    <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                    <div class="SpacingTopMini" ></div>
+                                </div>
+    [% RenderBlockEnd("ValueRow") %]
+    [% RenderBlockStart("ValueTemplate") %]
+                                <div class="[% Data.Type | html %]ValueTemplate Hidden">
+                                    <label class="Mandatory" for="[% Data.Type | html %]Key"><span class="Marker">*</span>[% Translate("Search") | html %]:</label>
+                                    <input name="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Key" class="KeyTemplate W20pc" type="text" maxlength="100" value="[% Data.Key | html %]"/>
+                                    <div id="[% Data.Type | html %]KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="[% Data.Type | html %]KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+
+                                    <label for="[% Data.Type | html %]Value">[% Translate("Replace") | html %]:</label>
+                                    <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
+
+                                    <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                    <div class="SpacingTopMini" ></div>
+                                </div>
+    [% RenderBlockEnd("ValueTemplate") %]
+                                <input type="hidden" name="[% Data.Type | html %]DeletedValue" value="[% Data.DeletedString | html %]" id="[% Data.Type | html %]DeletedValue" class="[% Data.Type | html %]DeletedValue" />
+                            </div>
+
+                        <label for="[% Data.Type | html %]AddValue">[% Translate("Add regex") | html %]:</label>
+                        <div class="Field">
+                            <a href="#" id="[% Data.Type | html %]AddValue" class="AddButton"><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add regex") | html %]</span></a>
+                            <p class="FieldExplanation">[% Translate("These filters can be used to transform keys using regular expressions.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("The data structure will be traversed recursively and all configured regexes will be applied to all keys.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Use cases are e.g. removing key prefixes that are undesired or correcting keys that are invalid as XML element names.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Example 1: Search = '^jira:' / Replace = '' turns 'jira:element' into 'element'.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Example 2: Search = '^' / Replace = '_' turns '16x16' into '_16x16'.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Example 3: Search = '^(?<number>\d+) (?<text>.+?)\$' / Replace = '_\$+{text}_\$+{number}' turns '16 elementname' into '_elementname_16'.") | html %]</p>
+                            <p class="FieldExplanation">
+                                [% Translate("For information about regular expressions in Perl please see here:") | html %]
+                                <a href="https://perldoc.perl.org/perlretut.html" target="_blank">[% Translate("Perl regular expressions tutorial") | html %]</a>
+                            </p>
+                            <p class="FieldExplanation">[% Translate("If modifiers are desired they have to be specified within the regexes themselves.") | html %]</p>
+[% IF Data.Type == 'Pre' %]
+                            <p class="FieldExplanation">[% Translate("Regular expressions defined here will be applied before the XSLT mapping.") | html %]</p>
+[% ELSE %]
+                            <p class="FieldExplanation">[% Translate("Regular expressions defined here will be applied after the XSLT mapping.") | html %]</p>
+[% END %]
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+[% RenderBlockEnd("ConfigBlockRegExFilter") %]
+
+[% RenderBlockEnd("ConfigBlock") %]
+
+            <div class="WidgetSimple Collapsed" id="Test">
+                <div class="Header">
+                    <div class="WidgetAction Toggle">
+                        <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    </div>
+                    <h2>[% Translate("Test mapping") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <p class="FieldExplanation">[% Translate("Use this area to check whether the mapping is being carried out correctly. Enter the ticket number in field 1 if you want to test the mapping with ticket data. Enter the JSON in field 2 if you want to test the mapping based on the received JSON. The result will be displayed in field 3. Save the XSLT before testing.") | html %]</p>
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="TestTicket">[% Translate("Ticket number (Field 1)") | html %]:</label>
+                            <div class="Field">
+                                <input id="TestTicket" class="TestTicket W20pc" type="text" value="" name="TestTicket"/>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label for="TestJSON">[% Translate("JSON (Field 2)") | html %]:</label>
+                            <div class="Field">
+                                <textarea id="TestJSON" name="TestJSON" rows="20" cols="80" class=""></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike">
+                        <div class="Field" style="justify-content: center; flex-direction: row;">
+                            <button class="CallForAction btn-main btn-primary btn-width-md" id="SendTest" type="button" value="[% Translate("Test") | html %]"><span>[% Translate("Test") | html %]</span></button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <div class="field-wrapper">
+                            <label class="" for="TemplateTest">[% Translate("Result (Field 3)") | html %]:</label>
+                            <div class="Field">
+                                <textarea id="TemplateTest" name="TemplateTest" rows="20" cols="80" class=""></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <fieldset class="TableLike">
+                <div class="Field" style="justify-content: flex-end; flex-direction: row; gap: var(--padding-lg);">
+                    <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=[% Data.ActionFrontendModule | uri %];Subaction=Change;[% Data.ActionType | uri %]=[% Data.Action | uri %];WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                    [% IF Data.Subaction == 'Change' %]
+                        <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                        <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                    [% ELSE %]
+                        <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                    [% END %]
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,56 @@
+# Kernel/Output/HTML/Templates/Standard/AdminCustomerPortalCustomCSS.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * ccresencio@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+   
+
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+          
+        </div>
+    
+    </div>
+    <div class="ContentColumn">
+
+        <h1 class="InvisibleText">[% Translate("Manage CSS") | html %]</h1>
+
+        [% BreadcrumbPath = [{
+            Name => Translate('Manage CSS'),
+            Link => Env("Action")
+        }] %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("CSS custom") | html %]</h2>
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="[% Data.Action | uri %]Action"/>
+                        <div class="RichTextField">
+                            <textarea id="CSSField" class="RichText" rows="10" cols="60" name="CSSField">[% Data.CSSField | html %]</textarea>
+                        </div>
+                        <div class="field-wrapper form-button-actions">
+                            <fieldset class="Field buttons-field">
+                                    <div class="Field buttons-field">
+                                        <button class="btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                        <!-- <button class="CallForAction" id="ExportCSS" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Export as .css") | html %]</span></button> -->
+                                    </div>
+                            </fieldset>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]

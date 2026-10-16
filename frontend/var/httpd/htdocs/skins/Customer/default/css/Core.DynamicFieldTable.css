@@ -1,0 +1,71 @@
+/**
+/* --
+// var/httpd/htdocs/skins/Customer/default/css/Core.DynamicFieldTable.css
+// Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+//
+// written/edited by:
+// mbernardo@serviceup.com.br
+// dsilva@serviceup.com.br
+// --
+*/
+
+@media screen,projection,tv,handheld {
+
+/**
+ * @subsection     DynamicFieldTable Render
+ */
+
+.ui-widget-header{
+    border: 1px solid #aaa !important;
+}
+
+.ui-widget-content .ui-button .ui-button-icon-primary{
+    margin-left: -35%;
+}
+
+select {
+    width: 100%;
+}
+
+input[type="date"]{
+    width:97%;
+}
+
+input[type="dateTime"]{
+    width:97%;
+}
+
+#Bottom {
+    background-color: #eee;
+    border: 1px solid #aaa;
+    border-top: 0px;
+}
+
+#Bottom .Field{
+    margin-left: 37% !important;
+    padding-top: 0px !important;
+    padding-bottom: 9px !important;
+}
+
+#SumRow{
+    line-height: 200%;
+}
+
+#tblAppendGrid_caption_td{
+    font-family: sans-serif;
+}
+
+input[type="textarea"]{
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    resize: vertical;
+}
+
+input[type=text], input[type=number], input[type=password], input[type=email], textarea {
+    flex: 1 auto !important;
+    padding: 6px !important;
+    width: auto !important;
+}
+
+}/* end @media */

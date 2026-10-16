@@ -1,0 +1,130 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/AgentEasyCategorization.tt
+# Copyright (C) 2019 Service Up http://www.serviceup.com.br
+#
+# written/edited by:
+# * pdias@beonup.com.br
+# * gesquetini@beonup.com.br
+# * gesquetini@beonup.com.br
+# * poliveira@serviceup.com.br
+# * ccresencio@serviceup.com.br
+# * dparavani@serviceup.com.br
+# * gbolsoni@serviceup.com.br
+# --
+<div class="WidgetSimple">
+    <div class="Header">
+        <div class="WidgetAction Toggle">
+            <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+        </div>
+        <h2>[% Translate("Easy Categorization") | html %]</h2>
+    </div>
+
+	<div class="Content">
+		<form class="Validate EasyCategorizationForm">
+			<input type="hidden" name="Action" value="AgentEasyCategorization">
+			<fieldset class="TableLike">
+
+	[% RenderBlockStart("Type") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="TypeID" style="width:100%; text-align: left;">[% Translate("Type") | html %]:</label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;">[% Data.TypeStrg %]
+						<span id="AJAXLoaderTypeID" class="AJAXLoader" style="display:none ; float: none;"></span>
+					</div>
+			    </div>						
+	[% RenderBlockEnd("Type") %]
+			
+	[% RenderBlockStart("Queue") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="QueueID" style="width:100%; text-align: left;" >[% Translate("Queue") | html %]:</label>
+					<div id="FieldEC" class="FieldEC" style="width:91%;">
+						[% Data.StateStrg %]
+						<span id="AJAXLoaderQueueID" class="AJAXLoader" style="display:none ; float: none;"></span>
+					</div>
+				</div>	
+	[% RenderBlockEnd("Queue") %]
+	[% RenderBlockStart("ServiceAndSLA") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="ServiceID" style="width:100%; text-align: left;" >[% Translate("Service") | html %]: </label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;" >
+							[% Data.ServiceSrtg %]
+							<span id="AJAXLoaderServiceID" class="AJAXLoader" style="display:none ; float: none;"></span>
+						</div>
+				</div>
+				<div class="field-wrapper">
+					<label class="label_easy" for="SLAID" style="width:100%; text-align: left;" >[% Translate("SLA") | html %]:</label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;" >
+							[% Data.SLAStrg %]
+							<span id="AJAXLoaderSLAID" class="AJAXLoader" style="display:none ; float: none;"></span>
+						</div>
+				</div>	
+					
+	[% RenderBlockEnd("ServiceAndSLA") %]
+	[% RenderBlockStart("Priority") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="PriorityID" style="width:100%; text-align: left;" >[% Translate("Priority") | html %]:</label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;">
+							[% Data.PriorityStrg %]
+							<span id="AJAXLoaderPriorityID" class="AJAXLoader" style="display:none ; float: none;"></span>
+						</div>
+				</div>
+					
+	[% RenderBlockEnd("Priority") %]
+	[% RenderBlockStart("State") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="StateID" style="width:100%; text-align: left;" >[% Translate("State") | html %]:</label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;">
+							[% Data.StateStrg %]
+							<span id="AJAXLoaderStateID" class="AJAXLoader" style="display:none ; float: none;"></span><span id="AJAXLoaderPriorityID" class="AJAXLoader" style="display:none ; float: none;"></span>
+						</div>
+				</div>	
+				
+	[% RenderBlockEnd("State") %]
+	[% RenderBlockStart("Owner") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="OwnerID" style="width:100%; text-align: left;" >[% Translate("Owner") | html %]:</label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;">
+							[% Data.StateStrg %]
+							<span id="AJAXLoaderOwnerID" class="AJAXLoader" style="display:none ; float: none;"></span>
+						</div>
+				</div>
+
+	[% RenderBlockEnd("Owner") %]
+	[% RenderBlockStart("Responsible") %]
+		<div class="field-wrapper">
+			<label class="label_easy" for="ResponsibleID" style="width:100%; text-align: left;" >[% Translate("Responsible") | html %]:</label>
+			<div id="FieldEC" class="FieldEC" style="width:91%;">
+				[% Data.ResponsibleStrg %]
+				<span id="AJAXLoaderResponsibleID" class="AJAXLoader" style="display:none ; float: none;"></span>
+			</div>
+		</div>
+	[% RenderBlockEnd("Responsible") %]
+	[% RenderBlockStart("DynamicField") %]
+				<div class="field-wrapper">
+					<label class="label_easy" for="[% Data.ID %]ID" style="width:100%; text-align: left;">[% Data.Label %]:</label>
+						<div id="FieldEC" class="FieldEC" style="width:91%;">
+							[% Data.DynamicField %]
+							<span id="AJAXLoader[% Data.ID %]" class="AJAXLoader" style="display: none; float: none;"></span>
+						</div>
+				</div>
+				
+	[% RenderBlockEnd("DynamicField") %]
+    [% RenderBlockStart("LockUnlock") %]
+				<div class="field-wrapper">
+                    <label class="label_easy" for="LockID" style="width:100%; text-align: left;" >[% Translate("Lock / Unlock") | html %]:</label>
+                        <div id="FieldEC" class="FieldEC" style="width:91%;">
+                            [% Data.LockStrg %]
+                            <span id="AJAXLoaderLockID" class="AJAXLoader" style="display:none ; float: none;"></span>
+						</div>
+				</div>
+				                                                                               
+    [% RenderBlockEnd("LockUnlock") %]
+	[% RenderBlockStart("ButtonSave") %]
+					<div class="box_button">
+						<input class="Primary btn-primary btn-main btn-width-md ButtonUpdate" type="button" value="[% Translate("Update") | html %]" id="ButtonUpdateEasy"/>
+					</div>
+	[% RenderBlockEnd("ButtonSave") %]
+				<div class="Clear"></div>
+			</fieldset>
+		</form>
+	</div>
+</div>

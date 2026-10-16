@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<otrs_config version="2.0" init="Application">
+
+	<Setting Name="Frontend::Module###AdminDynamicFieldFileSystem" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+		<Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Title" Translatable="1">AdminDynamicFieldFileSystem</Item>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description"></Item>
+                    <Item Key="Title"></Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+	<Setting Name="Loader::Module::AdminDynamicFieldFileSystem###3-AdminDynamicFieldFileSystem" Required="0" Valid="1">
+		<Description Translatable="1">Loader module registration for the agent interface.</Description>
+		<Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+		<Value>
+			<Hash>
+				<Item Key="CSS">
+					<Array>
+					</Array>
+				</Item>
+				<Item Key="JavaScript">
+					<Array>
+						<Item>Core.Agent.Admin.DynamicField.js</Item>
+					</Array>
+				</Item>
+			</Hash>
+		</Value>
+	</Setting>
+
+	<Setting Name="Frontend::Module###FileSystemAttachment" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+		<Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Title" Translatable="1">FileSystem Attachment</Item>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Lookup FileSystem attachment</Item>
+                    <Item Key="Title">FileSystem Attachment</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="CustomerFrontend::Module###FileSystemAttachment" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+		<Value>
+			<Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Title" Translatable="1">FileSystem Attachment</Item>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Lookup FileSystem attachment</Item>
+                    <Item Key="Title">FileSystem Attachment</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+	<Setting Name="DynamicFields::Driver###FileSystem" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField backend registration.</Description>
+		<Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">FileSystem</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::FileSystem</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldFileSystem</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="DynamicFieldFileSystemDir" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Specifies the directory to store the attachments.</Description>
+		<Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+			<Item String="" Regex="">&lt;OTRS_CONFIG_Home&gt;/var/dynamicfield</Item>
+        </Value>
+    </Setting>
+
+	<Setting Name="MaxSizeFileUpload" Required="1" Valid="1" ConfigLevel="210">
+        <Description Translatable="1">Defines the maximal size (in bytes) for file uploads via the dynamic field file system. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).</Description>
+		<Navigation>InBox::DynamicFieldFileSystem::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+			<Item String="" Regex="^[0-9]{1,11}$">24000000</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Agent::CommonJS###888-DynamicFieldFileSystem" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldFileSystem::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.FileSystem.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Customer::CommonJS###888-DynamicFieldFileSystem" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::DynamicFieldFileSystem::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.FileSystem.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="PublicFrontend::Module###PublicAttachment" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>InBox::PublicAttachment::Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">PublicAttachment</Item>
+                    <Item Key="Title">Public Attachment</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="DynamicFieldFileSystem::Core::PublicLink" Required="0" Valid="1">
+        <Description Translatable="1">This option defines whether the files link will be public.</Description>
+        <Navigation>InBox::DynamicFieldFileSystem::Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

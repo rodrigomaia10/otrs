@@ -1,0 +1,59 @@
+/* ===== Matriz de Risco (portal do cliente) - secoes em colunas verticais; escopo: formulario com o campo RefProf1Nome ===== */
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome){display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:0}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > [class*="Col_DynamicField_"]{flex:none;width:auto;max-width:none;display:flex;padding-bottom:14px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > [class*="Col_DynamicField_"] > .card{width:100%;height:100%;min-height:150px;margin-bottom:0}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS > .card{min-height:0}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFMOTORISTAREALIZADO{grid-column:1;grid-row:1;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFPROPRIETARIOREALIZADO{grid-column:1;grid-row:2}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Cliente{grid-column:2;grid-row:1;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Data{grid-column:2;grid-row:2}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaNome{grid-column:1;grid-row:3;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaCPF{grid-column:1;grid-row:4}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaTelefone{grid-column:2;grid-row:3;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_TIPOCONTRATACAOMOTORISTA{grid-column:2;grid-row:4}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt{grid-column:1;grid-row:5;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_DataEmissao{grid-column:2;grid-row:5;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Telefone{grid-column:3;grid-row:5;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RASTREADORTECNOLOGIA{grid-column:1;grid-row:6;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Login{grid-column:2;grid-row:6;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Senha{grid-column:3;grid-row:6;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Nome{grid-column:1;grid-row:7;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Empresa{grid-column:1;grid-row:8}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Telefone{grid-column:1;grid-row:9}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf2Nome{grid-column:2;grid-row:7;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf2Empresa{grid-column:2;grid-row:8}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf2Telefone{grid-column:2;grid-row:9}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf3Nome{grid-column:3;grid-row:7;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf3Empresa{grid-column:3;grid-row:8}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf3Telefone{grid-column:3;grid-row:9}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Nome{grid-column:1;grid-row:10;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Parentesco{grid-column:1;grid-row:11}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Telefone{grid-column:1;grid-row:12}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef2Nome{grid-column:2;grid-row:10;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef2Parentesco{grid-column:2;grid-row:11}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef2Telefone{grid-column:2;grid-row:12}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS{grid-column:1 / -1;grid-row:13;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCNH{grid-column:1;grid-row:14;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_PesqCavaloAnexoCRLV{grid-column:1;grid-row:15}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_PesqCarretaAnexoCLRV{grid-column:1;grid-row:16}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_PesqCavaloAnexoANTT{grid-column:2;grid-row:14;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_PesqContratoAluguel{grid-column:2;grid-row:15}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCompResidencia{grid-column:2;grid-row:16}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CarteiraDeTrabalhoESocial{grid-column:3;grid-row:14;margin-top:46px}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CteAnexoPosicaoRastreador{grid-column:3;grid-row:15}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFMOTORISTAREALIZADO{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFMOTORISTAREALIZADO::before{content:"Dados da análise";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaNome{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaNome::before{content:"Motorista";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt::before{content:"Proprietário (ANTT)";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RASTREADORTECNOLOGIA{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RASTREADORTECNOLOGIA::before{content:"Rastreador";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Nome{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Nome::before{content:"Referências profissionais";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Nome{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Nome::before{content:"Referências pessoais (família)";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS::before{content:"Informações adicionais";position:absolute;top:-40px;left:15px;width:calc(100% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCNH{position:relative}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCNH::before{content:"Anexos";position:absolute;top:-40px;left:15px;width:calc(300% - 30px);padding:4px 0;border-bottom:2px solid #7aa33a;font-weight:700;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#2f3b1a;z-index:1}

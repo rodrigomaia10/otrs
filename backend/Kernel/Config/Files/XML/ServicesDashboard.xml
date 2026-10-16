@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+
+    <Setting Name="Frontend::Module###AgentServicesDashboard" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::ServicesDashboard::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Title" Translatable="1">Services Dashboard</Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Chart to Tickets Stats</Item>
+                    <Item Key="Title" Translatable="1">Indicators</Item>
+                    <Item Key="NavBarName">Services Dashboard</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AgentServicesDashboard###002-ServicesDashboard" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::ServicesDashboard::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>inbox-thirdparty/chartjs-2.7.2/Chart.min.js</Item>
+                        <Item>Core.Agent.ServicesDashboard.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Navigation###AgentServicesDashboard###002-ServicesDashboard" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::ServicesDashboard::Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1"></Item>
+                        <Item Key="Name" Translatable="1">Services Dashboard</Item>
+                        <Item Key="Link">Action=AgentServicesDashboard</Item>
+                        <Item Key="NavBar" Translatable="1">Indicators</Item>
+                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">200</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="ServicesDashboard::Core::EnableCustomerSearch" Required="0" Valid="1">
+        <Description Translatable="1">Activates customer search.</Description>
+        <Navigation>InBox::ServicesDashboard::Core::UnansweredSurveys</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+</otrs_config>

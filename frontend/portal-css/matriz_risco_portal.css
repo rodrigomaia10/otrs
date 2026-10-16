@@ -1,0 +1,75 @@
+/* ===== Matriz de Risco (portal do cliente) - secoes com titulo ===== */
+/* Escopo: so a linha (.row) que contem o campo RefProf1Nome, ou seja, so este formulario */
+
+/* espaco acima das colunas que abrem uma linha de secao */
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFMOTORISTAREALIZADO,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFPROPRIETARIOREALIZADO,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Cliente,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaNome,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaCPF,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaTelefone,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_NewKMMCnpjCpf,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_DataEmissao,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Telefone,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RASTREADORTECNOLOGIA,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Login,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Senha,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Nome,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Empresa,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Telefone,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Nome,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Parentesco,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Telefone,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCNH,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_PesqCavaloAnexoCRLV,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_PesqCarretaAnexoCLRV {
+    margin-top: 46px;
+}
+
+/* titulos das secoes (na primeira coluna de cada secao) */
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFMOTORISTAREALIZADO::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaNome::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RASTREADORTECNOLOGIA::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Nome::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Nome::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS::before,
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCNH::before {
+    position: absolute;
+    top: -40px;
+    left: 15px;
+    width: calc(300% - 30px);
+    padding: 4px 0;
+    border-bottom: 2px solid #7aa33a;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #2f3b1a;
+    z-index: 1;
+}
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS::before { width: calc(100% - 30px); }
+
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_CAFMOTORISTAREALIZADO::before { content: "Dados da análise"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaNome::before { content: "Motorista"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Antt::before { content: "Proprietário (ANTT)"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RASTREADORTECNOLOGIA::before { content: "Rastreador"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_RefProf1Nome::before { content: "Referências profissionais"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaRef1Nome::before { content: "Referências pessoais (família)"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS::before { content: "Informações adicionais"; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_MotoristaAnexoCNH::before { content: "Anexos"; }
+
+/* quebras de linha: coluna sozinha ocupa a linha para a proxima secao comecar embaixo */
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_Data { margin-right: 66.66%; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_TIPOCONTRATACAOMOTORISTA { margin-right: 66.66%; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_NewKMMCnpjCpf:not(.HiddenShowHide) ~ .Col_DynamicField_Telefone { margin-right: 66.66%; }
+
+/* OBS em largura total */
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS { flex: 0 0 100%; max-width: 100%; }
+
+/* cartoes com a mesma altura */
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > [class*="Col_DynamicField_"] { display: flex; padding-bottom: 14px; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > [class*="Col_DynamicField_"] > .card { width: 100%; height: 100%; min-height: 150px; margin-bottom: 0; }
+form#NewServiceTicket .row:has(> .Col_DynamicField_RefProf1Nome) > .Col_DynamicField_OBS > .card { min-height: 0; }

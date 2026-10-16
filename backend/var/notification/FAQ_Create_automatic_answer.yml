@@ -1,0 +1,74 @@
+---
+- ChangeBy: '2'
+  ChangeTime: 2023-06-07 15:21:59
+  Comment: ''
+  CreateBy: '1'
+  CreateTime: 2023-06-07 10:44:19
+  Data:
+    AgentEnabledByDefault:
+    - Email
+    ArticleAttachmentInclude:
+    - '0'
+    Events:
+    - TicketDynamicFieldUpdate_FAQSendAnswer
+    LanguageID:
+    - en
+    - pt_BR
+    Recipients:
+    - Customer
+    Search_DynamicField_FAQSendAnswer:
+    - YES
+    TransportEmailTemplate:
+    - Default
+    TransportEmailTemplateEmailOption:
+    - Default
+    Transports:
+    - EmailOptionNotification
+    VisibleForAgent:
+    - '0'
+  ID: '23'
+  Message:
+    en:
+      Body: "<style type=\"text/css\">.feedbackAnswer {\n        display: flex;\n
+        \       flex-direction: row;\n    }\n\n    .answer {\n        display: flex;\n
+        \       flex-direction: column;\n        align-items: center;\n        margin:
+        10px 10px 5px 5px;\n    }\n\n    .button {\n        display: inline-block;\n
+        \       padding: 10px 20px;\n        margin: 10px 0;\n        text-decoration:
+        none;\n        background-color: #4CAF50;\n        color: #ffffff;\n        border-radius:
+        4px;\n        border: none;\n        font-size: 16px;\n        font-family:
+        'Helvetica Neue';\n    } \n\n    .button.denial {       \n        background-color:
+        #ff2a2a;        \n    }\n</style>\n&lt;OTRS_TICKET_DynamicField_FAQAnswer&gt;<br
+        />\n<br />\nPlease validate if the answer was satisfactory, select one of
+        the options below:\n<div class=\"feedbackAnswer\">\n<div class=\"answer\"><a
+        href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_1&gt;\"><img
+        alt=\"\" src=\"https://storage.googleapis.com/serviceup/avatar_feliz.png\"
+        width=\"72\" /> </a><br />\n<a class=\"button\" href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_1&gt;\">It
+        was enough, it helped me!</a></div>\n&nbsp;\n\n<div class=\"answer\"><a href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_2&gt;\"><img
+        alt=\"\" src=\"http://storage.googleapis.com/serviceup/avatar_triste.png\"
+        width=\"72\" /> </a><br />\n<a class=\"button denial\" href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_2&gt;\">It
+        was not satisfactory, continue service!</a></div>\n</div>"
+      ContentType: text/html
+      Subject: Automatic answer
+    pt_BR:
+      Body: "<style type=\"text/css\">.feedbackAnswer {\n        display: flex;\n
+        \       flex-direction: row;\n    }\n\n    .answer {\n        display: flex;\n
+        \       flex-direction: column;\n        align-items: center;\n        margin:
+        10px 10px 5px 5px;\n    }\n\n    .button {\n        display: inline-block;\n
+        \       padding: 10px 20px;\n        margin: 10px 0;\n        text-decoration:
+        none;\n        background-color: #4CAF50;\n        color: #ffffff;\n        border-radius:
+        4px;\n        border: none;\n        font-size: 16px;\n        font-family:
+        'Helvetica Neue';\n    } \n\n    .button.denial {       \n        background-color:
+        #ff2a2a;        \n    }\n</style>\n&lt;OTRS_TICKET_DynamicField_FAQAnswer&gt;<br
+        />\n<br />\nPor favor, valide se a resposta foi satisfatória, selecione uma
+        das opções abaixo:\n<div class=\"feedbackAnswer\">\n<div class=\"answer\"><a
+        href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_1&gt;\"><img
+        alt=\"\" src=\"https://storage.googleapis.com/serviceup/avatar_feliz.png\"
+        width=\"72\" /> </a><br />\n<a class=\"button\" href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_1&gt;\">Foi
+        suficiente, me ajudou!</a></div>\n&nbsp;\n\n<div class=\"answer\"><a href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_2&gt;\"><img
+        alt=\"\" src=\"http://storage.googleapis.com/serviceup/avatar_triste.png\"
+        width=\"72\" /> </a><br />\n<a class=\"button denial\" href=\"&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/otrs/public.pl?Action=EmailOptionReply;PublicKey=&lt;OTRS_EMAILOPTION_CustomerFeedbackFAQ_2&gt;\">Não
+        foi satisfatório, continuar atendimento!</a></div>\n</div>"
+      ContentType: text/html
+      Subject: Resposta automática
+  Name: FAQ - Create automatic answer
+  ValidID: '1'

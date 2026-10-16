@@ -1,0 +1,29 @@
+#chatbase-bubble-button img {
+    max-width: 200% !important;
+}
+
+
+.AttachmentListContainer {
+    position: relative;
+    width: 97%;
+    max-width: none !important
+}
+
+
+.ProcessContent .label-wrapper label {
+    flex-direction: row;
+}
+
+.InputField_Container, .InputField_InputContainer, .InputField_Container div, .InputField_InputContainer div, fieldset.Columns .Column .InputField_Container, fieldset.Columns .Column .InputField_InputContainer, fieldset.Columns .Column .InputField_Container div, fieldset.Columns .Column .InputField_InputContainer div{
+    width: auto !important;
+}
+
+#DynamicField_CteDB_Container .InputField_Selection:not(:hover) .Text {
+    background: #ebebeb !important;
+    border-radius: 5px;
+}
+
+
+.FAQZoom .ContentWrapper{
+    max-width: 100% !important;
+}

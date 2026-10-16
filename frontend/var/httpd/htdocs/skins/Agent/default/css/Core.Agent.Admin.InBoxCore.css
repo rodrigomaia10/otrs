@@ -1,0 +1,19 @@
+/**
+ * var/httpd/htdocs/skins/Agent/default/css/Core.Agent.Admin.InBoxCore.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+
+ * written/edited by:
+ ** dsilva@serviceup.com.br
+ */
+
+@media screen,projection,tv,handheld {
+
+    .InBoxRequiredDialog {
+        padding: 10px 20px 10px 20px;
+    } 
+    
+    .InBoxRequiredDialogLogo {
+        padding: 70px 20px 10px 20px;
+        background: url(https://storage.googleapis.com/serviceup/%20marca-06.png    ) no-repeat top center;
+    }
+}

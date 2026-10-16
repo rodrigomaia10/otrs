@@ -1,0 +1,134 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 7.0.1
+Provider:
+  Transport:
+    Type: ''
+RemoteSystem: ''
+Requester:
+  Invoker:
+    GetAnswers:
+      ArticleFields:
+      - Body
+      - IsVisibleForCustomer
+      - SenderType
+      - Subject
+      ArticleSenderType: []
+      CommunicationChannel: []
+      CountLastArticle: ''
+      CustomerVisibility: '2'
+      Description: ''
+      DynamicFieldList:
+      - FAQAnswer
+      - FAQSendAnswer
+      DynamicFieldsArticle: []
+      DynamicFieldsResponseArticle: []
+      DynamicFieldsTicket: []
+      Events:
+      - Asynchronous: '0'
+        Event: TicketServiceUpdate
+      - Asynchronous: '0'
+        Event: TicketCreate
+      FAQMembershipType: Service
+      MappingInbound:
+        Config:
+          DataInclude:
+          - RequesterRequestMapOutput
+          DecodeJSON: ''
+          ForceArray: ''
+          KeepAttributes: ''
+          OwnerCustomerData: ''
+          PostRegExFilter: ~
+          PostRegExValueCounter: ~
+          PreRegExFilter: ~
+          PreRegExValueCounter: ~
+          Template: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet
+            version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n
+            \   <xsl:template match=\"node() | @*\">\r\n    </xsl:template>\r\n\r\n
+            \   <xsl:template match=\"RootElement\">\r\n        <xsl:variable name=\"maxValueConfidenceScore\">\r\n
+            \           <xsl:for-each select=\"//answers\">\r\n                <xsl:sort
+            select=\"confidenceScore\" data-type=\"number\" order=\"descending\"/>\r\n
+            \               <xsl:if test=\"position() = 1\">\r\n                    <xsl:value-of
+            select=\"confidenceScore\"/>\r\n                </xsl:if>\r\n            </xsl:for-each>\r\n
+            \       </xsl:variable>\r\n        <xsl:variable name=\"maxValueAnswer\">\r\n
+            \           <xsl:for-each select=\"//answers\">\r\n                <xsl:sort
+            select=\"confidenceScore\" data-type=\"number\" order=\"descending\"/>\r\n
+            \               <xsl:if test=\"position() = 1\">\r\n                    <xsl:value-of
+            select=\"answer\"/>\r\n                </xsl:if>\r\n            </xsl:for-each>\r\n
+            \       </xsl:variable>\r\n        <xsl:copy>\r\n            <xsl:if test=\"count(//answers)
+            > 0\">\r\n                    <xsl:variable name=\"MinConfidenceScore\"
+            select=\"//DataInclude/RequesterRequestMapOutput/MinConfidenceScore\"
+            />\r\n                    <xsl:if test=\"$maxValueConfidenceScore > $MinConfidenceScore\">\r\n
+            \                       <Ticket>\r\n                            <DynamicField>\r\n
+            \                               <Name>FAQSendAnswer</Name>\r\n                                <Value>YES</Value>\r\n
+            \                           </DynamicField>\r\n                            <DynamicField>\r\n
+            \                               <Name>FAQAnswer</Name>\r\n                                <Value><xsl:value-of
+            select=\"$maxValueAnswer\" /></Value>\r\n                            </DynamicField>\r\n
+            \                       </Ticket>\r\n                    </xsl:if>\r\n
+            \           </xsl:if>\r\n        </xsl:copy>\r\n    </xsl:template>\r\n
+            \   <xsl:template match=\"content\" />\r\n</xsl:stylesheet>"
+        Type: XSLT
+      MappingOutbound:
+        Config:
+          DataInclude: []
+          DecodeJSON: ''
+          ForceArray: records
+          KeepAttributes: ''
+          OwnerCustomerData: ''
+          PostRegExFilter: ~
+          PostRegExValueCounter: ~
+          PreRegExFilter: ~
+          PreRegExValueCounter: ~
+          Template: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:stylesheet
+            version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n
+            \   <xsl:template match=\"node() | @*\">\r\n    </xsl:template>\r\n\r\n
+            \   <!-- Recursive template to split the text -->\r\n    <xsl:template
+            name=\"splitText\">\r\n        <xsl:param name=\"inputText\" />\r\n        <xsl:param
+            name=\"position\" select=\"1\"/>\r\n\r\n        <!-- Check if the input
+            text is not empty -->\r\n        <xsl:if test=\"string-length($inputText)
+            > 0\">\r\n            <!-- Get the first 30 characters of the input text
+            -->\r\n            <xsl:variable name=\"segment\" select=\"substring($inputText,
+            1, 5000)\"/>\r\n\r\n            <!-- Output the current sentence -->\r\n
+            \           <xsl:element name=\"records\">\r\n                <id><xsl:value-of
+            select=\"$position\"/></id>\r\n                <text><xsl:value-of select=\"$segment\"
+            /></text>\r\n            </xsl:element>\r\n\r\n            <!-- Recursive
+            call to process the remaining text -->\r\n            <xsl:call-template
+            name=\"splitText\">\r\n                 <xsl:with-param name=\"inputText\"
+            select=\"substring($inputText, 5001)\"/>\r\n                <xsl:with-param
+            name=\"position\" select=\"$position + 1\"/>\r\n            </xsl:call-template>\r\n
+            \       </xsl:if>\r\n    </xsl:template>\r\n\r\n    <xsl:template match=\"RootElement\">\r\n
+            \       <xsl:copy>\r\n            <xsl:if test=\"count(//FAQs) > 0\">\r\n
+            \               <VersionAPI>2021-10-01</VersionAPI>\r\n                <language>pt</language>\r\n
+            \               <question><xsl:value-of select=\"//Article/Body\"/></question>\r\n\r\n
+            \               <!--xsl:for-each select=\"//FAQs\"-->\r\n                    <xsl:variable
+            name=\"text\" select=\"//FAQs/Field3\" />\r\n\r\n                    <xsl:call-template
+            name=\"splitText\">\r\n                        <xsl:with-param name=\"inputText\"
+            select=\"$text\" />\r\n                    </xsl:call-template>\r\n                <!--/xsl:for-each-->\r\n
+            \               <MinConfidenceScore><xsl:value-of select=\"//FAQs/DynamicField_MinConfidenceScore\"/></MinConfidenceScore>\r\n
+            \           </xsl:if>\r\n        </xsl:copy>\r\n    </xsl:template>\r\n
+            \   <xsl:template match=\"content\" />\r\n</xsl:stylesheet>"
+        Type: XSLT
+      OnlyFirstArticle: '1'
+      ReturnAttachments: '0'
+      TicketFields: []
+      TicketIDToDynamicField: ''
+      Type: IA::FAQInject
+  Transport:
+    Config:
+      AdditionalHeaders:
+        Content-Type: application/json
+        Ocp-Apim-Subscription-Key: ''
+      ContentType: ''
+      DecodeJSONResponseError: '0'
+      DefaultCommand: POST
+      Host: https://sup.cognitiveservices.azure.com/language
+      InvokerControllerMapping:
+        GetAnswers:
+          Command: POST
+          Controller: /:query-text?api-version=:VersionAPI
+      SSLNoHostnameVerification: '0'
+      Timeout: '120'
+    Type: HTTP::REST

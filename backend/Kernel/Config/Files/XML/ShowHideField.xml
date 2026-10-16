@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+
+    <!-- AJAX Handle for Agent -->
+    <Setting Name="Frontend::Module###ShowHideAJAXHandler" Required="0" Valid="1">
+      <Description Translatable="1">Frontend module registration for the ShowHideAJAXHandler.</Description>
+      <Navigation>InBox::ShowHide::Frontend::Agent::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Group"></Item>
+                  <Item Key="GroupRo"></Item>
+                  <Item Key="Description">Lookup ShowHideField with AJAX-request</Item>
+                  <Item Key="Title"></Item>
+                  <Item Key="NavBarName"></Item>
+              </Hash>
+          </Item>
+      </Value>
+    </Setting>
+    
+    <!-- AJAX Handle for Customer -->
+    <Setting Name="CustomerFrontend::Module###ShowHideAJAXHandler" Required="0" Valid="1">
+      <Description Translatable="1">Frontend module registration for the ShowHideAJAXHandler.</Description>
+      <Navigation>InBox::ShowHide::Frontend::Customer::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Group"></Item>
+                  <Item Key="GroupRo"></Item>
+                  <Item Key="Description">Lookup ShowHideField with AJAX-request</Item>
+                  <Item Key="Title"></Item>
+                  <Item Key="NavBarName"></Item>
+              </Hash>
+          </Item>
+      </Value>
+    </Setting>
+
+    <!-- Load JS in Common Agent Interface -->
+    <Setting Name="Loader::Agent::CommonJS###001-JSShowHideField" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::ShowHide::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.ShowHideField.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- Load JS in Common Customer Interface -->
+    <Setting Name="Loader::Customer::CommonJS###001-JSShowHideField" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::ShowHide::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.ShowHideField.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- ShowHide in the CustomServiceForm -->
+    <Setting Name="ShowHideField::Core::ToEnableCustomServiceForm" Required="0" Valid="1">
+        <Description Translatable="1">Apply ACL ShowHide in the CustomServiceForm.</Description>
+        <Navigation>InBox::ShowHide::Core</Navigation>
+        <Value>
+        <Item ValueType="Select" SelectedID="0">
+            <Item ValueType="Option" Value="0" Translatable="1">No</Item>
+            <Item ValueType="Option" Value="1" Translatable="1">Yes</Item>
+        </Item>
+    </Value>
+    </Setting>~
+
+    <Setting Name="PublicFrontend::Module###ShowHideAJAXHandler" Required="0" Valid="0">
+      <Description Translatable="1">Frontend module registration for the ShowHideAJAXHandler.</Description>
+      <Navigation>InBox::ShowHide::Frontend::Agent::ModuleRegistration</Navigation>
+      <Value>
+          <Item ValueType="FrontendRegistration">
+              <Hash>
+                  <Item Key="Group"></Item>
+                  <Item Key="GroupRo"></Item>
+                  <Item Key="Description">Lookup ShowHideField with AJAX-request</Item>
+                  <Item Key="Title"></Item>
+                  <Item Key="NavBarName"></Item>
+              </Hash>
+          </Item>
+      </Value>
+    </Setting>
+
+    <Setting Name="Loader::Agent::CommonCSS###020-CSSShowHideField" Required="0" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::ShowHide::Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.ShowHide.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Customer::CommonCSS###001-CSSShowHideField" Required="0" Valid="1">
+        <Description Translatable="1">List of css files to always be loaded for the customer interface.</Description>
+        <Navigation>InBox::ShowHide::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.ShowHideCustomer.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="AutoloadPerlPackages###1001-TicketACL" Required="0" Valid="1">
+        <Description Translatable="1">Autoload for module AgentTicketActionCommon.</Description>
+        <Navigation>InBox::ShowHide::Core::Autoload</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">Kernel::Autoload::TicketACL</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+</otrs_config>

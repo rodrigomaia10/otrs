@@ -1,0 +1,46 @@
+/**
+ * var/httpd/htdocs/skins/Agent/default/css/Core.Agent.CustomServiceForm.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ *  * jgsantos@beonup.com.br
+ */
+
+ /**
+ * @package     InBox CustomServiceForm - Skin "Default"
+ * @section     Agent
+ */
+.WidgetSimple fieldset.Separated {
+    background-color: #E9E9E9;
+    border: 1px solid #CCCCCC;
+    margin: 9px 0px;
+    padding: 4px;
+}
+
+@media screen,projection,tv,handheld {
+
+fieldset.TableLike > .Field, fieldset.TableLike > .FormContent > .Row > .Field {
+    line-height: 1.9em;
+    /* margin-left: 30%; */
+    margin-right: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 0px;
+    min-height: 20px;
+}
+
+fieldset.TableLike > .FormContent > .Row > label {
+    display: block;
+    float: left;
+    line-height: 1.9em;
+    width: 30%;
+    text-align: right;
+    color: #929292;
+    min-height: 17px;
+    padding-top: 0.3em;
+    padding-bottom: 1px;
+    text-shadow: 0 1px 0 #FAFAFA;
+}
+
+}/* end @media */

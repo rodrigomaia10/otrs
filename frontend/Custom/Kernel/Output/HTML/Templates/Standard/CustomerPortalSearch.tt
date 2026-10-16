@@ -1,0 +1,80 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalSearchTickets.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * jsantos@serviceup.com.br
+# --
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.css" rel="stylesheet" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div id="Overlay" tabindex="0" style="transition: .6s !important;z-index: 1;height: 1723px; top: 0px;" class="Hidden"></div>
+
+<div class="row ServicesRowList HiddenElement" id="ServicesRowList">
+    <div class="col-lg-12">
+        <div class="form-group left-inner-addon">
+            <i class="fa fa-search" id="icon-Search"></i>
+            <input type="text" class="form-control" id="input-search-service" title=" [% Translate("Search") | html %]...">
+                <ul id="service-list">
+                </ul>
+
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<div id="content-functions-content" class="ContentResponsive removecontent">
+[% RenderBlockStart("BackgroundPortal") %]
+    <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+    <div class="MainBox">
+
+    [% RenderBlockStart("SearchResults") %]
+    <div class="row" >
+        <div class="col-lg-12 col-md-10 col-sm-10">
+            <div class="card-header-alt-newTicket">
+                <h5 class="card-title"><i class="fa fa-search"></i> [% Translate("Showing results for") | html %] '[% Data.Fulltext %]'...</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-lg-12 col-md-10 col-sm-10">           
+            <div class="card">
+            <div class="card-body">
+                <table id="FullSearchTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>[% Translate("Type of object") | html %]</th>
+                        <th>[% Translate("Description") | html %]</th>
+                        <th>[% Translate("Name/Title") | html %]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                [% RenderBlockStart("RecordService") %]
+                    <tr>
+                        <td><a href="[% Env("Baselink") %][% Data.URLToAcess | html %]">[% Data.TypeObject | html %]</a></td>
+                        <td>[% Data.Description | html %]</td>
+                        <td><div title="[% Data.Name | html %]">[% Data.Name | html %]</div></td>
+                    </tr>                
+                [% RenderBlockEnd("RecordService") %]
+                [% RenderBlockStart("Record") %]
+                    <tr>
+                        <td><a href="[% Env("Baselink") %][% Data.URLToAcess | html %]">[% Data.TypeObject | html %]</a></td>
+                        <td>[% Data.Description | html %]</td>
+                        <td><div title="[% Data.Name | html %]">[% Data.Name | html %]</div></td>
+                    </tr>                
+                [% RenderBlockEnd("Record") %]
+                
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    [% RenderBlockEnd("SearchResults") %]
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]

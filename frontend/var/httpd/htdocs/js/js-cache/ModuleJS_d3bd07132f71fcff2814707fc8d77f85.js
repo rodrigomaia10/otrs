@@ -1,0 +1,3 @@
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+"use strict";var Core=Core||{};Core.Agent=Core.Agent||{};Core.Agent.Admin=Core.Agent.Admin||{};Core.Agent.Admin.SelectBox=(function(TargetNS){TargetNS.Init=function(){Core.Form.Validate.SetSubmitFunction($('#AdminSelectBoxForm'),function(Form){Form.submit();if($('#ResultFormat option:selected').text()!=='CSV'&&$('#ResultFormat option:selected').text()!=='Excel'){window.setTimeout(function(){Core.Form.DisableForm($(Form));},0);}});Core.UI.Table.InitTableFilter($('#FilterResults'),$('#Results'));};Core.Init.RegisterNamespace(TargetNS,'APP_MODULE');return TargetNS;}(Core.Agent.Admin.SelectBox||{}));

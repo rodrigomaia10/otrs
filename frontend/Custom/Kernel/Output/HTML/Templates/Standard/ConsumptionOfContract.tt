@@ -1,0 +1,104 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalStats.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.css" rel="stylesheet" />
+<!--link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/gridstack-1.1.1/gridstack.min.css" rel="stylesheet" /-->
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div id="Content_Stats" class="ContentResponsive">
+[% RenderBlockStart("BackgroundPortal") %]
+    <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+    <div class="row" style="margin-top: 0px; margin-bottom: 20%;">
+        <div class="col-md-12">           
+            <div class="card card-custom-agent">
+            
+                <div class="card-text">
+                    <div class="">
+                        <div class="Header" style="border-radius: 3px;">
+                            <div class="TitleOfConsumption"><b style=" font-size: 16px;"><h5>[% Translate("Consumption of Hours by Contract") | html %]</h5></b></div>
+                        </div>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="Dashboard_filter_form" id="Dashboard_filter_form" class="WidgetfiltersForm">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="Search"/>
+                            <div style="text-align: center;">
+                                <div class="FilterFilds">
+                                    <Label for="Contract">[% Translate("Contract") | html %]:</label>
+                                    <div class="Field FieldMonthContract">[% Data.ContractOptionStrg %]</div>
+                                </div>
+                                <div class="FilterFilds">
+                                    <Label for="Year">[% Translate("Year") | html %]:</label>
+                                    <div class="Field">[% Data.YearOptionStrg %]</div>
+                                </div>
+                                <div class="FilterFilds">
+                                    <Label for="Month">[% Translate("Month") | html %]:</label>
+                                    <div class="Field FieldMonthContract">[% Data.MonthOptionStrg %]</div>
+                                </div>
+                                <div class="FilterFilds" style="padding: 10px 0px 8px 0px;">
+                                    <button id="Dashboard_submit" class="DontPrint CallForAction" type="submit" value="[% Translate("Submit") | html %]">
+                                        <span>[% Translate("Search") | html %]</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <table id="TicketTable" class="table table-striped table-bordered ListContract" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="HeaderTable">[% Translate("Month") | html %]</th>
+                                    <th class="HeaderTable">[% Translate("Contract") | html %]</th>
+                                    <th class="HeaderTable">[% Translate("Type of Consumption") | html %]</th>
+                                    <th class="HeaderTable">[% Translate("Contracted Hours") | html %]</th>
+                                    <th class="HeaderTable">[% Translate("Hours Consumed") | html %]</th>
+                                    <th class="HeaderTable">[% Translate("Balance") | html %]</th>
+                                    <th class="HeaderTable">[% Translate("Percentage of Consumption") | html %]</th>
+                                    [% IF Config("CustomerPortal::Core::ToEnableDownloadConsumptionOfContract") == 1 %]
+                                    <th class="HeaderTable">[% Translate("Export") | html %]</th>
+                                    [% END %]
+                                </tr>
+                            </thead>
+                            <tbody id="TableContentBody">
+[% RenderBlockStart("OverviewListRow") %]
+                                <tr class="column-content TableDataRow">
+                                    <td>[% Translate(Data.Month) %]</td>
+                                    <td>[% Data.Name %]</td>
+                                    <td>[% Data.Type %]</td>
+                                    <td>[% Data.TotalHours %]</td>
+                                    <td>[% Data.ConsumptionHours %]</td>
+                                    <td>[% Data.Balance %]</td>
+                                    <td class="ProgressTd">
+                                        <span class="ProgressContract" style="background-color: [% Data.ColorPercNotify %]; width: [% Data.PercentConsumption %];">[% Data.PercentConsumption %]</span>
+                                    </td>
+                                    [% IF Config("CustomerPortal::Core::ToEnableDownloadConsumptionOfContract") == 1 %]
+                                    <td style="text-align: center">
+                                        <a href="[% Env("CGIHandle") %]?Action=[% Env("Action") %];Subaction=ExportTicketView;ContractID=[% Data.ContractID %];Year=[% Data.Year %];Month=[% Data.MonthNumber %]" target="_self"><i class="fa fa-download"></i> [% Translate("Download") | html %]</a>
+                                    </td>
+                                    [% END %]
+                                </tr>
+[% RenderBlockEnd("OverviewListRow") %]
+[% RenderBlockStart("NoDataFoundMsg") %]
+                                <tr>
+                                    <td colspan="[% IF Config("CustomerPortal::Core::ToEnableDownloadConsumptionOfContract") == 1 %]8[% ELSE %]7[% END %]">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="Clear"></div>
+</div>
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]

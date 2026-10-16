@@ -1,0 +1,40 @@
+<fieldset class="TableLike Hidden" id="SearchAttributesHidden">
+    <div class="Clear"></div>
+    <label for="Number" id="LabelNumber">[% Translate("Number") | html %] [% Translate("(e. g. 10*5155 or 105658*)") | html %]:</label>
+    <div class="Field">
+        <input type="text" name="Number" value="[% Data.Number | html %]" class="W50pc" />
+        <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+    </div>
+
+    <div class="Clear"></div>
+    <label for="Name" id="LabelName">[% Translate("Name") | html %]:</label>
+    <div class="Field">
+        <input type="text" name="Name" value="[% Data.Name | html %]" class="W50pc" />
+        <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+    </div>
+
+    <div class="Clear"></div>
+    <label for="DeplStateIDs" id="LabelDeplStateIDs">[% Translate("Deployment State") | html %]:</label>
+    <div class="Field">
+        [% Data.CurDeplStateOptionStrg %]
+        <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+    </div>
+
+    <div class="Clear"></div>
+    <label for="InciStateIDs" id="LabelInciStateIDs">[% Translate("Incident State") | html %]:</label>
+    <div class="Field">
+        [% Data.CurInciStateOptionStrg %]
+        <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+    </div>
+
+[% RenderBlockStart("AttributeRow") %]
+    <div class="Clear"></div>
+    <label for="[% Translate(Data.Key) | html %]" id="Label[% Data.Key %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Name) | html %]:</label>
+    <div class="Field">
+        [% Data.InputString %]
+        <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+    </div>
+[% RenderBlockEnd("AttributeRow") %]
+    <div class="Clear"></div>
+    [% Data.AttributesOrigStrg %]
+</fieldset>

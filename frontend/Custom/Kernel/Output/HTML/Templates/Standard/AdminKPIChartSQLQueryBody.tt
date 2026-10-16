@@ -1,0 +1,57 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPIChartSQLQueryBody.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dparavani@serviceup.com.br
+# --
+ 
+  [% RenderBlockStart("Result") %]
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("%s Results", Data.MatchesFound) | html %]</h2>
+                </div>
+                <div class="Content">
+                    <table class="DataTable" id="Results">
+                        <thead>
+                            <tr>
+    [% RenderBlockStart("ColumnHead") %]
+                                <th>[% Data.ColumnName | html %]</th>
+    [% RenderBlockEnd("ColumnHead") %]
+                            </tr>
+                        </thead>
+                        <tbody>
+    [% RenderBlockStart("NoMatches") %]
+                            <tr><td colspan="[% Data.Colspan | html %]">[% Translate("No matches found.") | html %]</td></tr>
+    [% RenderBlockEnd("NoMatches") %]
+    [% RenderBlockStart("NoSelectResult") %]
+                            <tr><td colspan="[% Data.Colspan | html %]">[% Translate("Query is executed.") | html %]</td></tr>
+    [% RenderBlockEnd("NoSelectResult") %]
+    [% RenderBlockStart("Row") %]
+                            <tr>
+    [% RenderBlockStart("Cell") %]
+                                <td title="[% Data.Content | html %]">[% Data.Content | truncate(80) | html %]</td>
+    [% RenderBlockEnd("Cell") %]
+                            </tr>
+    [% RenderBlockEnd("Row") %]
+                            <tr class="FilterMessage Hidden">
+                                <td colspan="999">[% Translate("No matches found.") | html %]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    [% RenderBlockEnd("Result") %]
+
+    [% RenderBlockStart("SQLIsNotSelectServerError") %]
+        <div class="KPISQLErrorDiv">[% Translate("Only select queries are allowed.") | html %] </div>
+    [% RenderBlockEnd("SQLIsNotSelectServerError") %]
+    [% RenderBlockStart("SQLSyntaxServerError") %]
+        <div class="KPISQLErrorDiv">[% Translate("The syntax of your SQL query has a mistake. Please check it.") | html %] </div>
+    [% RenderBlockEnd("SQLSyntaxServerError") %]
+    [% RenderBlockStart("BindParamServerError") %]
+        <div class="KPISQLErrorDiv">[% Translate("There is at least one parameter missing for the binding. Please check it.") | html %] </div>
+    [% RenderBlockEnd("BindParamServerError") %]
+    [% RenderBlockStart("GraphDoesNotMatchSQLServerError") %]
+        <div class="KPISQLErrorDiv">[% Translate("Selected chart type incompatible with the generated table.") | html %] </div>
+    [% RenderBlockEnd("GraphDoesNotMatchSQLServerError") %]

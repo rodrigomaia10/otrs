@@ -1,0 +1,238 @@
+/*
+# --
+# var/httpd/htdocs/skins/Customer/default/css/Core.Public.EmailOption.css
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * gesquetini@beonup.com.br
+# --
+*/
+
+
+.Hidden {
+    display: none !important;
+}
+
+#Container form div {
+     /* display: block  !important;
+    flex-direction: none !important;
+    gap: none !important; */
+
+    display: flex ;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+#Header {
+    height: 82px !important;
+}
+
+#Container {
+    max-width: none !important;
+}
+
+body {
+    overflow-x:hidden;
+}
+
+/* Style inputs, select elements and textareas */
+
+input[type=text], select, textarea {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+    resize: none;
+}
+
+.TextAreaError {
+    border: 1px solid #ff0000 !important;
+}
+
+.TextAreaError::placeholder {
+    font-weight: bold;
+    opacity: 0.7;
+    color: red;
+}
+
+/* Style the label to display next to the inputs */
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+/* Style the submit button */
+
+input[type=submit] {
+    background-color: #4c7daf;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 34px;
+    cursor: pointer;
+    float: right;
+}
+
+/* Style the container */
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    height: -webkit-fill-available;
+    text-align: center;
+}
+
+/*Form*/
+
+.form {
+    display: inline-block;
+    width: 700px;
+}
+
+/* Floating column for labels: 25% width */
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.col-100 {
+    float: left;
+    text-align: center;
+    width: 100%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#MainBox .Content{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+#Header {
+    background: #fff;
+    height: 34px !important;
+    width: -webkit-fill-available !important;
+    padding: 25px 30px;
+}
+
+.col-100 label{
+    font-size: 30px;
+    font-weight: bolder;
+    cursor: auto;
+    padding: 3px 9px 3px 5px;
+    display: inline-block;
+    /* width: -webkit-fill-available; */
+    width: 100%;
+    margin-right: 8px;
+    float: left;
+    text-align: center;
+    line-height: normal;
+}
+
+.Box{
+    width: 100%; 
+    float: left;
+}
+
+.Box_Row{
+    background-color: #4c7daf;
+    padding: 20px;
+    /* margin-right: -5.5%; */
+    margin-left: -20px;    /* margin-left: -2.8%; */
+    border-radius: 10px 10px 0px 0px;
+    width:inherit;
+    height:100%;
+}
+
+.Box form {
+    padding: 8px 8px 0;
+    display: block;
+    background-color: #d6d6d6;
+    padding: 20px;
+    margin-left: -20px;
+    border-radius: 0px 0px 10px 10px;
+    width:inherit;
+    height:100%;
+}
+
+.Box-Sucess {
+    width: 100%;
+    float: left;
+    text-align: center;
+    line-height: normal;
+    background-color: #d6d6d6;
+    padding: 20px;
+    margin-left: -20px;
+    border-radius: 0px 0px 10px 10px;
+    width:inherit;
+    height:100%;
+}
+
+.Box-Warning {
+    width: 100%;
+    float: left;
+    text-align: center;
+    line-height: normal;
+    background-color: #d6d6d6;
+    padding: 20px;
+    margin-left: -20px;
+    border-radius: 0px 0px 10px 10px;
+    width:inherit;
+    height:100%;
+}
+
+.Box-Sucess h1, .Box-Warning h1 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+.dynamicFields {
+    display: flex;
+    width: 90%;
+    margin: 6px 5%;
+    align-items: center;
+}
+
+.dynamicFields > input {
+   flex-basis: 75%;
+}
+
+.dynamicFields > label {
+    display: inline-flex;
+    font-size: 15px;
+    align-items: start;
+    flex-basis: 25%;
+}

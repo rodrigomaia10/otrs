@@ -1,0 +1,54 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AgentKanban.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain">
+
+	<h1>[% Translate("My Boards") %]</h1>
+	<div class="ContentColumn">
+		<div class="WidgetSimple" id="Dashboard-KanbanMyBoards">
+			<div class="Header">
+				<!-- <div class="ActionMenu">
+					<div class="WidgetAction Settings">						
+					</div>				
+					<div class="Clear"></div>
+				</div> -->
+				<h2 title="[% Translate("Overview") | html %]">[% Translate("Overview") | html %]</h2>
+			</div>
+			<div class="Content">
+				<ul class="ListBoards">
+                [% RenderBlockStart("BoardNames") %]
+				    <li class="card" style="background-color: [% Data.BoardColor %]">
+					    [% RenderBlockStart("ToEditBoard") %]
+						<div class="EditBoard">
+							<a href="[% Env("Baselink") %]Action=AdminKanbanBoards;Subaction=BoardsEdit;ID=[% Data.BoardID %];OpenBy=Kanban">
+								<span  style="color: [% Data.BoardColorLabel %]" style='z-index: 1 !important' data-service-favorite="[% Data.ServiceID | html %]" title="[% Translate("Edit board") | html %]">
+								<i class="fa fa-pencil-square-o"></i>
+								</span>
+							</a>
+						</div>	
+						[% RenderBlockEnd("ToEditBoard") %]
+						<a href="[% Env("Baselink") %]Action=AgentKanban;Subaction=KanbanBoard;BoardID=[% Data.BoardID %]">
+							<div class="container">
+							<h4><b class="KanbanName"  style="color: [% Data.BoardColorLabel %]">[% Data.BoardName | html %]</b></h4>
+							</div>						
+						</a>
+						<div title="[% Translate("Number of tickets") | html %]" class='ConterTicketBoards' style="color: [% Data.BoardColorLabel %]">[% Translate("Total of tickets") | html %] [% Data.TotalTickets %]</div>
+					</li>
+                [% RenderBlockEnd("BoardNames") %]
+					[% RenderBlockStart("KanbanAddBoard") %]
+						<li class="card KanbanAddBoard">
+							<div id='AddBoardCard'>
+							<spam><i class='fa fa-plus'></i></spam> [% Translate("Add board") | html %]	
+							</div>								
+						</li>
+					[% RenderBlockEnd("KanbanAddBoard") %]
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

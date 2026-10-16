@@ -1,0 +1,126 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standart/DynamicFieldTableColumn.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * dsilva@serviceup.com.br
+# * ykaneage@serviceup.com.br
+# --
+
+[% RenderBlockStart("ValueTemplate") %]
+	<div class="ValueRow">
+
+		<div class="Field single-row-inputs">
+
+			<div class="field-wrapper">
+				<label style="">[% Translate("Column") | html %]:</label>
+				<input name="Column_[% Data.ValueCounter | html %]" id="Column_[% Data.ValueCounter | html %]" class="DefaultValueItem W20pc Validate_Required" type="text" value="[% Data.Column | html %]" maxlength="100"/>
+			</div>
+
+			<div class="field-wrapper">
+				<label>[% Translate("Type") | html %]:</label>
+				[% Data.PossibleDataTypes %]
+			</div>
+
+			<div class="field-wrapper">
+				<label class="Hidden" for="ContentColumn_[% Data.ValueCounter %]">[% Translate("Content") | html %]:</label>
+				<input name="ContentColumn_[% Data.ValueCounter %]" id="ContentColumn_[% Data.ValueCounter %]" class="DefaultValueItem Hidden" type="text" value="[% Data.ColumnContent %]" style="width: 42%;"/>
+			</div>
+
+		</div>
+		<br>
+		<div class="Field single-row-inputs">
+
+			<div class="field-wrapper">
+				<label style="" for="Default_[% Data.ValueCounter %]">[% Translate("Default") | html %]:</label>
+				<input name="Default_[% Data.ValueCounter%]" id="Default_[% Data.ValueCounter%]" class="DefaultValueItem" type="text" value="[% Data.Default%]" maxlength="100"/>
+			</div>
+
+			<div class="field-wrapper">
+				<label style="width: 135px;">[% Translate("Editable by") | html %]:</label>
+				[% Data.EditableByList %]
+			</div>
+		</div>
+
+		<a href="#" id="RemoveValue_[% Data.ValueCounter %]" class="RemoveButton ValueRemove_[% Data.ValueCounter %]"><i class="fa fa-minus-square-o"></i></a>
+
+	</div>
+
+	<div id="AJAXLoader" class="Spacing Center Hidden">
+		<span class="AJAXLoader" title="[% Translate("Loading") | html %]"></span>
+	</div>
+
+	<div id="AjaxColumn_[% Data.ValueCounter %]" style="flex-flow: column;"></div>
+
+[% WRAPPER JSOnDocumentComplete %]
+<script type="text/javascript">//<![CDATA[
+$('.DataTypeColumn_' + [% Data.ValueCounter %]).bind('change', function () {   
+    if ($(this).val() == 'select' && !($("#Column_" + [% Data.ValueCounter %]).val() == '')){		
+		$("#ContentColumn_" + [% Data.ValueCounter %]).removeClass('Hidden');
+		$("#ContentColumn_" + [% Data.ValueCounter %]).addClass('Validate_Required');
+		$('label[for="ContentColumn_'+ [% Data.ValueCounter %] +'"]').removeClass('Hidden');		
+	}
+	else{
+		$("#ContentColumn_" + [% Data.ValueCounter %]).addClass('Hidden');
+		$("#ContentColumn_" + [% Data.ValueCounter %]).removeClass('Validate_Required');
+		$('label[for="ContentColumn_'+ [% Data.ValueCounter %] +'"]').addClass('Hidden');
+	}
+	if ($(this).val() == 'mask' || $(this).val() == 'maskMoney'){
+		Core.Agent.Admin.DynamicFieldTable.NewMask($("#Column_" + [% Data.ValueCounter %]).val(), $(this).val());		
+	}
+	else{
+		var ColName = $("#Column_" + [% Data.ValueCounter %]).val();
+		ColName = ColName.replace(/\ /g, "");
+		
+		$('.DataItem_' + ColName).remove();
+	}
+	
+	if ( $("#Column_" + [% Data.ValueCounter %]).val() == '' ){
+		$(this).val("-");
+		$(this).addClass('Error');
+		$("#Column_" + [% Data.ValueCounter %]).addClass('Error');
+		
+	}
+	if ($('#PossibleSum').val() == 'true'){
+		Core.Agent.Admin.DynamicFieldTable.ColumnsSum();
+	}
+});
+
+$('#Column_' + [% Data.ValueCounter %]).bind('keydown', function () { 
+	var $MaskName = $('#Column_' + [% Data.ValueCounter %]).val();
+	$MaskName = $MaskName.replace(/\ /g, '');
+	$('.DataItem_' + $MaskName).remove();
+	
+	var $Div = $('#TypeColumn_' + [% Data.ValueCounter %]+ '_Search').parent();
+	var remove = $Div.find(".InputField_Selection");
+	remove.remove();
+	
+	$('.DataTypeColumn_' + [% Data.ValueCounter %]).val("-");	
+	
+	if ($('#PossibleSum').val() == 'true'){
+		Core.Agent.Admin.DynamicFieldTable.ColumnsSum();
+	}
+});
+
+//bind click function to remove button
+$('.ValueRemove_' +[% Data.ValueCounter %]).bind('click', function () {
+    Core.Agent.Admin.DynamicFieldTable.RemoveValue($(this).attr('id'));
+    return false;
+});
+
+//]]></script>
+[% END %]
+[% RenderBlockEnd("ValueTemplate") %]
+
+[% RenderBlockStart("FooterJS") %]
+<script type="text/javascript">
+[% PROCESS JSOnDocumentCompleteInsert %]
+</script>
+[% RenderBlockEnd("FooterJS") %]
+
+<style>
+	.ValueRow .InputField_Container{
+		margin-left: 3.3%;
+	}
+</style>

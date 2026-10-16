@@ -1,0 +1,33 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/KanbanShareInformation.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * poliveira@serviceup.com.br
+# --
+
+<div class="InnerContent" style="max-height: 200px;">
+ <form action="[% Env("Baselink") %]" method="post" id="AgentSplitSelection">
+        <input type="hidden" name="Action" value="AgentSplitSelection">
+        <input type="hidden" name="Subaction" value="ProcessSelection">
+        <input type="hidden" name="TicketID"  id="TicketID"  value="[% Data.TicketID %]">
+        <input type="hidden" name="ArticleID"  id="ArticleID" value="[% Data.ArticleID %]">
+        <input type="hidden" name="LinkTicketID" id="LinkTicketID" value="[% Data.TicketID %]">
+        <fieldset class="TableLike">
+            <label for="SplitSelection">[% Translate("Target") | html %]:</label>
+            <div class="Field">
+                 [% Data.OptionsStrg %]
+            </div>
+            <div class="Clear"></div>
+
+           <div class="ContentFooter Center">
+              <div class="Clear"></div>
+                <button onClick="Core.Agent.Admin.MyKanbanBoard.TicketSplit()" id="SplitSubmit" class="CallForAction Primary btn-primary btn-main btn-width-md" value="[% Translate("Split") | html %]" type="button">
+                    <span>[% Translate("Split") | html %]</span>
+                </button>
+            </div>
+            <div class="Clear"></div>
+        </fieldset>
+    </form>
+</div>

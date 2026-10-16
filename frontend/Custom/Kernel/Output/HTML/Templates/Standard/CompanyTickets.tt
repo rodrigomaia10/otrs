@@ -1,0 +1,242 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalCompanyTickets.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/dataTables-bootstrap4/dataTables.bootstrap4.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div class="ContentResponsive" id="content functions-content" style="">
+[% RenderBlockStart("BackgroundPortal") %]
+    <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+
+    <div id="successAlert" class="alert alert-success alert-popup fade">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times"></i>
+        </button>
+        <span>[% Translate("Mass action carried out successfully!") | html %]</span>
+    </div>
+[% RenderBlockStart("ShowMyCompanyTickets") %]
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+[% RenderBlockStart("FilterPriorities") %]
+                    <div style="cursor: auto; padding: 15px 15px 0px 15px;" class="card-body">
+                        <div class="toolbar">
+                            <div class="">
+                                
+                            </div>
+                        </div>
+                        <form action="[% Env('CGIHandle') %]" method="post" name="compose" id="NewServiceTicket" enctype="multipart/form-data" class="Validate PreventMultipleSubmits" novalidate="novalidate">
+                            <input type="hidden" name="Action" value="[% Env('Action') %]" />
+                            <input type="hidden" name="Subaction" value="CompanyTickets" />
+                            <div id="TicketTable_filter" style="width: 40%; margin-left: 60%;" class="dataTables_filter">
+                                <label class="SubmitLineCloseTicket">
+                                    <input type="search" name="Search" id="Search" value="[% Data.ValueSearch %]" class="form-control form-control-sm" placeholder="[% Translate('Search tickets') | html %]" aria-controls="TicketTable">
+                                    <a title="[% Translate('Clear search') | html %]" class="SubmitCloseSearch" href="[% Env("Baselink") %]Action=CompanyTickets;Subaction=CompanyTickets">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+[% RenderBlockEnd("FilterPriorities") %]
+ 
+<div id="MainBox" class="TicketView ARIARoleMain [% Config("Ticket::Frontend::CustomerTicketOverviewSortable") %] ">
+[% RenderBlockStart("Filled") %]
+    <div class="ActionRowMyTickets ActionRow ActionRow-full-width">
+        <ul class="Filter Tabs">
+[% RenderBlockStart("FilterHeader") %]
+            <li>
+                <a class="[% Data.ClassA | html %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy | uri %];OrderBy=[% Data.OrderBy | uri %][% Data.CustomerIDs %];[% Data.SearchText %];">
+                    [% Translate(Data.Name) | html %] ([% Data.Count | html %])
+                </a>
+            </li>
+[% RenderBlockEnd("FilterHeader") %]
+        </ul>
+        <div class="Tabs Pagination">
+            [% Data.ResultLong %]
+            [% Data.SiteNavBarLong %]
+        </div>
+    </div>
+    <div id="BulkAction" class="AlwaysPresent"><a class='ButtonTicketBulk' href="#">[% Translate("Action Bulk") | html %]</a></div>
+    <div style="overflow: auto;" class="Content">
+        <table id="TicketTable" style="border-top: 1px solid #dee2e6;" class="OverviewMyTickets table table-striped" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+[% RenderBlockStart("BulkNavBar") %]
+                    <th class="Checkbox">
+                        <input type="checkbox" class="Checkbox" title="[% Translate("Select all") | html %]" id="SelectAllTickets" autocomplete="off" />
+                    </th>
+[% RenderBlockEnd("BulkNavBar") %]
+[% RenderBlockStart("TableHeader") %]
+                    <th class="[% Data.ClassSort %]">
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];SortBy=[% Data.HeaderSort %];OrderBy=[% Data.OrderBy | uri %];Filter=[% Data.Filter | uri %];Search=[% Data.Search | uri %];">
+                            [% Data.LabelHeader %]
+                        </a>
+                    </th>
+[% RenderBlockEnd("TableHeader") %]
+[% RenderBlockStart("OverviewNavBarPageDynamicField") %]
+                    <th class="DynamicField Last [% Data.CSS | html %]">
+[% RenderBlockStart("OverviewNavBarPageDynamicFieldSortable") %]
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];SortBy=DynamicField_[% Data.DynamicFieldName | uri %];OrderBy=[% Data.OrderBy | uri %];Filter=[% Data.Filter | uri %];Search=[% Data.Search | uri %];">[% Translate(Data.Label) | html %]</a>
+[% RenderBlockEnd("OverviewNavBarPageDynamicFieldSortable") %]
+[% RenderBlockStart("OverviewNavBarPageDynamicFieldNotSortable") %]
+                        <span>[% Translate(Data.Label) | html %]</span>
+[% RenderBlockEnd("OverviewNavBarPageDynamicFieldNotSortable") %]
+                    </th>
+[% RenderBlockEnd("OverviewNavBarPageDynamicField") %]
+                </tr>
+            </thead>
+            <tbody>
+[% RenderBlockStart("Record") %]
+                <!-- <tr class="MasterAction"> -->
+                <tr class="">
+[% RenderBlockStart("Bulk") %]
+                    <td class="Checkbox NonTextContent">
+                        <input class="Checkbox" [% Data.Disabled %] type="checkbox" name="TicketID" title="[% Translate(Data.Title) | html %]" value="[% Data.TicketID | html %]" autocomplete="off" />
+                    </td>
+[% RenderBlockEnd("Bulk") %]
+[% RenderBlockStart("RecordRow") %]
+                    <td class="[% Data.Class %]">
+                    [% IF Data.Class == 'Flags' %]
+                        <div class="Flag Small" title="[% Translate(Data.Priority) %]">
+                            <span class="PriorityToCircle PriorityID-[% Data.PriorityID %]">
+                                <em>[% Translate(Data.Priority) %]</em>
+                            </span>
+                        </div>
+                    [% ELSE %]
+                    [% IF Data.Class == 'TicketNumber' %]
+                        <a href="[% Env("Baselink") %]Action=CustomerPortalTicketZoom;TicketNumber=[% Data.TicketNumber | uri %]" class="MasterActionLink">[% Data.TicketNumber | html %]</a>
+                    [% ELSE %]
+                    [% IF Data.Class == 'Title' %]
+                        <div>
+                            <h2>[% Data.Subject | truncate(60) | html %]</h2>
+                            &nbsp;-&nbsp; [% Data.Body | truncate(200) | html %]
+                        </div>
+                    [% ELSE %]
+                    [% IF Data.Class == 'Age' %]
+                        [% Data.CustomerAge | truncate(20) | html %]</td>
+                    [% ELSE %]
+                        [% Translate(Data.Value) | html %]
+                    [% END %]
+                    [% END %]
+                    [% END %]
+                    [% END %]
+                    </td>
+[% RenderBlockEnd("RecordRow") %]
+[% RenderBlockStart("RecordAvalition") %]
+                    <td class='RatingStars'>
+                        <ul class="Ratings">
+                            [% RenderBlockStart("RecordAvalitionLine") %]                                                   
+                            <li class='StarAvaliation [% Data.ClassStar %]' data-value="[% Data.StarValue %]"  data-ticket="[% Data.TicketNumber | html %]"></li> 
+                            [% RenderBlockEnd("RecordAvalitionLine") %]
+                        </ul>                                                                                          
+                    </td>
+[% RenderBlockEnd("RecordAvalition") %]
+
+[% RenderBlockStart("RecordDynamicField") %]
+                    <td>
+                        <div title="[% Data.Title | html %]">
+[% RenderBlockStart("RecordDynamicFieldLink") %]
+                            <a href="[% Data.Link | Interpolate %]" class="DynamicFieldLink">[% Data.Value %]</a>
+[% RenderBlockEnd("RecordDynamicFieldLink") %]
+[% RenderBlockStart("RecordDynamicFieldPlain") %]
+                            [% Data.Value %]
+[% RenderBlockEnd("RecordDynamicFieldPlain") %]
+                        </div>
+                    </td>
+[% RenderBlockEnd("RecordDynamicField") %]
+
+
+
+                </tr>
+[% RenderBlockEnd("Record") %]
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr>
+                            <td colspan="[% Data.Total %]">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+            </tbody>
+        </table>
+    </div>
+[% RenderBlockStart("FilterFooter") %]
+    <div id="BottomActionRow" class="ActionRowMyTickets ActionRow BigButtons">
+        <ul class="Tabs Filter">
+[% RenderBlockStart("FilterFooterItem") %]
+            <li class="[% Data.ClassLI | html %]">
+                <a class="[% Data.ClassA | html %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy | uri %];OrderBy=[% Data.OrderBy | uri %][% Data.CustomerIDs %];[% Data.SearchText %];">
+                    [% Translate(Data.Name) | html %] ([% Data.Count | html %])
+                </a>
+            </li>
+[% RenderBlockEnd("FilterFooterItem") %]
+            <li class="Clear"></li>
+        </ul>
+        <div class="Tabs Pagination">
+            [% Data.ResultLong %]
+            [% Data.SiteNavBarLong %]
+        </div>
+        <div class="Clear"></div>
+    </div>
+[% RenderBlockEnd("FilterFooter") %]
+
+[% RenderBlockEnd("Filled") %]
+
+[% RenderBlockStart("Empty") %]
+    <div class="Placeholder">
+[% RenderBlockStart("EmptyDefault") %]
+        <h2>[% Translate("Welcome!") | html %]</h2>
+[% RenderBlockStart("EmptyDefaultButton") %]
+        <p>
+            [% Translate("Please click the button below to create your first ticket.") | html %]
+        </p>
+        <a class="Button" href="[% Env("Baselink") %]Action=Services">[% Translate("Create your first ticket") | html %]</a>
+[% RenderBlockEnd("EmptyDefaultButton") %]
+[% RenderBlockEnd("EmptyDefault") %]
+[% RenderBlockStart("EmptyCustom") %]
+        <h2>[% Translate(Data.Title) | html %]</h2>
+        <p>
+            [% Translate(Data.Text) | html %]
+        </p>
+[% RenderBlockStart("EmptyCustomButton") %]
+        <a class="Button" href="[% Env("Baselink") %]Action=Services">[% Translate(Data.Button) | html %]</a>
+[% RenderBlockEnd("EmptyCustomButton") %]
+[% RenderBlockEnd("EmptyCustom") %]
+    </div>
+[% RenderBlockEnd("Empty") %]
+[% RenderBlockStart("ModalCommentStarVote") %]
+
+<div id="ModalCommentStarVote" class="ModalStarVote">
+    <div class="modal-content ModalContentStarVote">
+        <span id="ModalClose" class="close CloseModalStarVote">&times;</span>
+        <div id="ModalFormStarVote">
+                <p style="margin: 0px;" id="Evaluation">[% Translate(Data.TicketNoteAvalitionLabel) | html %]</p>
+                <br>
+            <textarea class="form-control" placeholder='[% Translate("Enter your justification...") | html %]' id="AnswerMessageToStar" name="AnswerMessageToStar" rows="3" placeholder=""></textarea>
+            <div class="card-body text-center CardButtonModalVote">
+                <button type="submit" id="BtnCommentStarVote"  class="btn btn-success btn-md Primary">[% Translate("Submit") | html %]</button>
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("ModalCommentStarVote") %]
+
+</div>
+            </div>
+        </div>
+    </div>
+[% RenderBlockEnd("ShowMyCompanyTickets") %]
+</div>
+[% InsertTemplate("CustomerPortalFooter.tt") %]

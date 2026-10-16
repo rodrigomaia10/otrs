@@ -1,0 +1,342 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalTicketZoom.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * jsantos@serviceup.com.br
+# -- 
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/Animate-3.7.2/animate.css">
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div class="ContentResponsive" id="content functions-content" >
+
+    <input type="Hidden" id="TicketTitle" value="[% Data.Title | truncate(50) | html  %]" />
+    <input type="Hidden" id="TicketTitleComplete" value="[% Data.Title | html  %]" />
+    <form action="[% Env("CGIHandle") %]#FollowUp" method="post" enctype="multipart/form-data" name="compose" id="ReplyCustomerTicket" class="Validate PreventMultipleSubmits" novalidate="novalidate">
+
+    <div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <input type="hidden" name="Action" value="CustomerPortalTicketZoom" />
+            <input type="hidden" name="Subaction" value="ReplyCustomerTicket" />
+            <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
+            <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
+
+[% RenderBlockStart("BackNewTicket") %]
+            <div class="ActionRow ActionRowBig" style="background: #6ac3d1 !important;width: auto;border-radius: 3px !important;margin-right: auto;margin-left: 10px;margin-top: 10px;">
+                <ul class="Tabs">
+                    <li><a href="/znuny/customer.pl?Action=NewTicketProcess;ProcessEntityID=[% Data.ProcessID %];TicketNumber=[% Data.TicketNumber %];TicketEqual=1" style="color: #ffffff;">&larr; [% Translate("Open new ticket for this service") | html %]</a></li>
+                </ul>
+                <div class="Clear"></div>
+            </div>
+[% RenderBlockEnd("BackNewTicket") %]
+
+            <div class='TicketTitlePadding'>
+                [% IF Data.MenuType == 1 %]
+                <span class='TicketTitle' title='[% Data.Title | html  %]'>[% Data.Title | html  %]</span>
+                [% END %]
+                [% RenderBlockStart("Expand") %]
+                <div class="TicketExpand">
+                    <a href="[% Env("Baselink") %]Action=CustomerPortalTicketZoom;TicketNumber=[% Data.TicketNumber | uri %];ZoomExpand=[% Data.ZoomExpand | uri %]" class="ZoomExpand Expand[% Data.ExpandOption %]" title="[% Translate(Data.ExpandText) | html %]">
+                        <span title="[% Translate(Data.ExpandTextDesc) | html %]">[% Translate(Data.ExpandText) | html %]</span>
+                        <span class="InvisibleText"></span>
+                    </a>
+                    <input type="hidden" name="ZoomExpand" id="ZoomExpand" value="[% Data.ZoomExpand | html %]" />
+                </div>
+                [% RenderBlockEnd("Expand") %]
+            </div>
+                
+            <ul id="MessagesPortal" style="visibility: hidden;">
+                <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                    [% RenderBlockStart("MessageBody") %]
+                    <div class="card card-plain CardMessage [% IF Data.AriaExpanded == 'true' %] Visible [% END %]" style="margin-bottom: 0px !important">
+                        <div class="card-header" role="tab" style="padding: 0px 0;" id="heading[% Data.ArticleID %]">
+                            <a class="[% Data.Collapse %] CollapseStyle" style="text-decoration:none" data-toggle="collapse" data-parent="#accordion" href="#collapse[% Data.ArticleID %]" aria-expanded="[% Data.AriaExpanded %]" aria-controls="collapse[% Data.ArticleID %]">
+                                <!--Add Config here-->
+                                [% IF Config("CustomerPortal::Core::Layout::ShowTicketIndexForCustomer") == 1 %]
+                                <div class="ArticleIndex">  [% Data.ArticleIndex %] </div>
+                                [% END %]
+                                <div class="PhotoAvatar">
+                                    <img class="ImgUserAvatar" src="[% Data.Avatar %]" id="">
+                                </div>
+                                <div class="PreviewMessage">
+                                    <span style="color: #000;">[% Data.FromRealname | html %]: </span>
+                                    <span>[% Data.Preview | truncate(100) | html %]</span>
+                                </div>
+                                [% IF Config("CustomerPortal::Core::TimeInArticleCustomerPortalTicketZoom") == 0 %]
+                                <div class="TimeDateMessage" title="[% Data.CreateTime | Localize('TimeShort') %]">[% Data.Age | Localize("TimeLong") | html %]</div>
+                                [% ELSE %]
+                                <div class="TimeDateMessage" title="[% Data.Age | Localize("TimeLong") | html %]">[% Data.CreateTime | Localize('TimeShort') %]</div>
+                                [% END %]
+                                <i class="Arrow fa fa-chevron-down"></i>
+                                <div style="font-size: 73%">([% Data.SenderName | html %])</div>
+                            </a>
+                            [% IF Data.Attachments && Data.Attachments.size %]
+                            <i class="fa fa-paperclip AttachmentIcon" rel="TicketAttachment[% Data.ArticleID | html %]" title="[% Translate("Attachments") | html %]"></i>
+                            <div id="TicketAttachment[% Data.ArticleID | html %]" class="AttachmentData Hidden">
+                                <div class="Attachment InnerContent">
+                                    [% RenderBlockStart("MessageBodyAttchPreview") %]
+                                    <div class="AttachmentElement">
+                                        <h7>
+                                            <a href="[% Data.Link %]" [% Data.Target %] style="font-size: 90%;">[% Data.Filename | html %]</a>
+                                        </h7>
+                                    </div>
+                                    [% RenderBlockEnd("MessageBodyAttchPreview") %]
+                                    </div>
+                                </div>
+                            [% END %]
+                            </div>
+                            <div id="collapse[% Data.ArticleID %]" class="collapse [% Data.Accordion %]" role="tabpanel" aria-labelledby="heading[% Data.ArticleID %]">
+                                <li style="padding-top: 15px;" class="message left appeared">
+                                    <div class="card [% Data.SenderType %]" style="[% Data.StyleScrollBar %]">
+                                        <div class="text_wrapper">
+                                            <iframe id="ArticleFrame[% Data.ArticleID %]" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" class="[% Data.ClassIframe %] ArticleIframe" style="width: 100%; padding: 15px !important;" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" title="[% Data.ArticleTitle %]" src="[% Data.ArticleLink %]"></iframe>
+                                        <div class="attach_wrapper">
+                                            [% IF Data.Attachments && Data.Attachments.size %]
+                                            <div id="FieldSep"></div>
+                                            [% RenderBlockStart("MessageBodyAttch") %]
+                                            <div class="Attachments">
+                                                <div>
+                                                    <i class="fa fa-paperclip"></i>
+                                                    <span class="DownloadAttachment" title="[% Data.Filename | html %][% IF Data.FilesizeRaw %] - [% Data.FilesizeRaw | Localize('Filesize') | html %][% END %]">
+                                                        <a id="AttchTicketZoom" href="[% Data.Link %]" [% Data.Target %] title="Baixar">[% Data.Filename | html %]</a>
+                                                        [% IF Data.FilesizeRaw %]
+                                                            ([% Data.FilesizeRaw | Localize('Filesize') | html %])
+                                                        [% END %]
+                                                    </span>
+                                                </div>
+                                                <div class="Clear"></div>
+                                            </div>
+                                            [% RenderBlockEnd("MessageBodyAttch") %]
+                                            [% END %]
+                                        </div>
+                                    </div>
+                                    <div class='InformationsCustomer'>
+                                        <span class="time_date">[% IF Data.AccountedTimeShow == 1 && Data.SenderType == 'AgentResponseCard' && Data.AccountedTime != '' %][% Translate("Time recorded") | html %]: [% Data.AccountedTime %] | [% END %][% Data.CreateTime | Localize('TimeShort') %] ([% Data.Age %])</span>
+                                    </div>
+                                </li>
+                                
+                        </div>
+                    </div>
+                    [% RenderBlockEnd("MessageBody") %]
+                </div>
+            </ul>            
+            [% RenderBlockStart("MessageResponse") %]
+            [% IF Data.FollowUpAttr == 1 %]
+            <div style='margin-left: 1%' id="FieldSeparator">
+                <div id="" style="display: inline-block;">  [% Translate("Reply") | html %]</div>
+                <div id="FieldLine" style="border: 1px solid #ddd;display: inline-block;width: 87%;"></div>
+            </div>
+            <div class="UserAvatar">
+                <img class="ImgUserAvatar" src="[% Data.Avatar %]" id="">
+            </div>
+            <div class="type_msg">
+                <div class="bubble-arrow"></div>
+
+                <div class="input_msg_write">
+
+                    <textarea id="Body" class="RichText Validate [% Data.BodyInvalid %]" name="Body" rows="7" cols="30" >[% Data.Body | html %]</textarea>
+
+                    <div class="Field">
+                        <div class="DnDUploadBox2">
+                            [% INCLUDE "FormElements/AttachmentList.tt" %]
+                        </div>
+                    </div>
+                </div>
+                [% RenderBlockStart("ButtonResponse") %]
+                <fieldset>
+                    [% RenderBlockStart("FollowUpDynamicField2") %]
+                    <div class="Row Row_DynamicField_[% Data.Name | html %]">
+                        [% Data.Label %]
+                        <div class="Field">
+                            [% Data.Field %]
+                        </div>
+                        <div class="Clear"></div>
+                    </div>
+                    [% RenderBlockEnd("FollowUpDynamicField2") %]
+                </fieldset>
+                <button onclick="Core.Customer.TicketZoomPortal.CustomerResponse()" id="SendResponse" class="btn Response btn-md Primary CallForAction" style="margin-left: 0%; padding: 10px !important; margin-top: 3%;" type="button"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp&nbsp[% Translate("Reply and Update") | html %] </button>
+                [% RenderBlockEnd("ButtonResponse") %]
+                [% RenderBlockStart("ReplayAll") %]
+                <button onclick="Core.Customer.TicketZoomPortal.CustomerResponseAll()" id="SendAllResponse" class="btn ResponseAll btn-md Primary CallForAction" style="margin-left: 0%; padding: 10px !important; margin-top: 3%;" type="button"><i class="fa fa-reply-all" aria-hidden="true"></i>&nbsp&nbsp[% Translate("Reply All") | html %] </button>
+                [% RenderBlockEnd("ReplayAll") %]
+            </div>
+            [% END %]
+            [% RenderBlockEnd("MessageResponse") %]
+        </div>
+    </div>
+
+        <div class="col-md-4">
+            
+            <div class="card CardInformations">
+                <div class="card-header">
+                    <h5 class="card-title card-title-space">[% Translate("Informations") | html %]:
+                        <div class="PrintTicketPortal">
+                            <a href="?Action=CustomerTicketPrint;TicketID=[% Data.TicketID | html %]" class="PrintPortal" title="[% Translate("Print") | html %]" target="_blank">
+                                <span class=""><i class="fa fa-print"></i></span>
+                            </a>   
+                        </div>
+
+                    </h5>          
+                </div>
+                <div class="card-body ">
+                    <div class="Field">
+                        <ul id="InformationsList">
+                            <li><span class="Key">[% Config("Ticket::Hook") %]:</span> <span>[% Data.TicketNumber | html %]</span></li>
+[% RenderBlockStart("Age") %]
+                        <li><span class="Key">[% Translate("Age") | html %]:</span> <span title="[% Data.Age | html %]">[% Data.Age | html %]</span></li>
+[% RenderBlockEnd("Age") %]
+[% RenderBlockStart("Type") %]
+                        <li><span class="Key">[% Translate("Type") | html %]:</span> <span title="[% Data.Type | html %]">[% Data.Type | html %]</span></li>
+[% RenderBlockEnd("Type") %]
+[% RenderBlockStart("Service") %]
+                        <li><span class="Key">[% Translate("Service") | html %]:</span> <span title="[% Translate(Data.Service) | html %]">[% Translate(Data.Service) | html %]</span></li>
+[% RenderBlockEnd("Service") %]
+[% RenderBlockStart("SLA") %]
+                        <li><span class="Key">[% Translate("SLA") | html %]:</span> <span title="[% Translate(Data.SLA) | html %]">[% Translate(Data.SLA) | html %]</span></li>
+[% RenderBlockEnd("SLA") %]
+[% RenderBlockStart("State") %]
+                        <li><span class="Key">[% Translate("State") | html %]:</span> <span id="SpanOfState" title="[% Translate(Data.State) | html %]">[% Translate(Data.State) | html %]</span></li>
+[% RenderBlockEnd("State") %]
+[% RenderBlockStart("Priority") %]
+                        <li><span class="Key">[% Translate("Priority") | html %]:</span> <span id="SpanPriority" title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</span></li>
+[% RenderBlockEnd("Priority") %]
+[% RenderBlockStart("Queue") %]
+                        <li><span class="Key">[% Translate("Queue") | html %]:</span> <span title="[% Data.Queue | html %]">[% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]</span></li>
+[% RenderBlockEnd("Queue") %]
+[% RenderBlockStart("TicketTimeUnits") %]
+                        <li><span class="Key">[% Translate("Time Units") | html %]:</span> <span title="[% Data.TicketTimeUnits | html %]">[% Data.TicketTimeUnits %]</span></li>
+[% RenderBlockEnd("TicketTimeUnits") %]
+[% RenderBlockStart("Owner") %]
+                        <li><span class="Key">[% Translate("Owner") | html %]:</span> [% Data.OwnerName | html %]</li>
+[% RenderBlockEnd("Owner") %]
+[% RenderBlockStart("Responsible") %]
+                        <li><span class="Key">[% Translate("Responsible") | html %]:</span> [% Data.ResponsibleName | html %]</li>
+[% RenderBlockEnd("Responsible") %]
+[% RenderBlockStart("SLACustomResponse") %]
+                        <li><span class="Key">[% Translate("Service Timeout") | html %]:</span> [% Data.FirstResponseTimeLimit  | Localize("TimeShort") %]</li>
+                        [% IF Data.EscalationResponseTime == '0' %]
+                        <li><span class="Key">[% Translate("Service Time Spent") | html %]:</span> [% Data.FirstResponseTimeSpent  | Localize("TimeShort") %]</li>
+                        [% END %]
+[% RenderBlockEnd("SLACustomResponse") %]
+[% RenderBlockStart("ProcessData") %]
+                        <li><span class="Key">[% Translate("Process") | html %]:</span> <span title="[% Data.Process | html %]">[% Data.Process | html %]</span></li>
+                        <li><span class="Key">[% Translate("Activity") | html %]:</span> <span title="[% Data.Activity | html %]">[% Data.Activity | html %]</span></li>
+[% RenderBlockEnd("ProcessData") %]
+[% RenderBlockStart("SLACustomSolution") %]
+                            <li><span class="Key">[% Translate("Solution Timeout") | html %]:</span> [% Data.SolutionTimeLimit  | Localize("TimeShort") %]</li>
+                            [% IF Data.EscalationSolutionTime == '0' %]
+                            <li><span class="Key">[% Translate("Solution Time Spent") | html %]:</span> [% Data.SolutionTimeSpent  | Localize("TimeShort") %]</li>
+                            [% END %]
+[% RenderBlockEnd("SLACustomSolution") %]
+                    <!-- # show ticket dynamic fields -->
+[% RenderBlockStart("TicketDynamicField") %]
+                                        <li>
+                                            <span class="Key" id="SpanLabel[% Data.DynamicFieldName %]">[% Translate(Data.Label) | html %]:</span>
+[% RenderBlockStart("TicketDynamicFieldLink") %]
+                                            <span title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" class="DynamicFieldLink" [% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank">[% Data.Value %]</a></span>
+[% RenderBlockEnd("TicketDynamicFieldLink") %]
+[% RenderBlockStart("TicketDynamicFieldPlain") %]
+                                            <span title="[% Data.Title | html %]" id="SpanValue[% Data.DynamicFieldName %]">[% Data.Value %]</span>
+[% RenderBlockEnd("TicketDynamicFieldPlain") %]
+                                        </li>
+[% RenderBlockEnd("TicketDynamicField") %]
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+[% RenderBlockStart("NextActivities") %]
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title card-title-space">[% Translate("Next Steps") | html %]:
+                </h5>          
+            </div>
+            <div class="card-body">
+                <ul>
+[% RenderBlockStart("ActivityDialog") %]
+                    <li><a title="[% Data.Name | html %]" class="AsPopup PopupType_TicketAction btn btn-primary" href="[% Env("Baselink") %]Action=NewTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Data.Name | html %] &nbsp
+                    <span class="Icons"><i class="fa fa-chevron-right"></i></span></a></li>
+[% RenderBlockEnd("ActivityDialog") %]
+[% RenderBlockStart("NoActivityDialog") %]
+                    <li>[% Translate("There are no dialogs available at this point in the process.") | html %]</li>
+[% RenderBlockEnd("NoActivityDialog") %]
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("NextActivities") %]
+[% IF Data.FlagShowUpdateTiket == 1 %]
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title card-title-space">[% Translate("Update ticket data") | html %]:
+                </h5>          
+            </div>
+            <div class="card-body">
+                <ul> 
+[% RenderBlockStart("FollowUpState") %]
+                    <li>
+                        <div>
+                            <div for="StateID" style="display: inline-block;">[% Translate("Next state") | html %]:</div> <div class="Field">[% Data.NextStatesStrg %]</div>
+                        </div>
+                    </li>
+[% RenderBlockEnd("FollowUpState") %]
+[% RenderBlockStart("FollowUpDynamicField") %]
+                    <li>
+                        <div class="Row Row_DynamicField_[% Data.Name | html %]">
+                            [% Data.Label %]
+                            <div class="Field">
+                                [% Data.Field %]
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
+                    </li>
+[% RenderBlockEnd("FollowUpDynamicField") %]
+[% RenderBlockStart("PriorityList") %]
+                    <li>
+                        <div>
+                            <div name="PriorityID" style="margin-top:10px; display: inline-block;">[% Translate("Priority") | html %]:</div> <div class="Field">[% Data.Priority %]</div>
+                        </div>
+                    </li>
+[% RenderBlockEnd("PriorityList") %]
+                </ul>
+            </div>
+        </div>
+[% END %]
+
+[% RenderBlockStart("LastTickets") %]
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title card-title-space">[% Translate("Last Tickets") | html %]:
+                </h5>          
+            </div>
+            <div class="card-body">
+                <ul>
+[% RenderBlockStart("LastTicketsRow") %]
+                    <li>
+                        <a title="[% Data.Title | html %]" class="LastTickets" href="[% Env("Baselink") %]Action=CustomerPortalTicketZoom;TicketNumber=[% Data.TicketNumber | uri %]">
+                            <span class="Key">[% Data.TicketNumber | html %]: </span><span>[% Data.Title | truncate(40) | html %]</span>
+                        </a>
+                    </li>
+[% RenderBlockEnd("LastTicketsRow") %]
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("LastTickets") %]
+    </div>
+</div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    var TicketTitle = $('#TicketTitle').val();
+    var TicketTitleComplete = $('#TicketTitleComplete').val();
+
+    document.getElementById("NavTitle").innerHTML= TicketTitle;
+    document.getElementById('NavTitle').title = TicketTitleComplete;
+});
+</script>

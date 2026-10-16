@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<otrs_config version="2.0" init="Application">
+
+    <Setting Name="AutoloadPerlPackages###1002-EmailOptionNotificationHidden" Required="0" Valid="1">
+        <Description Translatable="1">Autoload for module EmailOptionNotificationHidden.</Description>
+        <Navigation>InBox::EmailOption::Core::Autoload</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">Kernel::Autoload::EmailOptionNotificationHidden</Item>
+            </Array>
+        </Value>
+    </Setting>   
+
+    <Setting Name="AutoloadPerlPackages###1003-EmailOptionNotificationEvent" Required="0" Valid="1">
+        <Description Translatable="1">Autoload for module EmailOptionNotificationHidden.</Description>
+        <Navigation>InBox::EmailOption::Core::Autoload</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">Kernel::Autoload::EmailOptionNotificationEvent</Item>
+            </Array>
+        </Value>
+    </Setting>   
+
+	<Setting Name="PublicFrontend::Module###EmailOption" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>InBox::EmailOption::Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">EmailOption</Item>
+                    <Item Key="Title">EmailOption</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::EmailOption###002-EmailOption" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration.</Description>
+        <Navigation>InBox::EmailOption::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Public.EmailOption.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Public.EmailOption.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+	<Setting Name="PublicFrontend::Module###EmailOptionReply" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>InBox::EmailOption::Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">EmailOptionReply</Item>
+                    <Item Key="Title">EmailOptionReply</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::EmailOptionReply###002-EmailOption" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration.</Description>
+        <Navigation>InBox::EmailOption::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Public.EmailOption.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Public.EmailOption.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+ 
+    <Setting Name="InBox::EmailOption::DynamicFieldsEnabledValues" Required="1" Valid="1">
+        <Description Translatable="1">Dynamic Fields enabled to be set via e-mail. Possible settings: 0 = Disabled, 1 = Available.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                         <DefaultItem ValueType="Select">
+                            <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                            <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                        </DefaultItem>
+                    </Hash>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::CreateReplyArticle" Required="1" Valid="1">
+        <Description Translatable="1">This configuration makes it possible to create the article when a notification is responded to. By disabling this config, the InBox::EmailOption::DynamicFieldsTexts, InBox::EmailOption::DefaultTextOfAnsweredArticle and InBox::EmailOption::DefaultSubjectOfAnsweredArticle configs will not work.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::DynamicFieldsTexts" Required="1" Valid="1">
+        <Description Translatable="1">Configuration of texts. First key: Dynamic Field. Second Key: ValueField1 - Text displayed when registering the value. ValueField2 - Text displayed if the answer has the text field enabled.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>                        
+                    </Hash>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>  
+
+    <Setting Name="InBox::EmailOption::Configs" Required="1" Valid="1">
+        <Description Translatable="1">Settings for the text to be displayed in the title, header and button color.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Title">Information</Item>
+                <Item Key="HeaderColor">#4C7DAF</Item>
+                <Item Key="BtnColor">#4C7DAF</Item>
+			</Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::VisibleArticleForCustomer" Required="0" Valid="1">
+        <Description Translatable="1">Defines whether the EmailOption response will be visible to the customer.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::DefaultTextOfAnsweredArticle" Required="0" Valid="1">
+		<Description Translatable="1">Defines the text that will appear in the article.</Description>
+		<Navigation>InBox::EmailOption::Core</Navigation>
+		<Value>
+			<Item ValueType="String"></Item>
+		</Value>
+	</Setting>
+
+    <Setting Name="InBox::EmailOption::DefaultSubjectOfAnsweredArticle" Required="0" Valid="1">
+		<Description Translatable="1">Defines the subject that will appear in the article.</Description>
+		<Navigation>InBox::EmailOption::Core</Navigation>
+		<Value>
+			<Item ValueType="String"></Item>
+		</Value>
+	</Setting>
+
+    <Setting Name="InBox::EmailOption::ReplyTemplate" Required="0" Valid="1">
+		<Description Translatable="1">Define the default template for responses.</Description>
+		<Navigation>InBox::EmailOption::Core</Navigation>
+		<Value>
+			<Item ValueType="String">Default</Item>
+		</Value>
+	</Setting>
+
+    <Setting Name="InBox::EmailOption::DynamicFieldsToShow" Required="0" Valid="1">
+        <Description Translatable="1">Defines dynamic fields to display when a ticket is disapproved.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                        <Hash>
+                            <Value></Value>
+                        </Hash>
+                    </Hash>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::AnswerAuthor" Required="1" Valid="1">
+        <Description Translatable="1">Email from who responded to Email Option.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::TextToAlreadyAnswered" Required="1" Valid="1">
+        <Description Translatable="1">Message configuration for notifications already responded to. First key: Dynamic Field used in EmailOption. Second Key: Message to be displayed, this message may contain TAGs referencing ticket information. Ex: &lt;OTRS_TICKET_DynamicField_Field1&gt;</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::ArticleParameters" Required="1" Valid="1">
+        <Description Translatable="1">Subject and body of article created in EmailOption response.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                       <Item Key="EmailOption"></Item>
+                    </Hash>
+                </DefaultItem>
+                <Item Key="EmailOption">
+                    <Hash>
+                        <Item Key="Subject">Subject Text</Item>
+                        <Item Key="Body">Article Body Text</Item>
+                    </Hash>
+                </Item>
+			</Hash>
+        </Value>
+    </Setting> 
+
+    <Setting Name="Notification::Transport###EmailOptionNotification" Required="0" Valid="1">
+        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
+        <Navigation>InBox::EmailOption::Frontend::Admin::View::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::NotificationEvent::Transport::EmailOptionNotification</Item>
+                <Item Key="Name" Translatable="1">Email Option Notification</Item>
+                <Item Key="Icon">fa fa-mobile</Item>
+                <Item Key="Prio">140</Item>
+                <Item Key="IsOTRSBusinessTransport">0</Item>
+                <Item Key="AgentEnabledByDefault">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::Attachment" Required="0" Valid="1">
+        <Description Translatable="1">This option enables the possibility of attaching files when sending a justification via EmailOption.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::DynamicFieldsJustification" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic field to save the justification for an approve / disapprove.</Description>
+        <Navigation>InBox::EmailOption::Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::EmailOption::SenderValueToArticle" Required="0" Valid="1">
+		<Description Translatable="1">Define the default sender value to article create by response.</Description>
+		<Navigation>InBox::EmailOption::Core</Navigation>
+		<Value>
+			<Item ValueType="String">Resposta via E-mail</Item>
+		</Value>
+	</Setting>
+
+
+    <Setting Name="InBox::EmailOption::SaveEmailToSenderToArticle" Required="0" Valid="1">
+		<Description Translatable="1">Saves the email of the person responsible for voting on the sender of the created article.</Description>
+		<Navigation>InBox::EmailOption::Core</Navigation>
+		<Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+	</Setting>
+
+</otrs_config>

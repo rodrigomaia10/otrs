@@ -1,0 +1,69 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalTicketZoomReponse.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# *nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("MessageBodyResponseCustomer") %]
+    <li class="message left appeared animated pulse">
+        [% IF Data.SenderType == 'AgentResponseCard' %]
+        <div class="avatar"><img src="/otrs-web/skins/Customer/default/img/supportWhite.svg" id="SupportWhite" width="44" height="33"></div>
+         [% END %]
+        <div class="card [% Data.SenderType %]">
+            <div class="text_wrapper" style="font-family: Arial, sans-serif; color: #393939; font-size: 112%;">
+                [% Data.ArticleContent %]
+            </div>
+            <div class="attach_wrapper">
+                [% IF Data.Attachments && Data.Attachments.size %]
+                <div id="FieldSep"></div>
+                [% RenderBlockStart("MessageBodyAttchResponseCustomer") %]
+                        <div class="Attachments">
+                            <div>
+                                <i class="fa fa-paperclip"></i>
+                                <span class="DownloadAttachment" title="[% Data.Filename | html %][% IF Data.FilesizeRaw %] - [% Data.FilesizeRaw | Localize('Filesize') | html %][% END %]">
+                                    <a id="AttchTicketZoom" href="[% Data.Link %]" [% Data.Target %] title="Baixar">[% Data.Filename | html %]</a>
+                                    [% IF Data.FilesizeRaw %]
+                                        ([% Data.FilesizeRaw | Localize('Filesize') | html %])
+                                    [% END %]
+                                </span>
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
+                [% RenderBlockEnd("MessageBodyAttchResponseCustomer") %]
+                [% END %]
+             </div>
+         </div>
+         [% IF Data.SenderType == 'AgentResponseCard' %]
+         <div class='InformationsAgent'>
+             <span class="time_date">[% Data.FromRealname %]   |   [% Data.Age %] | [% Data.CreateTime | Localize('TimeShort') %]</span>
+         </div>
+         [% ELSE %]
+         <div class='InformationsCustomer'>
+             <span class="time_date">[% Data.FromRealname %]   |  [% Data.Age |  Localize("TimeLong") | html %] | [% Data.CreateTime | Localize('TimeShort') %]</span>
+         </div>
+         [% END %]
+    </li>
+
+[% RenderBlockEnd("MessageBodyResponseCustomer") %]
+[% RenderBlockStart("ErrorStateQueueMessage") %]
+    <div class="alert alert-danger" role="alert">
+        <input type="hidden" id="ErrorStateQueueMessage" value="1">
+      [% Data.Message %]
+      [% Data.Comment %]
+    [% Data.TicketNumber %]
+    </div>
+[% RenderBlockEnd("ErrorStateQueueMessage") %]
+[% RenderBlockStart("ErrorNoBody") %]
+    <div class="alert alert-danger" role="alert" id="ErrorNoBodyAlert">
+        <input type="hidden" id="ErrorNoBody" value="1">
+      [% Data.Message %]
+    </div>
+[% RenderBlockEnd("ErrorNoBody") %]
+[% RenderBlockStart("Errors") %]
+    <div class="alert alert-danger" role="alert" id="Errors">
+        <input type="hidden" id="Errors" value="1">
+      [% Data.Message %]
+    </div>
+[% RenderBlockEnd("Errors") %]

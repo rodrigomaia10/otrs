@@ -1,0 +1,214 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPI.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * pdias@beonup.com.br
+# * dsilva@serviceup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("Main") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("KPI Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('KPI Management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+
+    <div class="Clear"></div>
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionAddKPI") %]
+                    <li>
+                        <h4><label for="KPISelect">[% Translate("Add") | html %] KPI</label></h4>
+                        [% Data.AddKPIStrg %]
+                        <div class="FieldExplanation">
+                            <p>[% Translate("Add new KPI for object") | html %]</p>
+                        </div>
+                    </li>
+[% RenderBlockEnd("ActionAddKPI") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPIExport;[% Env("ChallengeTokenParam") | html %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export KPIs") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterKPIs">[% Translate("Filter for KPI") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterKPIs" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterKPIs" value="" title="[% Translate("Filter for KPI") | html %]">
+            </div>
+        </div>
+
+[% RenderBlockStart("Hint") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content">
+                <div class="FieldExplanation">
+                    <p>
+                        [% Translate("You can add a new KPI, select the search return type from one of the object lists, the object sets the search limit, and can not be changed after KPI is created.") | html %]
+                    </p>
+                </div>
+            </div>
+        </div>
+[% RenderBlockEnd("Hint") %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Configuration Import") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Here you can upload a configuration file to import KPIs to your system. The file needs to be in .yml format as exported by the KPI editor module.") | html %]
+                </p>
+                <ul class="ActionList">
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="KPIImport"/>
+                            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <fieldset class="Separated flex-row">
+                                <input type="checkbox" id="OverwriteExistingEntities" name="OverwriteExistingEntities" value="1" />
+                                <label for="OverwriteExistingEntities">[% Translate("Overwrite existing KPIs?") | html %]</label>
+                            </fieldset>
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Upload KPI configuration") | html %]">
+                                <span><i class="fa fa-upload"></i>[% Translate("Import KPIs configuration(s)") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("KPI List") | html %]</h2>
+
+[% RenderBlockStart("ContextSettings") %]
+                <ul class="ContextFunctions">
+                    <li class="ContextSettings">
+                        <a href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
+                            <i class="fa fa-cog"></i>
+                            <span>[% Translate("Settings") | html %]</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="ContextSettingsDialogContainer" class="Hidden">
+                    <form action="[% Env("CGIHandle") %]" method="post" id="ContextSettingsDialog">
+                        <input type="hidden" name="Action" value="AgentPreferences"/>
+                        <input type="hidden" name="Subaction" value="Update"/>
+                        <input type="hidden" name="Group" value="[% Data.Group | html %]"/>
+                        <input type="hidden" name="RedirectURL" value="[% Data.RequestedURL | html %]"/>
+                        <fieldset class="TableLike">
+                            <label for="[% Data.PreferencesKey | html %]">[% Translate("Fields per page") | html %]:</label>
+                            <div class="Field">
+                                [% Data.PageShownString %]
+                            </div>
+                            <div class="Clear"></div>
+                        </fieldset>
+                    </form>
+                </div>
+[% RenderBlockEnd("ContextSettings") %]
+
+            </div>
+            <div class="DynamicFieldsPagination">
+                <span class="Pagination">
+[% RenderBlockStart("OverviewNavBarPageNavBar") %]
+                    [% Data.ResultLong %]
+                    [% Data.SiteNavBarLong %]
+[% RenderBlockEnd("OverviewNavBarPageNavBar") %]
+                </span>
+            </div>
+            <div class="Clear"></div>
+
+            <div class="DynamicFieldsContent">
+                <table class="DataTable" id="KPIsTable" summary="List of all registered KPIs">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Output") | html %]</th>
+                            <th>[% Translate("Object") | html %]</th>
+                            <th>[% Translate("Groups") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                            <th>[% Translate("Copy") | html %]</th>
+                            <th>[% Translate("Export") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFound") %]
+                        <tr>
+                            <td colspan="6">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFound") %]
+[% RenderBlockStart("DynamicFieldsRow") %]
+                        <tr class="[% IF Data.ValidID != 1%] Invalid[% END %]" id="KPI_[% Data.ID | html %]">
+                            <td>
+                                <a data-kpi-object="[% Data.ObjectTypeName | html %]" href="[% Env("Baselink") %]Action=AdminKPI[% Data.ActionObjectType | uri %];Subaction=Change;ID=[% Data.ID | uri %]" title="[% Data.Name | html %]" class="MasterActionLink">[% Data.Name %]</a>
+                            </td>
+                            <td>
+                                <div>[% Data.ReturnFormat %]</div>
+                            </td>
+                            <td>
+                                <div>[% Translate(Data.ObjectTypeName) %]</div>
+                            </td>
+                            <td>
+                                <div>[% Data.GroupNames | truncate(50) %]</div>
+                            </td>
+							<td>
+                                <div>[% Translate(Data.Validity) %]</div>
+                            </td>
+                            <td class="Center">
+                                <a class="TrashCan KPIDelete" href="#" data-query-string="Action=AdminKPI;Subaction=KPIDelete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this KPI") | html %]">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                            <td class="Center">
+                                <a class="KPICopy" href="#" data-query-string="Action=AdminKPI;Subaction=KPICopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Copy this KPI") | html %]">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                            </td>
+                            <td class="Center">
+                                <a class="KPIExport" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPIExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Export this KPI") | html %]">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("DynamicFieldsRow") %]
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+        <div class="Clear"></div>
+    </div>
+</div>
+[% RenderBlockEnd("Main") %]

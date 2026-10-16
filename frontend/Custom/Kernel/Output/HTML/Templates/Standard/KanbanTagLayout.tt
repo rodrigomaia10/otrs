@@ -1,0 +1,8 @@
+[% RenderBlockStart("TagShow") %]
+    <div id='DivOFTag'>
+    [% RenderBlockStart("TagData") %]
+        <div class="TagInCard" style="background-color:[% Data.Tag_Color | html  %];">[% Data.Name | html  %]</div>
+    [% RenderBlockEnd("TagData") %]
+    </div>
+[% RenderBlockEnd("TagShow") %]
+<br/>

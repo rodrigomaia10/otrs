@@ -1,0 +1,54 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/DynamicFieldTableViewMore.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# 
+# written/edited by:
+# * mbernardo@serviceup.com.br
+# * dsilva@serviceup.com.br
+# --
+
+<div class="LayoutPopup ARIARoleMain">
+
+    <div class="Header">
+        <h1>
+            [% Translate("Info DynamicFieldTable") | html %]
+        </h1>
+        <p>
+            <a href="#" onclick="window.close();" class="CancelClosePopup">[% Translate("Close") | html %]</a>
+        </p>
+    </div>
+
+    <div class="Content">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>
+                    [% Translate("View DynamicFieldTable") | html %]
+                </h2>
+            </div>
+            <div class="Content">
+                <fieldset class="TableLike">
+                        <table class="DataTable">
+                            <thead>
+                                <tr>
+[% RenderBlockStart("ColumnData") %]
+                                <th>[% Data.Name %]</th>
+[% RenderBlockEnd("ColumnData") %]	
+                                </tr>    
+                            </thead>   
+                            <tbody>   
+[% RenderBlockStart("Row") %]
+                                <tr>
+[% RenderBlockStart("RowData") %]
+                                <td>[% Data.Value %]</td>
+[% RenderBlockEnd("RowData") %]	
+                                </tr>
+[% RenderBlockEnd("Row") %]
+                        </tbody>    
+                        </table>
+                        <div class="Clear"></div>
+                </fieldset>     
+            </div>
+        </div>
+    </div>
+</div>
+

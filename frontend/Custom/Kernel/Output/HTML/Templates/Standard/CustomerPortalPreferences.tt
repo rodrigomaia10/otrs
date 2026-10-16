@@ -1,0 +1,94 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalPreferences.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div id="content-functions-content" class="ContentResponsive" >
+[% RenderBlockStart("BackgroundPortal") %]
+  <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+[% RenderBlockStart("Head") %]
+       <div class="alert alert-warning alert-pref" role="alert">
+           <p>[% Translate(Data.Header) | html %]</p>
+       </div>
+[% RenderBlockEnd("Head") %]
+[% RenderBlockStart("Body") %]
+<div class="row">
+[% RenderBlockStart("Item") %]
+    <div class="col-md-6">
+            <form action="[% Env("CGIHandle") %]" enctype="multipart/form-data" method="post" class="Validate">
+                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                <input type="hidden" name="Subaction" value="UpdatePreferences"/>
+                <input type="hidden" name="Group" value="[% Data.Group | html %]"/>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group" >
+                                <div>
+                                    <p class="PreferencesTitle" for="ChangePassword">[% Translate(Data.Label) | html %]</p>
+                                    <p class="">[% Translate(Data.Desc) | html %]</p>
+[% RenderBlockStart("Block") %]
+[% RenderBlockStart("InputKey") %]
+                                <div>
+                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                    <input title="[% Data.Name | html %]" type="text" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" size="20" />
+                                    <div class="ClearLeft"></div>
+                                </div>
+[% RenderBlockEnd("InputKey") %]
+[% RenderBlockStart("Input") %]
+                                <div>
+                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                    <input title="[% Data.Name | html %]" type="text" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" size="20" />
+                                    <div class="ClearLeft"></div>
+                                </div>
+[% RenderBlockEnd("Input") %]
+[% RenderBlockStart("Option") %]
+                                <div>
+                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                    [% Data.Option %]
+                                    <div class="ClearLeft"></div>
+                                </div>
+[% RenderBlockEnd("Option") %]
+[% RenderBlockStart("Upload") %]
+                                <div>
+                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                    <input title="[% Data.Name | html %]" id="[% Data.Name | html %]" name="[% Data.Name | html %]" type="file" size="20" /><br/>
+                                    <div title="[% Data.Filename | html %]">[% Data.Filename | html %]</div>
+                                    <div class="ClearLeft"></div>
+                                </div>
+[% RenderBlockEnd("Upload") %]
+[% RenderBlockStart("Password") %]
+                                <div>
+                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                    <input title="[% Translate(Data.Key) | html %]" type="password" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="" size="20" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
+                                    <div class="ClearLeft"></div>
+                                </div>
+[% RenderBlockEnd("Password") %]
+[% RenderBlockEnd("Block") %]
+                                <button type="submit" class="btn btn-secondary  btn-pref  CallForAction" id="[% Data.PrefKey | html %]Update" value="[% Translate("Update") | html %]">[% Translate("Update") | html %]</button>
+                                </div>
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </div>
+            </form>
+        </div>
+[% RenderBlockEnd("Item") %]
+</div>
+        <div class="Clear"></div>
+
+[% RenderBlockEnd("Body") %]
+</div>

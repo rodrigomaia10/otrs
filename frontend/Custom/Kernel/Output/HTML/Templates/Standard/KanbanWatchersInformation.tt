@@ -1,0 +1,24 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/KanbanWatchersInformation.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * poliveira@serviceup.com.br
+# --
+
+<div class="InnerContent" style="max-height: 600px;min-width: 500px;max-width: 600px;">
+    <form action="[% Env("CGIHandle") %]" method="post" id="AgentKanbanTicketSetWatchers">
+        <input type="hidden" name="Action" value="KanbanAJAXHandler"/>
+        <input type="hidden" name="Subaction" value="TicketUpdateNewWatchers"/>
+        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+        <input type="hidden" name="BoardID" value="[% Data.BoardID | html %]"/>
+        <fieldset class="TableLike">
+            <label>[% Translate("Users") | html %]:</label>
+            <div class="Field">
+                [% Data.WatchersStrg %]
+                <button type="submit" class="CallForAction Primary btn-primary btn-main btn-width-md" value="Enviar"><span>Enviar</span></button>
+            </div>
+        </fieldset>
+    </form>
+</div>

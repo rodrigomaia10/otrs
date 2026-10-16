@@ -1,0 +1,25 @@
+Formulario 56 - Analise - Matriz de Risco - campos atribuidos (ordem original, 15/10/2026)
+MotoristaAnexoCNH
+PesqCavaloAnexoCRLV
+PesqCarretaAnexoCLRV
+PesqCavaloAnexoANTT
+PesqContratoAluguel
+Telefone
+MotoristaAnexoCompResidencia
+CarteiraDeTrabalhoESocial
+CteAnexoPosicaoRastreador
+TicketFreeText1
+Data
+TicketFreeText2
+CAFMOTORISTAREALIZADO
+Cliente
+MotoristaNome
+MotoristaCPF
+MotoristaRef1Telefone
+TIPOCONTRATACAOMOTORISTA
+Antt
+NewKMMCnpjCpf
+DataEmissao
+RASTREADORTECNOLOGIA
+Login
+Senha

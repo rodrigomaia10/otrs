@@ -1,0 +1,62 @@
+/* ===== Matriz de Risco - layout em secoes (escopo: formulario com RefProf1Nome) ===== */
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px 18px;
+    align-items: start;
+}
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row {
+    grid-column: span 4;
+    margin: 0 !important;
+    min-width: 0;
+}
+/* campos largos */
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_OBS {
+    grid-column: 1 / -1;
+}
+
+/* primeira linha de cada secao: nova linha + titulo */
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_CAFMOTORISTAREALIZADO,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaNome,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_Antt,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_RASTREADORTECNOLOGIA,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_RefProf1Nome,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaRef1Nome,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_OBS,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaAnexoCNH {
+    grid-column-start: 1;
+    position: relative;
+    padding-top: 40px !important;
+    margin-top: 10px !important;
+}
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_OBS { grid-column: 1 / -1; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_CAFMOTORISTAREALIZADO::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaNome::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_Antt::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_RASTREADORTECNOLOGIA::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_RefProf1Nome::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaRef1Nome::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_OBS::before,
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaAnexoCNH::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(300% + 36px);
+    box-sizing: border-box;
+    padding: 6px 0;
+    border-bottom: 2px solid #8fb63e;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #333;
+}
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_OBS::before { width: 100%; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_CAFMOTORISTAREALIZADO::before { content: "Dados da análise"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaNome::before { content: "Motorista"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_Antt::before { content: "Proprietário (ANTT)"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_RASTREADORTECNOLOGIA::before { content: "Rastreador"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_RefProf1Nome::before { content: "Referências profissionais"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaRef1Nome::before { content: "Referências pessoais (família)"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_OBS::before { content: "Informações adicionais"; }
+#ServiceFormContent:has(.Row_DynamicField_RefProf1Nome) > .Row_DynamicField_MotoristaAnexoCNH::before { content: "Anexos"; }

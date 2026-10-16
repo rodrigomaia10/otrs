@@ -1,0 +1,244 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminDAshboard.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dparavani@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("Dashboard Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Dashboard Management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% SWITCH Data.Action %]
+        [% CASE 'Add' %]
+            [% BreadcrumbPath.push({ Name => Translate("Add Dashboard"),}) %]
+        [% CASE 'Change' %]
+            [% USE EditTitle = String(Translate("Edit Dashboard")) %]
+            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+
+    <div class="SidebarColumn ActionsSideBarComp">
+
+[% RenderBlockStart("ActionList") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center btn-main btn-primary-ghost "><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionOverview") %]
+
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add" class="CallForAction Fullsize Center btn-main btn-primary-ghost "><span><i class="fa fa-plus-square"></i>[% Translate("Add Dashboard") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %]
+
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ActionList") %]
+
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="Filter">[% Translate("Filter for Dashboard") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="Filter" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="Filter" value="" title="[% Translate("Filter for dashboard") | html %]">
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+
+[% RenderBlockStart("OverviewResult") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+
+                <table class="DataTable" id="Dashboards">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Changed") | html %]</th>
+                            <th>[% Translate("Created") | html %]</th>
+                            <th>[% "Dashboard" | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr>
+                            <td colspan="4">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("OverviewResultRow") %]
+                        <tr [%IF Data.ValidID != 1%]class="Invalid"[% END %]>
+                            <td><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
+                            <td>[% Translate(Data.Valid) | html %]</td>
+                            <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
+                            <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
+                            <td class=""><a class="AccessDashboard" href="[% Env("Baselink") %]Action=AdminKPIDashboardEdit;DashboardID=[% Data.ID | uri %]" title="[% Translate("Access dashboard") | html %]">
+                                    <i class="fa fa-window-maximize"></i>
+                                </a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewResultRow") %]
+                        <tr class="FilterMessage Hidden">
+                            <td colspan="4">[% Translate("No matches found.") | html %]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("OverviewResult") %]
+
+[% RenderBlockStart("OverviewUpdate") %]
+            <div class="Header">
+
+            [% IF Data.Action == 'Add' %]
+                <h2>[% Translate("Add Dashboard") | html %]</h2>
+            [% ELSE %]
+                <h2>[% Translate("Edit Dashboard") | html %]</h2>
+            [% END %]
+
+            </div>
+            <div class="Content">
+                <form id="EntityUpdate" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="[% Data.Action | uri %]Action"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                <div id="NameError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="NameServerError" class="TooltipErrorMessage">
+                                    <p>
+    [% RenderBlockStart("NameServerError") %]
+                                    [% Translate("This field is required.") | html %]
+    [% RenderBlockEnd("NameServerError") %]
+    [% RenderBlockStart("ExistNameServerError") %]
+                                    [% Translate("A dashboard with this name already exists!") | html %]
+    [% RenderBlockEnd("ExistNameServerError") %]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="AvailableInterface"><span class="Marker">*</span> [% Translate("Available in") | html %]:</label>
+                            <div class="Field">
+                                [% Data.AvailableInterfaceOption %]
+                                <div id="AvailableInterfaceError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="AvailableInterfaceServerError" class="TooltipErrorMessage">
+                                    <p>
+    [% RenderBlockStart("RequiredValidOptionServerError") %]
+                                        [% Translate("This field is required.") | html %]
+    [% RenderBlockEnd("RequiredValidOptionServerError") %]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="field-wrapper">
+                            <label class="Mandatory" style="[% Data.CustomerDisplay %]" for="CustomerID"><span class="Marker">*</span> [% Translate("Customer") | html %]:</label>
+                            <div class="Field" style="[% Data.CustomerDisplay %]">
+                                [% Data.CustomerIDStrg %]
+                                <div id="CustomerIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="CustomerIDServerError" class="TooltipErrorMessage">
+                                    <p>
+    [% RenderBlockStart("RequiredValidOptionServerError") %]
+                                        [% Translate("This field is required.") | html %]
+    [% RenderBlockEnd("RequiredValidOptionServerError") %]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="field-wrapper">
+                            <label class="Mandatory" style="[% Data.AgentDisplay %]" for="GroupIDs"><span class="Marker">*</span> [% Translate("Groups") | html %]:</label>
+                            <div class="Field" style="[% Data.AgentDisplay %]">
+                                [% Data.GroupsStrg %]
+                                <div id="AlertMessageGroup" class="AlertMessage Hidden">
+                                    <p>[% Translate("The groups defined for the dashboard will override the groups defined in the KPI") | html %]</p>
+                                </div>
+                                <div id="GroupIDsError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="GroupIDsServerError" class="TooltipErrorMessage">
+                                    <p>
+    [% RenderBlockStart("RequiredValidOptionServerError") %]
+                                        [% Translate("This field is required.") | html %]
+    [% RenderBlockEnd("RequiredValidOptionServerError") %]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ValidOption %]
+                                <div id="ValidIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="ValidIDServerError" class="TooltipErrorMessage">
+                                    <p>
+    [% RenderBlockStart("RequiredValidOptionServerError") %]
+                                        [% Translate("This field is required.") | html %]
+    [% RenderBlockEnd("RequiredValidOptionServerError") %]
+    [% RenderBlockStart("InSettingValidOptionServerError") %]
+                                        [% Translate("Is not possible to invalidate this entry, all config settings have to be changed beforehand.") | html %]
+    [% RenderBlockEnd("InSettingValidOptionServerError") %]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save and Continue") | html %]</span></button>
+                                <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+[% RenderBlockEnd("OverviewUpdate") %]
+        </div>
+    </div>
+    <div class="Clear"></div>
+</div>
+[% RenderBlockEnd("Overview") %]

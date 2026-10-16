@@ -1,0 +1,114 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalMyData.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jsantos@serviceup.com.br
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div id="content-functions-content" class="ContentResponsive" >
+[% RenderBlockStart("BackgroundPortal") %]
+    <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+[% RenderBlockEnd("BackgroundPortal") %]
+[% RenderBlockStart("Head") %]
+    <div style="background-color: #[% Data.Color | html %]" class="alert alert-warning alert-pref" role="alert">
+        <p>[% Translate(Data.Header) | html %]</p>
+    </div>
+[% RenderBlockEnd("Head") %]
+
+[% RenderBlockStart("Body") %]
+
+    <div class="row">
+    
+[% RenderBlockStart("Card") %]
+
+        <div class="col-md-6">
+
+            <form action="[% Env("CGIHandle") %]" enctype="multipart/form-data" method="post" class="Validate">
+
+                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                <input type="hidden" name="Subaction" value="UpdatePreferences"/>
+                <input type="hidden" name="Group" value="[% Data.Group | html %]"/>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" >
+                                            <div>
+                                                <p class="PreferencesTitle" for="">[% Translate(Data.Label) | html %]</p>
+                                                <p class=""></p>
+[% RenderBlockStart("InputKey") %]
+                                                <div>
+                                                    <label [% IF Data.Mandatory %]class="Mandatory"[% END %] for="[% Data.Name | html %]">[% IF Data.Mandatory %]<span class="Marker">* </span>[% END %][% Translate(Data.Label) | html %]</label>
+
+                                                    <input [% IF Data.Mandatory %]required="required" class="Validate_Required [% Data.Class | html %]"[% END %][% IF Data.Readonly %] readonly [% END %] title="[% Translate(Data.Label) | html %]" type="text" id="[% Data.Name | html %]"  name="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" style="width: 100%;" />
+                                                    [% IF Data.Mandatory %]
+                                                    <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                    <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                    [% END %]
+                                                    <div class="ClearLeft"></div>
+                                                </div>
+[% RenderBlockEnd("InputKey") %]
+[% RenderBlockStart("Input") %]
+                                                <div>
+                                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                                    <input title="[% Data.Name | html %]" type="text" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" size="20" />
+                                                    <div class="ClearLeft"></div>
+                                                </div>
+[% RenderBlockEnd("Input") %]
+[% RenderBlockStart("Option") %]
+                                                <div>
+                                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                                    [% Data.Option %]
+                                                    <div class="ClearLeft"></div>
+                                                </div>
+[% RenderBlockEnd("Option") %]
+[% RenderBlockStart("Upload") %]
+                                                <div>
+                                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                                    <input title="[% Data.Name | html %]" id="[% Data.Name | html %]" name="[% Data.Name | html %]" type="file" size="20" /><br/>
+                                                    <div title="[% Data.Filename | html %]">[% Data.Filename | html %]</div>
+                                                    <div class="ClearLeft"></div>
+                                                </div>
+[% RenderBlockEnd("Upload") %]
+[% RenderBlockStart("Password") %]
+                                                <div>
+                                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                                    <input title="[% Translate(Data.Key) | html %]" type="password" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="" size="20" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
+                                                    <div class="ClearLeft"></div>
+                                                </div>
+[% RenderBlockEnd("Password") %]                <div style="text-align: center;">
+                                                    <button type="submit" class="btn btn-secondary btn-pref CallForAction" id="[% Data.PrefKey | html %]Update" value="[% Translate("Update") | html %]">[% Translate("Update") | html %]</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+[% RenderBlockStart("ActionButtons") %]
+            <div style="text-align: center;">
+
+                
+                <a style="background-color: #239245 !important;" class="btn btn-secondary btn-pref CallForAction" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;">
+                    <i class="fa fa-download" aria-hidden="true"></i> [% Translate("Download my personal data") | html %]
+                </a>     
+            </div>
+[% RenderBlockEnd("ActionButtons") %]            
+        </div>
+[% RenderBlockEnd("Card") %]
+        
+    </div>
+    <div class="Clear"></div>
+[% RenderBlockEnd("Body") %]
+</div>

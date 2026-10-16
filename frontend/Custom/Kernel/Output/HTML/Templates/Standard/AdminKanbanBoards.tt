@@ -1,0 +1,207 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKanbanBoards.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("Boards Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Boards Management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% IF Data.ID == "NEW"  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add Kanban Boards"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit Kanban Boards")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+[% RenderBlockStart("ActionList") %]
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                    
+[% RenderBlockEnd("ActionOverview") %]
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=BoardsEdit;ID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add board") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKanban" class="CallForAction Fullsize Center"><span><i class="fa fa fa fa-columns"></i>[% Translate("Manage Columns") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %]
+                </ul>
+            </div>
+[% RenderBlockEnd("ActionList") %]
+        </div>
+
+[% RenderBlockStart("FilterBoard") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h3><label for="FilterKanbanBoards">[% Translate("Filter for Kanban Boards") | html %]</label></h3>
+            </div>
+            <div class="Content">
+
+                <input type="text" id="FilterKanbanBoards" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterKanbanBoards" value="" title="[% Translate("Filter for Kanban Boards") | html %]">
+            </div>
+        </div> 
+[% RenderBlockEnd("FilterBoard") %]
+
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+[% RenderBlockStart("OverviewList") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+
+                <table class="DataTable" id="KanbanBoardsTable" summary="List of all registered Kanban Boards">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Boards") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr>
+                            <td colspan="5">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("OverviewListRow") %]
+                        <tr [% IF Data.ValidID != 1%]class="Invalid"[% END %]>
+                            <td title="[% Data.Name | html %]"><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=BoardsEdit;ID=[% Data.ID | uri %]">[% Data.Name | truncate(80) | html %]</a></td>
+                            <td>[% Translate(Data.Valid) | html %]</td>
+                        </tr>
+[% RenderBlockEnd("OverviewListRow") %]
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("OverviewList") %]
+
+[% RenderBlockStart("BoardsEdit") %]
+            <div class="Header">
+[% RenderBlockStart("HeaderAdd") %]
+                <h2>[% Translate("Add Kanban Boards") | html %]</h2>
+[% RenderBlockEnd("HeaderAdd") %]
+[% RenderBlockStart("HeaderEdit") %]
+                <h2>[% Translate("Edit Kanban Boards") | html %] : [% Data.Name | html %]</h2>
+[% RenderBlockEnd("HeaderEdit") %]
+            </div>
+            <div class="Content">
+
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="BoardsSave"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    <input type="hidden" name="OpenBy" value="[% Data.OpenBy | html %]"/>
+
+                    <fieldset class="TableLike">
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Board") | html %]:</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="AssociatedColumn">[% Translate("Columns") | html %]:</label>
+                            <div class="Field">
+                                [% Data.KanbanOptionString %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="GroupIDs"><span class="Marker">*</span> [% Translate("Groups") | html %]:</label>
+                            <div class="Field">
+                                [% Data.GroupsStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ValidOptionStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+
+                            <label for="BoardColor">[% Translate("BoardColor") | html %]: </label>
+                            <div class="Field">
+                                <input type='text' class="Colors" name="Resource_ColorName" id="Resource_ColorName" value="[% Data.Resource_ColorName %]">
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+
+                            <label for="BoardLabelColor">[% Translate("Board Label Color") | html %]: </label>
+                            <div class="Field">
+                                <input type='text' class="Colors" name="Resource_ColorNameLabel" id="Resource_ColorNameLabel" value="[% Data.Resource_ColorNameLabel %]">
+                            </div>
+                        </div>
+
+                         <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+
+                                <button class="CallForAction Primary btn-primary btn-main  btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+[% RenderBlockEnd("BoardsEdit") %]
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]
+
+[% WRAPPER JSOnDocumentComplete %]
+	<script type="text/javascript">//<![CDATA[
+		$("#Resource_ColorName").spectrum({  
+            showAlpha: true,
+            showInput: true,
+            hideAfterPaletteSelect:true,
+            preferredFormat: "hex",
+            color: '[% Data.Resource_ColorName %]',           
+        });
+
+        $("#Resource_ColorNameLabel").spectrum({  
+            showAlpha: true,
+            showInput: true,
+            hideAfterPaletteSelect:true,
+            preferredFormat: "hex",
+            color: '[% Data.Resource_ColorNameLabel %]',           
+        });
+	//]]></script>
+[% END %]

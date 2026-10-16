@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Changes">
+ 
+    <Setting Name="GenericInterface::Invoker::Module###Ticket::TicketUpdate" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>InBox::TicketInvoker::GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TicketUpdate</Item>
+                <Item Key="Controller">TicketUpdate</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerTicket</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="GenericInterface::Invoker::Module###Ticket::TicketCreate" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>InBox::TicketInvoker::GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TicketCreate</Item>
+                <Item Key="Controller">TicketCreate</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerTicket</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="GenericInterface::Invoker::Module###IA::FAQInject" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>InBox::TicketInvoker::GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">FAQInject</Item>
+                <Item Key="Controller">FAQInject</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerIA</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="GenericInterface::Invoker::Module###Generic::Tunnel" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">Tunnel</Item>
+                <Item Key="Controller">Generic</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Module###AdminGenericInterfaceInvokerTicket" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::TicketInvoker::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>users</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">This module is part of the admin area of OTRS</Item>
+                    <Item Key="Title">GenericInterface Invoker GUI</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminGenericInterfaceInvokerTicket###002-TicketInvoker" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::TicketInvoker::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterface.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterfaceInvoker.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminGenericInterfaceMappingXSLT###003-GenericInterface" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::TicketInvoker::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterfaceTestXSLT.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Module###AdminGenericInterfaceInvokerIA" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::TicketInvoker::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>users</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">This module is part of the admin area of OTRS</Item>
+                    <Item Key="Title">GenericInterface Invoker GUI</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminGenericInterfaceInvokerIA###002-TicketInvoker" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::TicketInvoker::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterface.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterfaceInvoker.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::TicketInvoker::Core###Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Ticket attributes that should be available in ticket invoker configuration frontend (0 = visible/selectable, 1 = default/preselected).</Description>
+        <Navigation>InBox::TicketInvoker::Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Age">0</Item>
+                <Item Key="ArchiveFlag">0</Item>
+                <Item Key="Changed">0</Item>
+                <Item Key="ChangeBy">0</Item>
+                <Item Key="Created">0</Item>
+                <Item Key="CreateBy">0</Item>
+                <Item Key="CustomerID">0</Item>
+                <Item Key="CustomerUser">1</Item>
+                <Item Key="CustomerUserID">0</Item>
+                <Item Key="EscalationResponseTime">0</Item>
+                <Item Key="EscalationSolutionTime">0</Item>
+                <Item Key="EscalationTime">0</Item>
+                <Item Key="EscalationUpdateTime">0</Item>
+                <Item Key="Lock">1</Item>
+                <Item Key="LockID">0</Item>
+                <Item Key="Owner">1</Item>
+                <Item Key="OwnerID">0</Item>
+                <Item Key="PendingTime">1</Item>
+                <Item Key="Priority">1</Item>
+                <Item Key="PriorityID">0</Item>
+                <Item Key="Queue">1</Item>
+                <Item Key="QueueID">0</Item>
+                <Item Key="Responsible">1</Item>
+                <Item Key="ResponsibleID">0</Item>
+                <Item Key="Service">1</Item>
+                <Item Key="ServiceID">0</Item>
+                <Item Key="SLA">1</Item>
+                <Item Key="SLAID">0</Item>
+                <Item Key="State">1</Item>
+                <Item Key="StateID">0</Item>
+                <Item Key="TicketID">0</Item>
+                <Item Key="TicketNumber">0</Item>
+                <Item Key="Title">1</Item>
+                <Item Key="Type">1</Item>
+                <Item Key="TypeID">0</Item>
+                <Item Key="UntilTime">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::TicketInvoker::Core###Article" Required="0" Valid="1">
+        <Description Translatable="1">Article attributes that should be available in ticket invoker configuration frontend (0 = visible/selectable, 1 = default/preselected).</Description>
+        <Navigation>InBox::TicketInvoker::Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ArticleTypeID">0</Item>
+                <Item Key="Attachment">1</Item>
+                <Item Key="Body">1</Item>
+                <Item Key="Cc">0</Item>
+                <Item Key="ChangeBy">0</Item>
+                <Item Key="ChangeTime">0</Item>
+                <Item Key="Charset">1</Item>
+                <Item Key="CommunicationChannel">1</Item>
+                <Item Key="CommunicationChannelID">0</Item>
+                <Item Key="ContentType">1</Item>
+                <Item Key="CreateBy">0</Item>
+                <Item Key="CreateTime">0</Item>
+                <Item Key="From">1</Item>
+                <Item Key="IsVisibleForCustomer">1</Item>
+                <Item Key="MimeType">1</Item>
+                <Item Key="SenderType">1</Item>
+                <Item Key="SenderTypeID">0</Item>
+                <Item Key="Subject">1</Item>
+                <Item Key="TicketID">0</Item>
+                <Item Key="TimeUnit">1</Item>
+                <Item Key="To">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="InBox::TicketInvoker::Settings::ResponseDynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Define a result field for the TicketID of the invoker response per web service (WebserviceID => DynamicFieldName).</Description>
+        <Navigation>InBox::TicketInvoker::Settings</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="GenericInterface::Transport::Module###HTTP::RESTArray" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the transport layer.</Description>
+        <Navigation>GenericInterface::Transport::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">RESTArray</Item>
+                <Item Key="Protocol">HTTP</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceTransportHTTPREST</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>

@@ -1,0 +1,38 @@
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# Custom/Kernel/Output/HTML/Templates/Standard/AgentKPIDashboard.tt - frontend template
+#
+# written/edited by:
+# * dparavani@serviceup.com.br
+# --
+
+<style type="text/css">
+	.grid-stack { 
+		background: [% Data.DashboardBG %];
+	}
+	.grid-stack-item-content { 
+		background-color: [% Data.CardBG %]; 
+	}
+</style>
+
+<div class="MainBox">
+	<ul class="DashboardHeader">
+		<div class="DashboardButtons">
+			<li><a class="btn btn-default" id="DashboardList" href='[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DashboardList' title='Dashboard List'><i class="fa fa-bar-chart"></i>[% Translate("Dashboard List") | html %]</a></li>
+		</div>
+	</ul>
+
+	<div class="row">
+
+[% RenderBlockStart("Card") %]
+		<a class="AsBlock" href='[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview;ID=[% Data.ID | uri %]'>
+			<div class="card" id="[% Data.ID %]">
+				<span><i class="fa fa-star fa-star-106" style="display: none;"></i></span>
+				<h2>[% Data.Name | html %]</h2>
+			</div>
+		</a>
+[% RenderBlockEnd("Card") %]
+
+	</div>
+
+    <div class="grid-stack"></div>
+</div>

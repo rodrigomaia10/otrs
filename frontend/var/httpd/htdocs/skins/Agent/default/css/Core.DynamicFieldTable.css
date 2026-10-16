@@ -1,0 +1,188 @@
+/* --
+// var/httpd/htdocs/skins/Agent/default/css/Core.DynamicFieldTable.css
+// Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+//
+// written/edited by:
+// mbernardo@serviceup.com.br
+// dsilva@serviceup.com.br
+// dparavani@serviceup.com.br
+// --
+*/
+
+@media screen,projection,tv,handheld {
+
+/**
+ * @subsection     DynamicFieldTable Render
+ */
+h1 {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    padding: 20px 8px 0px 23px !important;
+    position: relative !important;
+}
+
+.ui-widget-header{
+    border: 1px solid #aaa !important;
+    width: 100% !important;
+    background: #ddd url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x !important;
+    color: #222 !important;
+    font-weight: lighter !important;
+    display: revert !important;
+}
+
+.ui-icon-arrowreturnthick-1-w {
+    background-position: -4px -64px !important;
+}
+
+.ui-icon-trash {
+    background-position: -180px -97px !important;
+}
+
+.ui-icon-arrowthick-1-n {
+    background-position: -3px -48px !important;
+}
+
+.ui-icon-arrowthick-1-s {
+    background-position: -69px -48px !important;
+}
+
+.ui-widget-content .ui-button .ui-button-icon-primary{
+    margin-left: -35% !important;
+}
+
+select {
+    width: 100%;
+}
+
+input[type="date"]{
+    width:97%;
+    height: 33px;
+}
+
+input[type="datetime"]{
+    width:97%;
+    height: 33px;
+}
+
+input[type="datetime-local"]{
+    width:97%;
+    height: 33px;
+}
+
+#Bottom {
+    background-color: #eee;
+    border: 1px solid #aaa;
+    border-top: 0px;
+}
+
+#Bottom .Field{
+    margin-left: 37% !important;
+    padding-top: 0px !important;
+    padding-bottom: 9px !important;
+}
+
+#SumRow{
+    line-height: 200%;
+}
+
+#tblAppendGrid_caption_td{
+    font-family: sans-serif !important;
+}
+
+.RowSumCell{
+    background: #DDD !important;
+}
+
+.RowSumField{
+    background: #DDD;
+    border: 0px;
+}
+
+#tdHeadCellSumRow{
+    text-align: center;
+}
+
+.ui-widget-header{
+    text-align: center;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #aaa !important;
+    background: #fff !important;
+    font-weight: normal !important;
+    color: black !important;
+}
+
+div.appendGrid table thead td.caption {
+    padding: 4px !important;
+    font-weight: bold !important;
+}
+
+div#field-wrapperAdd {
+    width: 0 !important;
+}
+
+tr.columnHead {
+    width: auto !important;
+    text-overflow: ellipsis !important;
+}
+
+div.appendGrid table.head thead td {
+    width: auto !important;
+    text-overflow: ellipsis !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+a#AddValue {
+    width: auto !important;
+    margin: 0px 0px 0px 0px !important;
+}
+
+.ui-widget {
+    font-family: Verdana, Arial, sans-serif !important;
+    font-size: 1.1em !important;
+}
+
+div.appendGrid table.head, div.appendGrid table.body, div.appendGrid table.foot {
+    border-collapse: collapse !important;
+    margin-left: 23px !important;
+}
+
+div.appendGrid table tfoot button {
+    min-height: 30px !important;
+    min-width: 56px !important;
+    border-radius: var(--border-radius-sm) !important;
+    margin: 0px 2px 4px 4px !important;
+}
+
+div.appendGrid table tbody td.last button {
+    min-height: 25px !important;
+    min-width: 31px !important;
+    border-radius: var(--border-radius-sm) !important;
+    margin: 0px 0px 0px 4px !important;
+}
+
+.ui-icon-arrowreturnthick-1-w, .ui-icon-trash, .ui-icon-arrowthick-1-n{
+    margin-top: -8px !important;
+    margin-left: -5px !important;
+}
+
+.ui-icon-arrowthick-1-s{
+    margin-top: -8px !important;
+    margin-left: -3px !important;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    -webkit-box-sizing: border-box;
+    vertical-align: middle;
+    white-space: pre-wrap;
+}
+
+table thead tr th:first-child, table tbody tr td:first-child {
+    padding-left: 0px;
+}
+
+}/* end @media */

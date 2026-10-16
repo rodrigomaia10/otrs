@@ -1,0 +1,137 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminCustomerPortalHomePage.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * jsantos@serviceup.com.br
+# * ccresencio@serviceup.com.br
+# --
+
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+[% RenderBlockStart("ActionList") %]
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminCustomerPortalLayout" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                    
+[% RenderBlockEnd("ActionOverview") %]
+
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=CardsEdit;ID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add card") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %] 
+                </ul>
+            </div>
+[% RenderBlockEnd("ActionList") %]
+        </div>
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Customize the Home Page with HTML and CSS in the 'Source Code' area. Use the examples below if necessary.") | html %]
+                </p>
+            </div>
+        </div>
+        <div class="WidgetSimple" style='text-align: center;'>
+            <div class="Header">
+                <h2>[% Translate("Example") | html %]</h2>
+            </div>
+            <div class="Content">
+                <h4>[% Translate("Quick access") | html %]</h4>
+                <p class="FieldExplanation">
+                    [% Translate("Central card with access buttons for internal and external links.") | html %]
+                    <img style='width: -webkit-fill-available;' src='https://storage.googleapis.com/serviceup/CustomerPortal/QuickAcess.png'>
+                </p>
+                <button class="" id="QuickAcess" value=""><span>[% Translate("Use this example") | html %]</span></button>
+            </div>
+            <div class="Content">
+                <h4>[% Translate("access cards") | html %]</h4>
+                <p class="FieldExplanation">
+                    [% Translate("Access cards for internal and external links.") | html %]
+                    <img style='width: -webkit-fill-available;' src='https://storage.googleapis.com/serviceup/CustomerPortal/CardsAcess.png'>
+                </p>
+                <button class="" id="CardsAcess" value=""><span>[% Translate("Use this example") | html %]</span></button>
+            </div>
+
+            <div class="Content">
+                <h4>[% Translate("cards animated") | html %]</h4>
+                <p class="FieldExplanation">
+                    [% Translate("Access cards for internal and external links.") | html %]
+                    <img style='width: -webkit-fill-available;' src='https://storage.googleapis.com/serviceup/CustomerPortal/CardsAnimated.png'>
+                </p>
+                <button class="" id="CardsAnimated" value=""><span>[% Translate("Use this example") | html %]</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Cards Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Cards Management of Customer Portal'),
+                    Link => 'AdminCustomerPortalLayout',
+                },
+            ]
+        %]
+
+        [% IF Data.ID == "NEW"  %]
+            [% BreadcrumbPath.push({ Name => Translate("Add card"),}) %]
+        [% ELSIF Data.ID %]
+            [% USE EditTitle = String(Translate("Edit card")) %]
+            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+        [% END %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+[% RenderBlockStart("CardEdit") %]
+            <div class="Header">
+                <h2>[% Translate("Edit Home Page") | html %]</h2>
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="CardsSave"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    <fieldset class="TableLike">
+                        <label class="Mandatory" for="RichText">[% Translate("Body") | html %]:</label>
+                        <div class="RichTextField">
+                            <textarea id="RichText2" class="RichText2 " rows="10" cols="20" name="Body">[% Data.Body | html %]</textarea>
+                        </div>
+
+                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                [% Data.ValidOptionStrg %]
+                            </div>
+
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=AdminCustomerPortalLayout" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                <button class="btn-primary-ghost btn-main btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                            </div>
+                        
+                    </fieldset>
+                    </div>
+                </form>
+            </div>
+[% RenderBlockEnd("CardEdit") %]
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]

@@ -1,0 +1,159 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalUrgentTicket.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# *nfreitas@serviceup.com.br
+# --
+
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div id="content functions-content" style="margin-left: 20% !important;">
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]
+
+[% RenderBlockStart("NewUrgentTicket") %]
+
+<div class="row" style="margin-top:-6%;">
+  <div class="col-lg-9 col-md-12 col-sm-12">
+    <div class="card-header-alt">
+      <h5 class="card-title">Chamado urgente <small class="ticket-info"> - prioridade alta - você está abrindo um chamado urgente!</small></h5>
+    </div>
+  </div>
+</div>
+
+<form action="[% Env("CGIHandle") %]" method="post" name="compose" id="NewServiceTicket" enctype="multipart/form-data">
+  <input type="hidden" name="Action" value="[% Env("Action") %]" />
+  <input type="hidden" name="Subaction" value="StoreNew" />
+  <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
+  <input type="hidden" name="ServiceID" value="[% Data.ServiceID | html %]" />
+  <div class="row">
+    [% RenderBlockStart("TicketType") %]
+    <div class="col-md-4" style="display:none">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">*[% Translate("Type") | html %]</h5>
+        </div>
+        <div class="card-body ">
+          <div class="form-group">
+            [% Data.TypeStrg %]
+          </div>
+        </div>
+      </div>
+    </div>
+    [% RenderBlockEnd("TicketType") %]
+
+    [% RenderBlockStart("Queue") %]
+    <div class="col-md-4">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">*[% Translate("To") | html %]</h5>
+        </div>
+        <div class="card-body ">
+          <div class="form-group">
+            [% Data.ToStrg %]
+          </div>
+        </div>
+      </div>
+    </div>
+    [% RenderBlockEnd("Queue") %]
+
+    [% RenderBlockStart("TicketSLA") %]
+    <div class="col-md-4">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">[% Translate("SLA") | html %]:</h5>
+        </div>
+        <div class="card-body ">
+          <div class="form-group">
+            [% Data.SLAStrg %]
+          </div>
+        </div>
+      </div>
+    </div>
+    [% RenderBlockEnd("TicketSLA") %]
+
+    <div class="col-md-4">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">[% Translate("Attachments") | html %]:</h5>
+        </div>
+        <div class="card-body ">
+          <input type="file" class="form-control-file" id="FileUpload" name="FileUpload">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <!--h4 class="card-title">*[% Translate("Subject") | html %]:</h4-->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" placeholder="[% Translate("Subject") %]" style="width:100%" class="form-control" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate_Required [% Data.SubjectInvalid | html %]" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <textarea id="RichText" class="RichText [% Data.BodyInvalid | html %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.Body | html %]</textarea>
+          </div>
+
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+  </div>
+
+  <div class="row">
+    [% RenderBlockStart("Priority") %]
+    <div class="col-md-6" style="display:none">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">[% Translate("Priority") | html %]</h5>
+        </div>
+        <div class="card-body ">
+          <div class="form-group">
+            [% Data.PriorityStrg %]
+          </div>
+        </div>
+      </div>
+    </div>
+    [% RenderBlockEnd("Priority") %]
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto">
+      <div class="card">
+        <div class="card-body text-center">
+            <button id="submitUrgentTicket" class="btn btn-primary btn-lg">[% Translate("Submit") | html %]</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+  $(document).ready( function () {
+    $("#TypeID").removeClass("Validate_Required");
+    $("#TypeID").val("2");
+    $("#PriorityID").val("5");
+  } );
+
+  </script>
+
+</form>
+
+[% RenderBlockEnd("NewUrgentTicket") %]
+
+</div>

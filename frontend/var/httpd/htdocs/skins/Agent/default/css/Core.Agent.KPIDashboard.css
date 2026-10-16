@@ -1,0 +1,119 @@
+/*--
+var/httpd/htdocs/skins/Agent/default/css/Core.Agent.KPIDashboard.css
+Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+written/edited by:
+* dparavani@serviceup.com.br
+-- */
+
+.Dialog { 
+  transform: translate(-50%); 
+}
+
+.Alert { 
+  left: 50% !important;
+}
+
+.grid-stack-item-content { 
+  inset: 7px !important 
+}
+
+.DashboardHeader { 
+  list-style-type: none;
+  margin: 0px 2px 0px 0px;
+  padding: 10px 15px 4px 0px;
+  background: #f5f5f5;
+  position: relative;
+  padding-left: 0px;
+  padding-right: 15px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0px #e9e9e9; 
+}
+
+.DashboardHeader li { 
+  display: inline-block;
+  margin: 0px 2px 0px 2px;
+  padding-left: 35px;
+  color: #777;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle; 
+}
+
+.DashboardHeader li > a { 
+  line-height: 14px; display: inline-block; padding: 0px 2px 3px 2px;
+}
+
+i { 
+  margin-right: 3px;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card {
+    border-radius: 5px !important;
+    box-shadow: 7px 7px 25px 0px rgba(50, 50, 50, 0.4) !important;
+    padding: 30px !important;
+    margin: 20px !important;
+    width: 200px !important;
+    transition: all 0.3s ease-out !important;
+    border-left: 3px solid #929292 !important;
+    min-height: 40px !important;
+    position: relative !important;
+    box-sizing: content-box !important;
+    gap: inherit !important;
+}
+
+.card:hover {
+  transform: translateY(-5px) !important;
+  cursor: pointer !important;
+}
+
+.card p {
+  color: #a3a5ae !important;
+  font-size: 16px !important;
+}
+
+.image {
+  float: right;
+  max-width: 64px;
+  max-height: 64px;
+}
+
+
+.fa-star {
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  font-size: 1.5em !important;
+  color: #999;
+}
+
+.yellow-star {
+  color: rgb(255, 193, 7);
+}
+
+.card:hover .fa-star { 
+  display: block !important; transition: .6s; 
+}
+
+.Charts {
+  margin-bottom: 15px;
+}
+
+.c3-chart-arc text {
+  fill: #000;
+}
+
+h2 {
+  gap: var(--gap-sm);
+  font-size: 14px;
+  color: #474747;
+  margin-bottom: 10px;
+}

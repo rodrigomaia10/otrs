@@ -1,0 +1,435 @@
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPISearch.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * pdias@beonup.com.br
+# * dsilva@beonup.com.br
+# * nfreitas@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("Series Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Series Management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% IF Data.ID == "NEW"  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add KPI Series"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit KPI Series")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+[% RenderBlockStart("ActionList") %]
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+
+[% RenderBlockEnd("ActionOverview") %]
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SeriesEdit;ID=NEW" class="CallForAction Fullsize Center btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add series") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPISeriesExport;[% Env("ChallengeTokenParam") | html %]" class="CallForAction Fullsize Center  btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export series") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %]
+                </ul>
+            </div>
+[% RenderBlockEnd("ActionList") %]
+
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterKPISeries">[% Translate("Filter for KPI Series") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterKPISeries" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterKPISeries" value="" title="[% Translate("Filter for KPI Series") | html %]">
+            </div>
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Configuration Import") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Here you can upload a configuration file to import KPIs series to your system. The file needs to be in .yml format as exported by the KPI series editor module.") | html %]
+                </p>
+                <ul class="ActionList">
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="KPISeriesImport"/>
+                            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <fieldset class="Separated flex-row">
+                                <input type="checkbox" id="OverwriteExistingEntities" name="OverwriteExistingEntities" value="1" />
+                                <label for="OverwriteExistingEntities">[% Translate("Overwrite existing series?") | html %]</label>
+                            </fieldset>
+                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Upload KPI configuration") | html %]">
+                                <span><i class="fa fa-upload"></i>[% Translate("Import series configuration(s)") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+[% RenderBlockStart("OverviewList") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+
+                <table class="DataTable" id="KPISeriesTable" summary="List of all registered KPI Series">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Series") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                            <th>[% Translate("Copy") | html %]</th>
+                            <th>[% Translate("Export") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr>
+                            <td colspan="5">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("OverviewListRow") %]
+                        <tr [% IF Data.ValidID != 1%]class="Invalid"[% END %]>
+                            <td title="[% Data.Name | html %]"><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SeriesEdit;ID=[% Data.ID | uri %]">[% Data.Name | truncate(80) | html %]</a></td>
+                            <td>[% Translate(Data.Valid) | html %]</td>
+                            <td class="">
+                                <a class="TrashCan KPISeriesDelete" href="#" data-query-string="Action=AdminKPISeries;Subaction=KPISeriesDelete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this Serie") | html %]">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                            <td class="">
+                                <a class="KPISeriesCopy" href="#" data-query-string="Action=AdminKPISeries;Subaction=KPISeriesCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Copy this Serie") | html %]">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                            </td>
+                            <td class="">
+                                <a class="KPISeriesExport" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KPISeriesExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Export this Serie") | html %]">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewListRow") %]
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("OverviewList") %]
+
+[% RenderBlockStart("SeriesEdit") %]
+            <div class="Header">
+[% RenderBlockStart("HeaderAdd") %]
+                <h2>[% Translate("Add KPI Series") | html %]</h2>
+[% RenderBlockEnd("HeaderAdd") %]
+[% RenderBlockStart("HeaderEdit") %]
+                <h2>[% Translate("Edit KPI Series") | html %] : [% Data.Name | html %]</h2>
+[% RenderBlockEnd("HeaderEdit") %]
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="SeriesSave"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    
+                    <div class="Content">
+                        <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                            <fieldset class="TableLike">
+
+                                <div class="field-wrapper">
+                                    <label for="Name">[% Translate("Series") | html %]: </label>
+                                    <div class="Field">
+                                        <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                        <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="GroupIDs">[% Translate("Groups") | html %]: </label>
+                                    <div class="Field">
+                                        [% Data.GroupsStrg %]
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]: </label>
+                                    <div class="Field">
+                                        [% Data.ValidOptionStrg %]
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label>[% Translate("Default serie") | html %]:</label>
+                                    <div class="Field">
+                                        <input type="checkbox" name="DefaultSerie" id="DefaultSerie" value="[% Data.DefaultSerie | html %]" onclick="Core.Agent.Admin.KPISeries.DefaultSerie();" [% Data.Checked | html %]>
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="SerieType" class="">[% Translate("Serie type") | html %]: </label>
+                                    <div class="Field FieldSerieTypeStrg">
+                                        [% Data.SerieTypeStrg %]
+                                    </div>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label for="KPIs" id="KPIsFieldLabel">[% Translate("KPIs") | html %]: </label>
+                                    <div class="Field" id="KPIsField">
+                                        [% Data.KPIOptionString %]
+                                    </div>   
+                                </div>  
+
+                                <div class="field-wrapper">
+                                    <label for="Columns" id="ColumnsKPILabel">[% Translate("Columns") | html %]: </label>
+                                    <div class="Field" id="ColumnsKPI">
+                                        [% Data.QtdColumnStrg %]
+                                    </div>
+                                </div>
+
+                                <div class="TableLike" id="SearchInsertKPICol1">
+                                    <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                                        <h2 class="card-title">[% Translate("Column 1") | html %]</h2>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="KPIsFieldLabelCol1" id="KPIsFieldLabelCol1"><span class="Marker">*</span>[% Translate("KPIs") | html %]: </label>
+                                            <div class="Field" id="KPIsFieldCol1">
+                                                [% Data.KPIOptionStringCol1 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="ChartTypeLabelCol1" id="ChartTypeLabelCol1"><span class="Marker">*</span>[% Translate("Chart type") | html %]: </label>
+                                            <div class="Field" id="ChartTypeColField1">
+                                                [% Data.ChartTypeStringCol1 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label class="" for="ChartScaleTimeColLabel1" id="ChartScaleTimeColLabel1">[% Translate("Scale") | html %]: </label>
+                                            <div class="Field flex-row" id="ChartScaleTimeColField1">
+                                                [% Data.ChartScaleTimeCol1 %]
+                                                [% Data.ChartScaleUnitCol1 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="TitleCol1" id="TitleCol1">[% Translate("Title") | html %]: </label>
+                                            <div class="Field" id="ChartTitle1">
+                                                <input type="text" name="TitleCol1" id="TitleCol1" value="[% Data.TitleCol1 | html %]" class="W50pc [% Data.TitleColInvalid | html %]" maxlength="200"/>
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="LabelTypeCol1" id="LabelTypeCol1">[% Translate("Display text format") | html %]: </label>
+                                            <div class="Field" id="TypeLabelCol1">
+                                                [% Data.TypeLabelCol1Sting %]
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="TableLike" id="SearchInsertKPICol2">
+                                    <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                                        <h2 class="card-title">[% Translate("Column 2") | html %]</h2>
+                                        
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="KPIsFieldLabelCol2" id="KPIsFieldLabelCol2"><span class="Marker">*</span>[% Translate("KPIs") | html %]: </label>
+                                            <div class="Field" id="KPIsFieldCol2">
+                                                [% Data.KPIOptionStringCol2 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label  class="Mandatory" for="ChartTypeLabelCol2" id="ChartTypeLabelCol2"><span class="Marker">*</span>[% Translate("Chart type") | html %]: </label>
+                                            <div class="Field" id="ChartTypeColField2">
+                                                [% Data.ChartTypeStringCol2 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label class="" for="ChartScaleTimeColLabel2" id="ChartScaleTimeColLabel2">[% Translate("Scale") | html %]: </label>
+                                            <div class="Field flex-row" id="ChartScaleTimeColField2">
+                                                [% Data.ChartScaleTimeCol2 %]
+                                                [% Data.ChartScaleUnitCol2 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="TitleCol2" id="TitleCol2">[% Translate("Title") | html %]: </label>
+                                            <div class="Field" id="ChartTitle2">
+                                                <input type="text" name="TitleCol2" id="TitleCol2" value="[% Data.TitleCol2 | html %]" class="W50pc [% Data.TitleColInvalid | html %]" maxlength="200"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field-wrapper">
+                                            <label for="LabelTypeCol2" id="LabelTypeCol2">[% Translate("Display text format") | html %]: </label>
+                                            <div class="Field" id="TypeLabelCol2">
+                                                [% Data.TypeLabelCol2Sting %]
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="TableLike" id="SearchInsertKPICol3">
+                                    <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                                        <h2 class="card-title" >[% Translate("Column 3") | html %]</h2>
+                                        
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="KPIsFieldLabelCol3" id="KPIsFieldLabelCol3"><span class="Marker">*</span>[% Translate("KPIs") | html %]: </label>
+                                            <div class="Field" id="KPIsFieldCol3">
+                                                [% Data.KPIOptionStringCol3 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="ChartTypeLabelCol3" id="ChartTypeLabelCol3"><span class="Marker">*</span>[% Translate("Chart type") | html %]: </label>
+                                            <div class="Field" id="ChartTypeColField3">
+                                                [% Data.ChartTypeStringCol3 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label class="" for="ChartScaleTimeColLabel3" id="ChartScaleTimeColLabel3">[% Translate("Scale") | html %]: </label>
+                                            <div class="Field flex-row" id="ChartScaleTimeColField3">
+                                                [% Data.ChartScaleTimeCol3 %]
+                                                [% Data.ChartScaleUnitCol3 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="TitleCol3" id="TitleCol3">[% Translate("Title") | html %]: </label>
+                                            <div class="Field" id="ChartTitle3">
+                                                <input type="text" name="TitleCol3" id="TitleCol3" value="[% Data.TitleCol3 | html %]" class="W50pc [% Data.TitleColInvalid | html %]" maxlength="200"/>
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="LabelTypeCol3" id="LabelTypeCol3">[% Translate("Display text format") | html %]: </label>
+                                            <div class="Field" id="TypeLabelCol3">
+                                                [% Data.TypeLabelCol3Sting %]
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="TableLike" id="SearchInsertKPIChartSQLCol1">
+                                    <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                                        <h2 class="card-title">[% Translate("Column 1") | html %]</h2>
+                                        
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="KPIsFieldLabelChartSQLCol1" id="KPIsFieldLabelChartSQLCol1"><span class="Marker">*</span>[% Translate("KPIs") | html %]: </label>
+                                            <div class="Field" id="KPIsFieldChartSQLCol1">
+                                                [% Data.KPIOptionChartSQLStringCol1 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="TitleChartSQLCol1" id="TitleChartSQLCol1">[% Translate("Title") | html %]: </label>
+                                            <div class="Field" id="ChartSQLTitle1">
+                                                <input type="text" name="TitleChartSQLCol1" id="TitleChartSQLCol1" value="[% Data.TitleChartSQLCol1 | html %]" class="W50pc [% Data.TitleColInvalid | html %]" maxlength="200"/>
+                                            </div>
+                                        </div> 
+                                        <div class="Field" id="TypeLabelChartSQLCol1">
+                                            [% Data.TypeLabelChartSQLCol1Sting %]
+                                        </div> 
+                                    </div>
+                                </div>
+
+                                <div class="TableLike" id="SearchInsertKPIChartSQLCol2">
+                                    <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+
+                                        <h2 class="card-title">[% Translate("Column 2") | html %]</h2>
+                                    
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="KPIsFieldLabelChartSQLCol2" id="KPIsFieldLabelChartSQLCol2"><span class="Marker">*</span>[% Translate("KPIs") | html %]: </label>
+                                            <div class="Field" id="KPIsFieldChartSQLCol2">
+                                                [% Data.KPIOptionChartSQLStringCol2 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="TitleChartSQLCol2" id="TitleChartSQLCol2">[% Translate("Title") | html %]: </label>
+                                            <div class="Field" id="ChartSQLTitle2">
+                                                <input type="text" name="TitleChartSQLCol2" id="TitleChartSQLCol2" value="[% Data.TitleChartSQLCol2 | html %]" class="W50pc [% Data.TitleColInvalid | html %]" maxlength="200"/>
+                                            </div> 
+                                        </div>
+
+                                        <div class="Field" id="TypeLabelChartSQLCol2">
+                                            [% Data.TypeLabelChartSQLCol2Sting %]
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="TableLike" id="SearchInsertKPIChartSQLCol3">
+                                    <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+
+                                        <h2 class="card-title">[% Translate("Column 3") | html %]</h2>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="KPIsFieldLabelChartSQLCol3" id="KPIsFieldLabelChartSQLCol3"><span class="Marker">*</span>[% Translate("KPIs") | html %]: </label>
+                                            <div class="Field" id="KPIsFieldChartSQLCol3">
+                                                [% Data.KPIOptionChartSQLStringCol3 %]
+                                            </div> 
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="TitleChartSQLCol3" id="TitleChartSQLCol3">[% Translate("Title") | html %]: </label>
+                                            <div class="Field" id="ChartSQLTitle3">
+                                                <input type="text" name="TitleChartSQLCol3" id="TitleChartSQLCol3" value="[% Data.TitleChartSQLCol3 | html %]" class="W50pc [% Data.TitleColInvalid | html %]" maxlength="200"/>
+                                            </div> 
+                                        </div>
+
+                                        <div class="Field" id="TypeLabelChartSQLCol3">
+                                            [% Data.TypeLabelChartSQLCol3Sting %]
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>                        
+                        </div> 
+                    </div>
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-main btn-cancel-ghost btn-width-md"  href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                                <button class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>                                
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+[% RenderBlockEnd("SeriesEdit") %]
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]

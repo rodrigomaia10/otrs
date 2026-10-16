@@ -1,0 +1,405 @@
+/**
+ * var/httpd/htdocs/skins/Agent/default/css/Core.Agent.Admin.KanbanBoard.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ * * nfreitas@serviceup.com.br
+ * * dsilva@serviceup.com.br
+ * * dparavani@serviceup.com.br
+ */
+
+
+ .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: transform .2s;
+    width: 14%;
+    display: inline-block;
+    height: 90px;
+    margin-left: 1%;
+    border-radius: 2%;
+    opacity:0.8;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 0 !important;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.CounterColumn{
+    display: inline-block;
+}
+
+.ConterTicketBoards{
+    text-align: right;
+    margin: 0px 7px 0px 8px;
+}
+.container {
+    margin: 10px 6px 0px 6px;
+    height: 68%;
+}
+
+.StartTicketKanban{
+    display: inline-block;
+    font-size: 15px;
+}
+
+.ColumnTitleFormat{
+    text-align: initial;
+    display: inline-block;
+    min-width: 84%;
+    max-width: 84%;
+}
+
+/**
+ * @subsection AJAX Loader
+ */
+
+ .AJAXLoaderKanbanColumn {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 1px;
+    position: relative;
+    vertical-align: bottom;
+}
+
+.AJAXLoaderKanbanColumn:after,
+#Canvas .Activity .Loader:after,
+.Loading > .Header h2:after,
+.OverviewControl.Loading .ControlRow:after {
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    line-height: 14px;
+    content: "\f1ce";
+    font-family: FontAwesome;
+    font-size: 14px;
+}
+
+.KanbanName{
+    color: #fff;
+    font-size: 16px;
+}
+
+.card:hover {
+    opacity:1;
+}
+
+.Colapsed{
+    padding: 7px 9px 0px 7px !important;
+    min-height: 100%;
+    writing-mode: vertical-lr;
+}
+
+.kanban-drag-after:after{
+    content:'';
+    position:absolute;
+    top: 34px;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:rgba(0, 0, 0, 0.25);
+}
+
+
+#SearchForm,
+#AgentKanbanTicketSetQueue, #AgentCustomerUserInformationCenterSearchForm,
+#AgentTicketCustomerIDSelection {
+    width: 490px;
+    padding-right: 20px;
+}
+ 
+#SearchForm #SearchProfile,
+#AgentKanbanTicketSetQueue #SearchProfile {
+    max-width: 350px;
+}
+
+#SearchForm,
+#KanbanOwnerAndResponsibleInformation, #AgentCustomerUserInformationCenterSearchForm,
+#AgentTicketCustomerIDSelection {
+    width: 490px;
+    padding-right: 20px;
+}
+ 
+#SearchForm #SearchProfile,
+#KanbanOwnerAndResponsibleInformation #SearchProfile {
+    max-width: 350px;
+}
+
+.ButtonsOfCard{
+    margin-top: 2%;
+}
+
+
+.IconButtonKB{
+    padding: 1px 4px 1px 1px;
+}
+
+.IconButtonKB:hover{
+   color: #aaa;
+   cursor: pointer !important;
+   
+}
+
+.kanban-item{
+    padding: 7px 6px 7px 6px !important;
+    border: 1px solid #eaeaea !important;
+    box-shadow: #ddd 2px 2px 3px;
+}
+
+.kanban-board{
+    background-color: #fff !important;
+}
+
+/*To customize the scroll bar*/
+.kanban-drag::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+.kanban-drag::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+.kanban-drag::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+}
+
+.kanban-board .kanban-drag {
+    min-height: 200px;
+    max-height: 65vh;
+    padding: 6px;
+    overflow-y: auto;
+}
+
+#kanban{
+    /* background-color: #fff !important; */
+    overflow-x: auto;
+    max-height:  calc(100vh - 250px);;
+}
+
+.ColumnsButtons{
+    display: inline-block;
+    font-size: 15px;
+    z-index: 1;
+ 
+}
+
+.kanban-board-header{
+    border-radius: 2% !important;
+    text-align: left !important;
+    cursor: pointer;
+}
+
+.kanban-board header .kanban-title-board{
+    font-weight: 1 !important;
+    font-size: 14px  !important;
+    display: inline-block;
+}
+
+.EditBoard{
+    margin: 8px 7px 0px 0px;
+    font-size: 15px;
+    float: right;
+}
+
+.ColumnSpan{
+    padding: 3px;
+    z-index: 1;
+}
+
+.kanban-board{
+    margin-right: 0px !important;
+}
+
+.kanban-item:hover{
+    cursor: default !important;
+}
+
+.FlagToPriority span {
+    display: inline-block;
+    height: 100%;
+    text-indent: -9999px;
+    cursor: pointer;
+    background-color: #cdcdcd;
+}
+
+.FlagKB{
+    display: inline-block;
+    margin-right: 2%;
+    width:  89%;
+    height: 10px;
+}
+
+.MessageCardKB{
+    margin-top: 2%;
+}
+
+.DivFlagKB{
+    width: 10%;
+    display: inline-block;
+}
+
+.KanbanAddBoard{
+    background-color: #aaaaaab3;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ListBoards{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#AddBoardCard{
+    margin: 20%;
+}
+
+.StartTicketKanbanYellow{
+    display: inline-block;
+    color: #ff9922;
+    font-size: 16px;
+}
+
+.StartTicketKanbanGrey{
+    display: inline-block;
+    color: #bbbbbb;
+    font-size: 16px;
+}
+
+
+.TicketTitleKB { 
+    cursor: pointer;
+    display: inline-block;
+    color: #ff9922;
+    width: 80%;
+}
+
+.TicketTitleKBSLA {
+    width: 75% !important;
+}
+
+.TicketSLAIn {
+    display: inline-block;
+    color: #22E016;
+    font-size: 16px;
+}
+
+.TicketSLAOut {
+    display: inline-block;
+    color: #FF0100;
+    font-size: 16px;
+}
+
+.OwnerAvatar {
+    width: 30px;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.ResponsibleAvatar {
+    width: 30px;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.OwnerAvatardiv{
+    text-align: right;
+    margin-top: -18px;
+}
+
+
+#Fullscreen{
+    float: right;
+    font-size: 16px;
+}
+
+.FullscreenIcon{
+    color: #777 !important;
+}
+
+.BreadCrumb{
+    margin: 0px 2px 0px 0px;
+}
+
+.kanban-container{
+    margin-top: 1%;
+}
+
+.TagOfKanban{
+    border-radius: 2px;
+    padding: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.TagInCard{
+    display: inline-block;
+    padding: 2px 3px 2px 3px;
+    color: #ffffff;
+}
+
+/*.breadcrumb {
+    display:inline-block;
+    position:relative;
+    line-height:30px;                
+    text-align:center;
+    padding-right:20px;
+    padding-left:35px;                
+    color:#fff;
+}
+.breadcrumb:after {
+    content:"";display:block;position:absolute;
+    box-sizing:border-box;           
+    top:0;bottom:0;left:100%;
+    border:solid 15px transparent;   
+    z-index:1;
+}
+.blue {background:blue; border-left-color:blue} 
+ 
+.blue:after {border-left-color:blue} */
+
+.triangulo-para-direita {
+    width: 0; 
+    height: 0; 
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    display: inline-block;
+  }
+
+.kanban-board-header.Colapsed {    
+    min-height: calc(65vh + 34.9px ) !important;
+}
+  
+@media only screen and (max-width: 1024px) and (min-width: 0px)
+{
+    #kanban {
+        max-height: 740px !important;
+    }
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 0px)
+{
+    #kanban {
+        max-height: 714px !important;
+    }
+}
+
+@media only screen and (max-width: 1680px) and (min-width: 0px)
+{
+    #kanban {
+        max-height: 914px !important;
+    }
+}

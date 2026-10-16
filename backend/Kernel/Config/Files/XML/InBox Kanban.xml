@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+ <Setting Name="Frontend::Module###KanbanAJAXHandler" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module AJAX handler for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group"></Item>
+                    <Item Key="GroupRo"></Item>
+                    <Item Key="Description">KanbanAJAXHandler</Item>
+                    <Item Key="Title"></Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+   <Setting Name="Frontend::Module###AgentKanban" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Title" Translatable="1">KanbanBoard</Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>users</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                            <Item>users</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">KanbanBoard</Item>
+                    <Item Key="Title" Translatable="1">KanbanBoard</Item>
+                    <Item Key="NavBarName">KanbanBoard</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AgentKanban###002-AgentKanban" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+				 <Item Key="CSS">
+					 <Array>
+						 <Item>Core.Agent.Admin.KanbanBoard.css</Item>
+					     <Item>inbox-thirdparty/jKanban/jkanban.css</Item>          
+					     <Item>inbox-thirdparty/jquey-toast-plugin/jquery.toast.css</Item>          
+					 </Array>
+				 </Item>
+                <Item Key="JavaScript">
+                    <Array>      
+                        <Item>inbox-thirdparty/dragula-3.7.2/dragula.js</Item>          
+                        <Item>inbox-thirdparty/jKanban/jkanban.js</Item>  
+                        <Item>inbox-thirdparty/jquey-toast-plugin/jquery.toast.js</Item>                  
+                        <Item>Core.Agent.Admin.MyKanbanBoard.js</Item>               
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Navigation###AgentKanban###002-AgentKanban" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::Kanban::Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1"></Item>
+                        <Item Key="Name" Translatable="1">Kanban</Item>
+                        <Item Key="Link">Action=AgentKanban</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar" Translatable="1">Kanban</Item>
+                        <Item Key="Type">Menu</Item>
+                        <Item Key="Block">ItemArea</Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">8400</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Module###AdminKanbanBoards" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Kanban Boards</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminKanbanBoards###002-Board" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+				 <Item Key="CSS">
+					 <Array>
+						 <Item>inbox-thirdparty/spectrum-1.8.0/spectrum.css</Item>
+					 </Array>
+				 </Item>
+
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.KanbanBoard.js</Item>
+                        <Item>inbox-thirdparty/spectrum-1.8.0/spectrum.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::NavigationModule###AdminKanbanBoards" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Kanban Boards</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Description" Translatable="1">Create Kanban Boards.</Item>
+                <Item Key="IconBig">fa-th</Item>
+                <Item Key="IconSmall">fa fa-columns</Item>                
+            </Hash>
+        </Value>
+    </Setting>
+
+    
+    <Setting Name="Frontend::ToolBarModule###300-Ticket::AgentKanban" Required="0" Valid="1">
+        <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Name" Translatable="1">Kanban</Item>
+                <Item Key="Link">Action=AgentKanban</Item>
+                <Item Key="Action">AgentKanban</Item>
+                <Item Key="AccessKey"></Item>
+                <Item Key="CssClass"></Item>
+                <Item Key="Icon">fa fa-th</Item>
+                <Item Key="Priority">20000500</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Navigation###AgentKanban###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::Kanban::Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Kanban.</Item>
+                        <Item Key="Name" Translatable="1">Kanban</Item>
+                        <Item Key="Link">Action=AgentKanban</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Ticket</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">520</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+  
+    <Setting Name="Frontend::Module###AdminKanban" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">This module is part of the admin area of OTRS</Item>
+                    <Item Key="Title" Translatable="1">Admin Kanban</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminKanban###002-Kanban" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.Kanban.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.Kanban.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::NavigationModule###AdminKanban" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Kanban Columns</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Description" Translatable="1">Create and configure Kanban columns</Item>
+                <Item Key="IconBig">fa fa-columns</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::NavigationModule###AdminKanbanTags" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Kanban Tags</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Description" Translatable="1">Create Kanban tags</Item>
+                <Item Key="IconBig">fa fa-tags</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    
+    <Setting Name="Loader::Module::AdminKanbanTags###002-AdminKanbanTags" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+				 <Item Key="CSS">
+					 <Array>
+						 <Item>inbox-thirdparty/spectrum-1.8.0/spectrum.css</Item>
+					 </Array>
+				 </Item>
+
+                <Item Key="JavaScript">
+                    <Array>
+                        <!-- <Item>Core.Agent.Admin.KanbanBoard.js</Item> -->
+                        <Item>inbox-thirdparty/spectrum-1.8.0/spectrum.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Module###AdminKanbanTags" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Title" Translatable="1">Admin Kanban Tags</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+   
+    <Setting Name="Frontend::Module###AdminKanbanTicket" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Title" Translatable="1">Kanban</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AdminKanbanTicket###002-Kanban" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>InBox::Kanban::Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.KanbanTicket.js</Item>
+                        <Item>Core.Agent.Admin.KanbanSearch.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="PreferencesGroups###KanbanOverviewPageShown" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the pages (in which the Kanbans are shown) of the Kanban overview.</Description>
+        <Navigation>InBox::Kanban::Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">Other Settings</Item>
+                <Item Key="Label" Translatable="1">Kanbans Overview Limit</Item>
+                <Item Key="Key" Translatable="1">Kanbans limit per page for Kanbans Overview</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="10">10</Item>
+                        <Item Key="15">15</Item>
+                        <Item Key="20">20</Item>
+                        <Item Key="25">25</Item>
+                        <Item Key="30">30</Item>
+                        <Item Key="35">35</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">25</Item>
+                <Item Key="PrefKey">AdminKanbanOverviewPageShown</Item>
+                <Item Key="Prio">9000</Item>
+                <Item Key="Active">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::DynmaicFieldsToOrdination" Required="0" Valid="1">
+        <Description Translatable="1">Added dynamic fields name to ordination in column of kanban</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Array>               
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::TicketInformationDetails" Required="0" Valid="1">
+        <Description Translatable="1">Add values ​​to display in Details</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Array>      
+                <Item>Queue</Item>              
+                <Item>State</Item>              
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::PrioritiesColor" Required="0" Valid="1">
+        <Description Translatable="1">Define the priorities colors</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Hash> 
+               <Item Key="5 very high">#ff505e</Item>              
+               <Item Key="4 high">#ffaaaa</Item>              
+               <Item Key="3 normal">#cdcdcd</Item>              
+               <Item Key="2 low">#83bfc8</Item>              
+               <Item Key="1 very low">#03c4f0</Item>              
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::TimeToReload" Required="0" Valid="1">
+        <Description Translatable="1">Kanban time to reload view in minutes.</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Item ValueType="String">5</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::ToEnableResposibleChange" Required="0" Valid="1">
+        <Description Translatable="1">Added Responsible in ticket card.</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">No</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">Yes</Item>
+            </Item>
+        </Value>
+    </Setting>
+    
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###KanbanReorder" Required="0" Valid="1" ConfigLevel="100">
+        <Description Translatable="1">Process kanban reorder.</Description>
+        <Navigation>InBox::Kanban::Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">KanbanReorder</Item>
+                <Item Key="Schedule">*/1 * * * *</Item> <!-- default every 1 minutes -->
+                <Item Key="Module">Kernel::System::Console::Command::Maint::Kanban::KanbanReorder</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::ArticleToSplit" Required="0" Valid="1">
+        <Description Translatable="1">Which article will be added by splitting.</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">First Article</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">Last Article</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::CardData" Required="0" Valid="1">
+        <Description Translatable="1">Define what data will appear on the task card. Set 0 to disable or 1 to enable</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Hash> 
+                <Item Key="CustomerCompany" Translatable="1">1</Item>            
+                <Item Key="CustomerLogin" Translatable="1">1</Item>            
+                <Item Key="Age" Translatable="1">0</Item>            
+                <Item Key="Created" Translatable="1">0</Item>            
+                <Item Key="Owner" Translatable="1">0</Item>            
+                <Item Key="Responsible" Translatable="1">0</Item>            
+                <Item Key="CustomerUser" Translatable="1">0</Item>            
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::CardDataDynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Define what dinamic field will appear on the task card</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Array>                          
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::OpenTicketBy" Required="0" Valid="1">
+        <Description Translatable="1">Define how the ticket when be open by kanban</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+         <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="0" Translatable="1">By Phone</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">By Email</Item>
+                <Item ValueType="Option" Value="2" Translatable="1">By Process</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::IndexTickets" Required="1" Valid="1">
+        <Description Translatable="1">Define the means of indexing tickets in Kanban</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+         <Value>
+            <Item ValueType="Select" SelectedID="1">
+                <Item ValueType="Option" Value="0" Translatable="1">By Cron</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">In real time</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::TicketSLA" Required="1" Valid="1">
+        <Description Translatable="1">Add SLA icon for tickets that have a solution deadline.</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Kanban::Core::Permission" Required="1" Valid="1">
+        <Description Translatable="1">Add permission for the attendant to be able to move cards between rows / columns. Ex: ro, move_into, rw, ...</Description>
+        <Navigation>InBox::Kanban::Core</Navigation>
+        <Value>
+            <Item ValueType="String">rw</Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

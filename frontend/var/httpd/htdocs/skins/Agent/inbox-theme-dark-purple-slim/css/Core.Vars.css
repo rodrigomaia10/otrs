@@ -1,0 +1,413 @@
+/* 
+ * var/httpd/htdocs/skins/Agent/inbox-theme-dark-blue-slim/css/Core.Vars.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ * * gbolsoni@serviceup.com.br
+*/ 
+
+/**
+ * @package     Skin "Dark Blue Slim"
+ * @section     Vars
+
+    Values:
+    - px
+    - font-weight
+
+    --hover-brightness: brightness(1.2);
+    --main-transition: all ease .3s;
+*/
+
+.table-icon-hover-md:hover .fa::before, ul:not(#HeaderToolBar)>li .icon-hover:hover .fa::before, ul:not(#HeaderToolBar)>li .icon-hover-sm:hover .fa::before, ul:not(#HeaderToolBar)>li .icon-hover-md:hover .fa::before, .RemoveFromFavourites.icon-hover:hover .fa::before, .Update .fa-check::before, .ItemListGrid>li>a:not(.Disabled):hover .fa-star-o::before, .ItemListGrid>li>a:not(.Disabled):hover .fa-star::before, .UserAvatar_submenu>label, .UserAvatar_submenu span, .SidebarColumn .btn-main:hover .btn-wrapper .fa-plus::before, .SidebarFirst .SidebarColumn .CallForAction:hover .fa::before, .ListBoards .card:not(:first-child) .fa-pencil-square-o:before{
+    color: #9E9E9E !important;
+}
+.ItemListGrid>li span.Icons, ul.GettingStarted>li span.Icons{
+    border: var(--border-width) var(--border-solid) var(--border-color) !important;
+}
+.NumberGraphicResult:hover{
+    color: #ab80ff !important;
+}
+
+.TableChecklist th{
+    color: #9E9E9E !important;
+}
+
+h4 {
+    color: #d5d1cd !important;
+}
+.WidgetSimple fieldset.Separated {
+    background-color: #151718 !important;
+}
+
+ 	
+.c3-chart-arc .c3-gauge-value{
+    fill: #d5d1cd !important;
+}
+
+div.InputField_ToolbarContainer ul li a{
+    color: #ab80ff !important;
+}
+
+div.InputField_ToolbarContainer ul li a:hover {
+    border-bottom: 2px solid #ab80ff  !important;
+}
+
+.UseArticleColors tr.Active>td, .UseArticleColors tr.Active:hover>td {
+    background-color: rgb(171 128 255 / 20%) !important;
+}
+
+#Navigation>li:hover>a, #Navigation>li:active>a {
+    color: #ab80ff !important;
+}
+
+#Navigation>li>a:after{
+    background: #ab80ff !important;
+}
+
+.ItemRow a {
+    color: #d5d0cb !important;
+}
+	
+.ui-menu-item:hover, .ui-menu-item:focus, .ui-menu-item:active, .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
+    background: #817f7f !important;
+    color: #FFFFFF !important;
+}
+
+.TableSmall tr:hover td a, .TableSmall tr.Active td a {
+    color: #ab80ff !important;
+}
+
+.UseArticleColors tr.NotVisibleForCustomer.Active>td, .UseArticleColors tr.NotVisibleForCustomer:hover>td {
+    background-color: #d85445 !important;
+}
+
+.UseArticleColors tr.NotVisibleForCustomer>td {
+    background: #C0392B !important;
+}
+
+.UseArticleColors tr.system>td {
+    background-color: #F4D03F !important;
+    color: #333333 !important;
+}
+
+.UseArticleColors tr.system.Active>td, .UseArticleColors tr.system:hover>td {
+    background-color: #f7d85c !important;
+}
+
+table.dataTable tbody tr{
+    background-color: unset !important;
+}
+.Dialog .Overlay{
+    background: #555 !important;
+}
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item:hover{
+    background: #555 !important;
+}
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item:focus{
+    background: #555 !important;
+}
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item:active{
+    background: #555 !important;
+}
+.cke_toolgroup .cke_button_on {
+    background-color: rgb(53, 57, 59) !important;
+}
+
+	
+body.cke_editable{
+    background: #d1d1d1 !important;
+}
+.cke_top{
+    background: #d1d1d1 !important;
+}
+.search-dropdown-top input, .search-bar-container i {
+    color: #d1d1d1 !important;
+}
+form label[for], form label, .TableLike label{
+    color: #d1d1d1 !important;
+}
+.component-wrapper .search-bar-container form .component-wrapper{
+    background: #555 !important;
+}
+
+.fa, ::before, .li.dropdown-item.inactive-widget::after, ul.WidgetTooltip li:hover a, ul.dropdown-search-menu li::after, .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span .fa-ellipsis-v, .ResponsiveSidebarContainer #NavigationContainer span, .ResponsiveSidebarContainer #Navigation>.Active>ul>li>a{
+    color: #d1d1d1 !important;
+}
+/* Color X asys  */
+.c3-axis-x path,
+.c3-axis-x line {
+    stroke: #d5d1cd;
+}
+/* Color y asys  */
+.c3-axis-y path,
+.c3-axis-y line {
+    stroke: #d5d1cd;
+}
+text {
+    fill: #d5d1cd;
+}
+.c3-line {
+    stroke: #d5d1cd !important;
+}
+path.c3-line-0 {
+    stroke: #d5d1cd !important;
+}
+path.c3-line-1 {
+    stroke: #d5d1cd !important;
+}
+svg.nvd3-svg{
+    background-color: #999999 !important;
+}
+html, body {
+    border-color: #736b5e !important;
+    color: #e8e6e3 !important;
+}
+.ItemListGrid.WithIcons > li a:not(.Disabled):hover span.Icons, .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons {
+    background-color: rgba(24, 26, 27, 0.3) !important;
+    color: #d8d5cf  !important;
+}
+.MessageBox.Error > span, .MessageBox.Error i, .MessageBox.Error p > a {
+    color: rgb(225, 134, 143) !important;
+}
+.Error:not(i.fa):not(td) {
+    background: var(--alert-error-bg-color) !important;
+    border: 1px solid var(--alert-error-border-color) !important;
+}
+.ExportAllKPI {
+    color: rgb(232, 230, 227) !important;
+}
+body{
+    color: #d5d1cd !important;
+}
+.Widget li {
+    box-shadow: rgb(66, 72, 75) 0px 0px 4px 0px !important;
+    background-image: initial !important;
+    background-color: rgb(24, 26, 27) !important;
+}
+.GroupingHeader{
+    background-color: rgb(24, 26, 27) !important;
+    box-shadow: rgb(66, 72, 75) 0px 0px 4px 0px !important;
+}
+.DataTable tbody td {
+    color: rgb(186, 180, 171) !important;
+}
+.ArticleSenderInitials {
+    background-color: rgb(35, 38, 39) !important;
+}
+
+
+:root {
+
+    /* Page */
+    --main-page-padding: 10px;
+
+    /* Sections */
+    --main-bg-color: var(--gray-light-white);
+    --input-field-bg-color: var(--white);
+    --side-bar-width-desktop: 280px;
+
+    /* Text */
+    --font-size-xxl: 20px;
+    --font-size-xl: 16px;
+    --font-size-lg: 14px;
+    --font-size-md: 13px;
+    --main-font-size: 12px;
+    --font-size-sm: 12px;
+    --font-size-xs: 10px;
+    --font-size-xxs: 8px;
+
+    --h1-font-size: 24px;
+    --label-font-size: 14px;
+
+    --main-line-height: 14px;
+    --input-line-height: 20px;
+    --main-font-color: var(--black);
+
+    /* Weight */
+    --normal: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+
+    /* Spacing */
+    --size-6: 6px;
+    --size-8 : 8px;
+    --size-10: 10px;
+    --size-15: 15px;
+    --size-20: 20px;
+    --size-30: 30px;
+
+    --gap-xl: 30px;
+    --gap-lg: 13px;
+    --gap-md: 8px;
+    --gap-md-sm: 5.5px;
+    --gap-sm: 5px;
+    --gap-xs: 2.5px;
+
+
+    /* Borders */
+    --border-solid: solid;
+    --border-dashed: dashed;
+    --border-width: 1px;
+    --border-width-md: 2px;
+    --border-width-lg: 5px;
+    --border-radius-menu-mobile: 50px;
+    --border-radius-menu-mobile-active: 30px;
+    --border-radius-xxl: 100px;
+    --border-radius-xl: 50px;
+    --border-radius-lg: 5px;
+    --border-radius-md: 15px;
+    --border-radius-sm: 5px;
+    --border-radius-xs: 4px;
+    --border-radius-xxs: 3px;
+
+    /* Margins */
+    --margin-xxl: 30px;
+    --margin-xl: 25px;
+    --margin-lg: 20px;
+    --margin-md: 15px;
+    --margin-sm: 10px;
+    --margin-xs: 5px;
+
+    /* Paddings */
+    --padding-xxl: 30px;
+    --padding-xl: 25px;
+    --padding-lg: 8px;
+    --padding-md: 6px;
+    --padding-sm: 6px;
+    --padding-xs: 5px;
+
+    /* Box Shadow */
+    --menu-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    /* Interaction */
+    --hover-brightness: brightness(1.2);
+    --main-transition: all ease .3s;
+
+    /* Icons */
+    --icon-main-size: 16px;
+    --icon-hover-sm-size: 22px;
+    --icon-hover-size: 28px;
+    --icon-hover-md-size: 30px;
+    --icon-hover-color: var(--gray-regular);
+    --icon-hover-color-light: var(--gray-light);
+    --icon-hover-color-medium: var(--gray-medium-darker);
+
+    /* Flags */
+    --flag-width: 35px;
+    --flag-height: 13px;
+    --flag-small-width: 25px;
+    --flag-small-height: 8px;
+
+    /* COMPONENTS */
+
+        /* Main Menu */
+        --menu-font: var(--black);
+        --menu-bg: var(--white);
+
+        /* SidebarColumn Header*/
+        --sidebarcolumn-header-bg: var(--gray-regular-light);
+
+        /* Widget Simple */
+        --widget-simple-bg: var(--white);
+        --widget-simple-title-size: 14px;
+        --widget-standard-padding: var(--padding-md);
+        --widget-margin: 20px;
+
+        /* ToolBar UserAvatar */
+        --submenu-preferences: var(--gray-dark);
+        --submenu-log: var(--warning-color);
+
+        /* Tables */
+        --table-bg: var(--white);
+        --table-th-font-color: var(--black);
+        --table-td-hover-opacity: 0.5;
+        --table-tr-border-bottom: var(--gray-light-semi);
+        --table-tr-py-18: 18px;
+        --table-tr-px-18: 10px;
+        --table-tr-line-hight: 40px;
+
+        /* Bread Crumb */
+        --bread-crumb: var(--gray-dark-semi);
+        --bread-crumb-active: var(--black);
+        --bread-crumb-font-size: var(--font-size-sm);
+
+        /* Inputs */
+
+            /* Selection */
+            --pill-color-selected: var(--gray-light-ultra);
+            --main-field-size: 620px;
+
+            /* Input Fields */
+            --text-message-color: var(--black);
+            --text-message-min-height: 141px;
+            --text-area-min-height: 72px;
+            --reply-input-height: var(--btn-height-sm);
+            --max-input-field-height: 30px;
+            --disabled-input-color: var(--disabled-input);
+
+        /* InlineActions Dropdown Menu */
+        --inlactions-height: 35px;
+        --inlactions-font-size: var(--font-size-sm);
+        --inlactions-text-color: var(--white);
+        --inlactions-bg-color: var(--black);
+
+        /* Modal Window */
+        --modal-col-max-height: 326px;
+        --modal-col-text-color: var(--gray-darker);
+        --modal-input-width: 75px;
+        --modal-header-bg: var(--gray-regular-light);
+
+        /* Buttons */
+
+            /* Primary */
+            --btn-width-l: 134px;
+            --btn-max-width-xxl: 215px;
+            --btn-max-width-xl: 180px;
+            --btn-max-width-lg: 160px;
+            --btn-max-width-md: 140px;
+            --btn-max-width-sm: 100px;
+            --btn-max-width-xs: 80px;
+
+            --btn-min-height: 34px;
+            --btn-height-lg: 48px;
+            --btn-height-md: var(--btn-min-height);
+            --btn-height-sm: 28px;
+
+            --btn-primary-text: var(--white);
+            --btn-primary-text-hover: var(--btn-primary-text);
+
+            --btn-text-color: var(--white);
+            --btn-text-color-ghost: var(--gray-darker);
+
+            /* Btn Icon */
+            --btn-icon-sm: 34px;
+
+            /* Ghost */
+            --btn-ghost-text: var(--black);
+            --btn-ghost-text-hover: var(--btn-primary-text);
+            --btn-ghost-background: transparent;
+            --btn-ghost-background-hover: var(--primary-color);
+
+            /* Cancel Ghost */
+            --btn-cancel-ghost-text: var(--gray-dark);
+            --btn-cancel-ghost-bg: var(--white);
+            --btn-cancel-ghost-bg-hover: var(--border-color);
+
+            --btn-width-sm: 90px;
+            --btn-min-height-sm: 28px;
+
+            /* Drop-down */
+            --btn-dropdown-padding: var(--padding-md);
+            --btn-dropdown-bg-color: var(--primary-color);
+            --btn-dropdown-min-height: var(--btn-min-height);
+            --btn-dropdown-min-width: var(--btn-width-l);
+            --btn-dropdown-font-size: var(--font-size-sm);
+            --btn-dropdown-font-weight: var(--bold);
+            --btn-dropdown-color: var(--main-font-color);
+            --btn-dropdown-border-width: var(--border-width-md);
+            --btn-dropdown-border-radius: var(--border-radius-md);
+
+            --btn-filter-dropdown-hover-color: var(--gray-light);
+}
+

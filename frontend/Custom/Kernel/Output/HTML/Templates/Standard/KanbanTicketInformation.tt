@@ -1,0 +1,15 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/KanbanTicketInformation.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="InnerContent" style="max-height: 600px;min-width: 350px;">
+[% RenderBlockStart("DataValues") %]
+  <label>[% Data.DataLabel %]: <b>[% Data.DataValue  | truncate(70) | html %]</b></label>
+  <br/><br/>
+[% RenderBlockEnd("DataValues") %]
+  <div class="Clear"></div>
+</div>

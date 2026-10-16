@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+
+    <Setting Name="Frontend::Module###AgentDashboardCore" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>InBox::Core::Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Core Dashboard.</Item>
+                    <Item Key="Title" Translatable="1">AgentDashboardCore</Item>
+                    <Item Key="NavBarName">Indicators</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Navigation###AgentDashboardCore###002-InBoxCore" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>InBox::Core::Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                 <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1"></Item>
+                        <Item Key="Name" Translatable="1">Indicators</Item>
+                        <Item Key="Link"></Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar" Translatable="1">Indicators</Item>
+                        <Item Key="Type">Menu</Item>
+                        <Item Key="Block">ItemArea</Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">9000</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="SocketIO::Core###URL" Required="0" Valid="0">
+        <Description>Set the socket.io server URL. Note: If you use socket.io on the same server and you have done a reverse proxy, enable the 'SocketIO::Core::Path' setting.</Description>
+        <Navigation>InBox::Core::Socket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">http://yourhost:3000</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="SocketIO::Core###Path" Required="0" Valid="0">
+        <Description>Set the socket.io server path if you use socket.io on the same server as the system application and you have done a reverse proxy. Default value: '/otrs/socket/'.</Description>
+        <Navigation>InBox::Core::Socket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">/otrs/socket/</Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Agent::CommonJS###001-InBoxCore" Required="0" Valid="1">
+      <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+      <Navigation>InBox::InBoxCore::Frontend::Base::Loader</Navigation>
+      <Value>
+          <Array>
+              <Item>Core.Agent.InBoxCore.js</Item>
+          </Array>
+      </Value>
+    </Setting>
+
+    <Setting Name="Loader::Customer::CommonJS###001-InBoxCore" Required="0" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>InBox::InBoxCore::Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.InBoxCore.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Core::BrowserErrorMessage" Required="0" Valid="1">
+        <Description Translatable="1">Enable error message for unsupported browsers.</Description>
+        <Navigation>InBox::Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting> 
+
+    <Setting Name="AutoloadPerlPackages###1001-TemplateGenerator" Required="0" Valid="1">
+        <Description Translatable="1">Autoload for module TemplateGenerator.</Description>
+        <Navigation>InBox::Core::Autoload</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">Kernel::Autoload::TemplateGenerator</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="CustomerFrontend::Module###ConfigGetCoreAJAXHandler" Required="1" Valid="1">
+        <Description Translatable="1">FrontendModuleRegistration for module.</Description>
+        <Navigation>InBox::Core::Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group"></Item>
+                    <Item Key="GroupRo"></Item>
+                    <Item Key="Description" Translatable="1">ConfigGetCoreAJAXHandler</Item>
+                    <Item Key="Title" Translatable="1">ConfigGetCoreAJAXHandler</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Frontend::Module###ConfigGetCoreAJAXHandler" Required="1" Valid="1">
+        <Description Translatable="1">FrontendModuleRegistration for module.</Description>
+        <Navigation>InBox::Core::Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group"></Item>
+                    <Item Key="GroupRo"></Item>
+                    <Item Key="Description" Translatable="1">ConfigGetCoreAJAXHandler</Item>
+                    <Item Key="Title" Translatable="1">ConfigGetCoreAJAXHandler</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="PublicFrontend::Module###ConfigGetCoreAJAXHandler" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>InBox::Core::Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">ConfigGetCoreAJAXHandler</Item>
+                    <Item Key="Title">ConfigGetCoreAJAXHandler</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

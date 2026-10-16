@@ -1,0 +1,28 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/KanbanOwnerAndResponsibleInformation.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="InnerContent" style="max-height: 600px;min-width: 250px;max-width: 500px;">
+    <form action="[% Env("CGIHandle") %]" method="post" id="KanbanOwnerAndResponsibleInformation">
+        <input type="hidden" name="Action" value="KanbanAJAXHandler"/>
+        <input type="hidden" name="Subaction" value="TicketUpdateNewOwner"/>
+        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+        <input type="hidden" name="TypeUser" value="[% Data.TypeUser | html %]"/>
+        <input type="hidden" name="BoardID" value="[% Data.BoardID | html %]"/>
+        <fieldset class="TableLike">
+            [% IF  Data.TypeUser == 'Owner' %]
+                <label>[% Translate("Owner") | html %]:</label>
+            [% ELSE %]
+                <label>[% Translate("Responsible") | html %]:</label>
+            [% END %]
+            <div class="Field">
+                [% Data.OwnersStrg %]
+                <button type="submit" class="CallForAction Primary btn-primary btn-main btn-width-md" value="Enviar"><span>Enviar</span></button>
+            </div>
+        </fieldset>
+    </form>
+</div>

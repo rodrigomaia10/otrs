@@ -1,0 +1,86 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/CustomerPortalFAQs.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * nfreitas@serviceup.com.br 
+# -- 
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<style type="text/css">
+	#NavTitle{
+		font-weight: bold !important;
+		color: black !important;
+		font-family: sans-serif !important;
+		text-transform: none;
+	}
+</style>
+
+<div class="ContentResponsive">
+	[% RenderBlockStart("BackgroundPortal") %]
+		<div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+	[% RenderBlockEnd("BackgroundPortal") %]
+	<div class=" CardCustomFAQ">
+		<img class="CustomFAQSuperiorImage " src="[% Data.SuperiorImage | html %]">
+		<p class="FaqTitleSearch">[% Data.Title | html %] </p>
+		<p class="">[% Data.Description | html %] </p>
+		<div id="SearchAllFaqs" class="form-group left-inner-addon">
+			<i class="fa fa-search" id="icon-Search-all-FAQ"></i>
+			<input type="text" class="form-control input-search-faq-all" id="FAQTextSearch" name="FAQTextSearch" placeholder="[% Translate('Enter keywords here to find the subject you want...') %]" title="Procurar...">
+		</div>
+		<div id="EmptyErrorMessage" style="display: none; color: red;">[% Translate("Please, fill in the field") | html %]</div>
+
+		<!-- <a id="BackInitialFAQ" href="[% Env("Baselink") %]Action=CustomCustomerPortalFAQs" style="color: #073759" class="" ><i class="fa fa-caret-left" aria-hidden="true"></i> [% Translate("Back") | html %] </a> -->
+		<div class="RightSearchFAQ"> 
+			<a id="BackInitialFAQ" href="javascript:void(0)" onClick="history.go(-1); return false;" style="color: [% Data.FontColor | html %]; background-color: [% Data.ButtonColor | html %]"  ><i class="fa fa-caret-left" aria-hidden="true"></i> [% Translate("Back") | html %] </a>
+			<button id="BtnFAQSearch" class="btn" style="color: [% Data.FontColor | html %]; background-color: [% Data.ButtonColor | html %]" >
+				[% Translate("Research FAQ") | html %] 
+			</button>
+		</div>
+	</div>
+
+	<div class="ContainerBodyFAQs">
+		<div class="row"> 
+			<div class="col-4">
+				<div class="card CardCustomFAQ h-100 HeightCustomFAQ">
+					<div class="card-body" id="CardQuestionFAQ">
+						<p class="FaqTitleSearch">[% Translate("Browse the areas") | html %] </p>
+						[% RenderBlockStart("CustomerCategories") %]	
+						<div class="FAQCategoryMenu">
+							<div class="card-header FAQCategoriesBox" role="tab" id="heading[% Data.FAQCategoryID %]" data-category-faq-id="[% Data.FAQCategoryID %]">
+								<div class="[% Data.Collapse %] CollapseStyleCategoryFAQ" data-toggle="collapse" data-parent="#accordion" data-category-faq-id="[% Data.FAQCategoryID %]" aria-expanded="[% Data.AriaExpanded %]" aria-controls="collapse[% Data.FAQCategoryID %]">
+									<div class="IconCategoryFAQ">
+										<img class=' ' src="[% Data.IconCategory | html %]" >
+									</div>
+									<div class="PreviewCategoryFAQ">
+										<span style="color: #66615b;">[% Data.CategoryName | html %]</span>
+										<i class="fa fa-chevron-down SinalFAQ"></i>
+									</div>
+									<div>
+										[% RenderBlockStart("CustomerFAQTitles") %]	
+											<div class='FAQProblemList' data-faq-id='[% Data.FAQID | html %]'><b>[% Data.FAQCounter | html %].</b> [% Data.FAQTitle | html %] </div>
+										[% RenderBlockEnd("CustomerFAQTitles") %]
+									</div>
+								</div>
+							</div>
+						</div>
+
+						[% RenderBlockEnd("CustomerCategories") %]
+					
+					</div>
+				</div>
+			</div>
+			<div class="col-8">
+				<div class="card CardCustomFAQ h-100 HeightCustomFAQ">
+					<div class="card-body FAQCardInternal card" id="FAQsSolution">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ </div>
+ 
+ [% InsertTemplate("CustomerPortalFooter.tt") %]

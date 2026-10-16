@@ -1,0 +1,29 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/Kanban.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * ccresencio@serviceup.com.br
+# --
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.css" rel="stylesheet" />
+<!--link href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/gridstack-1.1.1/gridstack.min.css" rel="stylesheet" /-->
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Agent/default/css/inbox-thirdparty/jKanban/jkanban.css" />
+
+[% InsertTemplate("CustomerPortalNavBar.tt") %]
+
+<div class="ContentResponsive" id="content functions-content" >Visão de chamados Kanban
+    [% RenderBlockStart("BackgroundPortal") %]
+        <div class='BackgroundPortal' style='background-image: url([% Data.URL %]); opacity: [% Data.Opacity %]%'></div>
+    [% RenderBlockEnd("BackgroundPortal") %]
+	<!-- <div class='BackgroundPortal'></div> -->
+    <div class="container">
+        <input type="hidden" name="BoardID" id="BoardID" value="[% Data.BoardID | html %]">
+        <div class="row">
+            <div id="kanban"></div>                   
+        </div>
+    </div>
+</div>
+
+[% InsertTemplate("CustomerPortalFooter.tt") %]
+

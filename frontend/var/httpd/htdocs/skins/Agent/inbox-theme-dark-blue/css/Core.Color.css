@@ -1,0 +1,365 @@
+/* 
+ * var/httpd/htdocs/skins/Agent/inbox-theme-dark-blue/css/Core.Color.css
+ * Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+ *
+ *  written/edited by:
+ * * gbolsoni@serviceup.com.br
+*/
+
+/**
+ * @package     Skin "Default"
+ */
+
+/**
+ * @section     Colors
+ */
+
+/*
+ * Used colors in Znuny:
+ * ---------------------
+ *
+ * Variable                             Description                         Default
+ *
+ * var(--color-black);                                                      Black
+ * var(--color-red);                                                        Red
+ * var(--color-orange);                                                     Orange
+ * var(--color-yellow);                                                     Yellow
+ * var(--color-green);                                                      Green
+ * var(--color-grey1);                                                      Grey #111
+ * var(--color-grey2);                                                      Grey #222
+ * var(--color-grey3);                                                      Grey #333
+ * var(--color-grey4);                                                      Grey #444
+ * var(--color-grey5);                                                      Grey #555
+ * var(--color-grey6);                                                      Grey #666
+ * var(--color-grey7);                                                      Grey #777
+ * var(--color-grey8);                                                      Grey #888
+ * var(--color-grey9);                                                      Grey #999
+ * var(--color-grey10);                                                     Grey #AAA
+ * var(--color-grey11);                                                     Grey #BBB
+ * var(--color-grey12);                                                     Grey #CCC
+ * var(--color-grey13);                                                     Grey #DDD
+ * var(--color-grey14);                                                     Grey #EEE
+ */
+
+:root {
+
+    /* black */
+    --color-black:                    #000;
+
+    /* red */
+    --color-red:                      #b8384e;
+
+    /* orange */
+    --color-orange:                   #FF9050;
+
+    /* yellow */
+    --color-yellow:                   #FFDD50;
+
+    /* green */
+    --color-green:                    #049E35;
+
+    /* white */
+    --color-white:                    #FFF;
+
+    /* grey */
+    --color-grey1:                    #111;
+    --color-grey2:                    #222;
+    --color-grey3:                    #333;
+    --color-grey4:                    #444;
+    --color-grey5:                    #555;
+    --color-grey6:                    #666;
+    --color-grey7:                    #777;
+    --color-grey8:                    #888;
+    --color-grey9:                    #999;
+    --color-grey10:                   #AAA;
+    --color-grey11:                   #BBB;
+    --color-grey12:                   #CCC;
+    --color-grey13:                   #DDD;
+    --color-grey14:                   #EEE;
+
+
+
+
+
+    /* Main Colors */
+    --primary-color: #0b9bd3;
+    --primary-color-darker: #0b91c6;
+    --primary-color-rgb: rgba(255, 139, 37, 0.2);
+    --primary-color-calendar: #e0effc;
+    --primary-color-text: #e0effc;
+    --secondary-color: #251c17;
+
+    --white: #ffffff;
+    --gray-light-white: #fbfafa;
+    --gray-light-ultra: #f5f5f5;
+    --gray-light-semi: #efefef;
+    --gray-light: #ededed;
+    --gray-regular-light: #E8E8E8;
+    --gray-regular: #e0e0e0;
+    --gray-medium: #beb8b5;
+    --gray-medium-darker: #B5B5B580;
+    --gray-dark-semi: #9D9792;
+    --gray-dark: #746d69;
+    --gray-darker: #68615e;
+    --black: #251c17;
+
+
+    --color-scroll-bar: var(--gray-dark);
+    --mail-outgoing-color: #ffeec6;
+
+    --disabled: var(--gray-light-semi);
+    --disabled-text: var(--gray-medium);
+    --disabled-input: var(--gray-light-semi);
+
+    --bread-crumb: var(--gray-dark-semi);
+    --bread-crumb-active: var(--black);
+    --bread-crumb-font-size: var(--font-size-sm);
+
+
+    --color-ticket-header: var(--gray-light-white);
+    --email-info: var(--gray-light-white);
+    --ticket-subject: var(--table-text-color);
+
+    --success-color: #3DD598;
+    --warning-color: #FC5A5A;
+    --warning-color-darker: #E44E4E;
+    --error-color: var(--warning-color);
+    --error-color-darker: var(--warning-color-darker);
+    --confirmation-color: var(--success-color);
+    --plus-color: var(--success-color);
+
+    /* Tables */
+    --table-text-color: #4f4444;
+    --table-th-bg: #EFEFEF;
+    --table-td-even-bg: #F9F9F9;
+    --tr-disabled-bg: #efefef;
+    --tr-disabled-text: #B6B6B6;
+    
+    /* Flag Element */
+    --color-flag-default: #cdcdcd;
+
+    /* Alert Component */
+    --alert-close-icon-color: var(--gray-dark);
+
+        /* Info */
+        --alert-info-bg-color: #50b6ff10;
+        --alert-info-icon-color: #50B5FF;
+        --alert-info-border-color: #50b6ff1a;
+
+        /* Error */
+        --alert-error-bg-solid-color: #FC5A5A;
+        --alert-error-bg-color: #FC5A5A10;
+        --alert-error-icon-color: #FC5A5A;
+        --alert-error-border-color:#FC5A5A1a;
+
+        /* Success */
+        --alert-success-bg-solid-color: #3DD598;
+        --alert-success-bg-color: #3DD59810;
+        --alert-success-icon-color: #3DD598;
+        --alert-success-border-color: #3DD5981a;
+
+        /* Warning */
+        --alert-warning-bg-color: #F2BD0E10;
+        --alert-warning-icon-color: #F2BD0E;
+        --alert-warning-border-color: #F2BD0E1a;
+
+        /* Notice */
+        --alert-notice-bg-color: #cccccc10;
+        --alert-notice-icon-color: #cccccc;
+        --alert-notice-border-color: #cccccc1a;
+
+    --color-icon-favorite: #F2BD0E;
+
+
+    /* Forms */
+    --border-color: #eae7e2;
+    --border-input-color: #c4c1bb;
+
+
+    /* BG's */
+    --overlay-bg: rgba(23, 23, 37, 0.145);
+
+}
+
+.dropdown-filter .btn-dropdown:hover .fa-caret-down::before, .dropdown-filter .btn-dropdown .fa-caret-down::before, .dropdown-filter .btn-dropdown:hover .btn-text,
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span .fa-ellipsis-v::before,
+.SidebarColumn .WidgetSimple .Header .Btn-Menu-Vertical .fa::before, .SidebarColumn .WidgetSimple .Header .fa-caret-down::before, .btn-dropdown .btn-wrapper,
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li:hover .WidgetAction a .iconWrapper .fa::before, 
+.ActionMenu .ActionMenuList li:hover .WidgetAction a .iconWrapper .fa::before, ul.Tablelike li.Header, #HeaderToolBar li.UserAvatar .UserAvatar_submenu span a:hover .fa-gear::before, 
+div.InputField_ToolbarContainer ul li a, label.title, .GroupingHeader, .Preferences .WidgetSimple.Setting .Header h2 label, .activity-dropdown p,
+.ResponsiveSidebarContainer #NavigationContainer .Selected a span, .ResponsiveSidebarContainer #Navigation>.Active>ul>li:hover>a, .toolbar-row-wrapper .toolbar-row .component-wrapper{
+    color: var(--primary-color-text);
+}
+
+.mainContent>.ContentColumn>.WidgetSimple>.Header h2, .mainContent>.SidebarColumn>.WidgetSimple>.Header h2, 
+.SidebarColumn>.ContentColumn>.WidgetSimple>.Header h3, .SidebarColumn>.WidgetSimple>.Header , .TicketZoom .SidebarColumn .WidgetSimple>.Header h2,
+.ActionRow.Cluster ul ul li a, .SidebarColumn>.WidgetSimple>.Header h2, i.activity-icon.fa.fa-ticket::before,
+.ResponsiveSidebarContainer #Navigation>li#nav-search:hover>a {
+    color: var(--primary-color-text) !important;
+}
+
+.toolbar-row-wrapper .toolbar-row .component-wrapper .Text{
+    color: var(--menu-bg) !important;
+}
+
+.TicketZoom .Actions li:hover>span, .TicketZoom .Actions li#nav-Back:hover>a, .TicketZoom .Actions li#nav-Print:hover>a,
+.TicketZoom .Actions li#nav-Priority:hover>a, .TicketZoom .Actions li#nav-Time-Stamp:hover>a, .TicketZoom .Actions li#nav-Pending:hover>a, 
+.TicketZoom .Actions li#nav-Close:hover>a, .DataTable tbody tr:hover td, .TableSmall tbody tr:hover td, .DataTable tbody tr:active td.Clickable, 
+.TableSmall tbody tr:active td.Clickable, .DataTable tr:nth-child(even):hover td.Highlight, .Actions li a:hover, .ResponsiveSidebarContainer>#NavigationContainer>#Navigation>.Active>a, 
+.ResponsiveSidebarContainer #NavigationContainer li a:hover {
+    background: var(--primary-color-text) !important;
+}
+
+#Header {
+    border-bottom: 1px solid #18516d !important;
+    color: var(--primary-color-text) !important;
+}
+
+.toolbar-row-wrapper .toolbar-row, .MainBox.mainStructure .SidebarColumn .WidgetSimple .Header, .Size1of2 ul.Tablelike li.Header, .Results ul li a span,
+.modal-col-container.modal-col-wrapper ul>li.Header {
+    background: var(--menu-bg) !important;
+}
+
+.Size1of2 ul.Tablelike li.Header{
+    color: var(--primary-color-text) !important;
+}
+
+.dropdown-item, .dropdown-item a, .dropdown-item.Selected a, label#ActiveWidgetsLabel, .toolbar-row-wrapper .toolbar-row ul li a .iconWrapper span.Counter {
+    color: var(--black);
+}
+
+.fa, ::before, .li.dropdown-item.inactive-widget::after, ul.WidgetTooltip li:hover a, ul.dropdown-search-menu li::after,
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span .fa-ellipsis-v, .ResponsiveSidebarContainer #NavigationContainer span,
+.ResponsiveSidebarContainer #Navigation>.Active>ul>li>a{
+    color: var(--primary-color);
+}
+
+a.activity-link.activity.dropdown-item:hover {
+    background: #0d5173;
+}
+
+.UserAvatar>a {
+    border: 2px solid var(--primary-color-text) !important;
+    border-radius: 14px !important;
+}
+
+.ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .Header>h2, .dropdown-item a, .dropdown-menu .dropdown-item a, .dropdown-filter .dropdown-menu li a {
+    color: var(--black) !important;
+}
+
+.Dashboard .ContentColumn .WidgetSimple .Header {
+    border-color: var(--menu-bg);
+}
+
+.DashboardWidgetExpand ul li a.active, .DashboardWidgetExpand ul li a.active:hover, .QueueOverview a.Active, .QueueOverview .Active>a, .ServiceOverview a.Active, .ServiceOverview .Active>a, .OverviewZoom li.Active a, .OverviewZoom li.Active a:hover {
+    background-color: var(--primary-color-text) !important;
+}
+
+.MainBox.mainStructure .DataTable tbody tr:nth-child(even):hover td:not(:first-child:last-child){
+    background: var(--table-td-even-bg) !important;
+}
+
+.OverviewMedium li:nth-child(even) table.dataTable, .OverviewMedium li:nth-child(even) table.dataTable th, .OverviewMedium li:nth-child(even) table.dataTable td, .OverviewMedium li:nth-child(even) table.dataTable tbody tr {
+    background: var(--gray-light-ultra) !important;
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li:hover, .ActionMenu .ActionMenuList li:hover, ul.WidgetTooltip li:hover,
+#HeaderToolBar li.UserAvatar .UserAvatar_submenu a:hover, .Actions li:hover>span, .ResponsiveSidebarContainer #Navigation>li#nav-search:hover>a,
+.ResponsiveSidebarContainer #Navigation>li.Selected:hover>a{
+    background: var(--primary-color);
+}
+
+.Cluster ul ul li a:hover, .ResponsiveSidebarContainer #NavigationContainer .Selected a:hover, .ResponsiveSidebarContainer #Navigation>li#nav-search>a:hover,
+.mainStructure .Actions li:hover>a {
+    background: var(--primary-color) !important;
+}
+
+.SidebarColumn .Actions li:hover>a, .active-widgets-list li:hover, .badge, ul.Tablelike li:hover, #AjaxErrorDialogInner .Icon,
+.ResponsiveSidebarContainer #Navigation>li:hover>a, #NavigationContainer>a{
+    background: var(--primary-color-text);
+}
+
+.mainContent .Widget li{
+    background: var(--white);
+}
+
+.toolbar-row-wrapper .toolbar-row ul li a .iconWrapper span.Counter, .activity-new {
+    background: #bfdffb;
+}
+
+.table-icon-hover-md:hover .fa::before, ul:not(#HeaderToolBar)>li .icon-hover:hover .fa::before, 
+ul:not(#HeaderToolBar)>li .icon-hover-sm:hover .fa::before, ul:not(#HeaderToolBar)>li .icon-hover-md:hover .fa::before, .RemoveFromFavourites.icon-hover:hover .fa::before, 
+.fa-check::before, .ItemListGrid>li>a:not(.Disabled):hover .fa-star-o::before, .ItemListGrid>li>a:not(.Disabled):hover .fa-star::before,
+.UserAvatar_submenu>label, .UserAvatar_submenu span, .SidebarColumn .btn-main:hover .btn-wrapper .fa-plus::before, .SidebarFirst .SidebarColumn .CallForAction:hover .fa::before,
+.ListBoards .card:not(:first-child) .fa-pencil-square-o:before{
+    color: var(--white);
+}
+
+.ListBoards .card:first-child .fa-pencil-square-o:before{
+    color: #545454;
+}
+
+.dropdown-menu .dropdown-item a, .dropdown-filter .dropdown-menu li a {
+    color: var(--white) !important;
+}
+
+#Navigation>.Active>ul>li:hover>a, 
+.mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical:hover span, .WidgetSimple .Header .ActionMenu:hover .Btn-Menu-Vertical span,
+.dropdown-filter .btn-dropdown:hover, .dropdown-filter:hover label{
+    background-color: var(--primary-color) !important;
+}
+
+.dropdown-search-menu {
+    background-color: var(--white);
+}
+
+.mainStructure .ContentColumn .WidgetSimple .Header {
+    background: var(--menu-bg);
+    border-top-right-radius: inherit;
+    border-top-left-radius: inherit;
+}
+
+.ItemListGrid {
+    padding-top: 25px !important;
+}
+
+ul.QueueOverviewList li a:hover, ul.ServiceOverviewList li a:hover{
+    background: var(--primary-color-darker) !important;
+}
+
+.FilterInputContainer, .LayoutGrid .FilterInputContainer {
+    padding-top: var(--padding-md);
+}
+
+#HeaderToolBar li.UserAvatar .UserAvatar_submenu a:last-child .fa-sign-out::before, .Error i::before, i.Error::before, .Error i.Error::before{
+    color: var(--warning-color);
+}
+
+.Error i, i.Error::before, .Error i.Error::before {
+    color: var(--alert-error-icon-color);
+}
+
+.MainBox .SidebarColumn .WidgetSimple .Header, .MainBox .SidebarColumn .WidgetSimple.not-collapse .Header, .MainBox .InnerSidebarColumn .WidgetSimple .Header, .GroupingHeader{
+    background-color: var(--menu-bg);
+}
+
+.Preferences .WidgetSimple.Setting .Header{
+    background-color: var(--menu-bg) !important;
+}
+
+.AdminManagement .SidebarColumn .fa-caret-down::before, .activity-time, .ResponsiveSidebarContainer #Navigation>li#nav-search>a{ 
+    color: var(--primary-color) !important;
+}
+
+.Warning .fa-exclamation-triangle::before, .Warning i::before {
+    color: var(--alert-warning-icon-color) !important;
+}
+
+.EasyCategorizationForm .FieldEC{
+    width: 100% !important;
+    margin-bottom: 10px;
+}
+
+#ticketDetails .Content div.InputField_InputContainer{
+    max-width: 100%;
+}

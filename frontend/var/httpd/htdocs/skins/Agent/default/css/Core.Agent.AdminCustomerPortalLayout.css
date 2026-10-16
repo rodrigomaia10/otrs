@@ -1,0 +1,703 @@
+/*
+* var/httpd/htdocs/skins/Agent/default/css/Core.Agent.AdminCustomerPortalLayout.css
+* Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+* 
+* written/edited by:
+* jsantos@serviceup.com.br
+* jguedes@serviceup.com.br
+*/
+
+@media screen,projection,tv,handheld {
+
+    #BackgroundPageTopMenu{
+        margin-top: 30px; 
+        max-width: 740px;
+        max-height: 740px;
+    }
+
+    .FixMenu {
+        position: fixed;
+        margin-top: -130px !important;
+        width: 53% !important;
+        padding: 0px !important;
+        right: 70px;
+    }
+
+    .ColorMenuTop{
+        font-weight: bold;
+    }
+
+    .ColorMenuTopSelected{
+        font-weight: bold;
+    }
+
+
+    .IconPortal{
+        font-weight: bold;
+    }
+
+    .dropdown-item{
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        padding: 7px 3px 8px 0px;
+        clear: both;
+        width: 100%;
+        /* border-top-left-radius: 12px; */
+        /* border-top-right-radius: 12px; */
+        display: block;
+    }
+
+    .MenuTicketTopMenu{
+        opacity: 1;
+        transform: translate3d(0px, 0px, 0px);
+        visibility: visible !important;
+        position: absolute;
+        display: block;
+        box-shadow: 1px 2px 7px 1px rgb(0 0 0 / 13%);
+        float: none;
+        background-color: #FFFFFF;
+        border: 0 none;
+        border-radius: 12px;
+        padding: 0px;
+        top: 100%;
+        /* left: 0; */
+        z-index: 1000;
+        min-width: 10rem;
+        margin: 0.125rem 0 0;
+        font-size: 12px;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-clip: padding-box;
+        border-bottom: 11px solid #FFFFFF;
+        /* border-left: 11px solid rgba(0, 0, 0, 0); */
+    }
+
+    .FlexMenuTopInit{
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: left;
+    }
+
+    .Menu{
+        flex-direction: row; 
+        display: flex; 
+        position: absolute;                                                
+        right: 0px;
+    }
+
+    .fixed-top-menu-top{
+        position: absolute;
+        top: 0px;
+        right: 0;
+        left: 0px;
+    }
+
+    .ListTopBar{
+        padding: 4px 10px 1px 10px
+    }
+
+    .NavAvatar{
+        width: 27px;
+        height: 25px;
+        overflow: hidden;
+        float: left;
+        z-index: 5;
+        margin-right: 10px;
+        border-radius: 50%;
+        /* margin-left: 23px; */
+    }
+
+    .LogoPageTopMenu{
+        width: 20% !important;
+    }
+
+    #LogoPageTopMenu{
+        max-height: 31px;
+        max-width: none;
+    }
+    
+    .CodeMirror {
+        width: 1300px !important;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #a0a0a0;
+        margin-top: 15px;
+    }
+
+    .ImgLogo {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 17%;
+    }
+
+    .sidebar .logo, .off-canvas-sidebar .logo {
+        position: relative;
+        padding: 7px 0.7rem;
+        z-index: 4;
+    }
+
+    .sidebar .logo a.logo-normal, .off-canvas-sidebar .logo a.logo-normal {
+        display: block;
+        opacity: 1;
+        padding: 11px 0 8px;
+        -webkit-transform: translate3d(0px, 0, 0);
+        transform: translate3d(0px, 0, 0);
+    }
+
+    .logo img {
+        width: 100% !important;
+    }
+
+    #LogoNav {
+        top: 25px;
+        right: 24px;
+        width: 300px;
+        height: 55px;
+        background-size: contain;
+        position: absolute;
+    }
+
+    #LogoNavTopBar {
+        max-width: 150px;
+        max-height: 31px;
+        min-height: 31px;
+    }
+
+
+    .sidebar {
+        background: #EEEEEE;
+        width: 200px;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+    }
+
+    .sidebar .user, .off-canvas-sidebar .user {
+        padding-bottom: 20px;
+        margin: 20px auto 0;
+        position: relative;
+    }
+
+    .sidebar .user .photo, .off-canvas-sidebar .user .photo {
+        width: 34px;
+        height: 34px;
+        overflow: hidden;
+        float: left;
+        z-index: 5;
+        margin-right: 10px;
+        border-radius: 50%;
+        margin-left: 23px;
+    }
+
+    .sidebar .user .photo img, .off-canvas-sidebar .user .photo img {
+        width: 105%;
+    }
+    img {
+        max-width: 100%;
+        border-radius: 3px;
+    }
+    img {
+        vertical-align: middle;
+        border-style: none;
+    }
+
+    .caret-layout {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 37px;
+    }
+
+    .sidebar .user .info > a, .off-canvas-sidebar .user .info > a {
+        display: block;
+        line-height: 18px;
+    }
+    
+    .sidebar .user a, .off-canvas-sidebar .user a {
+        color: #FFFFFF;
+        text-decoration: none;
+        padding: 0.5rem 40px;
+        white-space: nowrap;
+    }
+
+    .sidebar .user .info > a > span, .off-canvas-sidebar .user .info > a > span {
+        display: block;
+        position: relative;
+        opacity: 1;
+    }
+
+    .CompanyName {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .sidebar .nav, .off-canvas-sidebar .nav {
+        margin-top: 0px;
+        display: block;
+    }
+
+    .sidebar .nav li > a, .off-canvas-sidebar .nav li > a {
+        /* margin: 10px 15px 0; */
+        color: #FFFFFF;
+        display: block;
+        text-decoration: none;
+        position: relative;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 11px;
+        padding: 3px 8px;
+        line-height: 30px;
+        opacity: .7;
+        text-align: left;
+        margin: 0px 15px 0;
+    }
+
+    .sidebar .nav i, .off-canvas-sidebar .nav i {
+        font-size: 18px;
+        float: left;
+        margin-right: 12px;
+        line-height: 30px;
+        width: 34px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        position: relative;
+    }
+
+    .sidebar .nav p, .off-canvas-sidebar .nav p {
+        margin: 0;
+        line-height: 30px;
+        position: relative;
+        display: block;
+        height: auto;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+
+    .navbar .navbar-wrapper {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .navbar.navbar-transparent {
+        /* background-color: transparent !important; */
+        box-shadow: none;
+        /* border-bottom: 1px solid #ddd; */
+    }
+
+    .navbar .navbar-wrapper .navbar-minimize {
+        padding-right: 10px;
+        margin-left: 10px;
+    }
+
+    .fixed-top {
+        position: absolute;
+        /* top: 5px; */
+        top: 0px;
+        right: 0;
+        left: 200px;
+    }
+
+    .navbar .navbar-brand {
+        text-transform: capitalize;
+        font-size: 16px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        line-height: 1.625rem;
+    }
+
+    .navbar.navbar-absolute {
+        padding-top: 10px;
+        z-index: 300 !important;
+    }
+    
+    .btn.btn-icon, .navbar .navbar-nav > a.btn.btn-icon {
+        height: 1.5rem;
+        min-width: 1.5rem;
+        width: 1.5rem;
+        padding: 0;
+        font-size: 0.6375rem;
+        overflow: hidden;
+        position: relative;
+        line-height: normal;
+    }
+    
+    .btn, .navbar .navbar-nav > a.btn {
+        border-width: 2px;
+        font-weight: 600;
+        font-size: 0.8571em;
+        line-height: 1.35em;
+        text-transform: uppercase;
+        border: none;
+        margin: 10px 1px;
+        border-radius: 30px;
+        padding: 11px 22px;
+        cursor: pointer;
+        background-color: #66615B;
+        color: #FFFFFF;
+        transition: all 150ms linear;
+    }
+
+    #SearchAll {
+        margin-left: 38%;
+        margin-right: -21%;
+        margin-top: -26px;
+    }
+    
+    .FullSizeForm p.Explanation {
+        color: #777;
+        margin-top: 10px;
+        font-size: 11px;
+    }
+
+    .EditWithPreview {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        max-height: 730px;
+        height: 730px;
+    }
+
+    .EditArea {
+        width: 250px;
+        box-sizing: border-box;
+        float: left;
+        background: #eee;
+        border-right: 1px solid #ccc;
+        max-height: 730px;
+        height: 730px;
+        /* width: 200px; */
+        overflow-y: auto;
+    }
+
+    .PreviewArea {
+        width: calc(100% - 251px - 100px);
+        padding: 20px 20px;
+        /* text-align: center; */
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 730px;
+        box-sizing: border-box;
+    }
+
+    .PreviewArea h3 {
+        font-weight: bold;
+    }
+
+    .PreviewArea h3 + p {
+        margin-bottom: 20px;
+    }
+
+    .FullSizeForm label,.FullSizeForm .Field {
+        margin-left: 0px;
+    }
+
+    .PreviewArea .Browser {
+        border: 7px solid #ddd;
+        border-top-width: 50px;
+        margin: 10px 0px 0px 0px;
+        border-radius: 5px 5px 0px 0px;
+        position: relative;
+    }
+
+    .PreviewArea .Browser > i {
+        position: absolute;
+        top: -36px;
+        font-size: 20px;
+        color: #aaa;
+        left: 90px;
+    }
+
+    .PreviewArea .Browser > i.fa-chevron-left {
+        left: 15px;
+        font-size: 18px;
+        top: -34px;
+    }
+    .PreviewArea .Browser > i.fa-chevron-right {
+        left: 45px;
+        font-size: 18px;
+        top: -34px;
+    }
+    .PreviewArea .Browser > i.fa-home {
+        left: 75px;
+        font-size: 18px;
+        top: -34px;
+    }
+
+    .PreviewArea .Browser > i.fa-repeat {
+        left: 105px;
+        font-size: 18px;
+        top: -34px;
+    }
+
+    .PreviewArea .Browser > i.fa-window-minimize {
+        left: 85%;
+        font-size: 18px;
+        top: -34px;
+    }
+    .PreviewArea .Browser > i.fa-window-restore {
+        left: 90%;
+        font-size: 18px;
+        top: -34px;
+    }
+    .PreviewArea .Browser > i.fa-window-close {
+        left: 95%;
+        font-size: 18px;
+        top: -34px;
+    }
+
+    .PreviewArea .Browser > .Favicon {
+        position: absolute;
+        top: -32px;
+        left: 161px;
+        width: 16px;
+        height: 16px;
+        background-color: #ccc;
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 100;
+    }
+
+    .PreviewArea .Browser > input {
+        position: absolute;
+        top: -39px;
+        left: 155px;
+        width: 53%;
+        max-width: 400px;
+        box-shadow: none;
+        border: 0px;
+        background: #eee;
+        padding: 7px 7px 7px 28px;
+        color: #888;
+    }
+
+    .PreviewArea iframe {
+        width: 100%;
+        height: 400px;
+    }
+
+    .PreviewArea .PageTopMenu {
+        background: #fff;
+        min-height: 430px;
+        /* padding: 20px 50px; */
+        position: relative;
+    }
+
+    .PreviewArea .Page {
+        /* background: #fff; */
+        min-height: 560px;
+        padding: 20px 50px;
+        position: relative;
+    }
+
+    .PreviewArea .Page .Logo {
+        display: block;
+        position: absolute;
+        left: 50px;
+        top: 40px;
+        height: 40px;
+        width: 80px;
+        background-color: #eee;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .FullSizeForm label {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .FullSizeForm {
+        padding: 20px !important;
+    }
+
+    .PreviewArea .Page .Nav.Top {
+        padding-top: 20px;
+    }
+
+    .PreviewArea .Page .Nav {
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+    .PreviewArea .Page .Nav li {
+        display: inline-block;
+    }
+
+    .PreviewArea .Page .Nav li span {
+        display: inline-block;
+        height: 10px;
+        width: 30px;
+        border-radius: 5px;
+        background: #eee;
+    }
+
+    .PreviewArea .Page .Nav.Bottom {
+        margin-bottom: 18px;
+    }
+
+    .PreviewArea .Page .Nav.Bottom li span {
+        width: 50px;
+        height: 15px;
+    }
+
+    .PreviewArea .Page header {
+        height: 100px;
+        background: #ccc;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    .PreviewArea .Page .Content {
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .PreviewArea .Page .Content .Communication,.PreviewArea .Page .Content .Communication:after {
+        border-radius: 5px;
+    }
+
+    .PreviewArea .Page .Content .Communication {
+        background: #eee;
+        height: 50px;
+        margin-left: 60px;
+        position: relative;
+        margin-bottom: 30px;
+        width: calc(70% - 60px);
+        float: left;
+    }
+
+    .PreviewArea .Page .Content .Communication span {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        position: absolute;
+        left: -60px;
+        top: 0px;
+        background-color: #eee;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .PreviewArea .Page .Content .Communication:after {
+        content: " ";
+        width: 70%;
+        height: 17px;
+        background: #eee;
+        display: block;
+        position: absolute;
+        bottom: -20px;
+    }
+
+    .PreviewArea .Page .Content .Sidebar {
+        width: 30%;
+        float: left;
+        text-align: right;
+    }
+
+    .PreviewArea .Page .Content .Sidebar > span {
+        display: inline-block;
+        width: 60%;
+        text-align: center;
+        border-radius: 5px;
+        background: #ccc;
+        padding: 8px 17px;
+        margin-bottom: 10px;
+        font-size: 10px;
+        color: #fff;
+        text-transform: uppercase;
+        box-sizing: border-box;
+    }
+
+    .PreviewArea .Page .Content .Sidebar > span.Status {
+        background: none;
+        color: #ccc;
+        border: 1px solid #ccc;
+    }
+
+    .CustomCSS {
+        display: block;
+        width: 100%;
+        min-height: 200px;
+        box-sizing: border-box;
+        margin-top: 5px;
+        padding: 20px;
+    }
+
+    .slidecontainer {
+        width: 100%;
+      }
+      
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+      
+      .slider:hover {
+        opacity: 1;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #d35b00;
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #d35b00;
+        cursor: pointer;
+      }
+
+    
+}
+
+.CardSearchPreviewFull{
+    width: 100%;
+}
+
+.CardSearchPreviewCardItem{
+    width: 90%;
+    /* margin-top:20px !important; */
+}
+
+
+.CardSearchPreviewItemSidebar{
+    width: 100% !important;
+    margin-top: 45px !important;
+    padding: 23px !important;
+    box-sizing: border-box !important;
+
+}
+
+.CardSearchPreview{
+    margin: 0 auto;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+}

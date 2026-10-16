@@ -1,0 +1,29 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/DynamicFieldTableMask.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dsilva@serviceup.com.br
+# --
+
+[% RenderBlockStart("MaskText") %]
+    <strong>[% Data.ColumnMask %]</strong>
+    <ul>
+        <li>
+            <label for="DefaultValue">[% Translate("Mask") | html %]:</label>
+            [% Data.PossibleMasks %]
+        </li>
+    </ul>
+[% RenderBlockEnd("MaskText") %]
+
+[% RenderBlockStart("MaskMoney") %]
+    <strong>[% Data.ColumnMask %]</strong>
+    <ul>
+        <li>
+            <label for="DefaultValue">[% Translate("Currency") | html %]:</label>
+            <input name="MoneyMaskPrefix_[% Data.ColumnMask %]" id="MoneyMaskPrefix_[% Data.ColumnMask %]" type="text" class="NewDataKey W10pc" data-level="3" data-parent="Ticket">
+            <label for="DefaultValue">[% Translate("Negative") | html %]:</label>
+            [% Data.PossibleNegative %]
+        </li>
+    </ul>
+[% RenderBlockEnd("MaskMoney") %]

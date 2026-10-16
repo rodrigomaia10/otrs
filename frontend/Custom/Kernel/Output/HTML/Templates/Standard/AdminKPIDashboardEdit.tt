@@ -1,0 +1,29 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKPIDashboardEdit.tt - frontend template
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+#
+# written/edited by:
+# * dparavani@serviceup.com.br
+# --
+
+<style type="text/css">
+	.grid-stack { 
+		background: [% Data.DashboardBG %]; 
+	}
+	.grid-stack-item-content {
+		background-color: [% Data.CardBG %]; 
+	}
+</style>
+
+<div class="MainBox">
+	<ul class="DashboardHeader">
+		<div class="DashboardButtons">
+			<li><a class="btn btn-default" id="AddNewCard" href="#" title='Add Widget'><i class="fa fa-plus"></i>[% Translate("Add Card") | html %]</a></li>
+			<!-- <li><a class="btn btn-default" id="SaveDashboard" href="#" title='Save Dashboard'><i class="fa fa-floppy-o"></i>[% Translate("Save Dashboard") | html %]</a></li> -->
+			<li><a class="btn btn-default" id="DashboardSettings" href="#" title='Settings'><i class="fa fa-cogs"></i>[% Translate("Settings") | html %]</a></li>
+		</div>
+	</ul>
+
+	
+    <div class="grid-stack"></div>
+</div>

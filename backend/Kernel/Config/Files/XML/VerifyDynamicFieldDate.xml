@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+  <Setting Name="Daemon::SchedulerCronTaskManager::Task###VerifyDynamicFieldDate" Required="0" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Ticket VerifyDynamicFieldDate Daemon.</Description>
+        <Navigation>InBox::VerifyDynamicFieldDate::Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">VerifyDynamicFieldDate</Item>
+                <Item Key="Schedule">*/5 * * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::Ticket::VerifyDynamicFieldDate</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>  
+
+    <Setting  Name="VerifyDynamicFieldDate::Core###ServicesIDs" Required="0" Valid="1">
+        <Description Translatable="1">Set the Services ID to filter date.</Description>
+        <Navigation>InBox::VerifyDynamicFieldDate::Core</Navigation>
+        <Value>
+            <Array>
+                <Item></Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="VerifyDynamicFieldDate::Core###DynamicFieldDateToCompare" Required="0" Valid="1">
+        <Description Translatable="1">Set the DynamicField Date name to compare</Description>
+        <Navigation>InBox::VerifyDynamicFieldDate::Core</Navigation>
+         <Value>
+            <Item  ValueType="String" Key="VerifyDynamicFieldDate"></Item>
+        </Value>
+    </Setting>
+
+
+</otrs_config>

@@ -1,0 +1,112 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/KanbanCardBody.tt
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * dsilva@serviceup.com.br
+# --
+<div id='DivOFTag'>
+[% RenderBlockStart("TagShow") %]
+    <div class="TagInCard" style="background-color:[% Data.Tag_Color | html  %];">[% Data.Name | html  %]</div>
+[% RenderBlockEnd("TagShow") %]
+</div>
+<div title='[% Data.Priority %]' class='DivFlagKB' >
+    <span id='Flag_[% Data.TicketID | html %]' class='FlagKB' style='background-color: [% Data.PriorityColor | html %] '></span>
+</div>
+
+<p class='TicketTitleKB [% Data.StartAndSLA | html %]' onclick='Core.Agent.Admin.MyKanbanBoard.TicketZoom([% Data.TicketID | html %])'>[% Data.TicketNumber | html %]</p>
+
+[% RenderBlockStart("SLATicketKanban") %]
+<div class="[% Data.SLACLass | html %]">
+    <spam class="IconButtonKB" title='[% Translate("Details") | html %]' onclick='Core.Agent.Admin.MyKanbanBoard.TicketKanbanSLA([% Data.TicketID | html %])'>
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+    </spam>
+</div>
+[% RenderBlockEnd("SLATicketKanban") %]
+
+[% RenderBlockStart("StartTicketKanban") %]
+<div class="[% Data.StartTicketKanban | html %]">
+    <spam><i class="fa fa-star" aria-hidden="true"></i></spam>
+</div>
+[% RenderBlockEnd("StartTicketKanban") %]
+
+<div class='CardData'>
+    <p class='MessageCardKB' title='[% Data.Title | html %]'><b> [% Data.Title | truncate(80) | html %]</b></p>
+    [% RenderBlockStart("TicketAge") %]
+    <p class='MessageCardKB' title='[% Translate("Age") | html %]'>[% Translate("Age") | html %]: [% Data.Age | html %]</p>
+    [% RenderBlockEnd("TicketAge") %]
+    [% RenderBlockStart("CustomerCompany") %]
+        <p class='MessageCardKB' title='[% Data.CustomerCompany | html %]'>[% Translate("Customer") | html %]: [% Data.CustomerCompany | truncate(29) | html %]</p>
+    [% RenderBlockEnd("CustomerCompany") %]
+    [% RenderBlockStart("CustomerLogin") %]
+        <p class='MessageCardKB' title='[% Data.CustomerLogin | html %]'>[% Translate("Customer User") | html %]: [% Data.CustomerLogin | truncate(25) | html %]</p>
+    [% RenderBlockEnd("CustomerLogin") %]
+    [% RenderBlockStart("TicketCreated") %]
+        <p class='MessageCardKB' title='[% Data.Created | html %]'>[% Translate("Created") | html %]: [% Data.Created | html %]</p>
+    [% RenderBlockEnd("TicketCreated") %]
+    [% RenderBlockStart("TicketOwner") %]
+        <p class='MessageCardKB' title='[% Data.Owner | html %]'>[% Translate("Owner") | html %]: [% Data.Owner | truncate(30) | html %]</p>
+    [% RenderBlockEnd("TicketOwner") %]
+    [% RenderBlockStart("TicketResponsible") %]
+        <p class='MessageCardKB' title='[% Data.Responsible | html %]'>[% Translate("Responsible") | html %]: [% Data.Responsible | truncate(24) | html %]</p>
+    [% RenderBlockEnd("TicketResponsible") %]
+    [% RenderBlockStart("TicketCustomerUser") %]
+        <p class='MessageCardKB' title='[% Data.CustomerUser | html %]'>[% Translate("Customer User") | html %]: [% Data.CustomerUser | truncate(35) | html %]</p>
+    [% RenderBlockEnd("TicketCustomerUser") %]
+    [% RenderBlockStart("TicketDynamicField") %]
+        [% RenderBlockStart("DynamicFieldName") %]
+            <p class='MessageCardKB' title='[% Data.DynamicFieldValue | html %]'>[% Data.DynamicFieldName | truncate(15) | html %]: [% Data.DynamicFieldValue | truncate(20) | html %]</p>
+        [% RenderBlockEnd("DynamicFieldName") %]
+    [% RenderBlockEnd("TicketDynamicField") %]
+</div>
+        [% Data.HTMLOwners %]
+<div class='ButtonsOfCard'>
+[% RenderBlockStart("ButtonTitle") %]
+    <spam class='IconButtonKB' id='Details_[% Data.TicketID | html %]' onclick='Core.Agent.Admin.MyKanbanBoard.TicketDetails([% Data.TicketID %])' title='[% Translate("Details") | html %]'><i class='fa fa-eye'></i></spam>
+[% RenderBlockEnd("ButtonTitle") %]
+
+[% RenderBlockStart("ButtonFreeText") %]
+   <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketFreeText([% Data.TicketID | html %])' title='[% Translate("Classify") | html %]'><i class='fa fa-edit'></i></spam>
+[% RenderBlockEnd("ButtonFreeText") %]
+
+[% RenderBlockStart("ButtonNote") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketNote([% Data.TicketID | html %])' title='[% Translate("Add note") | html %]'><i class='fa fa-sticky-note-o'></i></spam>
+[% RenderBlockEnd("ButtonNote") %]
+
+[% RenderBlockStart("ButtonClosed") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketClose([% Data.TicketID | html %])' title='[% Translate("Close") | html %]'><i class='fa fa-close'></i></spam>
+[% RenderBlockEnd("ButtonClosed") %]
+
+[% RenderBlockStart("ButtonLock") %]
+    <spam class='IconButtonKB' onclick=' [% Data.LockAction | html %]([% Data.TicketID | html %])'  title='[% Translate("Lock") | html %]'><i class='fa [% Data.LockSimbol | html %]'></i></spam>
+[% RenderBlockEnd("ButtonLock") %]
+
+[% RenderBlockStart("ButtonPrioriyUp") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketPrioriyUp([% Data.TicketID | html%])' title='[% Translate("Increase priority") | html %]'><i class='fa fa-arrow-up'></i></spam>
+[% RenderBlockEnd("ButtonPrioriyUp") %]
+           
+[% RenderBlockStart("ButtonPrioriyDown") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketPrioriyDown([% Data.TicketID | html %])' title='[% Translate("Decrease priority") | html %]'><i class='fa fa-arrow-down'></i></spam>
+[% RenderBlockEnd("ButtonPrioriyDown") %]
+
+[% RenderBlockStart("ButtonChangeQueues") %]
+    <spam class='tooltip IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketSetQueue([% Data.TicketID | html %])' title='[% Translate("Queues") | html %]'><i class='fa fa-bars'></i></spam>
+[% RenderBlockEnd("ButtonChangeQueues") %]
+
+[% RenderBlockStart("ButtonTicketShare") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketShare([% Data.TicketID | html %])' title='[% Translate("Split") | html %]'><i class='fa fa-code-fork'></i></spam> 
+[% RenderBlockEnd("ButtonTicketShare") %]
+
+[% RenderBlockStart("ButtonReplyAll") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketReplyAll([% Data.TicketID | html %])' title='[% Translate("Reply") | html %]'><i class='fa fa-reply-all'></i></spam> 
+[% RenderBlockEnd("ButtonReplyAll") %]
+
+[% RenderBlockStart("ButtonAddTag") %]
+    <spam class='IconButtonKB' onclick='Core.Agent.Admin.MyKanbanBoard.TicketSetTag([% Data.TicketID | html %])' title='[% Translate("Add Tag") | html %]'><i class='fa fa-tag'></i></spam> 
+[% RenderBlockEnd("ButtonAddTag") %]
+
+[% RenderBlockStart("ButtonWatch") %]
+    <spam class='IconButtonKB' id='Watch_[% Data.TicketID | html %]' onclick='Core.Agent.Admin.MyKanbanBoard.TicketWatchers([% Data.TicketID %])' title='[% Translate("Watch") | html %]'><i class='fa fa-user'></i></spam>
+[% RenderBlockEnd("ButtonTitle") %]
+</div>

@@ -1,0 +1,217 @@
+# --
+# Custom/Kernel/Output/HTML/Templates/Standard/AdminKanbanTicket.tt 
+# Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Kanban'),
+                Link => 'AdminKanban',
+            },
+        ]
+    %]
+
+    [% IF Data.ID == ""  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add new Column for object"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit Column")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminKanban" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" name="Action" value="AdminKanbanTicket">
+            <input type="hidden" name="Subaction" value="[% Data.Mode | html %]Action">
+            <input type="hidden" name="ID" value="[% Data.ID | html %]">
+            <input type="hidden" name="OpenBy" value="[% Data.OpenBy | html %]"/>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("General") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+                                    <div class="field-wrapper">
+                                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                                        <div class="Field">
+                                            <input id="Name" class="W50pc [% Data.NameServerError | html %] [% Data.ShowWarning | html %]  Validate_Alphanumeric" type="text" maxlength="200" value="[% Data.Name | html %]" name="Name" [% Data.ReadonlyInternalField | html %]>
+                                            <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate(Data.NameServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">[% Translate("This is the name to be shown on the screens.") | html %]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="Size1of2">
+                            <fieldset class="TableLike">
+                                <div class="field-wrapper">
+
+                                    <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.ValidityStrg %]
+
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+
+                                    <div class="SpacingTop"></div>
+                                    <label class="Mandatory" for="GroupIDs"><span class="Marker">*</span> [% Translate("Groups") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.GroupsStrg %]
+                                    </div>     
+                                </div>                                                       
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="WidgetSimple">
+                <div class="Header">
+					<div class="WidgetAction Toggle">
+						<a href="#" title="Chavear este dispositivo" aria-controls="Core_UI_AutogeneratedID_1" aria-expanded="true"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+					</div>
+                    <h2>[% Translate(Data.FieldTypeName) | html %] [% Translate("Column Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    [% InsertTemplate("AdminKanbanSearch.tt") %]
+                </div>
+            </div>
+			 <div class="WidgetSimple">
+                <div class="Header">
+					<div class="WidgetAction Toggle">
+						<a href="#" title="Chavear este dispositivo" aria-controls="Core_UI_AutogeneratedID_1" aria-expanded="true"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+					</div>
+                    <h2>[% Translate("View Settings") | html %]</h2>
+                </div>
+                <div class="Content">
+					<fieldset class="TableLike" id="ViewSettingsKanban" style="margin-bottom: 15px;">
+						<legend style="margin-top: 15px"><span>[% Translate("Rules in use") | html %]</span></legend>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="SeverityOrder"><span class="Marker">*</span> [% Translate("Severity order") | html %]:</label>
+                            <div class="Field">
+                                [% Data.SeverityOrder %]
+                            </div>
+						</div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Ordination"><span class="Marker">*</span> [% Translate("Ordination") | html %]:</label>
+                            <div class="Field">
+                                [% Data.Ordination %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="LimitValue"><span class="Marker">*</span> [% Translate("Maximum ticket limit in column") | html %]:</label>
+                            <div class="Field">
+                                <input type="text" class="Modernize Validate_Required" id="LimitValue" name="LimitValue" value="[% Data.LimitValue | html %]" />
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label>[% Translate("Manual sorting") | html %]:</label>
+                            <div class="Field">
+                                <input type="checkbox" name="ManualSorting" id="ManualSorting" value="[% Data.ManualSorting | html %]" onclick="Core.Agent.Admin.KanbanTicket.ManualSorting();" [% Data.Checked | html %]>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label>[% Translate("Start collapsed") | html %]:</label>
+                            <div class="Field">
+                                <input type="checkbox" name="StartCollapsed" id="StartCollapsed" value="[% Data.StartCollapsed | html %]" onclick="Core.Agent.Admin.KanbanTicket.StartCollapsed();" [% Data.CheckedStartCollapsed | html %]>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label>[% Translate("Preview Only") | html %]:</label>
+                            <div class="Field">
+                                <input type="checkbox" name="PreviewOnly" id="PreviewOnly" value="[% Data.PreviewOnly | html %]" onclick="Core.Agent.Admin.KanbanTicket.PreviewOnly();" [% Data.CheckedPreviewOnly | html %]>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label>[% Translate("Buttons to card") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ButtonsStrg %]
+                            </div>
+                        </div>
+					</fieldset>
+                </div>
+            </div>
+            	 <div class="WidgetSimple">
+                <div class="Header">
+					<div class="WidgetAction Toggle">
+						<a href="#" title="Chavear este dispositivo" aria-controls="Core_UI_AutogeneratedID_1" aria-expanded="true"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+					</div>
+                    <h2>[% Translate("Parameters after moving to this column") | html %]</h2>
+                </div>
+                <div class="Content">
+					<fieldset class="TableLike" id="ViewSettingsKanban2" style="margin-bottom: 15px;">
+                        <div class="field-wrapper">
+                            <label>[% Translate("Queue") | html %]:</label>
+
+                            <div class="Field">
+                                [% Data.QueueToMove %]
+                                <p class="FieldExplanation">[% Translate("To add the queue, select them in the filter.") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label>[% Translate("State") | html %]:</label>
+                            <div class="Field">
+                                [% Data.StateToMove %]
+                                <p class="FieldExplanation">[% Translate("To add the state, select them in the filter.") | html %]</p>
+
+                            </div>
+                        </div>
+                        
+                        <div class="field-wrapper">
+                            <label>[% Translate("Priority") | html %]:</label>
+                            <div class="Field">
+                                [% Data.PriorityToMove %]
+                                <p class="FieldExplanation">[% Translate("To add the priority, select them in the filter.") | html %]</p>
+
+                            </div>
+                        </div>
+					
+					</fieldset>
+                </div>
+            </div>
+            <fieldset class="TableLike card SpacingTop">
+                <div class="field-wrapper form-button-actions">
+                    <div class="Field buttons-field">
+                        <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=AdminKanban">[% Translate("Cancel") | html %]</a>
+                        <button type="submit" class="Primary CallForAction btn-main btn-primary-ghost btn-width-md" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                    </div>
+                </div>
+            </fieldset>
+            
+        </form>
+    </div>
+</div>

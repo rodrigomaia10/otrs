@@ -1,0 +1,625 @@
+<!--
+# Custom/Kernel/Output/HTML/Templates/Standard/CustomerPortalNavBar.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+# --
+# written/edited by:
+# * nfreitas@serviceup.com.br
+# * jsantos@serviceup.com.br
+# * lcavalheiro@serviceup.com.br
+# * dsilva@serviceup.com.br
+-->
+
+<!--     Fonts and icons     -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+
+<!-- CSS Files -->
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/inbox-thirdparty/paperDashboard-2.0.1/paper-dashboard.css" />
+<!--link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/Core.PaperInterface.ServiceUp.css" /-->
+
+[% RenderBlockStart("LayoutCSS") %]
+<style>
+
+body {
+	background-color: [% Data.BodyColor %];
+}
+
+/* background color */
+.main-panel {
+    background-color: [% Data.MainPanelColor %];
+}
+
+.navbar-color {
+    background-color: [% Data.NavBarBackgroundColor %];
+}
+
+/* top menu color */
+.navbar.navbar-top .nav-item .nav-link:not(.btn) {
+    color: [% Data.NavBarItemColor %] !important;
+}
+
+/* Top selected menu color */
+.navbar.navbar-top .nav-item.active .nav-link:not(.btn),
+    .navbar.navbar-top .nav-item .nav-link:not(.btn):focus,
+    .navbar.navbar-top .nav-item .nav-link:not(.btn):hover,
+    .navbar.navbar-top .nav-item .nav-link:not(.btn):focus:hover,
+    .navbar.navbar-top .nav-item .nav-link:not(.btn):active {
+    color: [% Data.SelectedNavBarItemColor %] !important;
+}
+
+/* Page ID text color. Lateral menu */
+.navbar-brand {
+	color: [% Data.TextPageLateralMenu %];
+}
+
+.navbar.navbar-top {
+    border-bottom: 3px solid;
+	border-color: [% Data.BorderNavBarColor %];
+}
+
+/* Color selected item menu suspended */
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
+    background-color: [% Data.SelectedItemSuspended %];
+	color: #FFFFFF !important;
+	cursor: pointer;
+}
+
+.CentralizeLogo {
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.CentralizeLogoToNavbar {
+	white-space: nowrap !important;
+}
+
+.CentralizeLogoSide {
+	display: flex !important;
+    justify-content: center !important;
+	width: 100% !important;
+}
+
+.IconPortal{
+	color: [% Data.NavBarNotificationsIcons %] !important;
+}
+
+.Response {
+    background-color: [% Data.ButtonResponse %] !important;
+    border-radius: 4px !important;
+}
+
+.Response:hover {
+    background-color: [% Data.ButtonResponseFocus %] !important;
+}
+.Response:focus {
+    background-color: [% Data.ButtonResponseFocus %] !important;
+}
+
+</style>
+[% RenderBlockEnd("LayoutCSS") %]
+
+<div class="wrapper ">
+[% RenderBlockStart("CustomerSideBar") %]
+	<div class="sidebar ps" data-color="blue" data-active-color="danger" style="background: #66615B !important;background: linear-gradient(#[% Data.SideBarColor1 %] 0%, #[% Data.SideBarColor2 %] 80%) !important;">
+		<div class="logo">
+			<button id="ResponsiveButtonNav" type="button" class="navbar-toggler">
+				<i class="fa fa-bars" aria-hidden="true"></i>
+			</button>
+[% RenderBlockStart("CustomerLogo") %]
+			<a href="#" class="simple-text-logo logo-mini" style="">
+				<div class="logo-image-small">
+					<img src="[% Data.URL %]">
+				</div>
+			</a>
+			<a href="#" class="simple-text logo-normal">
+				<div id="Logo" class="[% Data.CentralizeLogoSide %]">
+					<img style="width:[% Data.StyleWidth %] !important" src="[% Data.URL %]">
+				</div>
+			</a>
+			<div id='CompanyNameDiv' class='CompanyName' style='color: #[% Data.UserNameFontColor | html %]'>[% Config("CustomerHeadline") %]  </div>
+[% RenderBlockEnd("CustomerLogo") %]
+		</div>
+
+		<div class="sidebar-wrapper">
+			<div class="user">
+				<div class="photo">
+[% RenderBlockStart("GetUserAvatar") %]
+					[% IF Data.Avatar %]
+						<img src="[% Data.Avatar %]" />
+					[% ELSE %]
+						<span class="Initials">[% Data.UserInitials | html %]</span>
+					[% END %]
+[% RenderBlockEnd("GetUserAvatar") %]
+				</div>
+				<div class="info">
+					<a data-toggle="collapse" href="#collapseExample" class="collapsed">
+						<span title="[% Env("UserFullname") | html  %]" style="color: #[% Data.UserNameFontColor | html %]">
+							[% Env("UserFullname") | truncate(15) | html  %]
+							<b class="caret"></b>
+						</span>
+					</a>
+					<div class="clearfix"></div>
+					<div class="collapse" id="collapseExample">
+						<ul class="nav">
+							<li>
+								<a href="[% Env("Baselink") %]Action=CustomerPortalMyData" title="[% Translate("My Data") | html %]">
+									<i class="fa fa-user" style="color: #[% Data.UserNameFontColor | html %]"></i>
+									<span class="sidebar-normal" style="color: #[% Data.UserNameFontColor | html %]">[% Translate("My Data") | html %]</span>
+								</a>
+							</li>
+							<li>
+								<a href="[% Env("Baselink") %]Action=CustomerPortalPreferences" title="[% Translate("Preferences") | html %]">
+									<i class="fa fa-cog" style="color: #[% Data.UserNameFontColor | html %]"></i>
+									<span class="sidebar-normal" style="color: #[% Data.UserNameFontColor | html %]">[% Translate("Preferences") | html %]</span>
+								</a>
+							</li>
+							[% RenderBlockStart("NavBarAddCustomerUser") %]
+							<li>
+								<a href="[% Env("Baselink") %]Action=CustomerPortalAdminCustomerUser" title="[% Translate("Manage users") | html %]">
+									<i class="fa fa-user-plus" style="color: #[% Data.UserNameFontColor | html %]"></i>
+									<span class="sidebar-normal" style="color: #[% Data.UserNameFontColor | html %]">[% Translate("Manage users") | html %]</span>
+								</a>
+							</li>
+							[% RenderBlockEnd("NavBarAddCustomerUser") %]
+							<li>
+								<a href="[% Env("Baselink") %]Action=Logout" title="[% Translate("Logout") | html %]">
+									<i class="fa fa-sign-out" style="color: #[% Data.UserNameFontColor | html %]"></i>
+									<span class="sidebar-normal" style="color: #[% Data.UserNameFontColor | html %]">[% Translate("Logout") | html %]</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+[% RenderBlockStart("CustomerSideBar1") %]
+			<ul class="nav">
+				<li class="[% IF Data.Active == 'Stats' %] active [% END %]">
+					<a href="[% Env("Baselink") %]Action=HomePage">
+						<i class="fa fa-bar-chart" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Stats ) | html %] </p>
+					</a>
+				</li>
+[% RenderBlockStart("CustomerSideBarFAQ") %]		
+				[% IF Config("CustomerPortal::Core::EnableCustomCustomerPortalFAQs") %]
+				<li class="[% IF Data.Active == 'FAQs' %] active [% END %]">
+					<a href="[% Env("Baselink") %]Action=CustomCustomerPortalFAQs">
+						<i class="fa fa-question-circle-o" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").FAQs ) | html %] </p>
+					</a>
+				</li>	
+				[% ELSE %]
+				<li class="[% IF Data.Active == 'FAQs' %] active [% END %]">
+					<a href="[% Env("Baselink") %]Action=CustomerPortalFAQs">
+						<i class="fa fa-question-circle-o" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").FAQs ) | html %] </p>
+					</a>
+				</li>
+				[% END %]
+[% RenderBlockEnd("CustomerSideBarFAQ") %]
+[% RenderBlockStart("ConsumptionOfHoursNav") %]
+				<li class="[% IF Data.Active == 'ConsumptionOfHours' %] active [% END %]">
+					<a href="[% Env("Baselink") %]Action=ConsumptionOfHours">
+						<i class="fa fa-check-square-o" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").ConsumptionOfHours ) | html %] </p>
+					</a>
+				</li>   
+[% RenderBlockEnd("ConsumptionOfHoursNav") %]
+[% RenderBlockStart("ConsumptionOfContract") %]
+				<li class="[% IF Data.Active == 'ConsumptionOfContract' %] active [% END %]">
+					<a href="[% Env("Baselink") %]Action=ConsumptionOfContract">
+						<i class="fa fa-file-text-o" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").ConsumptionOfContract ) | html %] </p>
+					</a>
+				</li>   
+[% RenderBlockEnd("ConsumptionOfContract") %]
+		
+				<li class="[% IF Data.Active == 'Services' || Data.Active == 'MyTickets' || Data.Active == 'NewTicketProcess '%] active [% END %]">
+					<a data-toggle="collapse" href="#pagesExamples" aria-expanded="true" id="ancor-pagesExamples">
+						<i class="fa fa-ticket" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">
+							[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Tickets ) | html %]
+							<b class="caret"></b>
+						</p>
+					</a>
+[% RenderBlockEnd("CustomerSideBar1") %]
+					<div class="collapse show" id="pagesExamples">
+						<ul class="nav">
+
+[% RenderBlockStart("CustomerSideBarNewTicket") %]
+
+							<li class="[% IF Data.Active == 'Services' %] active [% END %]">
+								<a href="[% Env("Baselink") %]Action=Services">
+[% RenderBlockStart("CustomerSideBar2") %]
+								<span class="sidebar-mini-icon"><i class="fa fa-pencil-square-o" style="color: #[% Data.SubMenuFontColor | html %]"></i></span>
+								<span class="sidebar-normal" style="color: #[% Data.SubMenuFontColor | html %]">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").NewTicket ) | html %]</span>
+[% RenderBlockEnd("CustomerSideBar2") %]
+								</a>
+							</li>
+[% RenderBlockEnd("CustomerSideBarNewTicket") %]
+
+[% RenderBlockStart("CustomerSideBar5") %]
+							<li class="[% Data.HiddenTicketProcess %] [% IF Data.Active == 'NewTicketProcess' %] active [% END %]">
+								<a href="[% Env("Baselink") %]Action=NewTicketProcess">
+									
+									<span class="sidebar-mini-icon"><i class="fa fa-pencil-square-o" style="color: #[% Data.SubMenuFontColor | html %]"></i></span>
+									<span class="sidebar-normal" style="color: #[% Data.SubMenuFontColor | html %]">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").NewTicketProcess ) | html %]</span>
+								</a>
+							</li>
+[% RenderBlockEnd("CustomerSideBar5") %]
+[% RenderBlockStart("CustomerSideBar3") %]
+
+							[% IF Config("CustomerPortal::MyTickets::DisableMyTicketsMenu") == 'No' %]
+							<li class="[% IF Data.Active == 'MyTickets' %] active [% END %]">
+								<a href="[% Env("Baselink") %]Action=MyTickets">
+									<span class="sidebar-mini-icon"><i class="fa fa-list" style="color: #[% Data.SubMenuFontColor | html %]"></i></span>
+									<span class="sidebar-normal" style="color: #[% Data.SubMenuFontColor | html %]"> [% Translate( Config("CustomerPortal::Core::CustomerNavBarText").MyTickets ) | html %] </span>
+								</a>
+							</li>
+							[% END %]
+[% RenderBlockStart("EnableCompanyTickets") %]
+							<li class="[% IF Data.Active == 'CompanyTickets' %] active [% END %]">
+								<a href="[% Env("Baselink") %]Action=CompanyTickets">
+									<span class="sidebar-mini-icon"><i class="fa fa-indent" style="color: #[% Data.SubMenuFontColor | html %]"></i></span>
+									<span class="sidebar-normal" style="color: #[% Data.SubMenuFontColor | html %]"> [% Translate( Config("CustomerPortal::Core::CustomerNavBarText").CompanyTickets ) | html %] </span>
+								</a>
+							</li>
+[% RenderBlockEnd("EnableCompanyTickets") %]
+							<li class="[% IF Data.Active == 'CustomerPortalTicketSearch' %] active [% END %]">
+								<a href="[% Env("Baselink") %]Action=CustomerPortalTicketSearch">
+									<span class="sidebar-mini-icon"><i class="fa fa-indent" style="color: #[% Data.SubMenuFontColor | html %]"></i></span>
+									<span class="sidebar-normal" style="color: #[% Data.SubMenuFontColor | html %]"> [% Translate( Config("CustomerPortal::Core::CustomerNavBarText").CustomerPortalTicketSearch ) | html %] </span>
+								</a>
+							</li>
+
+[% RenderBlockEnd("CustomerSideBar3") %]
+						</ul>
+					</div>
+				</li>
+	
+[% RenderBlockStart("OuthersLinksShow") %]
+				<li class="[% IF Data.Active == 'Outhers' %] active [% END %]">
+					<a data-toggle="collapse" href="#pagesExamplesOuthers" id="ancor-pagesExamplesOuthers">
+[% RenderBlockStart("CustomerSideBar4") %]
+						<i class="fa fa-external-link" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">
+							[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Outhers ) | html %]
+							<b class="caret"></b>
+						</p>
+[% RenderBlockEnd("CustomerSideBar4") %]
+					</a>
+					<div class="collapse" id="pagesExamplesOuthers">
+						<ul class="nav">
+[% RenderBlockStart("CustomerLinks") %]
+							<li class="[% IF Data.Active == 'Outhers' %] active [% END %]">
+								<a class="" href="[% Data.ExternalLink | html %]"  target="[% Data.NewTab | html %]">
+									<span class="sidebar-mini-icon"><i class="fa fa-long-arrow-right" style="color: #[% Data.SubMenuFontColor | html %]"></i></span>
+									<span class="sidebar-normal" style="color: #[% Data.SubMenuFontColor | html %]"> [% Data.DisplayName | html %] </span>
+								</a>
+							</li>
+[% RenderBlockEnd("CustomerLinks") %]
+						</ul>
+					</div>
+				</li>
+[% RenderBlockEnd("OuthersLinksShow") %]
+
+[% RenderBlockStart("ServiceFavorite") %]
+				<li class="[% IF Data.Active == 'ServiceFavorite' %] active [% END %]">
+					<a data-toggle="collapse" href="#pagesExamplesServiceFavorite" id="ancor-pagesExamplesServiceFavorite">
+						<i class="fa fa-star" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">
+						[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").ServicesFavorites ) | html %]
+							<b class="caret"></b>
+						</p>
+					</a>
+					<div class="collapse " id="pagesExamplesServiceFavorite">
+						<ul class="nav" id="ServiceFavoriteList">
+[% RenderBlockStart("Favorites") %]
+							<li class="ServiceFav-[% Data.ServiceID | html %] [% IF Data.Active == 'ServiceFavorite' %] active [% END %] FavoriteClick" data-serviceNewTicketLink="[% Data.ServiceNewTicketLink | html %]">
+								<a class="" >
+									<span class="sidebar-mini-icon" title="[% Translate("Remove") %]">
+										<i  style="color: #[% Data.SubMenuFontColor | html %]; z-index:1" data-service-favorite-remove="[% Data.ServiceID | html %]"  class="fa fa-trash RemoveFavorite" aria-hidden="true"></i>
+									</span>
+									<span data-serviceNewTicketLink="[% Env("Baselink") %][% Data.ServiceNewTicketLink | html %]" 
+										data-service-name="[% Data.ServiceName | html %]" title="[% Data.ServiceName | html %]" class="sidebar-normal" 
+										style="color: #[% Data.SubMenuFontColor | html %]; margin-left: 28px; overflow: ;"> [% Data.ServiceName | html %] 
+									</span>	
+								</a>
+							</li>
+[% RenderBlockEnd("Favorites") %]
+						</ul>
+					</div>
+				</li>
+[% RenderBlockEnd("ServiceFavorite") %]
+[% RenderBlockStart("CustomerSideBarCustomMenu") %]
+				<li class="nav-item [% Data.Active %]">
+					<a class="nav-link" href="[% Env("Baselink") %]Action=[% Data.MenuLink | html %]">
+						<i class="[% Data.Icon | html %]" style="color: #[% Data.MenuFontColor | html %]"></i>
+						<p style="color: #[% Data.MenuFontColor | html %] !important">[% Translate(Data.MenuLabel) | html %]</p>
+					</a>
+				</li>
+[% RenderBlockEnd("CustomerSideBarCustomMenu") %]
+			</ul>
+		</div>
+	</div>
+[% RenderBlockEnd("CustomerSideBar") %]
+
+[% RenderBlockStart("MainPanel") %]
+	<div class="main-panel ps ps--active-y [% IF Data.SideBar == 0 %]FullPage[% END %]">
+[% RenderBlockEnd("MainPanel") %]
+			<!-- Navbar -->
+			<nav id='NavbarTop' class="navbar-color navbar navbar-expand-lg navbar-absolute fixed-top navbar-top">
+				<div class="container-fluid">
+[% RenderBlockStart("ActiveAction") %]
+				<div class="navbar-wrapper ">
+					<div class="navbar-toggle">
+						<button id='ResponsiveButton' type="button" class="navbar-toggler">
+							<span class="navbar-toggler-bar bar1"></span>
+							<span class="navbar-toggler-bar bar2"></span>
+							<span class="navbar-toggler-bar bar3"></span>
+						</button>
+					</div>
+					<div class="navbar-minimize">
+						<button id="minimizeSidebar" style='background-color: [% Data.MinimizeColor %]' class="btn btn-icon btn-round">
+							<i class="fa fa-chevron-right text-center visible-on-sidebar-mini Position-Chevron"></i>
+							<i class="fa fa-bars text-center visible-on-sidebar-regular"></i>
+						</button>
+					</div>
+					<text id='NavTitle' style='' class="navbar-brand" href="#"> [% Data.NameAction | html %] </text>
+				</div>
+[% RenderBlockEnd("ActiveAction") %]
+
+[% RenderBlockStart("PreviousScreen") %]
+				[% IF Env("Action") != 'Services' && Env("Action") != 'HomePage' %]
+				<div id='PreviousScreen' class="navbar-wrapper ">
+					
+					<div class="navbar-minimize">
+						<button id="" style='background-color: [% Data.MinimizeColor %]' class="btn btn-icon btn-round">
+							<i class="fa fa-chevron-left"></i>
+						</button>
+					</div>
+					<text id='NavTitle' style='font-size: 16px;' class="navbar-brand" href="#"> [% Translate("Back") %] </text>
+				</div>
+				[% END %]
+[% RenderBlockEnd("PreviousScreen") %]
+				
+[% RenderBlockStart("NavbarTopLogo") %]
+				<div id='NavbarTopLogo' class="navbar-wrapper [% Data.CentralizeLogo | html %]">
+					<a href="[% Env("Baselink") %]Action=HomePage">
+						<img title="[% Config("CustomerHeadline") %]" style='max-width: 150px;max-height: 65px;' alt="[% Config("CustomerHeadline") %]" src="[% Data.URL %]">
+					</a>
+				</div>
+[% RenderBlockEnd("NavbarTopLogo") %]
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+				</button>
+				
+				<div class="navbar-collapse justify-content-end collapse CentralizeLogoToNavbar" id="navigation">
+
+[% RenderBlockStart("NavBarTop") %]
+					<ul class="navbar-nav ">
+						<li class="nav-item [% IF Data.Active == 'Stats' %] active [% END %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=HomePage">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Stats ) | html %]</a>
+						</li>
+[% RenderBlockStart("NavBarFAQ") %]
+						[% IF Config("CustomerPortal::Core::EnableCustomCustomerPortalFAQs") %]
+						<li class="nav-item [% IF Data.Active == 'FAQs' %] active [% END %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=CustomCustomerPortalFAQs">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").FAQs ) | html %]</a>
+						</li>
+						[% ELSE %]
+						<li class="nav-item [% IF Data.Active == 'FAQs' %] active [% END %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=CustomerPortalFAQs">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").FAQs ) | html %]</a>
+						</li>
+						[% END %]
+[% RenderBlockEnd("NavBarFAQ") %]
+[% RenderBlockStart("NavBarGraphics") %]
+						<li class="nav-item [% IF Data.Active == 'Graphics' %] active [% END %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=Graphics">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Graphics ) | html %]</a>
+						</li>
+[% RenderBlockEnd("NavBarGraphics") %]
+[% RenderBlockStart("NavBarConsumptionOfHours") %]
+						<li class="nav-item [% IF Data.Active == 'ConsumptionOfHours' %] active [% END %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=ConsumptionOfHours">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").ConsumptionOfHours ) | html %]</a>
+						</li>
+[% RenderBlockEnd("NavBarConsumptionOfHours") %]
+[% RenderBlockStart("NavBarConsumptionOfContract") %]
+						<li class="nav-item [% IF Data.Active == 'ConsumptionOfContract' %] active [% END %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=ConsumptionOfContract">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").ConsumptionOfContract ) | html %]</a>
+						</li>
+[% RenderBlockEnd("NavBarConsumptionOfContract") %]
+[% RenderBlockStart("NavBarTickets") %]
+						<li class="nav-item dropdown [% IF Data.Active == 'Services' || Data.Active == 'MyTickets' || Data.Active == 'NewTicketProcess' || Data.Active == 'CompanyTickets' %] active [% END %]">
+							<a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Tickets ) | html %]
+							</a>
+							<div class="dropdown-menu NavMenu MenuTicket" aria-labelledby="navbarDropdownMenuLink">
+								[% RenderBlockStart("NavBarNewTicket") %]
+									<a class="dropdown-item" href="[% Env("Baselink") %]Action=Services">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").NewTicket ) | html %]</a>
+								[% RenderBlockEnd("NavBarNewTicket") %]
+								[% RenderBlockStart("NavBarNewTicketProcess") %]
+									<a class="dropdown-item" href="[% Env("Baselink") %]Action=NewTicketProcess">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").NewTicketProcess) | html %]</a>
+								[% RenderBlockEnd("NavBarNewTicketProcess") %]
+								[% RenderBlockStart("NavBarMyTickets") %]
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=MyTickets">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").MyTickets ) | html %]</a>
+								[% RenderBlockEnd("NavBarMyTickets") %]
+								[% RenderBlockStart("NavBarCompanyTickets") %]
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=CompanyTickets">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").CompanyTickets ) | html %]</a>
+								[% RenderBlockEnd("NavBarCompanyTickets") %]
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=CustomerPortalTicketSearch">[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").CustomerPortalTicketSearch ) | html %]</a>
+								[% IF Config("CustomerPortal::Core::CustomerKanbanFilters") %]
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=CustomerKanban">Kanban</a>
+								[% END %]
+							</div>
+						</li>
+[% RenderBlockEnd("NavBarTickets") %]
+[% RenderBlockStart("NavBarCustomMenu") %]
+						<li class="nav-item [% Data.Active %]">
+							<a class="nav-link" href="[% Env("Baselink") %]Action=[% Data.MenuLink | html %]">[% Translate(Data.MenuLabel) | html %]</a>
+						</li>
+[% RenderBlockEnd("NavBarCustomMenu") %]
+[% RenderBlockStart("NavBarOuthers") %]
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								[% Translate( Config("CustomerPortal::Core::CustomerNavBarText").Outhers ) | html %]
+							</a>
+							<div class="dropdown-menu NavMenu MenuOuther" aria-labelledby="navbarDropdownMenuLink">
+								[% RenderBlockStart("NavBarLinks") %]
+								<a class="dropdown-item" href="[% Data.ExternalLink | html %]" target="[% Data.NewTab | html %]">[% Data.DisplayName | html %]</a>
+								[% RenderBlockEnd("NavBarLinks") %]
+							</div>
+						</li>
+[% RenderBlockEnd("NavBarOuthers") %]
+					</ul>
+[% RenderBlockEnd("NavBarTop") %]
+
+[% RenderBlockStart("NavBarSearch") %]
+					[% IF Env('Action') != 'Services' || Data.HideSearch %]
+					<div id="SearchAll" class="form-group left-inner-addon  SearchAllClickAfter ">
+						<i class="fa fa-search" id="icon-Search-all"></i>
+						<input type="text" class="form-control input-search-service-all" id="input-search-service-all" placeholder="[% Translate("Search") %]..." title="[% Translate("Search") %]...">
+					</div>
+					[% END %]
+[% RenderBlockEnd("NavBarSearch") %]
+[% RenderBlockStart("NavBarIcons") %]
+					<ul class="navbar-nav [% IF Data.TopBar == 1 %] DisplayUser[% END %]">
+						[% RenderBlockStart("NavBarTopServiceFavorite") %]
+						<li class="nav-item dropdown" style='margin-left: -25px; [% IF Data.TopBar == 0 %] display: none[% END %]'>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownService" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="NavTopServicesFavorites" title="[% Translate("Service Favorite") %]">
+									<i class="IconPortal fa fa-star"></i>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownService">
+								<ul class="nav" id="ServiceFavoriteList">
+								[% RenderBlockStart("NavBarFavorites") %]
+									<li class="ServiceFav-[% Data.ServiceID | html %] dropdown-item FavoriteClick" id="ListServiceFavoriteTop" data-serviceNewTicketLink="[% Data.ServiceNewTicketLink | html %]">
+										<a class="dropdown-item" >
+											<span class="sidebar-mini-icon" title="[% Translate("Remove") %]">
+												<i  style="color: #[% Data.SubMenuFontColor | html %]; z-index:5" data-service-favorite-remove="[% Data.ServiceID | html %]"  class="fa fa-trash RemoveFavorite SpaceMenu" aria-hidden="true"></i>
+											</span>
+											<span data-serviceNewTicketLink="[% Data.ServiceNewTicketLink | html %]" 
+													data-service-name="[% Data.ServiceName | html %]" title="[% Data.ServiceName | html %]" class="FavoriteClick" 
+													> [% Data.ServiceName | html %] 
+											</span>								
+										</a>
+									</li>
+								[% RenderBlockEnd("NavBarFavorites") %]
+								</ul>
+							</div>
+						</li>
+						[% RenderBlockEnd("NavBarTopServiceFavorite") %]
+
+						<li class="nav-item">
+							<a class="nav-link btn-rotate" title="[% Translate("Notifications") %]" href="[% Env("Baselink") %]Action=CustomerPortalNotifications">
+								<i class="IconPortal fa fa-bell-o"> 
+								</i>
+							[% RenderBlockStart("TotalOfNotifications") %]
+							[% IF Data.TotalOfNotifications > 0 %]
+								<p><span [% IF Config("CustomerPortal::Core::EnableUnansweredSurveys") == 0 %] style="right: 30px !important"[% END %] class="notif red CountNotification[% IF Data.Length == 1 %]Small[% END %] d-md-block">[% Data.TotalOfNotifications | html %]</span></p>
+							[% END %]
+							[% RenderBlockEnd("TotalOfNotifications") %]
+									[% IF Config("CustomerPortal::Core::ToEnableIconTextNavBar") %]
+									<p class="TextIconNavSuperior">
+										<span class="d-lg d-md-block">[% Config("CustomerPortal::Core::TextToIconNavBar").Notifications %]</span>
+									</p>
+
+									[% END %]		
+							</a>
+						</li>
+						[% IF Config("CustomerPortal::Core::CustomerKanbanFilters") %]
+						<li class="nav-item ">
+							<a class="nav-link btn-magnify" title="[% Translate("Kanban") %]"href="[% Env("Baselink") %]Action=CustomerKanban">
+								<i class="IconPortal fa fa-th">
+								</i>
+									[% IF Config("CustomerPortal::Core::ToEnableIconTextNavBar") %]
+									<p class="TextIconNavSuperior">
+										<span class="d-lg d-md-block">[% Config("CustomerPortal::Core::TextToIconNavBar").Kanban %]</span>
+									</p>
+									[% END %]
+							</a>
+						</li>
+						[% END %]
+
+						[% IF Config("CustomerPortal::Core::EnableUnansweredSurveys") %]
+						<li class="nav-item">
+							<a class="nav-link btn-magnify" title="[% Translate("Survey") %]"href="[% Env("Baselink") %]Action=CustomerPortalSurvey">
+								<i class="IconPortal fa fa-list-alt">
+
+								</i>
+							[% RenderBlockStart("TotalSurvey") %]
+								[% IF Data.TotalOfSurvey > 0 %]
+								<p><span class="notif red CountSurvey[% IF Data.Length == 1 %]Small[% END %] d-md-block">[% Data.TotalOfSurvey | html %]</span></p>
+								[% END %]
+							[% RenderBlockEnd("TotalSurvey") %]
+									[% IF Config("CustomerPortal::Core::ToEnableIconTextNavBar") %]
+										<p class="TextIconNavSuperior">
+											<span class="d-lg d-md-block">[% Config("CustomerPortal::Core::TextToIconNavBar").Survey %]</span>
+										</p>
+									[% END %]
+							</a>
+						</li>
+						[% END %]
+						<li class="nav-item dropdown" style='margin-left: -25px; [% IF Data.TopBar == 0 %] display: none[% END %]'>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="NavAvatar">
+								[% RenderBlockStart("GetUserAvatar2") %]
+									[% IF Data.Avatar %]
+										<img src="[% Data.Avatar %]" />
+									[% ELSE %]
+										<span class="Initials">[% Data.UserInitials | html %]</span>
+									[% END %]
+								[% RenderBlockEnd("GetUserAvatar2") %]
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=CustomerPortalMyData">
+									<i class="fa fa-user SpaceMenu" style="color: #262626"></i>
+									[% Translate("My Data") | html %]
+								</a>
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=CustomerPortalPreferences">
+									<i class="fa fa-cog SpaceMenu" style="color: #262626"></i>
+									[% Translate("Preferences") | html %]
+								</a>
+								[% RenderBlockStart("NavBarAddCustomerUser2") %]
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=CustomerPortalAdminCustomerUser">
+									<i class="fa fa-user-plus SpaceMenu" style="color: #262626"></i>
+									[% Translate("Manage users") | html %]
+								</a>
+								[% RenderBlockEnd("NavBarAddCustomerUser2") %]
+								<a class="dropdown-item" href="[% Env("Baselink") %]Action=Logout">
+									<i class="fa fa-sign-out SpaceMenu" style="color: #262626"></i>
+									[% Translate("Logout") | html %]
+								</a>
+							</div>
+						</li>
+					</ul>
+[% RenderBlockEnd("NavBarIcons") %]
+				</div>
+			</div>
+		</nav>
+
+<!--   Core JS Files   -->
+
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/jquery/jquery.js"></script>
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/popper.js/popper.min.js"></script>
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/bootstrap-4.1.1/bootstrap.min.js"></script>
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/perfect-scrollbar-1.4.0/perfect-scrollbar.min.js"></script>
+<script src="[% Config("Frontend::WebPath") %]js/inbox-thirdparty/moment-2.18.1/moment.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+	$('body').attr('data-mini-side', 'true');
+
+	// To perfect scrollbar of sidebar
+	const container = document.querySelector('.sidebar');
+	if ( container != undefined ) {
+		const ps = new PerfectScrollbar(container);
+	}
+} );
+
+</script>

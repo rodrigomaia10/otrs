@@ -1,0 +1,217 @@
+# --
+# Kernel/Output/HTML/Templates/Standard/AdminToolBox.tt
+# Copyright (C) 2019 Service Up, http://serviceup.com.br/
+#
+# written/edited by:
+# * jguedes@serviceup.com.br
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <h1 class="InvisibleText">[% Translate("ToolBox Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('ToolBox Management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% IF Data.ID == "NEW"  %]
+        [% BreadcrumbPath.push({ Name => Translate("Add Task"),}) %]
+    [% ELSIF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit Task")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% END %]
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+[% RenderBlockStart("ActionList") %]
+        <div class="Header">
+            <h2>[% Translate("Navigation") | html %]</h2>
+        </div>
+        <div class="Content">
+            <ul class="ActionList">
+                <li class="AccordionElement">
+                    <a class="AsBlock CallForAction Fullsize Center" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AgentPreferences">
+                        <span>[% Translate("Agent Preferences") | html %]</span>
+                    </a>
+                </li>
+                <li class="AccordionElement">
+                    <h2>
+                        <a class="AsBlock CallForAction Fullsize Center" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=CustomerPreferences">
+                            <span>[% Translate("Customer Preferences") | html %]</span>
+                        </a>
+                    </h2>
+                </li>
+            </ul>
+        </div>
+[% RenderBlockEnd("ActionList") %]
+        </div>
+
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterTemplates">[% Translate("Filter for ToolBox") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterTemplates" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterTemplates" value="" title="[% Translate("Filter for task") | html %]">
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+    </div>
+[%RenderBlockStart("Change")%]
+    <div class="ContentColumn">
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Overview") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <form action="[% Env("CGIHandle") %]" method="post" name="matrix">
+                        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                        <input type="hidden" name="Subaction" value="Change[% Data.Type | html %]"/>
+                        <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+
+                        <div class="DataTable scroll-bar-styled bar-no-left-border">
+                            <table class="DataTable VariableWidth" id="Type">
+                                <thead>
+                                    <tr>
+                                        <th>[% Translate(Data.VisibleNeType) | html %]</th>
+[% RenderBlockStart("ChangeHeader") %]
+                                        <th class="[% Data.Mark | html %]">
+                                            <input type="checkbox" name="[% Data.Type | html %]" id="SelectAll[% Data.Type | html %]" title="[% Translate("Toggle active state for all") | html %]" value="" />
+                                            [% Translate("Active") | html %]
+                                        </th>
+[% RenderBlockEnd("ChangeHeader") %]
+                                    </tr>
+                                </thead>
+                                <tbody>
+[% RenderBlockStart("NoDataFoundMsgList") %]
+                                    <tr>
+                                        <td colspan="[% Data.ColSpan | html %]">
+                                            [% Translate("No data found.") | html %]
+                                        </td>
+                                    </tr>
+[% RenderBlockEnd("NoDataFoundMsgList") %]
+[% RenderBlockStart("ChangeRow") %]
+                                    <tr>
+                                        <td>
+                                            <a>[% Data.Name | html %]</a>
+                                        </td>
+                                        <td class="[% Data.Mark | html %]">
+                                            <input type="checkbox" name="[% Data.Type | html %]" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Selected %]/>
+                                        </td>
+                                    </tr>
+[% RenderBlockEnd("ChangeRow") %]
+                                    <tr class="Hidden">
+                                        <td colspan="2">[% Translate("No matches found.") | html %]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                                
+                                <button class="Primary CallForAction btn-primary-ghost btn-main btn-width-md" type="submit" value="[% Translate("Submit") | html %]">
+                                    <span>[% Translate("Advance") | html %]</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+[%RenderBlockEnd("Change")%]
+            </div>
+        </div>
+    </div>
+    
+[% RenderBlockEnd("Overview") %]
+
+[% RenderBlockStart("SaveConfig") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+  
+	
+	[% USE EditTitle = String(Data.BreadcrumbTitle) %]
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('ToolBox Management'),
+                Link => Env("Action"),
+            },
+            {
+                Name => EditTitle.append( Translate('Manage'))
+            }
+        ]
+    %]
+	
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+[% RenderBlockStart("EditChanges") %]
+
+    <div class="ContentColumn">
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Preference Settings") | html %]</h2>
+            </div>
+            <form action="[% Env("CGIHandle") %]" method="post" name="compose" class="Validate PreventMultipleSubmits">
+                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                <input type="hidden" name="Subaction" value="SaveChanges"/>
+                <input type="hidden" name="IDs" value="[% Data.IDs | html %]"/>
+                <input type="hidden" name="Type" value="[% Data.ConfigGet | html %]"/>
+ 
+                <fieldset class="TableLike">
+                    <div class="field-wrapper">
+                        <label class="Mandatory" for="Preferences"><span class="Marker">*</span> [% Translate("Preference Name") | html %]:</label>
+                        <div class="Field">
+                            [% Data.PreferenceStrg %]
+                            <div id="PreferencesError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
+                    </div>
+                    <div class="field-wrapper" style="margin-top: 20px;">
+                        <label for="PreferenceValue" class="Mandatory"><span class="Marker">*</span>[% Translate("Preference Value") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="PreferenceValue" id="PreferenceValue" value="[% Data.PreferenceValue | html %]" class="W50pc Modernize Validate_Required" maxlength="200"/>
+                            <div id="PreferenceValueError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Field" style="margin-top: 20px; margin-top: 20px;flex-direction: row;justify-content: center;">
+                        <button class="Primary CallForAction btn-primary-ghost btn-main btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Apply") | html %]</span></button>
+                    </div>
+                </fieldset>
+            </form> 
+            </div>
+
+            </div>
+        </div> 
+[% RenderBlockEnd("EditChanges") %]
+</div>
+
+[% RenderBlockEnd("SaveConfig") %]
+
+	
+
+
+
+    

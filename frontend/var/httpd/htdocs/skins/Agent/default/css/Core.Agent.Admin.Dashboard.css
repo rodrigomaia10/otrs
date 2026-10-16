@@ -1,0 +1,12 @@
+/*--
+ var/httpd/htdocs/skins/Agent/default/css/Core.Agent.Admin.Dashboard.css
+ Copyright (C) 2019 Service Up, http://www.serviceup.com.br
+
+ written/edited by:
+ * dparavani@serviceup.com.br
+ -- */
+
+ .AlertMessage {
+    color: red;
+    margin-top: 3px;
+}
